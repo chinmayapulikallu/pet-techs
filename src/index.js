@@ -4,6 +4,14 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
+//------------------Styling-----------------------------
+import {
+  createMuiTheme,
+  ThemeProvider,
+} from "@material-ui/core/styles"; 
+ 
+//------------------Styling-----------------------------
+
 
 import rootReducer from './redux/reducers'; // imports ./redux/reducers/index.js
 import rootSaga from './redux/sagas'; // imports ./redux/sagas/index.js
@@ -31,9 +39,25 @@ const store = createStore(
 // rootSaga contains all of our other sagas
 sagaMiddleware.run(rootSaga);
 
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: [
+      '"Quicksand"',
+      "sans-serif",
+    ].join(","),
+  },
+  palette: {
+    primary: { main: '#F8E16C' },//yellow
+    secondary: { main: '#195C60' },//green
+    info:{main:'#FFC2B4'}//light pink
+  },
+});
+
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </Provider>,
-  document.getElementById('react-root'),
+  document.getElementById("react-root")
 );

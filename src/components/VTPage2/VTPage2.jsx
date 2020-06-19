@@ -1,17 +1,38 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { withRouter } from "react-router"
 
 
 class VTPage2 extends Component {
 
+    state = {
+        ...this.props.vtInfo
+    }
+
     // HANDLE ALL CHECKMARK CHANGES
     // HANDLES THE SELECTION OF THE ANIMALS THE VET TECH IS COMFORTABLE WITH
-    onChangeAnimal(event) {
-        console.log(event.target.checked, event.target.name);
+
+    // onChangeAnimal(event) {
+    //     console.log(event.target.checked, event.target.name);
+    // }
+
+    onChangeAnimal = (event, property) => {
+        console.log(event.target.value, property);
+        if (event.target.value === "true" || event.target.value === "false") {
+            this.setState({
+                [property]: event.target.value === "true",
+            });
+        } else {
+            this.setState({
+                [property]: event.target.value
+            })
+        }
+
     }
 
     //HANDLES IF THE VET TECH IS HOME FULL TIME MON-FRIDAY
     onChangeAvailable(event) {
-        console.log(event.target.checked, event.target.name); 
+        console.log(event.target.checked, event.target.name);
     }
 
     //HANDLES HOW FREQUENTLY THE VET TECH WILL BE ABLE TO TAKE THE DOG OUTSIDE
@@ -30,14 +51,15 @@ class VTPage2 extends Component {
     }
 
     //HANDLES IF THE VET TECH WILL BE HOSTING ANIMALS FROM MORE THAN ONE FAMILY AT A TIME
-    onChangeMultiple(event){
-        console.log(event.target.checked, event.target.name); 
+    onChangeMultiple(event) {
+        console.log(event.target.checked, event.target.name);
     }
 
     //BUTTON CLICKS
     //THIS WILL DIRECT THE VET TECH TO THE PREVIOUS PAGE WHERE THEY CAN MAKE EDITS IF NEED BE
     handleBackClick = () => {
         console.log("CLICKED BACK");
+        this.props.history.push('/vtreg1')
     }
 
     //THIS WILL TAKE THE VET TECH TO THE 3RD VET TECH REGISTRATION PAGE
@@ -49,7 +71,7 @@ class VTPage2 extends Component {
     handleChange = (event, property) => {
         console.log(event.target.value);
     }
-    
+
     render() {
         return (
             <div>
@@ -59,38 +81,43 @@ class VTPage2 extends Component {
                 </div>
                 <div>
                     <h4>What animals will you provide services for?</h4>
-                    <input type="checkbox" name="dogCheck" defaultChecked={false} onChange={this.onChangeAnimal} /> Dogs
-                     <input type="checkbox" name="catCheck" defaultChecked={false} onChange={this.onChangeAnimal} /> Cats
-               <input type="checkbox" name="otherCheck" defaultChecked={false} onChange={this.onChangeAnimal} /> Other
+                    {/* <input type="checkbox" name="dogCheck" defaultChecked={false} onChange={this.onChangeAnimal} /> Dogs */}
+                    {/* <input type="checkbox" name="catCheck" defaultChecked={false} onChange={this.onChangeAnimal} /> Cats */}
+                    {/* <input type="checkbox" name="otherCheck" defaultChecked={false} onChange={this.onChangeAnimal} /> Other */}
+                    <input type="checkbox" name="dogCheck" defaultChecked={false} onChange={(event) => this.onChangeAnimal(event, "dogs")} /> Dogs
+                     <input type="checkbox" name="dogCheck" defaultChecked={false} onChange={(event) => this.onChangeAnimal(event, "cats")} /> Cats
+                     <input type="checkbox" name="dogCheck" defaultChecked={false} onChange={(event) => this.onChangeAnimal(event, "other")} /> Other
+
+
            </div>
                 <div>
                     <h4>Are you home full time Monday-Friday?</h4>
                     <input type="radio" name="yesRadio" defaultChecked={false} onChange={this.onChangeAvailable} /> Yes
-                    <input type="radio" name="noRadio" /> No
+                    <input type="radio" name="noRadio" defaultChecked={false} onChange={this.onChangeAvailable} /> No
            </div>
                 <div>
                     <h4>How frequently can you take dogs outside?</h4>
-                    <input type="checkbox" name="hrCheck1" defaultChecked={false} onChange={this.onChangeOutside}/> 0-2 hrs
-                    <input type="checkbox" name="hrCheck2" defaultChecked={false} onChange={this.onChangeOutside}/> 2-4 hrs
-                    <input type="checkbox" name="hrCheck3" defaultChecked={false} onChange={this.onChangeOutside}/> 4-8 hrs
-                    <input type="checkbox" name="hrCheck4" defaultChecked={false} onChange={this.onChangeOutside}/> N/A
+                    <input type="checkbox" name="hrCheck1" defaultChecked={false} onChange={this.onChangeOutside} /> 0-2 hrs
+                    <input type="checkbox" name="hrCheck2" defaultChecked={false} onChange={this.onChangeOutside} /> 2-4 hrs
+                    <input type="checkbox" name="hrCheck3" defaultChecked={false} onChange={this.onChangeOutside} /> 4-8 hrs
+                    <input type="checkbox" name="hrCheck4" defaultChecked={false} onChange={this.onChangeOutside} /> N/A
                 </div>
                 <div>
                     <h4>What size animals are you comfortable hosting?</h4>
-                    <input type="checkbox" name="smCheck" defaultChecked={false} onChange={this.onChangeSize}/> Small
-                    <input type="checkbox" name="medCheck" defaultChecked={false} onChange={this.onChangeSize}/> Medium
-                    <input type="checkbox" name="lgCheck" defaultChecked={false} onChange={this.onChangeSize}/> Large
-                    <input type="checkbox" name="gtCheck" defaultChecked={false} onChange={this.onChangeSize}/> Giant
+                    <input type="checkbox" name="smCheck" defaultChecked={false} onChange={this.onChangeSize} /> Small
+                    <input type="checkbox" name="medCheck" defaultChecked={false} onChange={this.onChangeSize} /> Medium
+                    <input type="checkbox" name="lgCheck" defaultChecked={false} onChange={this.onChangeSize} /> Large
+                    <input type="checkbox" name="gtCheck" defaultChecked={false} onChange={this.onChangeSize} /> Giant
                 </div>
                 <div>
                     <h4>Will you host animals younger than 1 year old?</h4>
-                    <input type="radio" name="yesAgeRadio" defaultChecked={false} onChange={this.onChangeAge}/> Yes
-                    <input type="radio" name="noAgeRadio" defaultChecked={false} onChange={this.onChangeAge}/> No
+                    <input type="radio" name="yesAgeRadio" defaultChecked={false} onChange={this.onChangeAge} /> Yes
+                    <input type="radio" name="noAgeRadio" defaultChecked={false} onChange={this.onChangeAge} /> No
            </div>
                 <div>
                     <h4>Will you host animals from more than one family at a time?</h4>
-                    <input type="radio" name="multiYesRadio" defaultChecked={false} onChange={this.onChangeMultiple}/> Yes
-                    <input type="radio" name="multiNoRadio" defaultChecked={false} onChange={this.onChangeMultiple}/> No
+                    <input type="radio" name="multiYesRadio" defaultChecked={false} onChange={this.onChangeMultiple} /> Yes
+                    <input type="radio" name="multiNoRadio" defaultChecked={false} onChange={this.onChangeMultiple} /> No
            </div>
                 <div>
                     <h4>Please provide a list of equipment that will be used when caring for pets:</h4>
@@ -114,4 +141,15 @@ class VTPage2 extends Component {
         )
     }
 }
-export default VTPage2;
+
+const putReduxStateOnProps =
+    (reduxState) => ({ reduxState });
+
+
+    state = {
+        animals: false,
+
+    }
+
+export default
+    connect(putReduxStateOnProps)(VTPage2);

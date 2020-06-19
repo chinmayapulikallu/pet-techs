@@ -3,17 +3,17 @@
 -- You must use double quotes in every query that user is in:
 -- ex. SELECT * FROM "user";
 -- Otherwise you will have errors!
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
+-- CREATE TABLE "user" (
+--     "id" SERIAL PRIMARY KEY,
+--     "username" VARCHAR (80) UNIQUE NOT NULL,
+--     "password" VARCHAR (1000) NOT NULL
+-- );
 
 CREATE TABLE "user" (
   id SERIAL PRIMARY KEY,
-  user_name varchar (80) NOT NULL,
+  "username" VARCHAR (80) UNIQUE NOT NULL,
   user_email varchar (80) NOT NULL,
-  password varchar (20)NOT NULL,
+  password VARCHAR (1000) NOT NULL
   phone_number int NOT NULL,
   hear_about text NOT NULL,
   user_type int NOT NULL
@@ -22,14 +22,14 @@ CREATE TABLE "user" (
 
 CREATE TABLE client (
   id SERIAL PRIMARY KEY,
-  "user_id" INT NOT NULL
+  user_id INT NOT NULL
         REFERENCES "user" (id)
         ON DELETE CASCADE ,
   client_name varchar (80) NOT NULL,
   home_address_house varchar NOT NULL,
   apt_suite varchar (80),
   city varchar (100) NOT NULL,
-  "state" varchar (20) NOT NULL,
+  state varchar (20) NOT NULL,
   zip_code int NOT NULL,
   profile_img varchar (1000),
   about_client text NOT NULL,
@@ -53,44 +53,42 @@ CREATE TABLE vet_tech (
   apt_suite varchar (80),
   city varchar (80) NOT NULL,
   state varchar (80) NOT NULL,
-  zip_code int,
+  zip_code int NOT NULL,
   profile_img varchar (1000),
   sleep_over boolean DEFAULT FALSE,
   boarding boolean DEFAULT FALSE,
   dropin_care boolean DEFAULT FALSE,
   hospice boolean DEFAULT FALSE,
   about_vet text NOT NULL,
-  --  dogs boolean ,
-  --  cats boolean,
-  --  other boolean,
-  type_pet_provide varchar (50) NOT NULL,
+  dogs boolean DEFAULT FALSE,
+  cats boolean DEFAULT FALSE,
+  other boolean DEFAULT FALSE,
+--  type_pet_provide varchar (50) NOT NULL,
   vet_available boolean NOT NULL,
-  zero_two boolean NOT NULL,
-  two_four boolean NOT NULL,
-  four_eight boolean NOT NULL,
-  na boolean NOT NULL,
---  small boolean
---  medium boolean
---  large boolean
---  giant boolean
-  pet_size varchar (30) NOT NULL,
-  pet_younger_than_one boolean,
+  zero_two boolean DEFAULT FALSE,
+  two_four boolean DEFAULT FALSE,
+  four_eight boolean DEFAULT FALSE,
+  not_available boolean DEFAULT FALSE,
+  small_dog boolean DEFAULT FALSE,
+  medium_dog boolean DEFAULT FALSE,
+  large_dog boolean DEFAULT FALSE,
+  giant_dog boolean DEFAULT FALSE,
+  pet_younger_than_one boolean ,
   pet_more_than_one_family boolean,
   equipment_list text ,
   
   experience int NOT NULL ,
-  education text,
   certifications text, 
   current_job_title text,
-  expertise varchar ,
-  CPR_first_air boolean NOT NULL,
-  oral_medication boolean NOT NULL,
-  injectable_medicaiton boolean NOT NULL,
-  exp_older_pet boolean NOT NULL,
-  exp_special_pet boolean NOT NULL,
-  daily_exercise boolean NOT NULL,
-  pet_longer_than_a_week boolean NOT NULL,
-  diabetic_insulin_care boolean NOT NULL
+  expertise text,
+  CPR_first_air boolean DEFAULT FALSE NOT NULL ,
+  oral_medication boolean DEFAULT FALSE NOT NULL,
+  injectable_medicaiton boolean DEFAULT FALSE NOT NULL,
+  exp_older_pet boolean DEFAULT FALSE NOT NULL,
+  exp_special_pet boolean DEFAULT FALSE NOT NULL,
+  daily_exercise boolean DEFAULT FALSE NOT NULL,
+  pet_longer_than_a_week boolean DEFAULT FALSE NOT NULL,
+  diabetic_insulin_care boolean DEFAULT FALSE NOT NULL
 );
 
 CREATE TABLE pet (

@@ -32,11 +32,21 @@ const styles = {
   btn: {
     marginTop: 20,
     marginBottom: 20,
+    height: 45,
+    widith: 180,
+    borderRadius: 12,
+  },
+  botBtn: {
+    margin: '20px 30px 20px 30px',
+    height: 45,
+    width: 180,
+    borderRadius: 12,
   },
   card: {
     marginTop: 20,
     marginBottom: 20,
     textAlign: "left",
+    border: "2px solid #195C60",
   },
   cardBox: {
     textAlign: "center",
@@ -65,6 +75,7 @@ class VTPage1 extends Component {
             id="outlined-basic"
             label={"Home Address"}
             fullWidth
+            color="secondary"
             variant="outlined"
             value={""}
             onChange={console.log("changed")}
@@ -75,6 +86,7 @@ class VTPage1 extends Component {
             id="outlined-basic"
             label={"Apartment or Suite #"}
             fullWidth
+            color="secondary"
             variant="outlined"
             value={""}
             onChange={console.log("changed")}
@@ -86,6 +98,7 @@ class VTPage1 extends Component {
             label={"City"}
             variant="outlined"
             value={""}
+            color="secondary"
             onChange={console.log("changed")}
             className={classes.city}
           />
@@ -94,6 +107,7 @@ class VTPage1 extends Component {
             label={"State"}
             variant="outlined"
             value={""}
+            color="secondary"
             onChange={console.log("changed")}
             className={classes.flex}
           />
@@ -101,6 +115,7 @@ class VTPage1 extends Component {
             id="outlined-basic"
             label={"Zipcode"}
             variant="outlined"
+            color="secondary"
             value={""}
             onChange={console.log("changed")}
           />
@@ -182,11 +197,44 @@ class VTPage1 extends Component {
                   </CardActions>
                 </div>
                 <Typography color="textSecondary">
-                  You care for pets in client's home with hospice needs and services.
+                  You care for pets in client's home with hospice needs and
+                  services.
                 </Typography>
               </CardContent>
             </Card>
           </Container>
+          <div>
+            <Typography variant="h5">Tell us more about yourself!</Typography>
+            <TextField
+              value={""}
+              label={"About your house, lifestyle, and pets..."}
+              variant="outlined"
+              className={classes.inputs}
+              fullWidth
+              color="secondary"
+              multiline
+              rows={7}
+              onChange={console.log("changed")}
+            />
+          </div>
+          <div>
+            <Button
+              className={classes.botBtn}
+              onClick={this.handleBack}
+              variant="contained"
+              color="primary"
+            >
+              Back
+            </Button>
+            <Button
+              className={classes.botBtn}
+              onClick={this.handleNext}
+              variant="contained"
+              color="primary"
+            >
+              Save and Continue
+            </Button>
+          </div>
         </div>
       </Container>
     );

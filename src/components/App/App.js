@@ -16,7 +16,10 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-
+import ClientRegPage2 from '../ClientRegPage2/ClientRegPage2';
+import ClientRegPage1 from '../ClientRegPage1/ClientRegPage1';
+import VTPage1 from '../VTPage1/VTPage1';
+import VTPage2 from '../VTPage2/VTPage2';
 import './App.css';
 
 class App extends Component {
@@ -54,6 +57,26 @@ class App extends Component {
               exact
               path="/info"
               component={InfoPage}
+            />
+              <Route
+              exact
+              path="/creg2"
+              component={ClientRegPage2}
+            />
+              <Route
+              exact
+              path="/creg1"
+              component={ClientRegPage1}
+            />
+              <Route
+              exact
+              path="/vtreg1"
+              component={VTPage1}
+            />
+              <Route
+              exact
+              path="/vtreg2"
+              component={VTPage2}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

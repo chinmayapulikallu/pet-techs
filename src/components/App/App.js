@@ -58,22 +58,22 @@ class App extends Component {
               path="/info"
               component={InfoPage}
             />
-              <ProtectedRoute
+              <Route
               exact
               path="/creg2"
               component={ClientRegPage2}
             />
-              <ProtectedRoute
+              <Route
               exact
               path="/creg1"
               component={ClientRegPage1}
             />
-              <ProtectedRoute
+              <Route
               exact
               path="/vtreg1"
               component={VTPage1}
             />
-              <ProtectedRoute
+              <Route
               exact
               path="/vtreg2"
               component={VTPage2}

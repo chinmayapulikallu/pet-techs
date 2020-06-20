@@ -3,13 +3,14 @@ import { connect } from 'react-redux'
 import { withRouter } from "react-router"
 import FormControl from '@material-ui/core/FormControl'
 import FormLabel from "@material-ui/core/FormLabel"
-import { FormControlLabel } from '@material-ui/core';
+import { FormControlLabel, GridList } from '@material-ui/core';
 import FormGroup from "@material-ui/core/FormGroup"
 import Checkbox from "@material-ui/core/Checkbox"
 import FormHelperText from "@material-ui/core/FormHelperText"
 import Radio from "@material-ui/core/Radio"
 import TextField from "@material-ui/core/TextField"
 import Grid from "@material-ui/core/Grid"
+import Button from '@material-ui/core/Button'
 
 
 
@@ -40,77 +41,90 @@ class VTPage2 extends Component {
     }
 
     render() {
-       
         return (
-            
+
+
             <div>
-                <div>
-                    <h2>What are your service preferences</h2>
-                </div>
-                <div>
+                <h2>What are your service preferences</h2>
+                <Grid container justify="center" spacing={3}>
                     <FormControl component="fieldset">
                         <FormLabel component="label">What animals will you provide services for?</FormLabel>
                         <FormGroup row="true">
                             <FormControlLabel
-                            control={<Checkbox  name="dog" />}
-                            label="Dogs"
+                                control={<Checkbox name="dog" />}
+                                onChange={(event) => this.handleChange(event, "dogs")}
+                                label="Dogs"
                             />
                             <FormControlLabel
-                            control={<Checkbox  name="cat" />}
-                            label="Cats"
+                                control={<Checkbox name="cat" />}
+                                onChange={(event) => this.handleChange(event, "cats")}
+                                label="Cats"
                             />
                             <FormControlLabel
-                            control={<Checkbox  name="other" />}
-                            label="Others"
+                                control={<Checkbox name="other" />}
+                                onChange={(event) => this.handleChange(event, "other")}
+                                label="Others"
                             />
                         </FormGroup>
                         <FormHelperText>Please choose all that apply</FormHelperText>
+                        <br />
                         <FormLabel component="label">Are you home full time Monday-Friday?</FormLabel>
                         <FormGroup row="true">
                             <FormControlLabel
                                 control={<Checkbox name="availYes" />}
+                                onChange={(event) => this.handleChange(event, "yes")}
                                 label="Yes"
                             />
                             <FormControlLabel
                                 control={<Checkbox name="availNo" />}
+                                onChange={(event) => this.handleChange(event, "no")}
                                 label="No"
                             />
                         </FormGroup>
+
                         <FormLabel component="label">How often can you take the animal(s) outside?</FormLabel>
                         <FormGroup row="true">
                             <FormControlLabel
-                                control={<Checkbox name="hourChoice1" />}
+                                control={<Checkbox name="hrCheck1" />}
+                                onChange={(event) => this.handleChange(event, "0-2")}
                                 label="0-2 Hours"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="hourChoice2" />}
+                                control={<Checkbox name="hrCheck2" />}
+                                onChange={(event) => this.handleChange(event, "2-4")}
                                 label="2-4 Hours"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="hourChoice3" />}
+                                control={<Checkbox name="hrCheck3" />}
+                                onChange={(event) => this.handleChange(event, "4-8")}
                                 label="4-8 Hours"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="hourChoice4" />}
+                                control={<Checkbox name="hrCheck4" />}
+                                onChange={(event) => this.handleChange(event, "N/A")}
                                 label="N/A"
                             />
                         </FormGroup>
                         <FormLabel component="label">What size animals are you comfortable hosting?</FormLabel>
                         <FormGroup row="true">
                             <FormControlLabel
-                                control={<Checkbox name="sizeSm" />}
+                                control={<Checkbox name="smCheck" />}
+                                onChange={(event) => this.handleChange(event, "small")} 
                                 label="Small"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="sizeMd" />}
+                                control={<Checkbox name="mdCheck" />}
+                                onChange={(event) => this.handleChange(event, "medium")}
                                 label="Medium"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="sizeLg" />}
+                                control={<Checkbox name="lgCheck" />}
+                                onChange={(event) => this.handleChange(event, "large")}
                                 label="Large"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="sizeGt" />}
+                                control={<Checkbox name="gtCheck" />}
+                                onChange={(event) => this.handleChange(event, "giant")}
                                 label="Giant"
                             />
                         </FormGroup>
@@ -118,32 +132,44 @@ class VTPage2 extends Component {
                         <FormGroup row="true">
                             <FormControlLabel
                                 control={<Radio name="youngYes" />}
+                                onChange={(event) => this.handleChange(event, "yesAge")}
+                                name="yesAgeRadio"
                                 label="Yes"
                             />
                             <FormControlLabel
                                 control={<Radio name="youngNo" />}
+                                onChange={(event) => this.handleChange(event, "noAge")}
+                                name="noAgeRadio"
                                 label="No"
                             />
                         </FormGroup>
                         <FormLabel component="label">Will you host animals from multiple families at once?</FormLabel>
                         <FormGroup row="true">
                             <FormControlLabel
-                                control={<Radio name="multiYes" />}
+                                control={<Radio name="multiYesRadio" />}
+                                onChange={(event) => this.handleChange(event, "yesMulti")}
                                 label="Yes"
                             />
                             <FormControlLabel
-                                control={<Radio name="multiNo" />}
+                                control={<Radio name="multiNoRadio" />}
+                                onChange={(event) => this.handleChange(event, "noMulti")}
                                 label="No"
                             />
                         </FormGroup>
                         <Grid>
-                        <TextField type="text" id="outlined-basic" label="Optional" variant="outlined"
-                            color="secondary"
-                        />
+                            <FormLabel component="label">Please provide a list of equipment that will be used when caring for pets: </FormLabel>
+                            <br />
+                            <TextField type="text" id="outlined-basic" label="Optional" variant="outlined"
+                                color="secondary"
+                            />
+                        </Grid>
+                        <Grid alignItems="center" justifyContent="center">
+                            <Button variant="contained" color="primary" >Back</Button>
+                            <Button variant="contained" color="primary">Continue</Button>
                         </Grid>
                     </FormControl>
-                   
-                </div>
+                </Grid>
+
                 {/* <div>
                     <h4>What animals will you provide services for?</h4>
                     <input type="checkbox" name="dogCheck" defaultChecked={false} onChange={(event) => this.handleChange(event, "dogs")} /> Dogs

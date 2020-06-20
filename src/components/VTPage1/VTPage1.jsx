@@ -8,6 +8,11 @@ import TextField from "@material-ui/core/TextField";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
+import FormControl from "@material-ui/core/FormControl";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import Switch from "@material-ui/core/Switch";
 
 const styles = {
   root: {
@@ -60,7 +65,7 @@ const styles = {
 
 class VTPage1 extends Component {
   state = {
-    ...this.props.VTInfo,
+    ...this.props.vtInfo,
   };
 
   render() {
@@ -148,7 +153,12 @@ class VTPage1 extends Component {
                     Pet Sleepover
                   </Typography>
                   <CardActions>
-                    <Button>toggle</Button>
+                    <Switch
+                      checked={true}
+                      onChange={console.log("changed")}
+                      size="normal"
+                      name="petSleepover"
+                    />
                   </CardActions>
                 </div>
                 <Typography color="textSecondary">
@@ -163,7 +173,12 @@ class VTPage1 extends Component {
                     Pet Boarding
                   </Typography>
                   <CardActions>
-                    <Button>toggle</Button>
+                    <Switch
+                      checked={true}
+                      onChange={console.log("changed")}
+                      size="normal"
+                      name="petBoarding"
+                    />
                   </CardActions>
                 </div>
                 <Typography color="textSecondary">
@@ -178,7 +193,12 @@ class VTPage1 extends Component {
                     Drop In Care
                   </Typography>
                   <CardActions>
-                    <Button>toggle</Button>
+                    <Switch
+                      checked={true}
+                      onChange={console.log("changed")}
+                      size="normal"
+                      name="dropInCare"
+                    />
                   </CardActions>
                 </div>
                 <Typography color="textSecondary">
@@ -193,7 +213,12 @@ class VTPage1 extends Component {
                     Hospice Care
                   </Typography>
                   <CardActions>
-                    <Button>toggle</Button>
+                    <Switch
+                      checked={true}
+                      onChange={console.log("changed")}
+                      size="normal"
+                      name="hospiceCare"
+                    />
                   </CardActions>
                 </div>
                 <Typography color="textSecondary">
@@ -242,6 +267,9 @@ class VTPage1 extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    vtInfo: {
+
+    },
   errors: state.errors,
 });
 

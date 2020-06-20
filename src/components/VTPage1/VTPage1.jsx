@@ -8,10 +8,6 @@ import TextField from "@material-ui/core/TextField";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import FormControl from "@material-ui/core/FormControl";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import Switch from "@material-ui/core/Switch";
 
 const styles = {
@@ -42,7 +38,7 @@ const styles = {
     borderRadius: 12,
   },
   botBtn: {
-    margin: '20px 30px 20px 30px',
+    margin: "20px 30px 20px 30px",
     height: 45,
     width: 180,
     borderRadius: 12,
@@ -68,6 +64,25 @@ class VTPage1 extends Component {
     ...this.props.vtInfo,
   };
 
+  handleInputChange = (property) => (event) => {
+    this.setState({
+      [property]: event.target.value,
+    });
+  };
+
+  handleToggleChange = (property) => (event) => {
+    this.setState({
+      [property]: event.target.checked === true,
+    });
+  };
+
+  handleUploadPhoto = () => {
+      alert("Photo upload needs set up")
+  }
+
+  handleNext = () => {
+      console.log(this.state)
+  }
   render() {
     const { classes } = this.props;
     return (
@@ -82,8 +97,8 @@ class VTPage1 extends Component {
             fullWidth
             color="secondary"
             variant="outlined"
-            value={""}
-            onChange={console.log("changed")}
+            value={this.state.home_adress_house}
+            onChange={this.handleInputChange("home_address_house")}
           />
         </div>
         <div className={classes.inputs}>
@@ -93,8 +108,8 @@ class VTPage1 extends Component {
             fullWidth
             color="secondary"
             variant="outlined"
-            value={""}
-            onChange={console.log("changed")}
+            value={this.state.apt_suite}
+            onChange={this.handleInputChange("apt_suite")}
           />
         </div>
         <div className={classes.inputs}>
@@ -102,18 +117,18 @@ class VTPage1 extends Component {
             id="outlined-basic"
             label={"City"}
             variant="outlined"
-            value={""}
+            value={this.state.city}
             color="secondary"
-            onChange={console.log("changed")}
+            onChange={this.handleInputChange("city")}
             className={classes.city}
           />
           <TextField
             id="outlined-basic"
             label={"State"}
             variant="outlined"
-            value={""}
+            value={this.state.state}
             color="secondary"
-            onChange={console.log("changed")}
+            onChange={this.handleInputChange("state")}
             className={classes.flex}
           />
           <TextField
@@ -121,8 +136,8 @@ class VTPage1 extends Component {
             label={"Zipcode"}
             variant="outlined"
             color="secondary"
-            value={""}
-            onChange={console.log("changed")}
+            value={this.state.zipcode}
+            onChange={this.handleInputChange("zipcode")}
           />
         </div>
         <div>
@@ -154,9 +169,9 @@ class VTPage1 extends Component {
                   </Typography>
                   <CardActions>
                     <Switch
-                      checked={true}
-                      onChange={console.log("changed")}
-                      size="normal"
+                      checked={this.state.sleep_over}
+                      onChange={this.handleToggleChange("sleep_over")}
+                      size="medium"
                       name="petSleepover"
                     />
                   </CardActions>
@@ -174,9 +189,9 @@ class VTPage1 extends Component {
                   </Typography>
                   <CardActions>
                     <Switch
-                      checked={true}
-                      onChange={console.log("changed")}
-                      size="normal"
+                      checked={this.state.boarding}
+                      onChange={this.handleToggleChange("boarding")}
+                      size="medium"
                       name="petBoarding"
                     />
                   </CardActions>
@@ -194,9 +209,9 @@ class VTPage1 extends Component {
                   </Typography>
                   <CardActions>
                     <Switch
-                      checked={true}
-                      onChange={console.log("changed")}
-                      size="normal"
+                      checked={this.state.dropin_care}
+                      onChange={this.handleToggleChange("dropin_care")}
+                      size="medium"
                       name="dropInCare"
                     />
                   </CardActions>
@@ -214,9 +229,9 @@ class VTPage1 extends Component {
                   </Typography>
                   <CardActions>
                     <Switch
-                      checked={true}
-                      onChange={console.log("changed")}
-                      size="normal"
+                      checked={this.state.hospice}
+                      onChange={this.handleToggleChange("hospice")}
+                      size="medium"
                       name="hospiceCare"
                     />
                   </CardActions>
@@ -231,7 +246,7 @@ class VTPage1 extends Component {
           <div>
             <Typography variant="h5">Tell us more about yourself!</Typography>
             <TextField
-              value={""}
+              value={this.state.bio}
               label={"About your house, lifestyle, and pets..."}
               variant="outlined"
               className={classes.inputs}
@@ -239,7 +254,7 @@ class VTPage1 extends Component {
               color="secondary"
               multiline
               rows={7}
-              onChange={console.log("changed")}
+              onChange={this.handleInputChange("bio")}
             />
           </div>
           <div>
@@ -267,9 +282,20 @@ class VTPage1 extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    vtInfo: {
-
-    },
+  vtInfo: {
+    home_address_house: "",
+    apt_suite: "",
+    city: "",
+    state: "",
+    zipcode: "",
+    profile_img: "",
+    sleep_over: false,
+    boarding: false,
+    dropin_care: false,
+    hospice: false,
+    bio: "",
+    ...state.vtInfo, // overrides default with any existing vt values
+  },
   errors: state.errors,
 });
 

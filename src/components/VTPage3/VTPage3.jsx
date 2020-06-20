@@ -147,22 +147,21 @@ class VTReg3 extends Component {
                         <Grid item xs={12}>
                             <FormControlLabel
                                 control={<Switch onChange={this.handleToggleChangeFor("cpr")} />}
-                                label="Do you know animal CPR/First Aid?"
+                                label="Do you know CPR and/or animal first aid?"
                                 labelPlacement="start"
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
                                 control={<Switch onChange={this.handleToggleChangeFor("oralMedication")} />}
-                                label="Can you administer oral medications?"
+                                label="Can you administer oral medications to animals?"
                                 labelPlacement="start"
                             />
                         </Grid>
                         <Grid item xs={12}>
-
                             <FormControlLabel
                                 control={<Switch onChange={this.handleToggleChangeFor("injectableMedicaiton")} />}
-                                label="Do you have experience with older/senior animals?"
+                                label="Can you administer injected medications to animals"
                                 labelPlacement="start"
                             />
                         </Grid>
@@ -170,36 +169,38 @@ class VTReg3 extends Component {
 
                             <FormControlLabel
                                 control={<Switch onChange={this.handleToggleChangeFor("expOlderPet")} />}
-                                label="Can you provide daily exercise?"
-                                labelPlacement="start"
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <FormControlLabel
-                                control={<Switch onChange={this.handleToggleChangeFor("expSpecialPet")} />}
-                                label="Are you willing to work with an animal longer than a week?"
+                                label="Do you have experience with caring for older or senior animals?"
                                 labelPlacement="start"
                             />
                         </Grid>
                         <Grid item xs={12}>
 
                             <FormControlLabel
+                                control={<Switch onChange={this.handleToggleChangeFor("expSpecialPet")} />}
+                                label="Do you have experience caring for special needs animals?"
+                                labelPlacement="start"
+                            />
+                        </Grid>
+                       
+                        <Grid item xs={12}>
+
+                            <FormControlLabel
                                 control={<Switch onChange={this.handleToggleChangeFor("dailyExercise")} />}
-                                label="Do you offer diabetic/insulin care?"
+                                label="Can you provied daily exercise for high energy animals or behavioral needs?"
                                 labelPlacement="start"
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
                                 control={<Switch onChange={this.handleToggleChangeFor("petLongerThanAWeek")} />}
-                                label="Do you offer diabetic/insulin care?"
+                                label="Are you willing to accept services that are longer than one week with animals?"
                                 labelPlacement="start"
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
                                 control={<Switch onChange={this.handleToggleChangeFor("diabeticInsulinCare")} />}
-                                label="Do you offer diabetic/insulin care?"
+                                label="Do you offer diabetic and insulin care?"
                                 labelPlacement="start"
                             />
                         </Grid>

@@ -15,7 +15,7 @@ const styles = theme => ({
 const Nav = (props) => (
   <div className="nav">
     <Link to="/home">
-      <img className="logo" src="images/VetTechlogo.png" alt="profile-photo" height="150" width="150" 
+      <img className="logo" src="images/VetTechlogo.png" alt="profile-photo" height="130" width="130" 
       />
     </Link>
     <div className="nav-right">

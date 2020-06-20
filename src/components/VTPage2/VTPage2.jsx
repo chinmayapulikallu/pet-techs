@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from "react-router"
+import Grid from '@material-ui/core/Grid'
+import FormControl from "@material-ui/core/FormControl"
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox'
+import Radio from "@material-ui/core/Radio"
+import FormGroup from "@material-ui/core/FormGroup"
+
+
 
 
 class VTPage2 extends Component {
 
     state = {
-        ...this.props.vtInfo
+        ...this.props.vtInfo2
     }
 
     handleChange = (event, property) => {
@@ -22,12 +30,16 @@ class VTPage2 extends Component {
     //THIS WILL TAKE THE VET TECH TO THE 3RD VET TECH REGISTRATION PAGE
     handleContClick = () => {
         console.log("CLICKED CONTINUE");
+        // this.props.dispatch({
+        //     type: '' ,
+        //     payload: this.state.vtInfo2
+        // })
+        this.props.history.push('/vtreg3')
     }
 
     render() {
         return (
             <div>
-
                 <div>
                     <h2>What are your service preferences</h2>
                 </div>
@@ -36,7 +48,6 @@ class VTPage2 extends Component {
                     <input type="checkbox" name="dogCheck" defaultChecked={false} onChange={(event) => this.handleChange(event, "dogs")} /> Dogs
                      <input type="checkbox" name="dogCheck" defaultChecked={false} onChange={(event) => this.handleChange(event, "cats")} /> Cats
                      <input type="checkbox" name="dogCheck" defaultChecked={false} onChange={(event) => this.handleChange(event, "other")} /> Other
-
            </div>
                 <div>
                     <h4>Are you home full time Monday-Friday?</h4>
@@ -77,18 +88,22 @@ class VTPage2 extends Component {
                         cols={100}
                         onChange={(event) => this.handleChange(event, "equipment")}
                     />
+
                 </div>
+               
                 <div>
                     <button onClick={this.handleBackClick}>Back</button>
                     <button onClick={this.handleContClick}>Continue</button>
                 </div>
+
             </div>
+
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    vtInfo: {
+    vtInfo2: {
         dog: false,
         cat: false,
         other: false,

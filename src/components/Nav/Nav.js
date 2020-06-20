@@ -4,11 +4,18 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 
+import { withStyles } from '@material-ui/core/styles';
+
+
+const styles = theme => ({
+ 
+})
+
 
 const Nav = (props) => (
   <div className="nav">
     <Link to="/home">
-      <img className="logo" src="images/VetTechlogo.png" alt="profile-photo" height="150" width="150" 
+      <img className="logo" src="images/VetTechlogo.png" alt="profile-photo" height="130" width="130" 
       />
     </Link>
     <div className="nav-right">
@@ -18,17 +25,13 @@ const Nav = (props) => (
         and call this link 'Login / Register' if they are not */}
         {props.user.id ? 'Home' : 'Login / Register'}
       </Link>
-      
-
 
       {/* Show the link to the info page and the logout button if the user is logged in */}
       {props.user.id && (
         <>
-          <div className="nav-link">
-            <Link to="/info">
+            <Link  className="nav-link"to="/info">
               Search for services
           </Link>
-          </div>
         </>
       )}
       <Link className="nav-link" to="/about">
@@ -38,9 +41,12 @@ const Nav = (props) => (
         <>
           <div className="nav-link">
             <Link className="profile" to="/info">
-              Profile
-                 <img src="images/blank-profile-picture.png" alt="profile-photo" height="20" width="20" />
-
+             Profile
+            </Link>
+          </div>
+          <div className = "profile_icon">
+            <Link to="/info">
+                 <img  src="images/blank-profile-picture.png" alt="profile-photo" height="30" width="30" />
             </Link>
           </div>
           <LogOutButton className="nav-link" />
@@ -61,4 +67,4 @@ const mapStateToProps = state => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps)(Nav);
+export default connect(mapStateToProps)(withStyles(styles, { withTheme: true })(Nav));

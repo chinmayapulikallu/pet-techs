@@ -11,13 +11,13 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Button from '@material-ui/core/Button';
-
+import { withRouter } from 'react-router-dom';
 
 
 
 const styles = theme => ({
     root: {
-        flexGrow: 1,
+        // flexGrow: 1,
         marginLeft: theme.spacing(20),
         marginRight: theme.spacing(20),
     },
@@ -46,7 +46,7 @@ const styles = theme => ({
         marginLeft: theme.spacing(2),
         marginRight: theme.spacing(2),
     },
-    img:{
+    img: {
         borderRadius: '50%',
     },
 
@@ -56,7 +56,7 @@ const styles = theme => ({
 
 class VTReg3 extends Component {
     state = {
-        ...this.props
+        ...this.props,
     }
 
     componentDidMount() {
@@ -75,14 +75,25 @@ class VTReg3 extends Component {
             [property]: event.target.value,
         });
     }
+    handleBackButton = () => {
+        console.log('back clicked!')
+        this.props.history.push('/vtreg2')
+    }
+    handleSave = () => {
+        console.log('clicked!')
+        this.props.dispatch({
+            // type: ADD_REG_3,
+            payload: { reg3Info: this.props.state }
+        })
+    }
 
     render() {
         const { classes } = this.props;
         return (
             <div className={classes.root}>
                 <div className={classes.title}>
-                    <h1 className={classes.title}>Tell us about your certifications and expertise:</h1>
-                    <img className ={classes.img} src = "images/blank-profile-picture.png" alt="profile-photo" height="150" width="150"/>
+                    <h3 className={classes.title}>Tell us about your certifications and expertise:</h3>
+                    <img className={classes.img} src="images/blank-profile-picture.png" alt="profile-photo" height="150" width="150" />
                     <h5>Your experise as a veterinary professional what makes you stand apart and what helps pet owners get to know you.</h5>
                     <h5>Please keep emojis and personal identifiers (last name or workplace) out of your profile.</h5>
                 </div>
@@ -130,12 +141,12 @@ class VTReg3 extends Component {
                 <FormHelperText className={classes.helperText}>500 characters maximum</FormHelperText>
                 <p>Brief bio about yourself:</p>
                 <TextField type="text"
-                    label="*Optional" variant="outlined" color="secondary"
+                    variant="outlined" color="secondary"
                     fullWidth
                     multiline
                     onChange={this.handleInputChangeFor("bioYourself")}
                 />
-                <FormHelperText className={classes.helperText}>500 characters maximum</FormHelperText>
+                <FormHelperText className={classes.helperText}>600 characters maximum</FormHelperText>
                 <br />
                 <br />
                 <h4>Additional Details:</h4>
@@ -181,7 +192,7 @@ class VTReg3 extends Component {
                                 labelPlacement="start"
                             />
                         </Grid>
-                       
+
                         <Grid item xs={12}>
 
                             <FormControlLabel
@@ -210,7 +221,7 @@ class VTReg3 extends Component {
                 </Grid>
                 <Grid className={classes.itemCenter} alignItems="center"
                     justifyContent="center">
-                    <Button className={classes.buttons} variant="contained" color="primary">Save & back to Dashboard</Button>
+                    <Button className={classes.buttons} variant="contained" color="primary" onClick={this.handleBackButton}>Save & back to Dashboard</Button>
                     <Button className={classes.buttons} variant="contained" color="primary">Save & Continue</Button>
                 </Grid>
 
@@ -238,4 +249,4 @@ const mapStateToProps = (state) => ({
     error: state.errors,
 })
 
-export default connect(mapStateToProps)(withStyles(styles, { withTheme: true })(VTReg3));
+export default withRouter(connect(mapStateToProps)(withStyles(styles, { withTheme: true })(VTReg3)));

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from "react-router"
 import FormControl from '@material-ui/core/FormControl'
 import FormLabel from "@material-ui/core/FormLabel"
-import { FormControlLabel, GridList } from '@material-ui/core';
+import { FormControlLabel} from '@material-ui/core';
 import FormGroup from "@material-ui/core/FormGroup"
 import Checkbox from "@material-ui/core/Checkbox"
 import FormHelperText from "@material-ui/core/FormHelperText"
@@ -11,8 +11,27 @@ import Radio from "@material-ui/core/Radio"
 import TextField from "@material-ui/core/TextField"
 import Grid from "@material-ui/core/Grid"
 import Button from '@material-ui/core/Button'
+import { withStyles } from '@material-ui/core/styles';
 
 
+const styles = theme => ({
+    root: {
+        marginLeft: theme.spacing(20),
+        marginRight: theme.spacing(20),
+        marginTop: '100px',
+    },
+    title: {
+        textAlign: 'center',
+    },
+    textbox: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+    },
+    buttons: {
+      
+       marginRight: "10px"
+    }
+})
 
 class VTPage2 extends Component {
 
@@ -41,11 +60,13 @@ class VTPage2 extends Component {
     }
 
     render() {
+        const {classes} = this.props
         return (
-
-
-            <div>
+            <div className={classes.root}>
+                <div className={classes.title}>
                 <h2>What are your service preferences</h2>
+                </div>
+                <br />
                 <Grid container justify="center" spacing={3}>
                     <FormControl component="fieldset">
                         <FormLabel component="label">What animals will you provide services for?</FormLabel>
@@ -159,13 +180,17 @@ class VTPage2 extends Component {
                         <Grid>
                             <FormLabel component="label">Please provide a list of equipment that will be used when caring for pets: </FormLabel>
                             <br />
+                            <div className={classes.textbox}>
                             <TextField type="text" id="outlined-basic" label="Optional" variant="outlined"
                                 color="secondary"
                             />
+                            </div>
                         </Grid>
                         <Grid alignItems="center" justifyContent="center">
+                            <div className={classes.buttons}>
                             <Button variant="contained" color="primary" >Back</Button>
                             <Button variant="contained" color="primary">Continue</Button>
+                            </div>
                         </Grid>
                     </FormControl>
                 </Grid>
@@ -224,7 +249,7 @@ class VTPage2 extends Component {
                 </div> */}
 
             </div>
-
+         
         )
     }
 }
@@ -249,5 +274,7 @@ const mapStateToProps = (state) => ({
     },
     errors: state.errors,
 });
-export default
-    connect(mapStateToProps)(VTPage2);
+// export default
+//     connect(mapStateToProps)(VTPage2);
+
+export default withRouter(connect(mapStateToProps)(withStyles(styles, { withTheme: true })(VTPage2)));

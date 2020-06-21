@@ -20,6 +20,8 @@ import ClientRegPage2 from '../ClientRegPage2/ClientRegPage2';
 import ClientRegPage1 from '../ClientRegPage1/ClientRegPage1';
 import VTPage1 from '../VTPage1/VTPage1';
 import VTPage2 from '../VTPage2/VTPage2';
+import VTPage3 from '../VTPage3/VTPage3';
+
 import './App.css';
 
 class App extends Component {
@@ -78,6 +80,12 @@ class App extends Component {
               path="/vtreg2"
               component={VTPage2}
             />
+            <Route
+              exact
+              path="/vtreg3"
+              component={VTPage3}
+            />
+
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>

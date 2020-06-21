@@ -4,10 +4,19 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 
+import { withStyles } from '@material-ui/core/styles';
+
+
+const styles = theme => ({
+ 
+})
+
+
 const Nav = (props) => (
   <div className="nav">
     <Link to="/home">
-      <h2 className="nav-title">Prime Solo Project</h2>
+      <img className="logo" src="images/VetTechlogo.png" alt="profile-photo" height="130" width="130" 
+      />
     </Link>
     <div className="nav-right">
       <Link className="nav-link" to="/home">
@@ -16,19 +25,35 @@ const Nav = (props) => (
         and call this link 'Login / Register' if they are not */}
         {props.user.id ? 'Home' : 'Login / Register'}
       </Link>
+
       {/* Show the link to the info page and the logout button if the user is logged in */}
       {props.user.id && (
         <>
-          <Link className="nav-link" to="/info">
-            Info Page
+            <Link  className="nav-link"to="/info">
+              Search for services
           </Link>
-          <LogOutButton className="nav-link"/>
         </>
       )}
-      {/* Always show this link since the about page is not protected */}
       <Link className="nav-link" to="/about">
         About
       </Link>
+      {props.user.id && (
+        <>
+          <div className="nav-link">
+            <Link className="profile" to="/info">
+             Profile
+            </Link>
+          </div>
+          <div className = "profile_icon">
+            <Link to="/info">
+                 <img  src="images/blank-profile-picture.png" alt="profile-photo" height="30" width="30" />
+            </Link>
+          </div>
+          <LogOutButton className="nav-link" />
+        </>
+      )}
+      {/* Always show this link since the about page is not protected */}
+
     </div>
   </div>
 );
@@ -42,4 +67,4 @@ const mapStateToProps = state => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps)(Nav);
+export default connect(mapStateToProps)(withStyles(styles, { withTheme: true })(Nav));

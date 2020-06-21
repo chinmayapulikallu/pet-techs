@@ -2,23 +2,41 @@
     font-size: 24px;
     font-weight: 700;
     display: inline-block;
-    color: #f2f2f2;
+    /* color: #f2f2f2; */
     padding-left: 10px;
 }
 
 .nav {
   overflow: hidden;
-  background-color: #00acb0;
+  background-color: #f7f7f7;
+  border-bottom: 2px solid #195C60;
+  background-size: cover;
+  position: fixed;
+  margin-top: 0px;
+  width: 100%;
+  height: 70px;
+  top:0px;
+}
+
+.logo{
+  /* display: flex; */
+  float: left;
+  position: fixed;
+  top: 7px;
+  left: 5px;
+  z-index: 1; 
+  margin-bottom: 50%;
+
 }
 
 .nav-link {
   float: left;
-  color: #f2f2f2;
-  background-color: #00acb0;
+  color: #000000;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
   font-size: 15px;
+  background-color: none;
 
   /* these last two make the logout button in
   the nav bar look like another link */
@@ -27,10 +45,35 @@
   outline:0;
 }
 
-.nav-link:hover {
-  background-color: #008183;
-}
-
 .nav-right {
   float: right;
 }
+img{
+  border-radius: 50%;
+}
+
+.profile{
+  border-left: 2px solid #195C60;
+  padding-left: 24px;
+  text-decoration: none;
+  color: black;
+  padding-left:20px;
+}
+.profile_text{
+  margin-bottom: 10px;
+}
+
+.profile_icon{
+  padding-top: -24px;
+  float: left;
+  padding: 15px 10px;
+  text-decoration: none;
+  font-size: 15px;
+  background-color: none;
+
+  /* these last two make the logout button in
+  the nav bar look like another link */
+  border:none;
+  cursor: pointer;
+}
+

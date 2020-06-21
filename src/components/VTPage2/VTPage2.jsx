@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from "react-router"
 import FormControl from '@material-ui/core/FormControl'
 import FormLabel from "@material-ui/core/FormLabel"
-import { FormControlLabel} from '@material-ui/core';
+import { FormControlLabel } from '@material-ui/core';
 import FormGroup from "@material-ui/core/FormGroup"
 import Checkbox from "@material-ui/core/Checkbox"
 import FormHelperText from "@material-ui/core/FormHelperText"
@@ -12,6 +12,7 @@ import TextField from "@material-ui/core/TextField"
 import Grid from "@material-ui/core/Grid"
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles';
+import Typeography from '@material-ui/core/Typography'
 
 
 const styles = theme => ({
@@ -23,14 +24,16 @@ const styles = theme => ({
     title: {
         textAlign: 'center',
     },
-    textbox: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
+    helperText: {
+        textAlign: 'center',
     },
-    buttons: {
-      
-       marginRight: "10px"
-    }
+    button: {
+        margin: "20px 30px 20px 30px",
+        height: 45,
+        width: 180,
+        borderRadius: 12,
+
+    },
 })
 
 class VTPage2 extends Component {
@@ -39,9 +42,12 @@ class VTPage2 extends Component {
         ...this.props.vtInfo2
     }
 
+    //THIS WILL HANDLE ALL THE INPUTS FROM THE VET TECH PREFERENCES 
     handleChange = (event, property) => {
         console.log(event.target.value, property);
-
+        this.setState({
+        [property]: event.target.value
+        })
     }
 
     handleBackClick = () => {
@@ -60,36 +66,41 @@ class VTPage2 extends Component {
     }
 
     render() {
-        const {classes} = this.props
+        const { classes } = this.props
         return (
             <div className={classes.root}>
                 <div className={classes.title}>
-                <h2>What are your service preferences</h2>
+                    <h2>What are your service preferences</h2>
                 </div>
                 <br />
                 <Grid container justify="center" spacing={3}>
-                    <FormControl component="fieldset">
-                        <FormLabel component="label">What animals will you provide services for?</FormLabel>
+                    <FormControl>
+                        <Typeography variant="subtitle1">What animals will you provide services for?</Typeography>
                         <FormGroup row="true">
                             <FormControlLabel
                                 control={<Checkbox name="dog" />}
+                                
+                                value={this.state.dog}
                                 onChange={(event) => this.handleChange(event, "dogs")}
                                 label="Dogs"
                             />
                             <FormControlLabel
                                 control={<Checkbox name="cat" />}
+                                value={this.state.cat}
                                 onChange={(event) => this.handleChange(event, "cats")}
+                                defaultChecked={false}
                                 label="Cats"
                             />
                             <FormControlLabel
                                 control={<Checkbox name="other" />}
+                                value={this.state.other}
                                 onChange={(event) => this.handleChange(event, "other")}
+                                defaultChecked={false}
                                 label="Others"
                             />
                         </FormGroup>
-                        <FormHelperText>Please choose all that apply</FormHelperText>
-                        <br />
-                        <FormLabel component="label">Are you home full time Monday-Friday?</FormLabel>
+                            <FormHelperText>Please choose all that apply</FormHelperText>
+                        <Typeography variant="subtitle1">Are you home full time Monday-Friday?</Typeography>
                         <FormGroup row="true">
                             <FormControlLabel
                                 control={<Checkbox name="availYes" />}
@@ -102,54 +113,71 @@ class VTPage2 extends Component {
                                 label="No"
                             />
                         </FormGroup>
-
-                        <FormLabel component="label">How often can you take the animal(s) outside?</FormLabel>
+                        <Typeography variant="subtitle1">How often can you take the animal(s) outside?</Typeography>
                         <FormGroup row="true">
                             <FormControlLabel
-                                control={<Checkbox name="hrCheck1" />}
-                                onChange={(event) => this.handleChange(event, "0-2")}
+                                control={<Checkbox name="" />}
+                                defaultChecked={false}
+                                value={this.state.hourSelectOne}
+                                onChange={(event) => this.handleChange(event, "hourSelectOne")}
                                 label="0-2 Hours"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="hrCheck2" />}
-                                onChange={(event) => this.handleChange(event, "2-4")}
+                                control={<Checkbox name="hourSelectTwo" />}
+                                defaultChecked={false}
+                                value={this.state.hourSelectTwo}
+                                onChange={(event) => this.handleChange(event, "hourSelectTwo")}
                                 label="2-4 Hours"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="hrCheck3" />}
-                                onChange={(event) => this.handleChange(event, "4-8")}
+                                control={<Checkbox name="hourSelectThree" />}
+                                defaultChecked={false}
+                                value={this.state.hourSelectThree}
+                                onChange={(event) => this.handleChange(event, "hourSelectThree")}
                                 label="4-8 Hours"
                             />
                             <FormControlLabel
-                                control={<Checkbox name="hrCheck4" />}
-                                onChange={(event) => this.handleChange(event, "N/A")}
+                                control={<Checkbox name="hourSelectFour" />}
+                                defaultChecked={false}
+                                value={this.state.hourSelectFour}
+                                onChange={(event) => this.handleChange(event, "hourSelectFour")}
                                 label="N/A"
                             />
+                            
                         </FormGroup>
-                        <FormLabel component="label">What size animals are you comfortable hosting?</FormLabel>
+                        <FormHelperText>Please choose all that apply</FormHelperText>
+                        <Typeography variant="subtitle1">What size animals are you comfortable hosting?</Typeography>
                         <FormGroup row="true">
                             <FormControlLabel
                                 control={<Checkbox name="smCheck" />}
-                                onChange={(event) => this.handleChange(event, "small")} 
+                                defaultChecked={false}
+                                value={this.state.smallAnimal}
+                                onChange={(event) => this.handleChange(event, "smallAnimal")}
                                 label="Small"
                             />
                             <FormControlLabel
                                 control={<Checkbox name="mdCheck" />}
-                                onChange={(event) => this.handleChange(event, "medium")}
+                                defaultChecked={false}
+                                value={this.state.mediumAnimal}
+                                onChange={(event) => this.handleChange(event, "mediumAnimal")}
                                 label="Medium"
                             />
                             <FormControlLabel
                                 control={<Checkbox name="lgCheck" />}
-                                onChange={(event) => this.handleChange(event, "large")}
+                                defaultChecked={false}
+                                value={this.state.largeAnimal}
+                                onChange={(event) => this.handleChange(event, "largeAnimal")}
                                 label="Large"
                             />
                             <FormControlLabel
                                 control={<Checkbox name="gtCheck" />}
-                                onChange={(event) => this.handleChange(event, "giant")}
+                                defaultChecked={false}
+                                value={this.state.giantAnimal}
+                                onChange={(event) => this.handleChange(event, "giantAnimal")}
                                 label="Giant"
                             />
                         </FormGroup>
-                        <FormLabel component="label">Will you host animals younger than 1 years old?</FormLabel>
+                        <Typeography variant="subtitle1">Will you host animals younger than 1 years old?</Typeography>
                         <FormGroup row="true">
                             <FormControlLabel
                                 control={<Radio name="youngYes" />}
@@ -164,7 +192,7 @@ class VTPage2 extends Component {
                                 label="No"
                             />
                         </FormGroup>
-                        <FormLabel component="label">Will you host animals from multiple families at once?</FormLabel>
+                        <Typeography variant="subtitle1">Will you host animals from multiple families at once?</Typeography>
                         <FormGroup row="true">
                             <FormControlLabel
                                 control={<Radio name="multiYesRadio" />}
@@ -178,19 +206,26 @@ class VTPage2 extends Component {
                             />
                         </FormGroup>
                         <Grid>
-                            <FormLabel component="label">Please provide a list of equipment that will be used when caring for pets: </FormLabel>
+                            <Typeography variant="subtitle1">Please provide a list of equipment that will be used when caring for pets: </Typeography>
                             <br />
-                            <div className={classes.textbox}>
-                            <TextField type="text" id="outlined-basic" label="Optional" variant="outlined"
+                            <br />
+                            <div >
+                                <TextField 
+                                fullWidth="true" 
+                                multiline="true" 
+                                type="text" 
+                                id="outlined-basic" 
+                                label="Optional" 
+                                variant="outlined"
                                 color="secondary"
-                            />
+                                value={this.state.optionalEquipment}
+                                onChange={(event) => this.handleChange(event, "optionalEquipment")}
+                                />
                             </div>
                         </Grid>
                         <Grid alignItems="center" justifyContent="center">
-                            <div className={classes.buttons}>
-                            <Button variant="contained" color="primary" >Back</Button>
-                            <Button variant="contained" color="primary">Continue</Button>
-                            </div>
+                            <Button className={classes.button} onClick={this.handleBackClick} variant="contained" color="primary" >Back</Button>
+                            <Button className={classes.button} onClick={this.handleContClick} variant="contained" color="primary">Continue</Button>
                         </Grid>
                     </FormControl>
                 </Grid>
@@ -249,7 +284,7 @@ class VTPage2 extends Component {
                 </div> */}
 
             </div>
-         
+
         )
     }
 }
@@ -259,14 +294,14 @@ const mapStateToProps = (state) => ({
         dog: false,
         cat: false,
         other: false,
-        hourSelect1: false,
-        hourSelect2: false,
-        hourSelect3: false,
-        hourSelect4: false,
-        small: false,
-        medium: false,
-        large: false,
-        giant: false,
+        hourSelectOne: false,
+        hourSelectTwo: false,
+        hourSelectThree: false,
+        hourSelectFour: false,
+        smallAnimal: false,
+        mediumAnimal: false,
+        largeAnimal: false,
+        giantAnimal: false,
         youngAnimals: '',
         multipleAnimals: '',
         optionalEquipment: '',

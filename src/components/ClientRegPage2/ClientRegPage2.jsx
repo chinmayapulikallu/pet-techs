@@ -11,46 +11,43 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
-import ReactDOM from 'react-dom';
-import MedicationField from '../MedicationField/MedicationField'
+import Typography from "@material-ui/core/Typography";
 // import FormLabel from '@material-ui/core/FormLabel';
-// import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Container from "@material-ui/core/Container";
 
 const useStyles = (theme) => ({
     root: {
-        marginTop: 20,
+        marginTop: 100,
         marginBottom: 40,
+        textAlign: "center",
         // flexGrow: 1,
-        marginLeft: theme.spacing(20),
-        marginRight: theme.spacing(20),
+        // marginLeft: theme.spacing(40),
+        // marginRight: theme.spacing(20),
     },
     formControl: {
-        margin: theme.spacing(1),
+        // margin: theme.spacing(1),
         minWidth: 120,
-    },
-    selectEmpty: {
-        marginTop: theme.spacing(2),
-    },
-    title: {
-        textAlign: 'center',
-    },
-    fullwidth: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
+        margin: "10px"
     },
     itemCenter: {
         textAlign: 'center',
         justifyContent: "center",
         marginTop: "20px",
     },
-    buttons: {
-        marginLeft: theme.spacing(2),
-        marginRight: theme.spacing(2),
+    inputField: {
+        margin: "10px"
     },
-   
-
-
+    radioAlignment: {
+        display: "block",
+        margin: "10px"
+    },
+    inputHeading: {
+        textAlign: "left"
+    },
+    buttonMargin: {
+        margin: "10px"
+    },
 });
 
 class ClientRegPage2 extends Component {
@@ -83,7 +80,7 @@ class ClientRegPage2 extends Component {
 
     //back to client1
     handleBack = () => {
-        this.props.history.dispatch('/creg1')
+        this.props.history.push('/creg1')
     }
 
     //Input function to capture input
@@ -110,7 +107,13 @@ class ClientRegPage2 extends Component {
 
     //sign in page after completing
     handleComplete = () => {
-        this.props.history.dispatch('/home')
+        this.props.history.push('/home')
+        //dispatch to reducer
+    }
+
+    //upload Photo
+    uploadPhoto = () => {
+        alert('upload photo');
     }
 
     
@@ -119,10 +122,10 @@ class ClientRegPage2 extends Component {
         const { classes } = this.props;
         
         return (
-            <div className={classes.root}>
-                <h2 className={classes.title}>Client Registration Page 2</h2>
+            <Container className={classes.root} maxWidth="md">
+                <Typography variant="h4">Client Registration Page 2</Typography>
                     <Grid container spacing={3}>
-                    <Grid item xs={3}>
+                    <Grid item xs={12}>
                         <FormControl variant="outlined" className={classes.formControl}>
                             <InputLabel id="demo-simple-select-outlined-label">Pet Type</InputLabel>
                             <Select
@@ -132,116 +135,146 @@ class ClientRegPage2 extends Component {
                                 onChange={(event) => this.handleChange('pet_type', event)}
                                 label="Pet Type"
                             >
-                                {/* <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem> */}
-                                <MenuItem value={1}>Dog</MenuItem>
-                                <MenuItem value={2}>Cat</MenuItem>
-                                <MenuItem value={3}>Other</MenuItem>
+                                <MenuItem value="1">Dog</MenuItem>
+                                <MenuItem value="2">Cat</MenuItem>
+                                <MenuItem value="3">Other</MenuItem>
                             </Select>
                         </FormControl>
                         <TextField
-                            id="outlined-password-input"
                             label="Pet Name"
                             type="text"
                             variant="outlined"
+                            color="secondary"
+                            className={classes.inputField}
                             onChange={(event) => this.handleChange('pet_name', event)}
                         />
                     </Grid>
-                    
-                    
-                  
-              
                     <Grid item xs={12}> 
                         <TextField
-                            id="outlined-password-input"
                             label="If others, please specify"
                             type="text"
                             variant="outlined"
+                            color="secondary"
+                            className={classes.inputField}
                             onChange={(event) => this.handleChange('other_pet', event)}
                         />
                         <TextField
-                            id="outlined-password-input"
                             label="Weight"
                             type="text"
                             variant="outlined"
+                            color="secondary"
+                            className={classes.inputField}
                             onChange={(event) => this.handleChange('weight', event)}
                         />
                         <TextField
-                            id="outlined-password-input"
                             label="Age"
                             type="text"
                             variant="outlined"
+                            color="secondary"
+                            className={classes.inputField}
                             onChange={(event) => this.handleChange('age', event)}
                         />
                   </Grid>
                     <Grid item xs={12}>
                         <FormControl component="fieldset">
-                            <RadioGroup defaultValue="male" aria-label="gender" 
+                            <RadioGroup defaultValue="male" aria-label="gender" className={classes.radioAlignment}
                                 name="customized-radios" onChange={(event) => this.handleChangeFor('sex', event)}>
                                 <FormControlLabel value="male" control={<Radio />} label="Male" />
                                 <FormControlLabel value="female" control={<Radio />} label="Female" />
                             </RadioGroup>
                         </FormControl>
                         <TextField
-                            id="outlined-password-input"
                             label="Breed"
                             type="text"
                             variant="outlined"
+                            color="secondary"
+                            className={classes.inputField}
                             onChange={(event) => this.handleChange('breed', event)}
                         />
                     </Grid>
-                <Grid className={classes.itemCenter}>
-                    <Button color="primary" variant="contained">Upload Photo</Button>
+                    <Grid item xs={12} className={classes.itemCenter}>
+                        <Button color="primary" variant="contained"
+                            onClick={this.uploadPhoto}>Upload Photo</Button>
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
-                            id="outlined-password-input"
                             label="Pet Food Brand"
                             type="text"
                             variant="outlined"
+                            color="secondary"
+                            className={classes.inputField}
                             onChange={(event) => this.handleChange('food_brand', event)}
                         />
                         <TextField
-                            id="outlined-password-input"
                             label="Feedings per day"
                             type="text"
                             variant="outlined"
+                            color="secondary"
+                            className={classes.inputField}
                             onChange={(event) => this.handleChange('feeding_per_day', event)}
                         />
                         <TextField
-                            id="outlined-password-input"
                             label="Pet Food Brand"
                             type="text"
                             variant="outlined"
+                            color="secondary"
+                            className={classes.inputField}
                             onChange={(event) => this.handleChange('amount_per_meal', event)}
                         />
                     </Grid>
-                    <Grid className={classes.optional}>
+                    <Grid item xs={12}>
                     <TextField
-                        id="outlined-full-width" label=" Optional* Other dietary restrictions, supplements, etc."  
+                        label=" Optional* Other dietary restrictions, supplements, etc."  
                         type="text" variant="outlined" color="secondary"
                         InputProps={{
-                            className: classes.fullwidth
+                            className: classes.inputField
                         }}
                         fullWidth
                         onChange={this.handleChange('optional_food')}
                     />
                     </Grid>
-                    {this.state.clientInfo.medications && this.state.clientInfo.medications.map(medication => 
+                    <Grid item xs={12}>
+                        {/* {this.state.clientInfo.medications && this.state.clientInfo.medications.map(medication => 
                             <MedicationField medication/>
-                            )}
+                            )} */}
+                        {this.state.clientInfo.medications && this.state.clientInfo.medications.map(medication =>
+                            <>
+                            <TextField
+                                label="Medication Name"
+                                type="text"
+                                variant="outlined"
+                                className={classes.inputField}
+                                onChange={(event) => this.handleChange('medication_name', event)}
+                            />
+                            <TextField
+                                label="Optional *dosage "
+                                type="text"
+                                variant="outlined"
+                                className={classes.inputField}
+                                onChange={(event) => this.handleChange('medication_dosage', event)}
+                            />
+                            <TextField
+                                label="Time Of Day"
+                                type="text"
+                                variant="outlined"
+                                className={classes.inputField}
+                                onChange={(event) => this.handleChange('dosage_time', event)}
+                            />
+                            <br />
+                            </>
+                        )}
+                    </Grid>
                     
-                <Grid className={classes.itemCenter}>
+                    <Grid item xs={12} className={classes.itemCenter}>
                         <Button color="primary" variant="contained" 
                         onClick={this.addMedication}>Add Medication</Button>
                     </Grid>
-                    <Grid item xs={12}>
-                        <h2>Behavioral:</h2>
+                    <Grid item xs={12} className={classes.inputHeading}>
+                        <Typography variant="h5">Behavioral:</Typography>
                     </Grid>
                     <Grid item xs={12}>
                     <TextField
-                        id="outlined-full-width" label="Type here "
+                        label="Type here "
                         type="text" variant="outlined" color="secondary"
                         InputProps={{
                             className: classes.fullwidth
@@ -250,12 +283,12 @@ class ClientRegPage2 extends Component {
                         onChange={this.handleChange('pet_behavior')}
                     />
                     </Grid>
-                    <Grid item xs={12}>
-                        <h2>Care Equipment:</h2>
+                    <Grid item xs={12} className={classes.inputHeading}>
+                        <Typography variant="h5">Care Equipment:</Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
-                            id="outlined-full-width" label="Type here "
+                            label="Type here "
                             type="text" variant="outlined" color="secondary"
                         InputProps={{
                             className: classes.fullwidth
@@ -264,14 +297,17 @@ class ClientRegPage2 extends Component {
                             onChange={this.handleChange('care_equipment')}
                         />
                     </Grid>
-                    <Grid className={classes.itemCenter}>
-                        <Button color="secondary" variant="contained" onClick={this.handleBack}>Back</Button>
-                        <Button color="secondary" variant="contained">Add Another Pet</Button>
-                        <Button color="secondary" variant="contained" onClick={this.handleComplete}>Complete</Button>
+                    <Grid item xs={12} className={classes.itemCenter}>
+                        <Button color="secondary" variant="contained"
+                            className={classes.buttonMargin} onClick={this.handleBack}>Back</Button>
+                        <Button color="secondary" variant="contained"
+                            className={classes.buttonMargin}>Add Another Pet</Button>
+                        <Button color="secondary" variant="contained" 
+                        className={classes.buttonMargin} onClick={this.handleComplete}>Complete</Button>
                     </Grid>
 
                 </Grid>
-            </div>
+            </Container>
         )
     }
 }

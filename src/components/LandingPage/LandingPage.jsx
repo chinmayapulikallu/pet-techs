@@ -60,8 +60,17 @@ const styles = theme => ({
         borderRadius: 12,
         
     },
-    misson: {
-        borderRadius: 0
+    mission: {
+        textAlign: "center",
+        fontFamily: 'Quicksand',
+        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
+        marginRight: 400,
+        marginLeft: 400,
+        color: '#195C60',
+        paddingTop: 20,
+        paddingBottom: 20
     }
 
 
@@ -85,7 +94,7 @@ class LandingPage extends Component {
                     </Grid>
                 </div>
                 <div>
-                    <Typeography className={classes.services} variant="h6"><b>Our Services</b></Typeography>
+                    <Typeography className={classes.services} variant="h5"><b>Our Services</b></Typeography>
                     <Grid container direction="row" className={classes.cards} spacing={2}>
                         <Grid item xs={2}>
                             <Card>
@@ -155,9 +164,10 @@ class LandingPage extends Component {
                 </Grid>
                 <Grid>
                     <div>
-                        <Typeography className={classes.description} variant="h5">Find the best caretaker for your critter.</Typeography>
+                       
                     </div>
                     <div>
+                        <Typeography className={classes.description} variant="h3">Our Mission</Typeography>
                         <img className={classes.mission} src="/images/mission-logo.png" alt="missionLogoIcon" height="300" width="300" />
                     </div>
                     

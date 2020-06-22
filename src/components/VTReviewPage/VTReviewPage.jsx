@@ -35,7 +35,7 @@ const styles = theme => ({
 
 class VTReviewPage extends Component {
     state = {
-        ...this.props,
+        ...this.props.vtInfo,
     }
 
     handleEditVTPage1Button = () => {
@@ -50,6 +50,15 @@ class VTReviewPage extends Component {
         console.log('edit clicked!')
         this.props.history.push('/vtreg3')
     }
+    handleSaveButton = () =>{
+        console.log('save clicked!')
+        console.log('send this VT data to saga:', this.state)
+        this.props.dispatch({
+            type: "ADD_VT",
+            payload: { vtInfo: this.state }
+        })
+    }
+
 
     render() {
         const { classes } = this.props;
@@ -61,25 +70,19 @@ class VTReviewPage extends Component {
                 <p>City: <span>{this.state.city}</span></p>
                 <p>State: <span>{this.state.state}</span></p>
                 <p>Zip Code: <span>{this.state.zipcode}</span></p>
-
                 <p>Bio: <span>{this.state.bio}</span></p>
-                <Grid className={classes.itemCenter} alignItems="center"
-                    justifyContent="center">
-                    <Button className={classes.buttons} variant="contained" color="primary"
-                        onClick={this.handleEditVTPage1Button}
-                    >Edit Basic Infomation</Button>
-                </Grid>
-                <p>Hospice Care: <span>{this.state.apt_suite}</span></p>
+                
                 <p>Pet Sleepover: <span>{this.state.sleep_over}</span></p>
                 <p>Pet Boarding:  <span>{this.state.boarding}</span></p>
                 <p>Drop In Care: <span>{this.state.dropin_care}</span></p>
                 <p>Hospice Care: <span>{this.state.hospice}</span></p>
-                <Grid className={classes.itemCenter} alignItems="center"
-                    justifyContent="center">
+                <Grid className={classes.itemCenter} 
+                    >
                     <Button className={classes.buttons} variant="contained" color="primary"
-                        onClick={this.handleEditVTPage2Button}
-                    >Edit Services</Button>
+                        onClick={this.handleEditVTPage1Button}
+                    >Edit Basic Infomation</Button>
                 </Grid>
+               
 
                 <p>What animals will you provide services for? <span>{this.state.apt_suite}</span></p>
                 <p>Are you home full time Monday-Friday? <span>{this.state.apt_suite}</span></p>
@@ -89,12 +92,11 @@ class VTReviewPage extends Component {
                 <p>Will you host animals younger than 1 years old? <span>{this.state.apt_suite}</span></p>
                 <p>Will you host animals from multiple families at once? <span>{this.state.apt_suite}</span></p>
                 <p>Please provide a list of equipment that will be used when caring for pets: <span>{this.state.apt_suite}</span></p>
-                <Grid className={classes.itemCenter} alignItems="center">
+                <Grid className={classes.itemCenter}>
                     <Button className={classes.buttons} variant="contained" color="primary"
-                        onClick={this.handleEditVTPage3Button}
-                    >Edit Service preferences</Button>
+                        onClick={this.handleEditVTPage2Button}
+                    >Edit Services</Button>
                 </Grid>
-
 
                 <p>Year of professional experience caring for pets: <span>{this.state.apt_suite}</span></p>
                 <p>Education/Degree/Certifications: <span>{this.state.apt_suite}</span></p>
@@ -110,8 +112,14 @@ class VTReviewPage extends Component {
                 <p>Can you provied daily exercise for high energy animals or behavioral needs? <span>{this.state.apt_suite}</span></p>
                 <p>Are you willing to accept services that are longer than one week with animals? <span>{this.state.apt_suite}</span></p>
                 <p>Do you offer diabetic and insulin care? <span>{this.state.apt_suite}</span></p>
-                <Grid className={classes.itemCenter} alignItems="center"
-                    justifyContent="center">
+                <Grid className={classes.itemCenter}>
+                    <Button className={classes.buttons} variant="contained" color="primary"
+                        onClick={this.handleEditVTPage3Button}
+                    >Edit Service preferences</Button>
+                </Grid>
+
+                
+                <Grid className={classes.itemCenter}>
                     <Button className={classes.buttons} variant="contained" color="primary"
                         onClick={this.handleSaveButton}
                     >Save</Button>

@@ -47,6 +47,7 @@ class RegisterPage extends Component {
         )}
         <form onSubmit={this.registerUser}>
           <h1>Sign up with email!</h1>
+          <h5>All fields required*</h5>
           <div>
             Email:
             <input

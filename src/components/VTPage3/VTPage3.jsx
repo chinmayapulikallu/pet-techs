@@ -239,7 +239,7 @@ const mapStateToProps = (state) => ({
         bioYourself: '',
         cpr: false,
         oralMedication: false,
-        injectableMedicaiton: false,
+        injectableMedication: false,
         expOlderPet: false,
         expSpecialPet: false,
         dailyExercise: false,

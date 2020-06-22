@@ -32,7 +32,6 @@ const styles = theme => ({
         height: 45,
         width: 180,
         borderRadius: 12,
-
     },
 })
 
@@ -46,7 +45,7 @@ class VTPage2 extends Component {
     handleChange = (event, property) => {
         console.log(event.target.value, property);
         this.setState({
-        [property]: event.target.value
+            [property]: event.target.value
         })
     }
 
@@ -77,7 +76,7 @@ class VTPage2 extends Component {
                 <Grid container justify="center" spacing={3}>
                     <FormControl>
                         <Typeography variant="subtitle1">What animals will you provide services for?</Typeography>
-                        <FormGroup row="true">
+                        <FormGroup row= {true}>
                             <FormControlLabel
                                 control={<Checkbox name="dog" />}
                                 value={this.state.dog}
@@ -99,9 +98,9 @@ class VTPage2 extends Component {
                                 label="Others"
                             />
                         </FormGroup>
-                            <FormHelperText>Please choose all that apply</FormHelperText>
+                        <FormHelperText>Please choose all that apply</FormHelperText>
                         <Typeography variant="subtitle1">Are you home full time Monday-Friday?</Typeography>
-                        <FormGroup row="true">
+                        <FormGroup row={true}>
                             <FormControlLabel
                                 control={<Checkbox name="availYes" />}
                                 onChange={(event) => this.handleChange(event, "yes")}
@@ -114,7 +113,7 @@ class VTPage2 extends Component {
                             />
                         </FormGroup>
                         <Typeography variant="subtitle1">How often can you take the animal(s) outside?</Typeography>
-                        <FormGroup row="true">
+                        <FormGroup row={true}>
                             <FormControlLabel
                                 control={<Checkbox name="" />}
                                 defaultChecked={false}
@@ -143,11 +142,11 @@ class VTPage2 extends Component {
                                 onChange={(event) => this.handleChange(event, "hourSelectFour")}
                                 label="N/A"
                             />
-                            
+
                         </FormGroup>
                         <FormHelperText>Please choose all that apply</FormHelperText>
                         <Typeography variant="subtitle1">What size animals are you comfortable hosting?</Typeography>
-                        <FormGroup row="true">
+                        <FormGroup row={true}>
                             <FormControlLabel
                                 control={<Checkbox name="smCheck" />}
                                 defaultChecked={false}
@@ -178,7 +177,7 @@ class VTPage2 extends Component {
                             />
                         </FormGroup>
                         <Typeography variant="subtitle1">Will you host animals younger than 1 years old?</Typeography>
-                        <FormGroup row="true">
+                        <FormGroup row={true}>
                             <FormControlLabel
                                 control={<Radio name="youngYes" />}
                                 onChange={(event) => this.handleChange(event, "yesAge")}
@@ -193,7 +192,7 @@ class VTPage2 extends Component {
                             />
                         </FormGroup>
                         <Typeography variant="subtitle1">Will you host animals from multiple families at once?</Typeography>
-                        <FormGroup row="true">
+                        <FormGroup row={true}>
                             <FormControlLabel
                                 control={<Radio name="multiYesRadio" />}
                                 onChange={(event) => this.handleChange(event, "yesMulti")}
@@ -210,27 +209,27 @@ class VTPage2 extends Component {
                             <br />
                             <br />
                             <div >
-                                <TextField 
-                                fullWidth="true" 
-                                multiline="true" 
-                                type="text" 
-                                id="outlined-basic" 
-                                label="Optional" 
-                                variant="outlined"
-                                color="secondary"
-                                value={this.state.optionalEquipment}
-                                onChange={(event) => this.handleChange(event, "optionalEquipment")}
+                                <TextField
+                                    fullWidth
+                                    multiline
+                                    type="text"
+                                    id="outlined-basic"
+                                    label="Optional"
+                                    variant="outlined"
+                                    color="secondary"
+                                    value={this.state.optionalEquipment}
+                                    onChange={(event) => this.handleChange(event, "optionalEquipment")}
                                 />
                             </div>
                         </Grid>
-                        <Grid alignItems="center" justifyContent="center">
+                        <Grid>
                             <Button className={classes.button} onClick={this.handleBackClick} variant="contained" color="primary" >Back</Button>
                             <Button className={classes.button} onClick={this.handleContClick} variant="contained" color="primary">Continue</Button>
                         </Grid>
                     </FormControl>
                 </Grid>
 
-               
+
             </div>
 
         )

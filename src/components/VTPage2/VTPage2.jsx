@@ -46,7 +46,7 @@ class VTPage2 extends Component {
     handleChange = (event, property) => {
         console.log(event.target.value, property);
         this.setState({
-        [property]: event.target.value
+            [property]: event.target.value
         })
     }
 
@@ -99,7 +99,7 @@ class VTPage2 extends Component {
                                 label="Others"
                             />
                         </FormGroup>
-                            <FormHelperText>Please choose all that apply</FormHelperText>
+                        <FormHelperText>Please choose all that apply</FormHelperText>
                         <Typeography variant="subtitle1">Are you home full time Monday-Friday?</Typeography>
                         <FormGroup row="true">
                             <FormControlLabel
@@ -143,7 +143,7 @@ class VTPage2 extends Component {
                                 onChange={(event) => this.handleChange(event, "hourSelectFour")}
                                 label="N/A"
                             />
-                            
+
                         </FormGroup>
                         <FormHelperText>Please choose all that apply</FormHelperText>
                         <Typeography variant="subtitle1">What size animals are you comfortable hosting?</Typeography>
@@ -210,16 +210,16 @@ class VTPage2 extends Component {
                             <br />
                             <br />
                             <div >
-                                <TextField 
-                                fullWidth="true" 
-                                multiline="true" 
-                                type="text" 
-                                id="outlined-basic" 
-                                label="Optional" 
-                                variant="outlined"
-                                color="secondary"
-                                value={this.state.optionalEquipment}
-                                onChange={(event) => this.handleChange(event, "optionalEquipment")}
+                                <TextField
+                                    fullWidth="true"
+                                    multiline="true"
+                                    type="text"
+                                    id="outlined-basic"
+                                    label="Optional"
+                                    variant="outlined"
+                                    color="secondary"
+                                    value={this.state.optionalEquipment}
+                                    onChange={(event) => this.handleChange(event, "optionalEquipment")}
                                 />
                             </div>
                         </Grid>
@@ -230,7 +230,7 @@ class VTPage2 extends Component {
                     </FormControl>
                 </Grid>
 
-               
+
             </div>
 
         )

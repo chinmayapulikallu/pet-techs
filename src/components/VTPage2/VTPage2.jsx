@@ -32,7 +32,6 @@ const styles = theme => ({
         height: 45,
         width: 180,
         borderRadius: 12,
-
     },
 })
 

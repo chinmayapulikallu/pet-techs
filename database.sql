@@ -83,7 +83,7 @@ CREATE TABLE vet_tech (
   expertise text,
   CPR_first_air boolean DEFAULT FALSE NOT NULL ,
   oral_medication boolean DEFAULT FALSE NOT NULL,
-  injectable_medicaiton boolean DEFAULT FALSE NOT NULL,
+  injectable_medication boolean DEFAULT FALSE NOT NULL,
   exp_older_pet boolean DEFAULT FALSE NOT NULL,
   exp_special_pet boolean DEFAULT FALSE NOT NULL,
   daily_exercise boolean DEFAULT FALSE NOT NULL,

@@ -43,6 +43,27 @@ const styles = theme => ({
         textAlign: 'center',
         justifyContent: "center"
     },
+    image: {
+        alignItems: "center",
+
+    },
+    servProv: {
+        paddingTop: 25,
+        marginLeft: 580,
+
+    },
+    button: {
+        margin: "20px 30px 20px 30px",
+        marginLeft: 600,
+        height: 45,
+        width: 180,
+        borderRadius: 12,
+        
+    },
+    misson: {
+        borderRadius: 0
+    }
+
 
 
 })
@@ -117,10 +138,31 @@ class LandingPage extends Component {
                     <Grid container spacing={3}>
 
                         <img className={classes.landingPg} src='../images/homeCat.png' />
-                       
-                       
+
+
                     </Grid>
                 </div>
+                <Grid>
+                    <div>
+                        <img className={classes.servProv} src="/images/service-provider.png" alt="serviceProviderIcon" height="200" width="200" />
+                    </div>
+                    <div>
+                        <Typeography className={classes.description} variant="h5">Find the best caretaker for your critter.</Typeography>
+                    </div>
+                    <div>
+                        <Button className={classes.button} onClick={this.handleBackClick} variant="contained" color="primary" >Find a service provider</Button>
+                    </div>
+                </Grid>
+                <Grid>
+                    <div>
+                        <Typeography className={classes.description} variant="h5">Find the best caretaker for your critter.</Typeography>
+                    </div>
+                    <div>
+                        <img className={classes.mission} src="/images/mission-logo.png" alt="missionLogoIcon" height="300" width="300" />
+                    </div>
+                    
+                    
+                </Grid>
             </div>
 
 

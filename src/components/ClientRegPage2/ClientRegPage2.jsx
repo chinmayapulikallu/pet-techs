@@ -84,7 +84,7 @@ class ClientRegPage2 extends Component {
     }
 
     //Input function to capture input
-    handleChange = property => (event) => {
+    handleChange = (property) => (event) => {
         console.log('in handle change', property, event.target.value);
         this.setState({
             ...this.state,
@@ -92,15 +92,15 @@ class ClientRegPage2 extends Component {
         })
     }
 
-    handleChangeFor = (name, event) => {
-        console.log(name,event.target.value);
+    handleChangeFor = (property) => (event) => {
+        console.log(property,event.target.value);
         if (event.target.value === "true" || event.target.value === "false") {
             this.setState({
-                [name]: event.target.value === "true",
+                [property]: event.target.value === "true",
             });
         } else {
             this.setState({
-                [name]: event.target.value,
+                [property]: event.target.value,
             });
         }
     }
@@ -131,13 +131,15 @@ class ClientRegPage2 extends Component {
                             <Select
                                 labelId="demo-simple-select-outlined-label"
                                 id="demo-simple-select-outlined"
-                                //value={age}
-                                onChange={(event) => this.handleChange('pet_type', event)}
+                                value={0}
+                                color="secondary"
+                                onChange={this.handleChange('pet_type')}
                                 label="Pet Type"
                             >
-                                <MenuItem value="1">Dog</MenuItem>
-                                <MenuItem value="2">Cat</MenuItem>
-                                <MenuItem value="3">Other</MenuItem>
+                                <MenuItem value="0">None</MenuItem>
+                                <MenuItem value="Dog">Dog</MenuItem>
+                                <MenuItem value="Cat">Cat</MenuItem>
+                                <MenuItem value="Other">Other</MenuItem>
                             </Select>
                         </FormControl>
                         <TextField
@@ -146,7 +148,7 @@ class ClientRegPage2 extends Component {
                             variant="outlined"
                             color="secondary"
                             className={classes.inputField}
-                            onChange={(event) => this.handleChange('pet_name', event)}
+                            onChange={this.handleChange('pet_name')}
                         />
                     </Grid>
                     <Grid item xs={12}> 
@@ -156,7 +158,7 @@ class ClientRegPage2 extends Component {
                             variant="outlined"
                             color="secondary"
                             className={classes.inputField}
-                            onChange={(event) => this.handleChange('other_pet', event)}
+                            onChange={this.handleChange('other_pet')}
                         />
                         <TextField
                             label="Weight"
@@ -164,7 +166,7 @@ class ClientRegPage2 extends Component {
                             variant="outlined"
                             color="secondary"
                             className={classes.inputField}
-                            onChange={(event) => this.handleChange('weight', event)}
+                            onChange={this.handleChange('weight')}
                         />
                         <TextField
                             label="Age"
@@ -172,13 +174,13 @@ class ClientRegPage2 extends Component {
                             variant="outlined"
                             color="secondary"
                             className={classes.inputField}
-                            onChange={(event) => this.handleChange('age', event)}
+                            onChange={this.handleChange('age')}
                         />
                   </Grid>
                     <Grid item xs={12}>
                         <FormControl component="fieldset">
                             <RadioGroup defaultValue="male" aria-label="gender" className={classes.radioAlignment}
-                                name="customized-radios" onChange={(event) => this.handleChangeFor('sex', event)}>
+                                name="customized-radios" onChange={this.handleChangeFor('sex')}>
                                 <FormControlLabel value="male" control={<Radio />} label="Male" />
                                 <FormControlLabel value="female" control={<Radio />} label="Female" />
                             </RadioGroup>
@@ -189,7 +191,7 @@ class ClientRegPage2 extends Component {
                             variant="outlined"
                             color="secondary"
                             className={classes.inputField}
-                            onChange={(event) => this.handleChange('breed', event)}
+                            onChange={this.handleChange('breed')}
                         />
                     </Grid>
                     <Grid item xs={12} className={classes.itemCenter}>
@@ -203,7 +205,7 @@ class ClientRegPage2 extends Component {
                             variant="outlined"
                             color="secondary"
                             className={classes.inputField}
-                            onChange={(event) => this.handleChange('food_brand', event)}
+                            onChange={this.handleChange('food_brand')}
                         />
                         <TextField
                             label="Feedings per day"
@@ -211,15 +213,15 @@ class ClientRegPage2 extends Component {
                             variant="outlined"
                             color="secondary"
                             className={classes.inputField}
-                            onChange={(event) => this.handleChange('feeding_per_day', event)}
+                            onChange={this.handleChange('feeding_per_day')}
                         />
                         <TextField
-                            label="Pet Food Brand"
+                            label="Amount per meal"
                             type="text"
                             variant="outlined"
                             color="secondary"
                             className={classes.inputField}
-                            onChange={(event) => this.handleChange('amount_per_meal', event)}
+                            onChange={this.handleChange('amount_per_meal')}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -244,21 +246,21 @@ class ClientRegPage2 extends Component {
                                 type="text"
                                 variant="outlined"
                                 className={classes.inputField}
-                                onChange={(event) => this.handleChange('medication_name', event)}
+                                onChange={this.handleChange('medication_name')}
                             />
                             <TextField
                                 label="Optional *dosage "
                                 type="text"
                                 variant="outlined"
                                 className={classes.inputField}
-                                onChange={(event) => this.handleChange('medication_dosage', event)}
+                                onChange={this.handleChange('medication_dosage')}
                             />
                             <TextField
                                 label="Time Of Day"
                                 type="text"
                                 variant="outlined"
                                 className={classes.inputField}
-                                onChange={(event) => this.handleChange('dosage_time', event)}
+                                onChange={this.handleChange('dosage_time')}
                             />
                             <br />
                             </>
@@ -298,11 +300,11 @@ class ClientRegPage2 extends Component {
                         />
                     </Grid>
                     <Grid item xs={12} className={classes.itemCenter}>
-                        <Button color="secondary" variant="contained"
+                        <Button color="primary" variant="contained"
                             className={classes.buttonMargin} onClick={this.handleBack}>Back</Button>
-                        <Button color="secondary" variant="contained"
+                        <Button color="primary" variant="contained"
                             className={classes.buttonMargin}>Add Another Pet</Button>
-                        <Button color="secondary" variant="contained" 
+                        <Button color="primary" variant="contained" 
                         className={classes.buttonMargin} onClick={this.handleComplete}>Complete</Button>
                     </Grid>
 
@@ -336,9 +338,9 @@ const mapStateToProps = (state) => ({
                 dosage_time:''
             }
         ],
-        ...state.vtInfo
+        ...state.clientInfo
     }
    
 })
 
-export default (withStyles(useStyles, {withTheme: true} ))(withRouter(connect(mapStateToProps)(ClientRegPage2)));
+export default (withStyles(useStyles))(withRouter(connect(mapStateToProps)(ClientRegPage2)));

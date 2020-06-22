@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import Table from "@material-ui/core/Table";
@@ -13,13 +14,21 @@ class VTDashboard extends Component {
   componentDidMount = () => {
     // get dashboard info for Vet Tech, get request
   };
-
+// not sure if these will be the exact paths, or types, placeholders for now. 
   detailsButton = (event) => {
     this.props.dispatch({
       type: "GET_VT_SERVICE_REQUEST_BY_ID",
       payload: event.currentTarget.value,
     });
     this.props.history.push("/vtservicerequest");
+  };
+ // not sure if these will be the exact paths, or types, placeholders for now. 
+  viewButton = (event) => {
+    this.props.dispatch({
+      type: "GET_CARE_PLAN__BY_ID",
+      payload: event.currentTarget.value,
+    });
+    this.props.history.push("/careplan");
   };
   render() {
     return (
@@ -57,92 +66,32 @@ class VTDashboard extends Component {
             </TableBody>
           </Table>
         </TableContainer>
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Date</TableCell>
-                <TableCell>Client Name</TableCell>
-                <TableCell>Details</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Date</TableCell>
-                <TableCell>Client Name</TableCell>
-                <TableCell>
-                <Button
-                  size="small"
-                  variant="contained"
-                  // will need to add a value, (id) for event to capture.
-                  onClick={this.detailsButton}
-                >
-                  Details
-                </Button>
-              </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
       </Container>
        <Container>
-       <h1>Photo will go here</h1>
-      
        <h2>Upcoming Commitments</h2>
        <TableContainer component={Paper}>
          <Table>
            <TableHead>
              <TableRow>
-               <TableCell>Name</TableCell>
+               <TableCell>Pet Name</TableCell>
                <TableCell>Date</TableCell>
-               <TableCell>Client Name</TableCell>
-               <TableCell>Details</TableCell>
+               <TableCell>Species Name</TableCell>
+               <TableCell>Action</TableCell>
              </TableRow>
            </TableHead>
            <TableBody>
              <TableRow>
                <TableCell>Name</TableCell>
                <TableCell>Date</TableCell>
-               <TableCell>Client Name</TableCell>
+               <TableCell>Species</TableCell>
                <TableCell>
                <Button
                  size="small"
                  variant="contained"
                  // will need to add a value, (id) for event to capture.
-                 onClick={this.detailsButton}
+                 onClick={this.viewButton}
                >
-                 Details
-               </Button>
-             </TableCell>
-             </TableRow>
-           </TableBody>
-         </Table>
-       </TableContainer>
-       <TableContainer component={Paper}>
-         <Table>
-           <TableHead>
-             <TableRow>
-               <TableCell>Name</TableCell>
-               <TableCell>Date</TableCell>
-               <TableCell>Client Name</TableCell>
-               <TableCell>Details</TableCell>
-             </TableRow>
-           </TableHead>
-           <TableBody>
-             <TableRow>
-               <TableCell>Name</TableCell>
-               <TableCell>Date</TableCell>
-               <TableCell>Client Name</TableCell>
-               <TableCell>
-               <Button
-                 size="small"
-                 variant="contained"
-                 // will need to add a value, (id) for event to capture.
-                 onClick={this.detailsButton}
-               >
-                 Details
+                 View
                </Button>
              </TableCell>
              </TableRow>
@@ -154,4 +103,8 @@ class VTDashboard extends Component {
     );
   }
 }
-export default VTDashboard;
+const mapStateToProps = (state) => ({
+ // not sure about the reducer names yet
+  });
+
+export default connect(mapStateToProps)(VTDashboard);

@@ -21,10 +21,10 @@ import ClientRegPage1 from '../ClientRegPage1/ClientRegPage1';
 import VTPage1 from '../VTPage1/VTPage1';
 import VTPage2 from '../VTPage2/VTPage2';
 import VTPage3 from '../VTPage3/VTPage3';
-import LandingPage from '../LandingPage/LandingPage'
-import VTDashboard from '../VTDashboard/VTDashboard'
-import VTReviewPage from '../VTReviewPage/VTReviewPage'
-import ClientReviewPage from '../ClientReviewPage/ClientReviewPage'
+import LandingPage from '../LandingPage/LandingPage';
+import VTDashboard from '../VTDashboard/VTDashboard';
+import VTReviewPage from '../VTReviewPage/VTReviewPage';
+import ClientReviewPage from '../ClientReviewPage/ClientReviewPage';
 
 import './App.css';
 

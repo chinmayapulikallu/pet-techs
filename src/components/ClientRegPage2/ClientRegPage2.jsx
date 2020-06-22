@@ -15,6 +15,7 @@ import Typography from "@material-ui/core/Typography";
 // import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import Container from "@material-ui/core/Container";
+import DatePicker from 'react-time-picker';
 
 const useStyles = (theme) => ({
     root: {
@@ -60,22 +61,66 @@ class ClientRegPage2 extends Component {
         console.log('in component did mount')
     }
 
-    //add Medication
-    addMedication = () => {
-        let nextMedicationId = Math.max(...this.state.clientInfo.medications.map(m => m.id)) + 1
-        console.log("medications ::", this.state, nextMedicationId)
-        this.setState({
+
+    //add AnotherPet
+    addPets = () => {
+        let petsId = Math.max(...this.state.clientInfo.pets.map(pet => pet.id)) +1
+         console.log("Pet List ::", this.state, petsId)
+         this.setState({
             ...this.state,
-            clientInfo: {...this.state.clientInfo, medications:
-                [...this.state.clientInfo.medications,
+            clientInfo: {...this.state.clientInfo, pets:
+                [...this.state.clientInfo.pets,
                     {
-                        id: nextMedicationId,
-                        medication_name: '',
-                        medication_dosage: '',
-                        dosage_time: ''
-                    }
-                ]}
+                        id: petsId,
+                        pet_type: '',
+                        other_pet: '',
+                        pet_name: '',
+                        weight: '',
+                        age: '',
+                        breed: '',
+                        sex: '',
+                        food_brand: '',
+                        feeding_per_day: '',
+                        amount_per_meal: '',
+                        other_food: '',
+                        optional_food: '',
+                        care_equipment: '',
+                        pet_behavior: '',
+                        medications: [
+                            {
+                                id: 1,
+                                medication_name: '',
+                                medication_dosage: '',
+                                dosage_time:''
+                            }
+                    ]
+                }]
+            }
         })
+
+    
+    }
+
+    //add Medication
+    addMedication = (petId) => {
+            const currentPet = this.state.clientInfo.pets.filter(pet => pet.id === petId)[0]
+            console.log("medications ::", this.state, petId, currentPet)
+            let nextMedicationId = Math.max(...currentPet.medications.map(m => m.id)) + 1
+            currentPet.medications.push(
+                {
+                    id: nextMedicationId,
+                    medication_name: '',
+                    medication_dosage: '',
+                    dosage_time: ''
+                }
+            )
+            
+            this.setState({
+                ...this.state,
+                clientInfo: {...this.state.clientInfo, pets:
+                    [...this.state.clientInfo.pets.filter(pet => pet.id !== petId), currentPet]
+                }
+            })
     }
 
     //back to client1
@@ -124,6 +169,7 @@ class ClientRegPage2 extends Component {
         return (
             <Container className={classes.root} maxWidth="md">
                 <Typography variant="h4">Client Registration Page 2</Typography>
+                {this.state.clientInfo.pets && this.state.clientInfo.pets.map(pet =>
                     <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <FormControl variant="outlined" className={classes.formControl}>
@@ -239,7 +285,7 @@ class ClientRegPage2 extends Component {
                         {/* {this.state.clientInfo.medications && this.state.clientInfo.medications.map(medication => 
                             <MedicationField medication/>
                             )} */}
-                        {this.state.clientInfo.medications && this.state.clientInfo.medications.map(medication =>
+                        {pet.medications && pet.medications.map(medication =>
                             <>
                             <TextField
                                 label="Medication Name"
@@ -255,13 +301,24 @@ class ClientRegPage2 extends Component {
                                 className={classes.inputField}
                                 onChange={this.handleChange('medication_dosage')}
                             />
-                            <TextField
+                            <DatePicker
+                                selected="00:00"
+                                onChange={this.handleChange('dosage_time')}
+                                showTimeSelect
+                                showTimeSelectOnly
+                                timeIntervals={15}
+                                timeCaption="Time"
+                                dateFormat="h:mm aa"                           
+                            />
+                            {/* <TextField
                                 label="Time Of Day"
                                 type="text"
                                 variant="outlined"
                                 className={classes.inputField}
+                                <DatePicker
                                 onChange={this.handleChange('dosage_time')}
-                            />
+                                />
+                            /> */}
                             <br />
                             </>
                         )}
@@ -269,7 +326,7 @@ class ClientRegPage2 extends Component {
                     
                     <Grid item xs={12} className={classes.itemCenter}>
                         <Button color="primary" variant="contained" 
-                        onClick={this.addMedication}>Add Medication</Button>
+                        onClick={() => this.addMedication(pet.id)}>Add Medication</Button>
                     </Grid>
                     <Grid item xs={12} className={classes.inputHeading}>
                         <Typography variant="h5">Behavioral:</Typography>
@@ -303,12 +360,13 @@ class ClientRegPage2 extends Component {
                         <Button color="primary" variant="contained"
                             className={classes.buttonMargin} onClick={this.handleBack}>Back</Button>
                         <Button color="primary" variant="contained"
-                            className={classes.buttonMargin}>Add Another Pet</Button>
+                            className={classes.buttonMargin} onClick={this.addPets}>Add Another Pet</Button>
                         <Button color="primary" variant="contained" 
                         className={classes.buttonMargin} onClick={this.handleComplete}>Complete</Button>
                     </Grid>
 
                 </Grid>
+                )}
             </Container>
         )
     }
@@ -316,31 +374,35 @@ class ClientRegPage2 extends Component {
 
 const mapStateToProps = (state) => ({
     clientInfo: {
-        pet_type: '',
-        other_pet: '',
-        pet_name: '',
-        weight: '',
-        age: '',
-        breed: '',
-        sex: '',
-        food_brand: '',
-        feeding_per_day: '',
-        amount_per_meal: '',
-        other_food: '',
-        optional_food: '',
-        care_equipment: '',
-        pet_behavior: '',
-        medications: [
+        pets: [
             {
                 id: 1,
-                medication_name: '',
-                medication_dosage: '',
-                dosage_time:''
+                pet_type: '',
+                other_pet: '',
+                pet_name: '',
+                weight: '',
+                age: '',
+                breed: '',
+                sex: '',
+                food_brand: '',
+                feeding_per_day: '',
+                amount_per_meal: '',
+                other_food: '',
+                optional_food: '',
+                care_equipment: '',
+                pet_behavior: '',
+                medications: [
+                    {
+                        id: 1,
+                        medication_name: '',
+                        medication_dosage: '',
+                        dosage_time: '00:00'
+                    }
+                ], 
             }
         ],
-        ...state.clientInfo
-    }
-   
+         ...state.clientInfo
+    } 
 })
 
 export default (withStyles(useStyles))(withRouter(connect(mapStateToProps)(ClientRegPage2)));

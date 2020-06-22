@@ -15,7 +15,7 @@ import Typography from "@material-ui/core/Typography";
 // import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import Container from "@material-ui/core/Container";
-import DatePicker from 'react-time-picker';
+import DatePicker from 'react-datepicker';
 
 const useStyles = (theme) => ({
     root: {

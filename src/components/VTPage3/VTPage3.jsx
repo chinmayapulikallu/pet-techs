@@ -18,8 +18,8 @@ import { withRouter } from 'react-router-dom';
 const styles = theme => ({
     root: {
         // flexGrow: 1,
-        marginLeft: theme.spacing(20),
-        marginRight: theme.spacing(20),
+        marginLeft: theme.spacing(45),
+        marginRight: theme.spacing(45),
         marginTop: '100px',
     },
 

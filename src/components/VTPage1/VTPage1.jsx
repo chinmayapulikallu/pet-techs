@@ -51,12 +51,25 @@ const styles = {
   },
   cardBox: {
     textAlign: "center",
-    width: "60%",
+    width: "85%",
   },
   toggle: {
     display: "flex",
     justifyContent: "space-between",
   },
+  logo: {
+    marginTop: -6,
+    marginRight: 20,
+  },
+  description: {
+    marginLeft: 60,
+  },
+  switch: {
+    marginTop: -10
+  },
+  title: {
+    marginTop: 100
+  }
 };
 
 class VTPage1 extends Component {
@@ -77,18 +90,18 @@ class VTPage1 extends Component {
   };
 
   handleUploadPhoto = () => {
-      alert("Photo upload needs set up")
-  }
+    alert("Photo upload needs set up");
+  };
 
   handleNext = () => {
-      console.log(this.state)
-  }
+    console.log(this.state);
+  };
   render() {
     const { classes } = this.props;
     return (
-      <Container className={classes.root} maxWidth="md">
-        <Typography variant="h3">
-          Hi NAME! Let's Set up your profile!
+      <Container className={classes.root} maxWidth="sm">
+        <Typography variant="h3" className={classes.title}>
+          Hi NAME! Let's set up your profile!
         </Typography>
         <div className={classes.inputs}>
           <TextField
@@ -158,12 +171,19 @@ class VTPage1 extends Component {
             Tell us which services you'd like to offer.
           </Typography>
           <Typography variant="body1">
-            Toggle selections to incule them in your profile.
+            Toggle selections to inculde them in your profile.
           </Typography>
           <Container className={classes.cardBox}>
             <Card className={classes.card}>
               <CardContent>
                 <div className={classes.toggle}>
+                  <img
+                    className={classes.logo}
+                    src="/images/sleepover-icon.png"
+                    alt="Sleepover"
+                    height="50"
+                    width="50"
+                  />
                   <Typography variant="h5" className={classes.flex}>
                     Pet Sleepover
                   </Typography>
@@ -173,10 +193,14 @@ class VTPage1 extends Component {
                       onChange={this.handleToggleChange("sleep_over")}
                       size="medium"
                       name="petSleepover"
+                      className={classes.switch}
                     />
                   </CardActions>
                 </div>
-                <Typography color="textSecondary">
+                <Typography
+                  color="textSecondary"
+                  className={classes.description}
+                >
                   You care for pets in the owner's home.
                 </Typography>
               </CardContent>
@@ -184,6 +208,13 @@ class VTPage1 extends Component {
             <Card className={classes.card}>
               <CardContent>
                 <div className={classes.toggle}>
+                  <img
+                    className={classes.logo}
+                    src="/images/boarding-icon.png"
+                    alt="Boarding"
+                    height="50"
+                    width="50"
+                  />
                   <Typography variant="h5" className={classes.flex}>
                     Pet Boarding
                   </Typography>
@@ -193,10 +224,14 @@ class VTPage1 extends Component {
                       onChange={this.handleToggleChange("boarding")}
                       size="medium"
                       name="petBoarding"
+                      className={classes.switch}
                     />
                   </CardActions>
                 </div>
-                <Typography color="textSecondary">
+                <Typography
+                  color="textSecondary"
+                  className={classes.description}
+                >
                   You care for pets at your home.
                 </Typography>
               </CardContent>
@@ -204,6 +239,13 @@ class VTPage1 extends Component {
             <Card className={classes.card}>
               <CardContent>
                 <div className={classes.toggle}>
+                  <img
+                    className={classes.logo}
+                    src="/images/drop-in-care-icon.png"
+                    alt="Drop In Care"
+                    height="50"
+                    width="50"
+                  />
                   <Typography variant="h5" className={classes.flex}>
                     Drop In Care
                   </Typography>
@@ -213,10 +255,14 @@ class VTPage1 extends Component {
                       onChange={this.handleToggleChange("dropin_care")}
                       size="medium"
                       name="dropInCare"
+                      className={classes.switch}
                     />
                   </CardActions>
                 </div>
-                <Typography color="textSecondary">
+                <Typography
+                  color="textSecondary"
+                  className={classes.description}
+                >
                   You provide medical services in a client's home.
                 </Typography>
               </CardContent>
@@ -224,6 +270,13 @@ class VTPage1 extends Component {
             <Card className={classes.card}>
               <CardContent>
                 <div className={classes.toggle}>
+                  <img
+                    className={classes.logo}
+                    src="/images/hospice-icon.png"
+                    alt="Hospice"
+                    height="50"
+                    width="50"
+                  />
                   <Typography variant="h5" className={classes.flex}>
                     Hospice Care
                   </Typography>
@@ -233,10 +286,14 @@ class VTPage1 extends Component {
                       onChange={this.handleToggleChange("hospice")}
                       size="medium"
                       name="hospiceCare"
+                      className={classes.switch}
                     />
                   </CardActions>
                 </div>
-                <Typography color="textSecondary">
+                <Typography
+                  color="textSecondary"
+                  className={classes.description}
+                >
                   You care for pets in client's home with hospice needs and
                   services.
                 </Typography>

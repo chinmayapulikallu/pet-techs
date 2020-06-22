@@ -80,12 +80,13 @@ class VTReg3 extends Component {
         console.log('back clicked!')
         this.props.history.push('/vtreg2')
     }
-    handleSave = () => {
+    handleReviewButton = () => {
         console.log('clicked!')
-        this.props.dispatch({
-            // type: ADD_REG_3,
-            payload: { reg3Info: this.props.state }
-        })
+        this.props.history.push('/vtreview');
+        // this.props.dispatch({
+        //     // type: ADD_REG_3,
+        //     payload: { reg3Info: this.props.state }
+        // })
     }
 
     render() {
@@ -173,7 +174,7 @@ class VTReg3 extends Component {
                         <Grid item xs={12}>
                             <FormControlLabel
                                 control={<Switch onChange={this.handleToggleChangeFor("injectableMedicaiton")} />}
-                                label="Can you administer injected medications to animals"
+                                label="Can you administer injected medications to animals?"
                                 labelPlacement="start"
                             />
                         </Grid>
@@ -222,8 +223,8 @@ class VTReg3 extends Component {
                 </Grid>
                 <Grid className={classes.itemCenter} alignItems="center"
                     justifyContent="center">
-                    <Button className={classes.buttons} variant="contained" color="primary" onClick={this.handleBackButton}>Save & back to Dashboard</Button>
-                    <Button className={classes.buttons} variant="contained" color="primary">Save & Continue</Button>
+                    <Button className={classes.buttons} variant="contained" color="primary" onClick={this.handleBackButton}>Back</Button>
+                    <Button className={classes.buttons} variant="contained" color="primary" onClick={this.handleReviewButton}>Review</Button>
                 </Grid>
 
             </div>

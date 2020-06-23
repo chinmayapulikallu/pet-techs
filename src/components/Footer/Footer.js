@@ -15,7 +15,6 @@ const styles = theme => ({
     marginTop: 50,
     width: '100%',
     height: '70px',
-    // top: '0px',
     // zIndex: theme.zIndex.drawer + 1,
   },
   icons: {
@@ -52,7 +51,7 @@ class Footer extends Component {
         {/* Show the link to the info page and the logout button if the user is logged in */}
         {this.props.user.id && (
           <>
-            <div>
+            <div className="footer_links">
               <Link className="nav-link" to="/">
                 Home
               </Link>
@@ -83,7 +82,7 @@ class Footer extends Component {
                   </a>
 
                   <a class="social-nav__link" href="https://www.instagram.com">
-                    <svg class="social-nav__icon" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="50 0 190 230">
+                    <svg class="social-nav__icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="50 0 190 230">
                       <g>
                         <path d="M195.93,63.708H95.38c-17.47,0-31.672,14.211-31.672,31.672v100.56
 		c0,17.47,14.211,31.672,31.672,31.672h100.56c17.47,0,31.672-14.211,31.672-31.672V95.38

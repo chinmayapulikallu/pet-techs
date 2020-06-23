@@ -16,7 +16,23 @@ const styles = theme => ({
     landingPg: {
         borderRadius: 0,
         width: "100%",
-        height: "auto"
+        height: "auto",
+        position: "relative"
+    },
+    btngroup: {
+        position: "absolute",
+        top: "70%",
+        left: "75%",
+    },
+    btngroup2: {
+        position: "absolute",
+        top: "70%",
+        left: "85%",
+    },
+    dogText:{
+        position: "absolute",
+        top: "50%",
+        left: "70%"
     },
     catImage: {
         position: "relative",
@@ -126,13 +142,7 @@ const styles = theme => ({
         alignItems: "center",
         marginTop: 25
     },
-    overlay: {
-        position: 'absolute',
-        top: '20px',
-        left: '20px',
-        color: 'black',
-        backgroundColor: 'white'
-    },
+    
     media: {
         height: 0,
         paddingTop: '56.25%' // 16:9
@@ -147,12 +157,12 @@ class LandingPage extends Component {
 
     handleJoinClick = () => {
         console.log("ClickedJoin");
-        this.props.history.push('/creg1')
+        this.props.history.push('/register')
     }
 
     handSignInClick = () => {
         console.log("ClickedSignIn");
-        this.props.history.push('/vtreg1')
+        this.props.history.push('/home')
 
     }
 
@@ -170,9 +180,14 @@ class LandingPage extends Component {
         const { classes } = this.props
         return (
             <div className={classes.root}>
+                
                 <Grid container spacing={3}>
                     <img className={classes.landingPg} src='../images/homeDog.png' />
+                   <Typography variant="h3" className={classes.dogText}>Welcome to Pet Techs!</Typography>
+                    <Button className={classes.btngroup2}  onClick={this.handleJoinClick} variant="contained" color="primary" >Join</Button>
+                    <Button className={classes.btngroup} onClick={this.handSignInClick} variant="contained" color="primary" >Sign In</Button>
                 </Grid>
+
                 <div>
                     <Grid >
                         <Grid container spacing={3} >

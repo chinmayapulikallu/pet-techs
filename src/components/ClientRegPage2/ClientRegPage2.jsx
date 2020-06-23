@@ -15,7 +15,7 @@ import Typography from "@material-ui/core/Typography";
 // import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import Container from "@material-ui/core/Container";
-import DatePicker from 'react-datepicker';
+// import DatePicker from 'react-datepicker';
 
 const useStyles = (theme) => ({
     root: {
@@ -64,12 +64,12 @@ class ClientRegPage2 extends Component {
 
     //add AnotherPet
     addPets = () => {
-        let petsId = Math.max(...this.state.clientInfo.pets.map(pet => pet.id)) +1
+        let petsId = Math.max(...this.state.petInfo.pets.map(pet => pet.id)) +1
          console.log("Pet List ::", this.state, petsId)
          this.setState({
             ...this.state,
-            clientInfo: {...this.state.clientInfo, pets:
-                [...this.state.clientInfo.pets,
+            petInfo: {...this.state.petInfo, pets:
+                [...this.state.petInfo.pets,
                     {
                         id: petsId,
                         pet_type: '',
@@ -103,7 +103,7 @@ class ClientRegPage2 extends Component {
 
     //add Medication
     addMedication = (petId) => {
-            const currentPet = this.state.clientInfo.pets.filter(pet => pet.id === petId)[0]
+            const currentPet = this.state.petInfo.pets.find(pet => pet.id === petId)
             console.log("medications ::", this.state, petId, currentPet)
             let nextMedicationId = Math.max(...currentPet.medications.map(m => m.id)) + 1
             currentPet.medications.push(
@@ -117,8 +117,8 @@ class ClientRegPage2 extends Component {
             
             this.setState({
                 ...this.state,
-                clientInfo: {...this.state.clientInfo, pets:
-                    [...this.state.clientInfo.pets.filter(pet => pet.id !== petId), currentPet]
+                clientInfo: {...this.state.petInfo, pets:
+                    [...this.state.petInfo.pets.filter(pet => pet.id !== petId), currentPet]
                 }
             })
     }
@@ -128,16 +128,16 @@ class ClientRegPage2 extends Component {
         this.props.history.push('/creg1')
     }
 
-    //Input function to capture input
-    handleChange = (property) => (event) => {
-        console.log('in handle change', property, event.target.value);
-        this.setState({
-            ...this.state,
-            [property]: event.target.value
-        })
-    }
+    // //Input function to capture input
+    // handleChange = (property) => (event) => {
+    //     console.log('in handle change', property, event.target.value);
+    //     this.setState({
+    //         ...this.state,
+    //         [property]: event.target.value
+    //     })
+    // }
 
-    handleChangeFor = (property) => (event) => {
+    handleChange = (property) => (event) => {
         console.log(property,event.target.value);
         if (event.target.value === "true" || event.target.value === "false") {
             this.setState({
@@ -152,8 +152,13 @@ class ClientRegPage2 extends Component {
 
     //sign in page after completing
     handleComplete = () => {
-        this.props.history.push('/home')
-        //dispatch to reducer
+        this.props.history.push('/clientreview')
+        this.props.dispatch({
+            type: 'SET_PET',
+            payload: {
+                ...this.props.petInfo
+            }
+        })
     }
 
     //upload Photo
@@ -169,7 +174,7 @@ class ClientRegPage2 extends Component {
         return (
             <Container className={classes.root} maxWidth="md">
                 <Typography variant="h4">Client Registration Page 2</Typography>
-                {this.state.clientInfo.pets && this.state.clientInfo.pets.map(pet =>
+                {this.state.petInfo.pets && this.state.petInfo.pets.map(pet =>
                     <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <FormControl variant="outlined" className={classes.formControl}>
@@ -226,7 +231,7 @@ class ClientRegPage2 extends Component {
                     <Grid item xs={12}>
                         <FormControl component="fieldset">
                             <RadioGroup defaultValue="male" aria-label="gender" className={classes.radioAlignment}
-                                name="customized-radios" onChange={this.handleChangeFor('sex')}>
+                                name="customized-radios" onChange={this.handleChange('sex')}>
                                 <FormControlLabel value="male" control={<Radio />} label="Male" />
                                 <FormControlLabel value="female" control={<Radio />} label="Female" />
                             </RadioGroup>
@@ -282,9 +287,6 @@ class ClientRegPage2 extends Component {
                     />
                     </Grid>
                     <Grid item xs={12}>
-                        {/* {this.state.clientInfo.medications && this.state.clientInfo.medications.map(medication => 
-                            <MedicationField medication/>
-                            )} */}
                         {pet.medications && pet.medications.map(medication =>
                             <>
                             <TextField
@@ -301,7 +303,7 @@ class ClientRegPage2 extends Component {
                                 className={classes.inputField}
                                 onChange={this.handleChange('medication_dosage')}
                             />
-                            <DatePicker
+                            {/* <DatePicker
                                 selected="00:00"
                                 onChange={this.handleChange('dosage_time')}
                                 showTimeSelect
@@ -309,16 +311,14 @@ class ClientRegPage2 extends Component {
                                 timeIntervals={15}
                                 timeCaption="Time"
                                 dateFormat="h:mm aa"                           
-                            />
-                            {/* <TextField
+                            /> */}
+                            <TextField
                                 label="Time Of Day"
                                 type="text"
                                 variant="outlined"
-                                className={classes.inputField}
-                                <DatePicker
+                                className={classes.inputField} 
                                 onChange={this.handleChange('dosage_time')}
-                                />
-                            /> */}
+                            />
                             <br />
                             </>
                         )}
@@ -373,7 +373,7 @@ class ClientRegPage2 extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    clientInfo: {
+    petInfo: {
         pets: [
             {
                 id: 1,
@@ -401,7 +401,7 @@ const mapStateToProps = (state) => ({
                 ], 
             }
         ],
-         ...state.clientInfo
+         ...state.petInfo
     } 
 })
 

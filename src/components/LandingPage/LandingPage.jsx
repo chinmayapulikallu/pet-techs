@@ -63,7 +63,6 @@ const styles = theme => ({
 
     },
     button: {
-
         height: 50,
         width: 200,
         borderRadius: 12,
@@ -83,15 +82,43 @@ const styles = theme => ({
         marginLeft: 400,
         paddingTop: 100,
         paddingBottom: 20
-
+    },
+    btn: {
+        height: 50,
+        width: 200,
+        borderRadius: 12,
+        display: "flex",
+        flexDirection: "row",
+        marginLeft: "auto",
+        marginRight: "auto",
+        alignItems: "center",
+        marginTop: 25
     }
-
-
-
 })
 
 
 class LandingPage extends Component {
+
+    handleJoinClick = () => {
+        console.log("ClickedJoin");
+        this.props.history.push('/vtreg1')
+    }
+
+    handSignInClick = () => {
+        console.log("ClickedSignIn");
+        this.props.history.push('/vtreg1')
+
+    }
+
+    serviceProviderClick = () => {
+        console.log("clickedSignIn");
+        this.props.history.push('/vtreg1')
+    }
+
+
+
+
+
     render() {
         const { classes } = this.props
         return (
@@ -172,7 +199,7 @@ class LandingPage extends Component {
                         <Typeography className={classes.description} variant="h5">Find the best caretaker for your critter.</Typeography>
                     </div>
                     <div>
-                        <Button className={classes.button} onClick={this.handleBackClick} variant="contained" color="primary" >Find a service provider</Button>
+                        <Button className={classes.button} onClick={this.serviceProviderClick} variant="contained" color="primary" >Find a service provider</Button>
                     </div>
                 </Grid>
                 <Grid>
@@ -185,6 +212,12 @@ class LandingPage extends Component {
                     <div>
                         <Typeography className={classes.description} variant="h5">We're here to connect vetinary technicians with pet owners who want to hire qualified individuals to help give different kinds of out-of-clinic care. Either in your home or theirs, you want to know your precious animals are in great hands. We are commited to giving quality and professional care and to give you ease of mind. </Typeography>
                     </div>
+                    <Grid>
+                        <div>
+                            <Button className={classes.btn} onClick={this.handleJoinClick} variant="contained" color="primary" >Join</Button>
+                            <Button className={classes.btn} onClick={this.handSignInClick} variant="contained" color="primary" >Sign In</Button>
+                        </div>
+                    </Grid>
                 </Grid>
             </div>
 

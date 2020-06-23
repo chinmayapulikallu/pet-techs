@@ -67,3 +67,24 @@
   cursor: pointer;
 }
 
+.social-nav__icon {
+  fill: #195C60;
+  transition: .25s ease;
+}
+
+.social-nav__icon:hover {
+  fill: #FFC2B4;
+}
+
+.social-nav__link + .social-nav__link {
+  margin-left: 10px;
+}
+
+/* .instagram_icon{
+  border-radius:50%;
+  background-color: #195C60;
+  color:white
+}
+.instagram_icon:hover {
+  fill: #FFC2B4;
+} */

@@ -5,12 +5,10 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import ToggleButton from "@material-ui/lab/ToggleButton";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
 // import { withRouter } from 'react-router-dom';
 
 const styles = {
@@ -35,7 +33,7 @@ const styles = {
   },
   btn: {
     marginTop: 20,
-    marginBottom: 20,
+    marginBottom: 40,
     height: 45,
     widith: 180,
     borderRadius: 12,
@@ -43,6 +41,31 @@ const styles = {
   title: {
     marginTop: 100,
   },
+  botBtn: {
+    margin: "60px 30px 20px 30px",
+    height: 45,
+    width: 180,
+    borderRadius: 12,
+  },
+  em_phone: {
+    width: "40%",
+  },
+  em_email: {
+    width: "58%"
+  },
+  labels: {
+    textAlign: "left",
+    marginTop: 20,
+    marginBottom: -5
+  },
+  section: {
+    marginTop: 50,
+    marginBottom: 10
+  },
+  subTitle: {
+    marginTop: 10,
+    marginBottom: 40
+  }
 };
 
 class ClientRegPage1 extends Component {
@@ -67,8 +90,10 @@ class ClientRegPage1 extends Component {
     alert("Photo set up needs to be set up");
   };
 
+
   handleClick = () => {
-    this.props.history.push("/creg2");
+    console.log(this.state)
+    // this.props.history.push("/creg2");
   };
   render() {
     const { classes } = this.props;
@@ -78,9 +103,10 @@ class ClientRegPage1 extends Component {
         <Typography variant="h4" className={classes.title}>
           Hi NAME! Let's set up your profile
         </Typography>
-        <Typography variant="h5">
+        <Typography variant="subtitle1" className={classes.subTitle}>
           This information will be displayed on your profile
         </Typography>
+        <img src="/images/house-icon.png" alt="House" height="70" />
         <div className={classes.inputs}>
           <TextField
             id="outlined-basic"
@@ -127,12 +153,12 @@ class ClientRegPage1 extends Component {
             label={"Zipcode"}
             variant="outlined"
             color="secondary"
-            value={this.state.zipcode}
-            onChange={(event) => this.handleChange(event, "zipcode")}
+            value={this.state.zip_code}
+            onChange={(event) => this.handleChange(event, "zip_code")}
           />
         </div>
         <div>
-          <Typography variant="h5">
+          <Typography variant="h6" className={classes.section}>
             You look purr-fect! Let's add a photo for your profile!
           </Typography>
           <Button
@@ -145,7 +171,7 @@ class ClientRegPage1 extends Component {
           </Button>
         </div>
         <div>
-          <Typography variant="h6">
+          <Typography variant="subtitle1" className={classes.labels}>
             Help providers get to you know you and a bit about your animals that
             will be displayed on your profile - write a quick bio and whatever
             else you would like to add!
@@ -162,7 +188,7 @@ class ClientRegPage1 extends Component {
           />
         </div>
         <div>
-          <Typography variant="h6">
+          <Typography variant="subtitle1" className={classes.labels}>
             Describe a bit about your home environment and space for providers
             to get a sense of where they might provide services
           </Typography>
@@ -177,10 +203,16 @@ class ClientRegPage1 extends Component {
             onChange={(event) => this.handleChange(event, "about_home")}
           />
         </div>
-        <Typography variant="h5">
+        <img
+          src="/images/phone-icon.png"
+          alt="Phone"
+          height="70"
+          className={classes.section}
+        />
+        <Typography variant="h6">
           Please enter emergency contact information
         </Typography>
-        <Typography variant="h6">
+        <Typography variant="subtitle1" className={classes.labels}>
           This person would be notified as ta person of contact for any
           emergencies or critical needs and would be contacted if you aren't
           able to be reached by the service provider.
@@ -213,9 +245,16 @@ class ClientRegPage1 extends Component {
             color="secondary"
             value={this.state.contact_email_1}
             onChange={(event) => this.handleChange(event, "contact_email_1")}
+            className={classes.em_email}
           />
         </div>
-        <Typography variant="h5">
+        <img
+          src="/images/pet-clinic-icon.png"
+          alt="Phone"
+          height="70"
+          className={classes.section}
+        />
+        <Typography variant="h6">
           Please enter your preferred vet clinic information
         </Typography>
         <div className={classes.inputs}>
@@ -226,8 +265,10 @@ class ClientRegPage1 extends Component {
             value={this.state.vet_clinic}
             color="secondary"
             onChange={(event) => this.handleChange(event, "vet_clinic")}
-            className={classes.city}
+            fullWidth
           />
+        </div>
+        <div className={classes.inputs}>
           <TextField
             id="outlined-basic"
             label={"Vet Clinic Phone"}
@@ -235,28 +276,30 @@ class ClientRegPage1 extends Component {
             value={this.state.clinic_phone}
             color="secondary"
             onChange={(event) => this.handleChange(event, "clinic_phone")}
-            className={classes.flex}
+            className={classes.em_phone}
           />
           <TextField
             id="outlined-basic"
-            label={"Vet Clinic Address (street and city)"}
+            label={"Vet Clinic Address (street & city)"}
             variant="outlined"
             color="secondary"
             value={this.state.clinic_address}
             onChange={(event) => this.handleChange(event, "clinic_address")}
+            className={classes.em_email}
           />
         </div>
-        <Typography variant="h6">
+        <Typography variant="subtitle1" className={classes.labels}>
           Are you Ok with a Vet Tech transporting your animal to the Vet in an
           emergency?
         </Typography>
-        <div className={classes.input}>
+        <div className={(classes.input, classes.labels)}>
           <FormControl component="fieldset">
             <RadioGroup
               aria-label="transport"
               name="transport"
               value={String(this.state.transport)}
               onChange={(event) => this.handleChange(event, "transport")}
+              row
             >
               <FormControlLabel value="false" control={<Radio />} label="No" />
               <FormControlLabel value="true" control={<Radio />} label="Yes" />
@@ -266,10 +309,18 @@ class ClientRegPage1 extends Component {
         <Button
           color="primary"
           variant="contained"
-          className={classes.btn}
+          className={classes.botBtn}
           onClick={this.handleClick}
         >
-          Continue to Add Pets
+          Back
+        </Button>
+        <Button
+          color="primary"
+          variant="contained"
+          className={classes.botBtn}
+          onClick={this.handleClick}
+        >
+          Save and Continue
         </Button>
       </Container>
     );

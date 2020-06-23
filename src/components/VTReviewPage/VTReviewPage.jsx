@@ -62,9 +62,30 @@ class VTReviewPage extends Component {
 
     render() {
         const { classes } = this.props;
+        let provideServices;
+        if(this.state.dog === true){
+            provideServices = this.state.dog;
+        }else if (this.state.cat === true){
+            provideServices += this.state.cat;
+        }else if (this.state.other === true){
+            provideServices += this.state.other;
+        }
+
+        let workHour;
+        if(this.state.hourSelectOne === true){
+            workHour = this.state.hourSelectOne;
+        }else if (this.state.hourSelectTwo === true){
+            workHour += this.state.hourSelectTwo;
+        }else if (this.state.hourSelectThree === true){
+            workHour += this.state.hourSelectThree;
+        }else if (this.state.hourSelectFour === true){
+            workHour += this.state.hourSelectFour;
+        }
+
+      
         return (
             <div className={classes.root}>
-                <h1>{JSON.stringify(this.state)}</h1>
+                <h1>{JSON.stringify(this.state.sleep_over)}</h1>
                 <h1 className={classes.title}>Vet tech review</h1>
                 <p>Home address: <spand>{this.state.home_address_house}</spand></p>
                 <p>Apartment or Suite #: <span>{this.state.apt_suite}</span></p>
@@ -85,34 +106,34 @@ class VTReviewPage extends Component {
                 </Grid>
                
 
-                <p>What animals will you provide services for? <span>{this.state.apt_suite}</span></p>
-                <p>Are you home full time Monday-Friday? <span>{this.state.apt_suite}</span></p>
-                <p>How often can you take the animal(s) outside? <span>{this.state.apt_suite}</span></p>
-                <p>How often can you take the animal(s) outside? <span>{this.state.apt_suite}</span></p>
-                <p>What size animals are you comfortable hosting? <span>{this.state.apt_suite}</span></p>
-                <p>Will you host animals younger than 1 years old? <span>{this.state.apt_suite}</span></p>
-                <p>Will you host animals from multiple families at once? <span>{this.state.apt_suite}</span></p>
-                <p>Please provide a list of equipment that will be used when caring for pets: <span>{this.state.apt_suite}</span></p>
+                <p>What animals will you provide services for? <span>{provideServices}</span></p>
+                <p>Are you home full time Monday-Friday? <span>{workHour}</span></p>
+                <p>How often can you take the animal(s) outside? </p>
+                <p>How often can you take the animal(s) outside? </p>
+                <p>What size animals are you comfortable hosting? </p>
+                <p>Will you host animals younger than 1 years old? </p>
+                <p>Will you host animals from multiple families at once?</p>
+                <p>Please provide a list of equipment that will be used when caring for pets: </p>
                 <Grid className={classes.itemCenter}>
                     <Button className={classes.buttons} variant="contained" color="primary"
                         onClick={this.handleEditVTPage2Button}
                     >Edit Services</Button>
                 </Grid>
 
-                <p>Year of professional experience caring for pets: <span>{this.state.apt_suite}</span></p>
-                <p>Education/Degree/Certifications: <span>{this.state.apt_suite}</span></p>
-                <p>Current job title: <span>{this.state.apt_suite}</span></p>
-                <p>Areas of professional expertise: <span>{this.state.apt_suite}</span></p>
-                <p>Brief bio about yourself: <span>{this.state.apt_suite}</span></p>
-                <h4>Additional Details: <span>{this.state.apt_suite}</span></h4>
-                <p>Do you know CPR and/or animal first aid? <span>{this.state.apt_suite}</span></p>
-                <p>Can you administer oral medications to animals? <span>{this.state.apt_suite}</span></p>
-                <p>Can you administer injected medications to animal? <span>{this.state.apt_suite}</span></p>
-                <p>Do you have experience with caring for older or senior animals? <span>{this.state.apt_suite}</span></p>
-                <p>Do you have experience caring for special needs animals? <span>{this.state.apt_suite}</span></p>
-                <p>Can you provied daily exercise for high energy animals or behavioral needs? <span>{this.state.apt_suite}</span></p>
-                <p>Are you willing to accept services that are longer than one week with animals? <span>{this.state.apt_suite}</span></p>
-                <p>Do you offer diabetic and insulin care? <span>{this.state.apt_suite}</span></p>
+                <p>Year of professional experience caring for pets: </p>
+                <p>Education/Degree/Certifications: </p>
+                <p>Current job title:</p>
+                <p>Areas of professional expertise: </p>
+                <p>Brief bio about yourself: </p>
+                <h4>Additional Details: </h4>
+                <p>Do you know CPR and/or animal first aid? </p>
+                <p>Can you administer oral medications to animals? </p>
+                <p>Can you administer injected medications to animal? </p>
+                <p>Do you have experience with caring for older or senior animals? </p>
+                <p>Do you have experience caring for special needs animals?</p>
+                <p>Can you provied daily exercise for high energy animals or behavioral needs? </p>
+                <p>Are you willing to accept services that are longer than one week with animals? </p>
+                <p>Do you offer diabetic and insulin care? </p>
                 <Grid className={classes.itemCenter}>
                     <Button className={classes.buttons} variant="contained" color="primary"
                         onClick={this.handleEditVTPage3Button}

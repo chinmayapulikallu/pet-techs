@@ -96,7 +96,7 @@ class VTReg3 extends Component {
             <Container className={classes.root} maxWidth="sm">
             <div className={classes.title}>
                     <h3 className={classes.title}>Tell us about your certifications and expertise:</h3>
-                    <img className={classes.img} src="images/blank-profile-picture.png" alt="profile-photo" height="150" width="150" />
+                    <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
                     <h5>Your experise as a veterinary professional what makes you stand apart and what helps pet owners get to know you.</h5>
                     <h5>Please keep emojis and personal identifiers (last name or workplace) out of your profile.</h5>
                 </div>

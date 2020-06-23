@@ -27,6 +27,7 @@
   text-decoration: none;
   font-size: 15px;
   background-color: none;
+  /* margin-left: 10px; */
 
   /* these last two make the logout button in
   the nav bar look like another link */
@@ -38,9 +39,7 @@
 .nav-right {
   float: right;
 }
-/* img{
-  border-radius: 50%;
-} */
+
 
 .profile{
   border-left: 2px solid #195C60;
@@ -67,3 +66,19 @@
   cursor: pointer;
 }
 
+.social-nav__icon {
+  fill: #195C60;
+  transition: .25s ease;
+}
+
+.social-nav__icon:hover {
+  fill: #FFC2B4;
+}
+
+.social-nav__link + .social-nav__link {
+  margin-left: 10px;
+}
+
+.footer_links{
+  margin-left: 20px;
+}

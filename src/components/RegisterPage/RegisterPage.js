@@ -4,6 +4,12 @@ import TextField from "@material-ui/core/TextField"
 import FormControl from "@material-ui/core/FormControl"
 import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from "react-router"
+import { Typography } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid"
+import FormGroup from "@material-ui/core/FormGroup"
+import FormControlLabel from "@material-ui/core/FormControlLabel"
+import Radio from "@material-ui/core/Radio"
+import Button from "@material-ui/core/Button"
 
 
 const styles = theme => ({
@@ -17,6 +23,10 @@ const styles = theme => ({
   },
   helperText: {
     textAlign: 'center',
+  },
+  boxes: {
+    marginTop: 10,
+    marginBottom: 10
   },
   button: {
     margin: "20px 30px 20px 30px",
@@ -74,90 +84,113 @@ class RegisterPage extends Component {
           </h2>
         )}
         <div className={classes.root}>
-        <FormControl  onSubmit={this.registerUser}>
-          <h1>Sign up with email!</h1>
-          <h5>All fields required*</h5>
-          <div>
-            <TextField id="outlined-basic"
-              label="Email"
-              variant="outlined"
-              name="user_email"
-              color="secondary"
-              value={this.state.user_email}
-              onChange={this.handleInputChangeFor("user_email")}
-            />
-          </div>
-          <div>
-            <TextField id="outlined-basic"
-              label="Username"
-              variant="outlined"
-              name="username"
-              color="secondary"
-              value={this.state.username}
-              onChange={this.handleInputChangeFor("username")}
-            />
-          </div>
-          <div>
-            <TextField id="outlined-basic"
-              label="Phone"
-              variant="outlined"
-              name="phone"
-              color="secondary"
-              value={this.state.phone_number}
-              onChange={this.handleInputChangeFor("phone_number")}
-            />
-          </div>
-          <div>
-            <TextField id="outlined-basic"
-              label="Password"
-              variant="outlined"
-              name="password"
-              color="secondary"
-              value={this.state.password}
-              onChange={this.handleInputChangeFor("password")} />
-          </div>
-          <h3>How did you hear about Pet Techs?</h3>
-          <div>
-            <TextField
-              fullWidth
-              multiline
-              type="text"
-              id="outlined-basic"
-              label="How did you hear about Pet Techs?"
-              variant="outlined"
-              color="secondary"
-            // value={this.state.this.state.hear_about}
-            //onChange={(event) => this.handleChange(event, "this.state.hear_about")}
-            />
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="client"
-              name="user_type"
-              value="0"
-              onChange={this.handleInputChangeFor("user_type")}
-            />
-            <label>I want to sign up as a pet owner.</label>
-            <br />
-            <input
-              type="radio"
-              id="vet_tech"
-              name="user_type"
-              value="1"
-              onChange={this.handleInputChangeFor("user_type")}
-            />
-            <label>I want to sign up at a Vet Tech.</label>
-          </div>
-          <div>
-            <input
-              className="register"
-              type="submit"
-              name="submit"
-              value="Register"
-            />
-          </div>
-        </FormControl>
+          <Grid className={classes.title}>
+            <FormControl onSubmit={this.registerUser}>
+              <Typography className={classes.title} variant="h3">Sign up with email!</Typography>
+              <Typography className={classes.title} variant="h6">*All fields required</Typography>
+
+              <div className={classes.boxes}>
+                <TextField id="outlined-basic"
+                  label="Email"
+                  variant="outlined"
+                  name="user_email"
+                  color="secondary"
+                  value={this.state.user_email}
+                  onChange={this.handleInputChangeFor("user_email")}
+                />
+              </div>
+              <div className={classes.boxes}>
+                <TextField id="outlined-basic"
+                  label="Username"
+                  variant="outlined"
+                  name="username"
+                  color="secondary"
+                  value={this.state.username}
+                  onChange={this.handleInputChangeFor("username")}
+                />
+              </div>
+              <div className={classes.boxes}>
+                <TextField id="outlined-basic"
+                  label="Phone"
+                  variant="outlined"
+                  name="phone"
+                  color="secondary"
+                  value={this.state.phone_number}
+                  onChange={this.handleInputChangeFor("phone_number")}
+                />
+              </div>
+              <div className={classes.boxes}>
+                <TextField id="outlined-basic"
+                  label="Password"
+                  variant="outlined"
+                  name="password"
+                  color="secondary"
+                  value={this.state.password}
+                  onChange={this.handleInputChangeFor("password")} />
+              </div>
+              <h3>How did you hear about Pet Techs?</h3>
+              <div>
+                <TextField
+                  fullWidth
+                  multiline
+                  type="text"
+                  id="outlined-basic"
+                  label="How did you hear about Pet Techs?"
+                  variant="outlined"
+                  color="secondary"
+                // value={this.state.this.state.hear_about}
+                //onChange={(event) => this.handleChange(event, "this.state.hear_about")}
+                />
+              </div>
+
+              <FormGroup row={true}>
+                <FormControlLabel
+                  control={<Radio name="owner" />}
+                  value="0"
+                  id="client"
+                  onChange={this.handleInputChangeFor("user_type")}
+                  name="ownerRadio"
+                  label="I want to sign up as a pet owner"
+                />
+                <FormControlLabel
+                  control={<Radio name="vetTech" />}
+                  value="1"
+                  id="vet_tech"
+                  onChange={this.handleInputChangeFor("user_type")}
+                  name="noAgeRadio"
+                  label="I want to sign up as a Vet Tech"
+                />
+              </FormGroup>
+              {/* <div>
+                <input
+                  type="radio"
+                  id="client"
+                  name="user_type"
+                  value="0"
+                  onChange={this.handleInputChangeFor("user_type")}
+                />
+                <label>I want to sign up as a pet owner.</label>
+                <br />
+                <input
+                  type="radio"
+                  id="vet_tech"
+                  name="user_type"
+                  value="1"
+                  onChange={this.handleInputChangeFor("user_type")}
+                />
+                <label>I want to sign up at a Vet Tech.</label>
+              </div> */}
+              <div>
+                <Button className={classes.button} type="submit" name="submit" value="Register" onClick={this.registerUser} variant="contained" color="primary" >Register</Button>
+                {/* <input
+                  className="register"
+                  type="submit"
+                  name="submit"
+                  value="Register"
+                /> */}
+              </div>
+            </FormControl>
+          </Grid>
         </div>
         {/* <br />
         <button

@@ -59,7 +59,8 @@ const styles = theme => ({
         margin: "25px",
         textAlign: 'center',
         justifyContent: "center",
-        marginBottom: 100
+        marginBottom: 100,
+      
     },
     catText: {
         fontFamily: 'Quicksand',
@@ -69,6 +70,12 @@ const styles = theme => ({
         marginBottom: 100,
         backgroundColor: "transparent",
         fontSize: 100
+    },
+    catPaw: {
+        position: "absolute",
+        top: "0%",
+        left: "65%",
+        borderRadius: 40
     },
     image: {
         display: "block",
@@ -130,6 +137,9 @@ const styles = theme => ({
         height: 0,
         paddingTop: '56.25%' // 16:9
     },
+    cardService: {
+        height: 400,
+    }
 })
 
 
@@ -174,7 +184,7 @@ class LandingPage extends Component {
                     <Typography className={classes.services} variant="h5"><b>Our Services</b></Typography>
                     <Grid container direction="row" className={classes.cards} spacing={2}>
                         <Grid item xs={2}>
-                            <Card>
+                            <Card className={classes.cardService}>
                                 <CardContent>
                                     <div>
                                         <img className={classes.image} src="/images/sleepover-icon.png" alt="sleepoverIcon" height="75" width="75" />
@@ -185,7 +195,7 @@ class LandingPage extends Component {
                             </Card>
                         </Grid>
                         <Grid item xs={2}>
-                            <Card>
+                            <Card className={classes.cardService}>
                                 <CardContent>
                                     <div>
                                         <img className={classes.image} src="/images/boarding-icon.png" alt="boardingIcon" height="75" width="75" />
@@ -196,7 +206,7 @@ class LandingPage extends Component {
                             </Card>
                         </Grid>
                         <Grid item xs={2}>
-                            <Card>
+                            <Card className={classes.cardService}>
                                 <CardContent>
                                     <div>
                                         <img className={classes.image} src="/images/drop-in-care-icon.png" alt="dropInCare" height="75" width="75" />
@@ -207,7 +217,7 @@ class LandingPage extends Component {
                             </Card>
                         </Grid>
                         <Grid item xs={2}>
-                            <Card>
+                            <Card className={classes.cardService}>
                                 <CardContent>
                                     <div>
                                         <img className={classes.image} src="/images/hospice-icon.png" alt="hospiceIcon" height="75" width="75" />
@@ -229,14 +239,16 @@ class LandingPage extends Component {
                                 <Typography variant="h3">
                                     "I really appreciate the Pet Techs service providers! They've got my back when i need help with my pets, always going above and beyond with their care!"
                                 </Typography>
-                               
                                 <Typography variant="h5">
                                         - James, Eden Prairie Minnesota
                                 </Typography>
-                            
                             </Card>
                             </Grid>
+                            <Grid item>
+                                <img src='../images/catPaw.png' className={classes.catPaw} />
+                            </Grid>
                         </div>
+        
 
 
 

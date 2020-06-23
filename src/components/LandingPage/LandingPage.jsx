@@ -14,8 +14,8 @@ import Typography from '@material-ui/core/Typography';
 const styles = theme => ({
     landingPg: {
         borderRadius: 0,
-       width: "100%",
-       height: "auto"
+        width: "100%",
+        height: "auto"
     },
     description: {
         textAlign: "center",
@@ -46,23 +46,34 @@ const styles = theme => ({
         justifyContent: "center"
     },
     image: {
-        alignItems: "center",
+        display: "block",
+        marginLeft: "auto",
+        marginRight: "auto",
+        borderRadius: 0,
+        paddingTop: 25,
+        width: 200,
+        height: 200
 
     },
     servProv: {
-        paddingTop: 25,
-        marginLeft: 580,
+        paddingTop: 35,
+        display: "block",
+        marginLeft: "auto",
+        marginRight: "auto",
 
     },
     button: {
-        margin: "20px 30px 20px 30px",
-        marginLeft: 600,
-        height: 45,
-        width: 180,
-        borderRadius: 12,
 
+        height: 50,
+        width: 200,
+        borderRadius: 12,
+        display: "block",
+        marginLeft: "auto",
+        marginRight: "auto",
+        paddingTop: 2
     },
-    mission: {
+
+    missionHeader: {
         textAlign: "center",
         fontFamily: 'Quicksand',
         alignItems: 'center',
@@ -70,9 +81,9 @@ const styles = theme => ({
         alignItems: "center",
         marginRight: 400,
         marginLeft: 400,
-        color: '#195C60',
-        paddingTop: 20,
+        paddingTop: 100,
         paddingBottom: 20
+
     }
 
 
@@ -166,14 +177,14 @@ class LandingPage extends Component {
                 </Grid>
                 <Grid>
                     <div>
-
                     </div>
                     <div>
-                        <Typeography className={classes.description} variant="h3">Our Mission</Typeography>
-                        <img className={classes.mission} src="/images/mission-logo.png" alt="missionLogoIcon" height="300" width="300" />
+                        <Typeography className={classes.missionHeader} variant="h3">Our Mission</Typeography>
+                        <img className={classes.image} src="/images/mission-logo.png" alt="missionLogoIcon" height="300" width="300" />
                     </div>
-
-
+                    <div>
+                        <Typeography className={classes.description} variant="h5">We're here to connect vetinary technicians with pet owners who want to hire qualified individuals to help give different kinds of out-of-clinic care. Either in your home or theirs, you want to know your precious animals are in great hands. We are commited to giving quality and professional care and to give you ease of mind. </Typeography>
+                    </div>
                 </Grid>
             </div>
 

@@ -14,7 +14,7 @@ CREATE TABLE "user" (
   "username" VARCHAR (80) UNIQUE NOT NULL,
   user_email varchar (80) NOT NULL,
   password VARCHAR (1000) NOT NULL,
-  phone_number int NOT NULL,
+  phone_number VARCHAR (20) NOT NULL,
   hear_about text NOT NULL,
   user_type int NOT NULL
 );
@@ -35,11 +35,11 @@ CREATE TABLE client (
   about_client text NOT NULL,
   about_home text NOT NULL,
   contact_name_1 varchar (80),
-  contact_phone_1 int,
+  contact_phone_1 varchar (20),
   contact_email_1 varchar (100),
   vet_clinic varchar (250),
   clinic_address varchar (250),
-  clinic_phone int ,
+  clinic_phone varchar (20),
   transport boolean 
 );
 

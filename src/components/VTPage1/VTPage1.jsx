@@ -38,7 +38,7 @@ const styles = {
     borderRadius: 12,
   },
   botBtn: {
-    margin: "20px 30px 20px 30px",
+    margin: "60px 30px 20px 30px",
     height: 45,
     width: 180,
     borderRadius: 12,

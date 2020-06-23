@@ -153,7 +153,12 @@ class ClientRegPage2 extends Component {
     //sign in page after completing
     handleComplete = () => {
         this.props.history.push('/clientreview')
-        //dispatch to reducer
+        this.props.dispatch({
+            type: 'SET_PET',
+            payload: {
+                ...this.props.petInfo
+            }
+        })
     }
 
     //upload Photo

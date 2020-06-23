@@ -27,17 +27,15 @@ class ClientReviewPage extends Component {
     //complete registration
     completeRegistration = () => {
         this.props.dispatch({
-            type: 'SET_CLIENT',
+            type: 'REGISTER',
             payload: {
-                ...this.props.clientInfo
+                ...this.props.petInfo,
+                ...this.props.clientInfo,
+                ...this.props.userInfo,
             }
         })
-        this.props.dispatch({
-            type: 'SET_PET',
-            payload: {
-                ...this.props.petInfo
-            }
-        })
+        this.props.history.push('/home')
+
     }
     
 

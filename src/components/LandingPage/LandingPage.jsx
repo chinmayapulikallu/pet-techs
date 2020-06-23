@@ -169,7 +169,7 @@ class LandingPage extends Component {
     serviceProviderClick = () => {
         console.log("clickedSignIn");
 
-        this.props.history.push('/creg1')
+        this.props.history.push('/register')
     }
 
 

@@ -27,6 +27,7 @@
   text-decoration: none;
   font-size: 15px;
   background-color: none;
+  /* margin-left: 10px; */
 
   /* these last two make the logout button in
   the nav bar look like another link */
@@ -38,9 +39,7 @@
 .nav-right {
   float: right;
 }
-/* img{
-  border-radius: 50%;
-} */
+
 
 .profile{
   border-left: 2px solid #195C60;
@@ -80,11 +79,6 @@
   margin-left: 10px;
 }
 
-/* .instagram_icon{
-  border-radius:50%;
-  background-color: #195C60;
-  color:white
+.footer_links{
+  margin-left: 20px;
 }
-.instagram_icon:hover {
-  fill: #FFC2B4;
-} */

@@ -28,7 +28,6 @@ const styles = theme => ({
     position: 'fixed',
     top: '7px',
     left: 5,
-    // z-index: 1,
     marginBottom: '50%',
   }
 
@@ -46,64 +45,60 @@ function HideOnScroll(props) {
 }
 
 
-
 class Nav extends Component {
-  state = {
-    ...this.props,
-  }
+ 
 
   render() {
     const { classes } = this.props;
+    // console.log('---------->user id:', this.props.user.id)
 
 
     return (
       <HideOnScroll {...this.props}>
 
-      <div className={classes.root}>
-
-
-        <Link to="/home">
-          <img className={classes.logo} src="images/VetTechlogo.png" alt="profile" height="130" width="130"
-          />
-        </Link>
-        <div className="nav-right">
-          <Link className="nav-link" to="/home">
-            {/* Show this link if they are logged in or not,
+        <div className={classes.root}>
+          <Link to="/home">
+            <img className={classes.logo} src="images/VetTechlogo.png" alt="profile" height="130" width="130"
+            />
+          </Link>
+          <div className="nav-right">
+            <Link className="nav-link" to="/home">
+              {/* Show this link if they are logged in or not,
           but call this link 'Home' if they are logged in,
           and call this link 'Login / Register' if they are not */}
-            {this.state.user.id ? 'Home' : 'Login / Register'}
-          </Link>
-
-          {/* Show the link to the info page and the logout button if the user is logged in */}
-          {this.state.user.id && (
-            <>
-              <Link className="nav-link" to="/info">
-                Search for services
+              {this.props.user.id ? 'Home' : 'Login / Register'}
             </Link>
-            </>
-          )}
-          <Link className="nav-link" to="/about">
-            About
-        </Link>
-          {this.state.user.id && (
-            <>
-              <div className="nav-link">
-                <Link className="profile" to="/info">
-                  Profile
-              </Link>
-              </div>
-              <div className="profile_icon">
-                <Link to="/info">
-                  <img src="images/blank-profile-picture.png" alt="profile" height="30" width="30" />
-                </Link>
-              </div>
-              <LogOutButton className="nav-link" />
-            </>
-          )}
-          {/* Always show this link since the about page is not protected */}
 
+            {/* Show the link to the info page and the logout button if the user is logged in */}
+            {this.props.user.id && (
+              <>
+                <Link className="nav-link" to="/info">
+                  Search for services
+            </Link>
+              </>
+            )}
+            <Link className="nav-link" to="/about">
+              About
+        </Link>
+            {this.props.user.id && (
+              <>
+                <div className="nav-link">
+                  <Link className="profile" to="/info">
+                    Profile
+              </Link>
+                </div>
+                <div className="profile_icon">
+                  <Link to="/info">
+                    <img src="images/blank-profile-picture.png" alt="profile" height="30" width="30" />
+                  </Link>
+                </div>
+                <LogOutButton className="nav-link" />
+              </>
+            )}
+            {/* Always show this link since the about page is not protected */}
+
+          </div>
         </div>
-      </div>
       </HideOnScroll>
 
     )
@@ -116,8 +111,9 @@ class Nav extends Component {
 // if they are logged in, we show them a few more links 
 // if you wanted you could write this code like this:
 // const mapStateToProps = ({ user }) => ({ user });
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.user
+
 });
 
 export default connect(mapStateToProps)(withStyles(styles, { withTheme: true })(Nav));

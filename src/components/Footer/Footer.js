@@ -20,13 +20,13 @@ const styles = theme => ({
     // top: '0px',
     // zIndex: theme.zIndex.drawer + 1,
   },
-  // logo: {
-  //   float: 'right',
-  //   position: 'fixed',
-  //   top: '7px',
-  //   left: 5,
-  //   // marginBottom: '50%',
-  // }
+  icons: {
+    float: 'right',
+    // position: 'fixed',
+    marginTop: 20,
+    marginRight: 20,
+    // marginBottom: '50%',
+  }
 
 })
 
@@ -56,24 +56,39 @@ class Footer extends Component {
         <div className={classes.root}>
 
           {/* Show the link to the info page and the logout button if the user is logged in */}
-
           {this.state.user.id && (
             <>
-              <div className="nav-link">
-                <Link  to="/">
+              <div>
+                <Link className="nav-link" to="/">
                   Home
               </Link>
-              <Link  to="/">
+              <Link className="nav-link" to="/">
                   Browse
               </Link>
-              <Link  to="/">
+              <Link className="nav-link" to="/">
                   About
               </Link>
-              <Link  to="/">
+              <Link className="nav-link" to="/">
                   F.A.Q.
               </Link>
-              <Link to="/">
+              <Link className="nav-link" to="/">
                   Leanring & Resources
+              </Link>
+
+              </div>
+              <div className={classes.icons}>
+                <Link to="/info">
+                  <img src="images/blank-profile-picture.png" alt="profile" height="30" width="30" />
+                </Link>
+              </div>
+            </>
+
+          )}
+           {this.state.user.id && (
+            <>
+              <div className="nav-link">
+                <Link className="profile" to="/info">
+                  Profile
               </Link>
               </div>
               <div className="profile_icon">
@@ -81,7 +96,7 @@ class Footer extends Component {
                   <img src="images/blank-profile-picture.png" alt="profile" height="30" width="30" />
                 </Link>
               </div>
-
+              <LogOutButton className="nav-link" />
             </>
           )}
         </div>

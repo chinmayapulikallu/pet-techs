@@ -18,7 +18,7 @@ class RegisterPage extends Component {
       this.props.dispatch({
         type: "REGISTER",
         payload: {
-            user_email: this.state.email,
+          user_email: this.state.email,
           username: this.state.username,
           phone_number: this.state.phone,
           password: this.state.password,

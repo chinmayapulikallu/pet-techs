@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { withStyles } from '@material-ui/core/styles';
-import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import TextField from '@material-ui/core/TextField';
@@ -12,14 +10,15 @@ import Grid from '@material-ui/core/Grid';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router-dom';
+import Container from "@material-ui/core/Container";
 
 
 
 const styles = theme => ({
     root: {
         // flexGrow: 1,
-        marginLeft: theme.spacing(45),
-        marginRight: theme.spacing(45),
+        // marginLeft: theme.spacing(45),
+        // marginRight: theme.spacing(45),
         marginTop: '100px',
     },
 
@@ -57,7 +56,7 @@ const styles = theme => ({
 
 class VTReg3 extends Component {
     state = {
-        ...this.props,
+        ...this.props.vtInfo,
     }
 
     componentDidMount() {
@@ -67,7 +66,7 @@ class VTReg3 extends Component {
     handleToggleChangeFor = property => (event) => {
         console.log('switch', property, event.target.checked)
         this.setState({
-            [property]: event.target.checked,
+            [property]: event.target.checked === true,
         });
     }
     handleInputChangeFor = property => (event) => {
@@ -80,21 +79,24 @@ class VTReg3 extends Component {
         console.log('back clicked!')
         this.props.history.push('/vtreg2')
     }
-    handleSave = () => {
+    handleReviewButton = () => {
         console.log('clicked!')
-        this.props.dispatch({
-            // type: ADD_REG_3,
-            payload: { reg3Info: this.props.state }
-        })
+        this.props.history.push('/vtreview');
+        // this.props.dispatch({
+        //     type: "ADD_VT_INFO_PAGE_3",
+        //     payload: this.state 
+        // })
+        console.log('send this VT reg page 3 data to saga:', this.state)
+
     }
 
     render() {
         const { classes } = this.props;
         return (
-            <div className={classes.root}>
-                <div className={classes.title}>
+            <Container className={classes.root} maxWidth="sm">
+            <div className={classes.title}>
                     <h3 className={classes.title}>Tell us about your certifications and expertise:</h3>
-                    <img className={classes.img} src="images/blank-profile-picture.png" alt="profile-photo" height="150" width="150" />
+                    <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
                     <h5>Your experise as a veterinary professional what makes you stand apart and what helps pet owners get to know you.</h5>
                     <h5>Please keep emojis and personal identifiers (last name or workplace) out of your profile.</h5>
                 </div>
@@ -173,7 +175,7 @@ class VTReg3 extends Component {
                         <Grid item xs={12}>
                             <FormControlLabel
                                 control={<Switch onChange={this.handleToggleChangeFor("injectableMedicaiton")} />}
-                                label="Can you administer injected medications to animals"
+                                label="Can you administer injected medications to animals?"
                                 labelPlacement="start"
                             />
                         </Grid>
@@ -220,13 +222,12 @@ class VTReg3 extends Component {
 
 
                 </Grid>
-                <Grid className={classes.itemCenter} alignItems="center"
-                    justifyContent="center">
-                    <Button className={classes.buttons} variant="contained" color="primary" onClick={this.handleBackButton}>Save & back to Dashboard</Button>
-                    <Button className={classes.buttons} variant="contained" color="primary">Save & Continue</Button>
+                <Grid className={classes.itemCenter} >
+                    <Button className={classes.buttons} variant="contained" color="primary" onClick={this.handleBackButton}>Back</Button>
+                    <Button className={classes.buttons} variant="contained" color="primary" onClick={this.handleReviewButton}>Review</Button>
                 </Grid>
 
-            </div>
+                </Container>
         )
     }
 }

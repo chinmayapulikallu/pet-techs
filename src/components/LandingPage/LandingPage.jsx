@@ -101,7 +101,7 @@ class LandingPage extends Component {
 
     handleJoinClick = () => {
         console.log("ClickedJoin");
-        this.props.history.push('/vtreg1')
+        this.props.history.push('/creg1')
     }
 
     handSignInClick = () => {
@@ -112,7 +112,8 @@ class LandingPage extends Component {
 
     serviceProviderClick = () => {
         console.log("clickedSignIn");
-        this.props.history.push('/vtreg1')
+        
+        this.props.history.push('/creg1')
     }
 
 

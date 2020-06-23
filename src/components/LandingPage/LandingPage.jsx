@@ -229,6 +229,10 @@ class LandingPage extends Component {
                                 <Typography variant="h3">
                                     "I really appreciate the Pet Techs service providers! They've got my back when i need help with my pets, always going above and beyond with their care!"
                                 </Typography>
+                               
+                                <Typography variant="h5">
+                                        - James, Eden Prairie Minnesota
+                                </Typography>
                             
                             </Card>
                             </Grid>

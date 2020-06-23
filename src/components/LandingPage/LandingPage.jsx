@@ -8,6 +8,7 @@ import Typeography from "@material-ui/core/Typography"
 import Card from "@material-ui/core/Card"
 import CardContent from "@material-ui/core/CardContent"
 import Typography from '@material-ui/core/Typography';
+import CardMedia from "@material-ui/core/CardMedia"
 
 
 
@@ -16,6 +17,19 @@ const styles = theme => ({
         borderRadius: 0,
         width: "100%",
         height: "auto"
+    },
+    catImage: {
+        position: "relative",
+        borderRadius: 0,
+        width: "100%",
+        height: "auto",
+
+    },
+    test: {
+        position: "absolute",
+        top: "225%",
+        left: "10%"
+
     },
     description: {
         textAlign: "center",
@@ -37,13 +51,24 @@ const styles = theme => ({
         alignItems: "center",
         marginRight: 400,
         marginLeft: 400,
-        paddingTop: "50px"
+        paddingTop: "50px",
+
     },
     cards: {
         fontFamily: 'Quicksand',
         margin: "25px",
         textAlign: 'center',
-        justifyContent: "center"
+        justifyContent: "center",
+        marginBottom: 100
+    },
+    catText: {
+        fontFamily: 'Quicksand',
+        margin: "25px",
+        textAlign: 'center',
+        justifyContent: "center",
+        marginBottom: 100,
+        backgroundColor: "transparent",
+        fontSize: 100
     },
     image: {
         display: "block",
@@ -93,7 +118,18 @@ const styles = theme => ({
         marginRight: "auto",
         alignItems: "center",
         marginTop: 25
-    }
+    },
+    overlay: {
+        position: 'absolute',
+        top: '20px',
+        left: '20px',
+        color: 'black',
+        backgroundColor: 'white'
+    },
+    media: {
+        height: 0,
+        paddingTop: '56.25%' // 16:9
+    },
 })
 
 
@@ -112,7 +148,7 @@ class LandingPage extends Component {
 
     serviceProviderClick = () => {
         console.log("clickedSignIn");
-        
+
         this.props.history.push('/creg1')
     }
 
@@ -130,12 +166,12 @@ class LandingPage extends Component {
                 <div>
                     <Grid >
                         <Grid container spacing={3} >
-                            <Typeography className={classes.description} variant="h5">You love your pets. We love that you love your pets. Pet Techs is here to make sure you have qualified indviduals to help you take care of them.</Typeography>
+                            <Typography className={classes.description} variant="h5">You love your pets. We love that you love your pets. Pet Techs is here to make sure you have qualified indviduals to help you take care of them.</Typography>
                         </Grid>
                     </Grid>
                 </div>
                 <div>
-                    <Typeography className={classes.services} variant="h5"><b>Our Services</b></Typeography>
+                    <Typography className={classes.services} variant="h5"><b>Our Services</b></Typography>
                     <Grid container direction="row" className={classes.cards} spacing={2}>
                         <Grid item xs={2}>
                             <Card>
@@ -153,8 +189,8 @@ class LandingPage extends Component {
                                 <CardContent>
                                     <div>
                                         <img className={classes.image} src="/images/boarding-icon.png" alt="boardingIcon" height="75" width="75" />
-                                        <Typeography variant="h6"><b>Pet Boarding</b></Typeography>
-                                        <Typeography variant="subtitle1">Our care providers have cozy homes for your four legged friends. Have them watched in a providers home with pet boarding.</Typeography>
+                                        <Typography variant="h6"><b>Pet Boarding</b></Typography>
+                                        <Typography variant="subtitle1">Our care providers have cozy homes for your four legged friends. Have them watched in a providers home with pet boarding.</Typography>
                                     </div>
                                 </CardContent>
                             </Card>
@@ -164,7 +200,7 @@ class LandingPage extends Component {
                                 <CardContent>
                                     <div>
                                         <img className={classes.image} src="/images/drop-in-care-icon.png" alt="dropInCare" height="75" width="75" />
-                                        <Typeography variant="h6"><b>Drop in Care</b></Typeography>
+                                        <Typography variant="h6"><b>Drop in Care</b></Typography>
                                         <Typeography variant="subtitle1">Service providers drop by your home to help provide insulin injections, basic medical needs, or routing care.</Typeography>
                                     </div>
                                 </CardContent>
@@ -176,7 +212,7 @@ class LandingPage extends Component {
                                     <div>
                                         <img className={classes.image} src="/images/hospice-icon.png" alt="hospiceIcon" height="75" width="75" />
                                         <Typeography variant="h6"><b>Hospice Care</b></Typeography>
-                                        <Typeography variant="subtitle1">Hospice service centers around providers coming to your home, helping with general hospice comfort, maintenance and care.</Typeography>
+                                        <Typography variant="subtitle1">Hospice service centers around providers coming to your home, helping with general hospice comfort, maintenance and care.</Typography>
                                     </div>
                                 </CardContent>
                             </Card>
@@ -186,8 +222,18 @@ class LandingPage extends Component {
 
                 <div className={classes.root}>
                     <Grid container spacing={3}>
+                        <img className={classes.catImage} src='../images/homeCat.png' />
+                        <div className={classes.test}>
+                            <Grid item xs={6}>
+                            <Card raised={false} className={classes.catText}>
+                                <Typography variant="h3">
+                                    "I really appreciate the Pet Techs service providers! They've got my back when i need help with my pets, always going above and beyond with their care!"
+                                </Typography>
+                            
+                            </Card>
+                            </Grid>
+                        </div>
 
-                        <img className={classes.landingPg} src='../images/homeCat.png' />
 
 
                     </Grid>
@@ -197,7 +243,7 @@ class LandingPage extends Component {
                         <img className={classes.servProv} src="/images/service-provider.png" alt="serviceProviderIcon" height="200" width="200" />
                     </div>
                     <div>
-                        <Typeography className={classes.description} variant="h5">Find the best caretaker for your critter.</Typeography>
+                        <Typography className={classes.description} variant="h5">Find the best caretaker for your critter.</Typography>
                     </div>
                     <div>
                         <Button className={classes.button} onClick={this.serviceProviderClick} variant="contained" color="primary" >Find a service provider</Button>
@@ -207,11 +253,11 @@ class LandingPage extends Component {
                     <div>
                     </div>
                     <div>
-                        <Typeography className={classes.missionHeader} variant="h3">Our Mission</Typeography>
+                        <Typography className={classes.missionHeader} variant="h3">Our Mission</Typography>
                         <img className={classes.image} src="/images/mission-logo.png" alt="missionLogoIcon" height="300" width="300" />
                     </div>
                     <div>
-                        <Typeography className={classes.description} variant="h5">We're here to connect vetinary technicians with pet owners who want to hire qualified individuals to help give different kinds of out-of-clinic care. Either in your home or theirs, you want to know your precious animals are in great hands. We are commited to giving quality and professional care and to give you ease of mind. </Typeography>
+                        <Typography className={classes.description} variant="h5">We're here to connect vetinary technicians with pet owners who want to hire qualified individuals to help give different kinds of out-of-clinic care. Either in your home or theirs, you want to know your precious animals are in great hands. We are commited to giving quality and professional care and to give you ease of mind. </Typography>
                     </div>
                     <Grid>
                         <div>

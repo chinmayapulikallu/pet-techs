@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   HashRouter as Router,
   Route,
@@ -6,7 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
@@ -26,13 +26,15 @@ import VTDashboard from '../VTDashboard/VTDashboard';
 import VTReviewPage from '../VTReviewPage/VTReviewPage';
 import ClientReviewPage from '../ClientReviewPage/ClientReviewPage';
 import RegisterPage from "../RegisterPage/RegisterPage"
+import ClientProfile from "../ClientProfile/ClientProfile"
+
 import ClientDashBoard from "../ClientDashboard/ClientDashboard"
 
 import './App.css';
 
 class App extends Component {
-  componentDidMount () {
-    this.props.dispatch({type: 'FETCH_USER'})
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_USER' })
   }
 
   render() {
@@ -66,22 +68,22 @@ class App extends Component {
               path="/info"
               component={InfoPage}
             />
-              <Route
+            <Route
               exact
               path="/creg2"
               component={ClientRegPage2}
             />
-              <Route
+            <Route
               exact
               path="/creg1"
               component={ClientRegPage1}
             />
-              <Route
+            <Route
               exact
               path="/vtreg1"
               component={VTPage1}
             />
-              <Route
+            <Route
               exact
               path="/vtreg2"
               component={VTPage2}
@@ -118,6 +120,12 @@ class App extends Component {
             />
             <Route
               exact
+              path="/client_profile"
+              component={ClientProfile}
+            />
+
+
+            <Route
               path="/clientdashboard"
               component={ClientDashBoard}
             />
@@ -127,7 +135,8 @@ class App extends Component {
           <Footer />
         </div>
       </Router>
-  )}
+    )
+  }
 }
 
 export default connect()(App);

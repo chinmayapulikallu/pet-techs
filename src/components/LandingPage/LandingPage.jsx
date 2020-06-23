@@ -14,6 +14,8 @@ import Typography from '@material-ui/core/Typography';
 const styles = theme => ({
     landingPg: {
         borderRadius: 0,
+       width: "100%",
+       height: "auto"
     },
     description: {
         textAlign: "center",
@@ -58,7 +60,7 @@ const styles = theme => ({
         height: 45,
         width: 180,
         borderRadius: 12,
-        
+
     },
     mission: {
         textAlign: "center",
@@ -164,14 +166,14 @@ class LandingPage extends Component {
                 </Grid>
                 <Grid>
                     <div>
-                       
+
                     </div>
                     <div>
                         <Typeography className={classes.description} variant="h3">Our Mission</Typeography>
                         <img className={classes.mission} src="/images/mission-logo.png" alt="missionLogoIcon" height="300" width="300" />
                     </div>
-                    
-                    
+
+
                 </Grid>
             </div>
 

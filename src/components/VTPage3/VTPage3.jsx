@@ -82,10 +82,10 @@ class VTReg3 extends Component {
     handleReviewButton = () => {
         console.log('clicked!')
         this.props.history.push('/vtreview');
-        this.props.dispatch({
-            type: "ADD_VT_INFO_PAGE_3",
-            payload: this.state 
-        })
+        // this.props.dispatch({
+        //     type: "ADD_VT_INFO_PAGE_3",
+        //     payload: this.state 
+        // })
         console.log('send this VT reg page 3 data to saga:', this.state)
 
     }

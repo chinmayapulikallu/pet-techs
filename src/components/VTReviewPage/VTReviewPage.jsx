@@ -53,10 +53,10 @@ class VTReviewPage extends Component {
     handleSaveButton = () =>{
         console.log('save clicked!')
         console.log('send this VT data to saga:', this.state)
-        this.props.dispatch({
-            type: "ADD_VT",
-            payload: { vtInfo: this.state }
-        })
+        // this.props.dispatch({
+        //     type: "ADD_VT",
+        //     payload:  this.state 
+        // })
     }
 
 
@@ -64,6 +64,7 @@ class VTReviewPage extends Component {
         const { classes } = this.props;
         return (
             <div className={classes.root}>
+                <h1>{JSON.stringify(this.state)}</h1>
                 <h1 className={classes.title}>Vet tech review</h1>
                 <p>Home address: <spand>{this.state.home_address_house}</spand></p>
                 <p>Apartment or Suite #: <span>{this.state.apt_suite}</span></p>

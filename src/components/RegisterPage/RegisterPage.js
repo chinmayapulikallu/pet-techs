@@ -77,13 +77,13 @@ class RegisterPage extends Component {
   render() {
     const { classes } = this.props
     return (
-      <div>
+      <div className={classes.root}>
         {this.props.errors.registrationMessage && (
           <h2 className="alert" role="alert">
             {this.props.errors.registrationMessage}
           </h2>
         )}
-        <div className={classes.root}>
+        <div>
           <Grid className={classes.title}>
             <FormControl onSubmit={this.registerUser}>
               <Typography className={classes.title} variant="h3">Sign up with email!</Typography>

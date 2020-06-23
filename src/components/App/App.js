@@ -26,6 +26,8 @@ import VTDashboard from '../VTDashboard/VTDashboard';
 import VTReviewPage from '../VTReviewPage/VTReviewPage';
 import ClientReviewPage from '../ClientReviewPage/ClientReviewPage';
 import RegisterPage from "../RegisterPage/RegisterPage"
+import ClientProfile from "../ClientProfile/ClientProfile"
+
 
 import './App.css';
 
@@ -115,6 +117,14 @@ class App extends Component {
               path="/register"
               component={RegisterPage}
             />
+            <Route
+              exact
+              path="/client_profile"
+              component={ClientProfile}
+            />
+
+
+
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>

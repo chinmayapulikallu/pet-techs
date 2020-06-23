@@ -97,7 +97,7 @@ class VTReg3 extends Component {
             <div className={classes.title}>
                     <h3 className={classes.title}>Tell us about your certifications and expertise:</h3>
                     <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
-                    <h5>Your experise as a veterinary professional what makes you stand apart and what helps pet owners get to know you.</h5>
+                    <h5>Your expertise as a veterinary professional what makes you stand apart and what helps pet owners get to know you.</h5>
                     <h5>Please keep emojis and personal identifiers (last name or workplace) out of your profile.</h5>
                 </div>
                 <Grid container spacing={12}>
@@ -108,7 +108,7 @@ class VTReg3 extends Component {
                             InputProps={{
                                 className: classes.year
                             }}
-                            onChange={this.handleInputChangeFor("experienceYear")}
+                            onChange={this.handleInputChangeFor("experience")}
                         />
                     </Grid>
                 </Grid>
@@ -129,10 +129,10 @@ class VTReg3 extends Component {
                         className: classes.fullwidth
                     }}
                     fullWidth
-                    onChange={this.handleInputChangeFor("currentJob")}
+                    onChange={this.handleInputChangeFor("current_job_title")}
 
                 />
-                <p>Areas of professional expertise (examples: lab pracedures, animal medicine, hospice care, etc.)</p>
+                <p>Areas of professional expertise (examples: lab procedures, animal medicine, hospice care, etc.)</p>
                 <TextField type="text" id="outlined-full-width"
                     label="*Optional" variant="outlined" color="secondary"
                     fullWidth
@@ -153,28 +153,28 @@ class VTReg3 extends Component {
                 <br />
                 <br />
                 <h4>Additional Details:</h4>
-                <p>While these details are optional, providing more information about skills and expertise will help pet owners feel more comfotable contacting you.</p>
+                <p>While these details are optional, providing more information about skills and expertise will help pet owners feel more comfortable contacting you.</p>
                 <Grid container spacing={12}>
 
                     <FormControl component="fieldset">
                         {/* <p>Do you know animal CPR/First Aid?</p> */}
                         <Grid item xs={12}>
                             <FormControlLabel
-                                control={<Switch onChange={this.handleToggleChangeFor("cpr")} />}
+                                control={<Switch onChange={this.handleToggleChangeFor("CPR_first_aid")} />}
                                 label="Do you know CPR and/or animal first aid?"
                                 labelPlacement="start"
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
-                                control={<Switch onChange={this.handleToggleChangeFor("oralMedication")} />}
+                                control={<Switch onChange={this.handleToggleChangeFor("oral_medication")} />}
                                 label="Can you administer oral medications to animals?"
                                 labelPlacement="start"
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
-                                control={<Switch onChange={this.handleToggleChangeFor("injectableMedicaiton")} />}
+                                control={<Switch onChange={this.handleToggleChangeFor("injectable_medication")} />}
                                 label="Can you administer injected medications to animals?"
                                 labelPlacement="start"
                             />
@@ -182,7 +182,7 @@ class VTReg3 extends Component {
                         <Grid item xs={12}>
 
                             <FormControlLabel
-                                control={<Switch onChange={this.handleToggleChangeFor("expOlderPet")} />}
+                                control={<Switch onChange={this.handleToggleChangeFor("exp_older_pet")} />}
                                 label="Do you have experience with caring for older or senior animals?"
                                 labelPlacement="start"
                             />
@@ -190,7 +190,7 @@ class VTReg3 extends Component {
                         <Grid item xs={12}>
 
                             <FormControlLabel
-                                control={<Switch onChange={this.handleToggleChangeFor("expSpecialPet")} />}
+                                control={<Switch onChange={this.handleToggleChangeFor("exp_special_pet")} />}
                                 label="Do you have experience caring for special needs animals?"
                                 labelPlacement="start"
                             />
@@ -199,21 +199,21 @@ class VTReg3 extends Component {
                         <Grid item xs={12}>
 
                             <FormControlLabel
-                                control={<Switch onChange={this.handleToggleChangeFor("dailyExercise")} />}
+                                control={<Switch onChange={this.handleToggleChangeFor("daily_exercise")} />}
                                 label="Can you provied daily exercise for high energy animals or behavioral needs?"
                                 labelPlacement="start"
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
-                                control={<Switch onChange={this.handleToggleChangeFor("petLongerThanAWeek")} />}
+                                control={<Switch onChange={this.handleToggleChangeFor("pet_longer_than_a_week")} />}
                                 label="Are you willing to accept services that are longer than one week with animals?"
                                 labelPlacement="start"
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
-                                control={<Switch onChange={this.handleToggleChangeFor("diabeticInsulinCare")} />}
+                                control={<Switch onChange={this.handleToggleChangeFor("diabetic_insulin_care")} />}
                                 label="Do you offer diabetic and insulin care?"
                                 labelPlacement="start"
                             />
@@ -233,19 +233,19 @@ class VTReg3 extends Component {
 }
 const mapStateToProps = (state) => ({
     vtInfo: {
-        experienceYear: '',
+        experience: '',
         certifications: '',
-        currentJob: '',
+        current_job_title: '',
         expertise: '',
         bioYourself: '',
-        cpr: false,
-        oralMedication: false,
-        injectableMedication: false,
-        expOlderPet: false,
-        expSpecialPet: false,
-        dailyExercise: false,
-        petLongerThanAWeek: false,
-        diabeticInsulinCare: false,
+        CPR_first_aid: false,
+        oral_medication: false,
+        injectable_medication: false,
+        exp_older_pet: false,
+        exp_special_pet: false,
+        daily_exercise: false,
+        pet_longer_than_a_week: false,
+        diabetic_insulin_care: false,
         ...state.vtInfo,
     },
     error: state.errors,

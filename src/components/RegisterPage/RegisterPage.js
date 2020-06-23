@@ -5,8 +5,8 @@ class RegisterPage extends Component {
   state = {
     username: "",
     password: "",
-    email: "",
-    phone: "",
+    user_email: "",
+    phone_number: "",
     hear_about: "",
     user_type: "",
   };
@@ -18,9 +18,9 @@ class RegisterPage extends Component {
       this.props.dispatch({
         type: "REGISTER",
         payload: {
-          email: this.state.email,
+          user_email: this.state.email,
           username: this.state.username,
-          phone: this.state.phone,
+          phone_number: this.state.phone,
           password: this.state.password,
           hear_about: this.state.hear_about,
           user_type: this.state.user_type,
@@ -52,9 +52,9 @@ class RegisterPage extends Component {
             Email:
             <input
               type="text"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleInputChangeFor("email")}
+              name="user_email"
+              value={this.state.user_email}
+              onChange={this.handleInputChangeFor("user_email")}
             />
           </div>
           <div>
@@ -72,9 +72,9 @@ class RegisterPage extends Component {
             Phone:
             <input
               type="number"
-              name="phone"
-              value={this.state.phone}
-              onChange={this.handleInputChangeFor("phone")}
+              name="phone_number"
+              value={this.state.phone_number}
+              onChange={this.handleInputChangeFor("phone_number")}
             />
           </div>
           <div>

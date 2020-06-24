@@ -5,7 +5,18 @@ const router = express.Router();
 /**
  * GET route template
  */
-router.get("/", (req, res) => {});
+router.get("/:id", (req, res) => {
+  const sqlText = `SELECT * from vet_tech where vet_tech.id = $1; `;
+  pool
+    .query(sqlText, [req.params.id])
+    .then((response) => {
+      res.send(response.rows);
+    })
+    .catch((error) => {
+      console.log(`Error getting Pet Tech info ${sqlText}`, error);
+      res.sendStatus(500);
+    });
+});
 
 /**
  * POST route template

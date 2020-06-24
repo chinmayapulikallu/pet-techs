@@ -13,6 +13,12 @@ import TableContainer from "@material-ui/core/TableContainer";
 class VTDashboard extends Component {
   componentDidMount = () => {
     // get dashboard info for Vet Tech, get request
+    const currentId = this.props.match.params.id
+    this.props.dispatch({
+        type: "GET_VT_DATA",
+        payload: currentId,
+    })
+    console.log('component mounted', this.props.match.params.id)
   };
   // not sure if these will be the exact paths, or types, placeholders for now.
   detailsButton = (event) => {
@@ -106,6 +112,8 @@ class VTDashboard extends Component {
 const mapStateToProps = (state) => ({
   // not sure about the reducer names yet
   clientInfo: state.clientInfo,
+  vtInfo: state.vtInfo,
+
 });
 
 export default connect(mapStateToProps)(VTDashboard);

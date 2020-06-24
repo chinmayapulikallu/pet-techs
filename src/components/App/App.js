@@ -18,6 +18,7 @@ import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
 import LandingPage from "../LandingPage/LandingPage";
 import VTDashboard from "../VTDashboard/VTDashboard";
+import VTProfile from "../VTProfile/VTProfile";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import ClientStepper from "../ClientStepper/ClientStepper";
 import ClientProfile from "../ClientProfile/ClientProfile";
@@ -62,6 +63,7 @@ class App extends Component {
             <Route exact path="/vtdashboard" component={VTDashboard} />
             <Route exact path="/register" component={RegisterPage} />
             <Route exact path="/client_profile" component={ClientProfile} />
+            <Route exact path="/vt-profile" component={VTProfile} />
             <Route
               exact
               path="/client_service"

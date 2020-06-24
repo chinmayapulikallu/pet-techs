@@ -168,7 +168,7 @@ class ClientServiceRequest extends Component {
                                         rows={10}
                                         type="text"
                                         id="outlined-basic"
-                                        label="What should the Vet Tech know about your pet?"
+                                        label="Instructions"
                                         variant="outlined"
                                         color="secondary"
                                     />

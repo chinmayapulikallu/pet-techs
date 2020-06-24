@@ -32,7 +32,8 @@ const styles = theme => ({
     dogText:{
         position: "absolute",
         top: "50%",
-        left: "70%"
+        left: "70%",
+        textAlign: "center"
     },
     catImage: {
         position: "relative",
@@ -43,8 +44,8 @@ const styles = theme => ({
     },
     test: {
         position: "absolute",
-        top: "225%",
-        left: "10%"
+        top: "1850px",
+        left: "70px"
 
     },
     description: {
@@ -79,13 +80,15 @@ const styles = theme => ({
       
     },
     catText: {
+        
         fontFamily: 'Quicksand',
         margin: "25px",
         textAlign: 'center',
         justifyContent: "center",
         marginBottom: 100,
         backgroundColor: "transparent",
-        fontSize: 100
+        fontSize: 100,
+        
     },
     catPaw: {
         position: "absolute",
@@ -117,7 +120,8 @@ const styles = theme => ({
         display: "block",
         marginLeft: "auto",
         marginRight: "auto",
-        paddingTop: 2
+        paddingTop: 2,
+        marginTop: 30
     },
 
     missionHeader: {
@@ -148,7 +152,11 @@ const styles = theme => ({
         paddingTop: '56.25%' // 16:9
     },
     cardService: {
-        height: 400,
+        // height: 400,
+        minHeight: 450,
+    },
+    fixResize: {
+        width: "100%"
     }
 })
 
@@ -197,7 +205,7 @@ class LandingPage extends Component {
                 </div>
                 <div>
                     <Typography className={classes.services} variant="h5"><b>Our Services</b></Typography>
-                    <Grid container direction="row" className={classes.cards} spacing={2}>
+                    <Grid container direction="row" justify="center" className={classes.cards} spacing={2}>
                         <Grid item xs={2}>
                             <Card className={classes.cardService}>
                                 <CardContent>
@@ -245,13 +253,13 @@ class LandingPage extends Component {
                     </Grid>
                 </div>
 
-                <div className={classes.root}>
-                    <Grid container spacing={3}>
+               
+                    <Grid container className={classes.fixResize}>
                         <img className={classes.catImage} src='../images/homeCat.png' />
                         <div className={classes.test}>
-                            <Grid item xs={6}>
+                            <Grid item xs={7}>
                             <Card raised={false} className={classes.catText}>
-                                <Typography variant="h3">
+                                <Typography variant="h4">
                                     "I really appreciate the Pet Techs service providers! They've got my back when i need help with my pets, always going above and beyond with their care!"
                                 </Typography>
                                 <Typography variant="h5">
@@ -263,12 +271,9 @@ class LandingPage extends Component {
                                 <img src='../images/catPaw.png' className={classes.catPaw} />
                             </Grid>
                         </div>
-        
-
-
-
                     </Grid>
-                </div>
+                
+
                 <Grid>
                     <div>
                         <img className={classes.servProv} src="/images/service-provider.png" alt="serviceProviderIcon" height="200" width="200" />

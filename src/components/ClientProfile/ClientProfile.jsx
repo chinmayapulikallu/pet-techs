@@ -79,7 +79,7 @@ class ClientProfile extends Component {
 
 
     componentDidMount() {
-        console.log('client profile', this.props.clientInfo)
+        // console.log('---->client profile', this.props.clientInfo)
         const currentId = this.props.match.params.id;
         // const currentClient= this.props.clientInfo.find(client => client.id === parseInt(currentId))
         console.log('-----> Current client', currentId)
@@ -87,6 +87,8 @@ class ClientProfile extends Component {
             type: 'GET_CLIENT_DATA',
             payload:{id: currentId}
         })
+        console.log('---->client profile', this.props.clientInfo)
+
     }
     handleBackButton = () => {
         console.log('clicked');
@@ -112,7 +114,7 @@ class ClientProfile extends Component {
     }
 
     render() {
-        console.log('client profile', this.user);
+        // console.log('client profile', this.props.user);
 
 
         const { classes } = this.props;

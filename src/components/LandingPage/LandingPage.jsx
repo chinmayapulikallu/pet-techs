@@ -43,7 +43,7 @@ const styles = theme => ({
     },
     test: {
         position: "absolute",
-        top: "225%",
+        top: "235%",
         left: "10%"
 
     },
@@ -148,7 +148,8 @@ const styles = theme => ({
         paddingTop: '56.25%' // 16:9
     },
     cardService: {
-        height: 400,
+        // height: 400,
+        minHeight: 450,
     }
 })
 
@@ -251,7 +252,7 @@ class LandingPage extends Component {
                         <div className={classes.test}>
                             <Grid item xs={6}>
                             <Card raised={false} className={classes.catText}>
-                                <Typography variant="h3">
+                                <Typography variant="h4">
                                     "I really appreciate the Pet Techs service providers! They've got my back when i need help with my pets, always going above and beyond with their care!"
                                 </Typography>
                                 <Typography variant="h5">

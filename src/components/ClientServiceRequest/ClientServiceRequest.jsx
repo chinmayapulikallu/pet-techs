@@ -50,6 +50,13 @@ class ClientServiceRequest extends Component {
         ...this.props.clientRequest,
     };
 
+    componentDidMount=()=>{
+        console.log("Mounted");
+        const currentId = this.props.match.params.id;
+        this.props.dispatch({ type: "GET_PET_DATA"})
+            // , payload: { id: currentId }
+    }
+
 
     handleDateChange = (event, property) => {
         // console.log(event.target.value, "#######")
@@ -196,7 +203,9 @@ class ClientServiceRequest extends Component {
                         </FormControl>
                     </Grid>
                 </div>
-
+<div>
+    <p>{JSON.stringify(this.props.petInfoReducer)}</p>
+</div>
             </div>
         );
     }

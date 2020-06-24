@@ -19,7 +19,7 @@ import Container from "@material-ui/core/Container";
 
 const useStyles = (theme) => ({
     root: {
-        marginTop: 100,
+        marginTop: 50,
         marginBottom: 40,
         textAlign: "center",
         // flexGrow: 1,
@@ -125,7 +125,7 @@ class ClientRegPage2 extends Component {
 
     //back to client1
     handleBack = () => {
-        this.props.history.push('/creg1')
+        this.props.onBack();
     }
 
     // //Input function to capture input
@@ -151,14 +151,14 @@ class ClientRegPage2 extends Component {
     }
 
     //sign in page after completing
-    handleComplete = () => {
-        this.props.history.push('/clientreview')
+    handleNext = () => {
         this.props.dispatch({
             type: 'SET_PET',
             payload: {
                 ...this.props.petInfo
             }
         })
+        this.props.onNext();
     }
 
     //upload Photo
@@ -362,7 +362,7 @@ class ClientRegPage2 extends Component {
                         <Button color="primary" variant="contained"
                             className={classes.buttonMargin} onClick={this.addPets}>Add Another Pet</Button>
                         <Button color="primary" variant="contained" 
-                        className={classes.buttonMargin} onClick={this.handleComplete}>Complete</Button>
+                        className={classes.buttonMargin} onClick={this.handleNext}>Save and Continue</Button>
                     </Grid>
 
                 </Grid>

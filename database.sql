@@ -81,7 +81,8 @@ CREATE TABLE vet_tech (
   certifications text, 
   current_job_title text,
   expertise text,
-  CPR_first_air boolean DEFAULT FALSE NOT NULL ,
+  bioYourself text,
+  CPR_first_aid boolean DEFAULT FALSE NOT NULL ,
   oral_medication boolean DEFAULT FALSE NOT NULL,
   injectable_medication boolean DEFAULT FALSE NOT NULL,
   exp_older_pet boolean DEFAULT FALSE NOT NULL,
@@ -142,6 +143,6 @@ CREATE TABLE client_request (
   start_date_time date,
   end_date_time date,
   add_info text,
-  resquest_status int 
+  request_status int 
 );
 

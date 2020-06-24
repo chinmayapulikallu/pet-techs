@@ -14,6 +14,7 @@ const clientRouter = require('./routes/client.router');
 const petRouter = require('./routes/pet.router');
 const vtRouter = require('./routes/vt.router');
 const searchRouter = require('./routes/search.router');
+const requestRouter = require('./routes/request.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -32,6 +33,7 @@ app.use('/api/client', clientRouter);
 app.use('/api/pet', petRouter);
 app.use('/api/vt', vtRouter);
 app.use('/api/search', searchRouter);
+app.use('/api/request', requestRouter);
 
 
 // Serve static files

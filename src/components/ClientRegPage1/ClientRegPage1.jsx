@@ -39,7 +39,7 @@ const styles = {
     borderRadius: 12,
   },
   title: {
-    marginTop: 100,
+    marginTop: 50,
   },
   botBtn: {
     margin: "60px 30px 20px 30px",
@@ -90,16 +90,21 @@ class ClientRegPage1 extends Component {
     alert("Photo set up needs to be set up");
   };
 
-
-  handleClick = () => {
-    console.log(this.state)
-    // this.props.history.push("/creg2");
+  handleNext = () => {
+    // this.props.dispatch({
+    //   type: "",
+    //   payload: { ...this.state },
+    // });
+    this.props.onNext();
   };
+
+  // handleBack = () => {
+  //   this.props.history.push("/register");
+  // };
   render() {
     const { classes } = this.props;
     return (
       <Container className={classes.root} maxWidth="sm">
-        <Typography>All fields required*</Typography>
         <Typography variant="h4" className={classes.title}>
           Hi NAME! Let's set up your profile
         </Typography>
@@ -306,19 +311,19 @@ class ClientRegPage1 extends Component {
             </RadioGroup>
           </FormControl>
         </div>
-        <Button
+        {/* <Button
           color="primary"
           variant="contained"
           className={classes.botBtn}
-          onClick={this.handleClick}
+          onClick={this.handleBack}
         >
           Back
-        </Button>
+        </Button> */}
         <Button
           color="primary"
           variant="contained"
           className={classes.botBtn}
-          onClick={this.handleClick}
+          onClick={this.handleNext}
         >
           Save and Continue
         </Button>

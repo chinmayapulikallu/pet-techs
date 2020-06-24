@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = (theme) => ({
     root: {
-        marginTop: 100,
+        marginTop: 50,
         marginBottom: 40,
         textAlign: "center",
     },
@@ -41,12 +41,12 @@ class ClientReviewPage extends Component {
 
     //editPetProfile
     editPetProfile = () => {
-        this.props.history.push('/creg2')  
+        this.props.onEditPet();  
     }
 
     //edit Client Profile
     editClientProfile = () => {
-        this.props.history.push('/creg1')
+        this.props.onEditInfo();
     }
 
     // handleBack = () => {

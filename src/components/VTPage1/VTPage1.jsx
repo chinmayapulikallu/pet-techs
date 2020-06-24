@@ -94,7 +94,7 @@ class VTPage1 extends Component {
   };
 
   handleNext = () => {
-    console.log(this.state);
+    this.props.onNext();
   };
   render() {
     const { classes } = this.props;
@@ -146,11 +146,11 @@ class VTPage1 extends Component {
           />
           <TextField
             id="outlined-basic"
-            label={"Zipcode"}
+            label={"Zip_code"}
             variant="outlined"
             color="secondary"
-            value={this.state.zipcode}
-            onChange={this.handleInputChange("zipcode")}
+            value={this.state.zip_code}
+            onChange={this.handleInputChange("zip_code")}
           />
         </div>
         <div>
@@ -303,7 +303,7 @@ class VTPage1 extends Component {
           <div>
             <Typography variant="h5">Tell us more about yourself!</Typography>
             <TextField
-              value={this.state.bio}
+              value={this.state.about_vet}
               label={"About your house, lifestyle, and pets..."}
               variant="outlined"
               className={classes.inputs}
@@ -311,18 +311,18 @@ class VTPage1 extends Component {
               color="secondary"
               multiline
               rows={7}
-              onChange={this.handleInputChange("bio")}
+              onChange={this.handleInputChange("about_vet")}
             />
           </div>
           <div>
-            <Button
+            {/* <Button
               className={classes.botBtn}
               onClick={this.handleBack}
               variant="contained"
               color="primary"
             >
               Back
-            </Button>
+            </Button> */}
             <Button
               className={classes.botBtn}
               onClick={this.handleNext}
@@ -344,13 +344,13 @@ const mapStateToProps = (state) => ({
     apt_suite: "",
     city: "",
     state: "",
-    zipcode: "",
+    zip_code: "",
     profile_img: "",
     sleep_over: false,
     boarding: false,
     dropin_care: false,
     hospice: false,
-    bio: "",
+    about_vet: "",
     ...state.vtInfo, // overrides default with any existing vt values
   },
   errors: state.errors,

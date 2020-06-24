@@ -26,6 +26,7 @@ import VTDashboard from '../VTDashboard/VTDashboard';
 import VTReviewPage from '../VTReviewPage/VTReviewPage';
 import ClientReviewPage from '../ClientReviewPage/ClientReviewPage';
 import RegisterPage from "../RegisterPage/RegisterPage"
+import ClientStepper from "../ClientStepper/ClientStepper"
 
 import './App.css';
 
@@ -65,16 +66,12 @@ class App extends Component {
               path="/info"
               component={InfoPage}
             />
-              <Route
+            <Route
               exact
-              path="/creg2"
-              component={ClientRegPage2}
+              path="/client-registration"
+              component={ClientStepper}
             />
-              <Route
-              exact
-              path="/creg1"
-              component={ClientRegPage1}
-            />
+              
               <Route
               exact
               path="/vtreg1"
@@ -104,11 +101,6 @@ class App extends Component {
               exact
               path="/vtreview"
               component={VTReviewPage}
-            />
-            <Route
-              exact
-              path="/clientreview"
-              component={ClientReviewPage}
             />
             <Route
               exact

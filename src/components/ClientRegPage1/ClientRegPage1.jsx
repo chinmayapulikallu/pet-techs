@@ -91,10 +91,10 @@ class ClientRegPage1 extends Component {
   };
 
   handleNext = () => {
-    // this.props.dispatch({
-    //   type: "",
-    //   payload: { ...this.state },
-    // });
+    this.props.dispatch({
+      type: "SET_CLIENT",
+      payload: { ...this.state },
+    });
     this.props.onNext();
   };
 

@@ -3,6 +3,7 @@ import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import vetTechRegSaga from './vetTechRegSaga';
+import clientRegistrationSaga from './clientRegistrationSaga';
 import clientInfoSaga from './clientInfoSaga';
 
 // rootSaga is the primary saga.
@@ -19,5 +20,6 @@ export default function* rootSaga() {
     userSaga(),
     vetTechRegSaga(),
     clientInfoSaga(),
+    clientRegistrationSaga()
   ]);
 }

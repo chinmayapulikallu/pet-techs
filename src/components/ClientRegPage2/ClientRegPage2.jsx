@@ -155,7 +155,7 @@ class ClientRegPage2 extends Component {
         this.props.dispatch({
             type: 'SET_PET',
             payload: {
-                ...this.props.petInfo
+                ...this.state
             }
         })
         this.props.onNext();
@@ -173,7 +173,6 @@ class ClientRegPage2 extends Component {
         
         return (
             <Container className={classes.root} maxWidth="md">
-                <Typography variant="h4">Client Registration Page 2</Typography>
                 {this.state.petInfo.pets && this.state.petInfo.pets.map(pet =>
                     <Grid container spacing={3}>
                     <Grid item xs={12}>

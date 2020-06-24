@@ -1,6 +1,6 @@
 import { put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
-import { response } from "express";
+// import { response } from "express";
 
 function* petInfoSaga() {
   yield takeLatest("GET_PET_DATA", getPetData);
@@ -9,7 +9,7 @@ function* petInfoSaga() {
 function* getPetData(action) {
   try {
     const id = action.payload;
-    yield axios.get(`/api/pet/${id}`);
+    const response = yield axios.get(`/api/pet/${id}`);
     yield put({
       type: "GET_PET_DATA_SUCCESSFUL",
       payload: response.data,

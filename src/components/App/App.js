@@ -27,6 +27,7 @@ import VTReviewPage from '../VTReviewPage/VTReviewPage';
 import ClientReviewPage from '../ClientReviewPage/ClientReviewPage';
 import RegisterPage from "../RegisterPage/RegisterPage"
 import ClientProfile from "../ClientProfile/ClientProfile"
+import ClientServiceRequest from "../ClientServiceRequest/ClientServiceRequest"
 
 import ClientDashBoard from "../ClientDashboard/ClientDashboard"
 
@@ -123,9 +124,13 @@ class App extends Component {
               path="/client_profile"
               component={ClientProfile}
             />
-
-
             <Route
+              exact
+              path="/client_service"
+              component={ClientServiceRequest}
+            />
+            <Route
+            exact
               path="/clientdashboard"
               component={ClientDashBoard}
             />

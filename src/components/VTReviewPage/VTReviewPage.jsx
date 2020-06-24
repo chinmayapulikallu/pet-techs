@@ -40,15 +40,15 @@ class VTReviewPage extends Component {
 
     handleEditVTPage1Button = () => {
         console.log('edit clicked!')
-        this.props.history.push('/vtreg1')
+        this.props.onEditInfo();
     }
     handleEditVTPage2Button = () => {
         console.log('edit clicked!')
-        this.props.history.push('/vtreg2')
+        this.props.onEditPreferences();
     }
     handleEditVTPage3Button = () => {
         console.log('edit clicked!')
-        this.props.history.push('/vtreg3')
+        this.props.onEditCert();
     }
     handleSaveButton = () =>{
         console.log('save clicked!')
@@ -57,6 +57,7 @@ class VTReviewPage extends Component {
         //     type: "ADD_VT",
         //     payload:  this.state 
         // })
+        this.props.history.push("/home");
     }
 
 
@@ -84,71 +85,123 @@ class VTReviewPage extends Component {
 
       
         return (
-            <div className={classes.root}>
-                <h1>{JSON.stringify(this.state.sleep_over)}</h1>
-                <h1 className={classes.title}>Vet tech review</h1>
-                <p>Home address: <spand>{this.state.home_address_house}</spand></p>
-                <p>Apartment or Suite #: <span>{this.state.apt_suite}</span></p>
-                <p>City: <span>{this.state.city}</span></p>
-                <p>State: <span>{this.state.state}</span></p>
-                <p>Zip Code: <span>{this.state.zipcode}</span></p>
-                <p>Bio: <span>{this.state.bio}</span></p>
-                
-                <p>Pet Sleepover: <span>{this.state.sleep_over}</span></p>
-                <p>Pet Boarding:  <span>{this.state.boarding}</span></p>
-                <p>Drop In Care: <span>{this.state.dropin_care}</span></p>
-                <p>Hospice Care: <span>{this.state.hospice}</span></p>
-                <Grid className={classes.itemCenter} 
-                    >
-                    <Button className={classes.buttons} variant="contained" color="primary"
-                        onClick={this.handleEditVTPage1Button}
-                    >Edit Basic Infomation</Button>
-                </Grid>
-               
+          <div className={classes.root}>
+            <h1>{JSON.stringify(this.state.sleep_over)}</h1>
+            <h1 className={classes.title}>Vet tech review</h1>
+            <p>
+              Home address: <spand>{this.state.home_address_house}</spand>
+            </p>
+            <p>
+              Apartment or Suite #: <span>{this.state.apt_suite}</span>
+            </p>
+            <p>
+              City: <span>{this.state.city}</span>
+            </p>
+            <p>
+              State: <span>{this.state.state}</span>
+            </p>
+            <p>
+              Zip Code: <span>{this.state.zipcode}</span>
+            </p>
+            <p>
+              Bio: <span>{this.state.bio}</span>
+            </p>
 
-                <p>What animals will you provide services for? <span>{provideServices}</span></p>
-                <p>Are you home full time Monday-Friday? <span>{workHour}</span></p>
-                <p>How often can you take the animal(s) outside? </p>
-                <p>How often can you take the animal(s) outside? </p>
-                <p>What size animals are you comfortable hosting? </p>
-                <p>Will you host animals younger than 1 years old? </p>
-                <p>Will you host animals from multiple families at once?</p>
-                <p>Please provide a list of equipment that will be used when caring for pets: </p>
-                <Grid className={classes.itemCenter}>
-                    <Button className={classes.buttons} variant="contained" color="primary"
-                        onClick={this.handleEditVTPage2Button}
-                    >Edit Services</Button>
-                </Grid>
+            <p>
+              Pet Sleepover: <span>{this.state.sleep_over}</span>
+            </p>
+            <p>
+              Pet Boarding: <span>{this.state.boarding}</span>
+            </p>
+            <p>
+              Drop In Care: <span>{this.state.dropin_care}</span>
+            </p>
+            <p>
+              Hospice Care: <span>{this.state.hospice}</span>
+            </p>
+            <Grid className={classes.itemCenter}>
+              <Button
+                className={classes.buttons}
+                variant="contained"
+                color="primary"
+                onClick={this.handleEditVTPage1Button}
+              >
+                Edit Basic Infomation
+              </Button>
+            </Grid>
 
-                <p>Year of professional experience caring for pets: </p>
-                <p>Education/Degree/Certifications: </p>
-                <p>Current job title:</p>
-                <p>Areas of professional expertise: </p>
-                <p>Brief bio about yourself: </p>
-                <h4>Additional Details: </h4>
-                <p>Do you know CPR and/or animal first aid? </p>
-                <p>Can you administer oral medications to animals? </p>
-                <p>Can you administer injected medications to animal? </p>
-                <p>Do you have experience with caring for older or senior animals? </p>
-                <p>Do you have experience caring for special needs animals?</p>
-                <p>Can you provied daily exercise for high energy animals or behavioral needs? </p>
-                <p>Are you willing to accept services that are longer than one week with animals? </p>
-                <p>Do you offer diabetic and insulin care? </p>
-                <Grid className={classes.itemCenter}>
-                    <Button className={classes.buttons} variant="contained" color="primary"
-                        onClick={this.handleEditVTPage3Button}
-                    >Edit Service preferences</Button>
-                </Grid>
+            <p>
+              What animals will you provide services for?{" "}
+              <span>{provideServices}</span>
+            </p>
+            <p>
+              Are you home full time Monday-Friday? <span>{workHour}</span>
+            </p>
+            <p>How often can you take the animal(s) outside? </p>
+            <p>How often can you take the animal(s) outside? </p>
+            <p>What size animals are you comfortable hosting? </p>
+            <p>Will you host animals younger than 1 years old? </p>
+            <p>Will you host animals from multiple families at once?</p>
+            <p>
+              Please provide a list of equipment that will be used when caring
+              for pets:{" "}
+            </p>
+            <Grid className={classes.itemCenter}>
+              <Button
+                className={classes.buttons}
+                variant="contained"
+                color="primary"
+                onClick={this.handleEditVTPage2Button}
+              >
+                Edit Services
+              </Button>
+            </Grid>
 
-                
-                <Grid className={classes.itemCenter}>
-                    <Button className={classes.buttons} variant="contained" color="primary"
-                        onClick={this.handleSaveButton}
-                    >Save</Button>
-                </Grid>
+            <p>Year of professional experience caring for pets: </p>
+            <p>Education/Degree/Certifications: </p>
+            <p>Current job title:</p>
+            <p>Areas of professional expertise: </p>
+            <p>Brief bio about yourself: </p>
+            <h4>Additional Details: </h4>
+            <p>Do you know CPR and/or animal first aid? </p>
+            <p>Can you administer oral medications to animals? </p>
+            <p>Can you administer injected medications to animal? </p>
+            <p>
+              Do you have experience with caring for older or senior animals?{" "}
+            </p>
+            <p>Do you have experience caring for special needs animals?</p>
+            <p>
+              Can you provied daily exercise for high energy animals or
+              behavioral needs?{" "}
+            </p>
+            <p>
+              Are you willing to accept services that are longer than one week
+              with animals?{" "}
+            </p>
+            <p>Do you offer diabetic and insulin care? </p>
+            <Grid className={classes.itemCenter}>
+              <Button
+                className={classes.buttons}
+                variant="contained"
+                color="primary"
+                onClick={this.handleEditVTPage3Button}
+              >
+                Edit Certifications
+              </Button>
+            </Grid>
 
-            </div>
-        )
+            <Grid className={classes.itemCenter}>
+              <Button
+                className={classes.buttons}
+                variant="contained"
+                color="primary"
+                onClick={this.handleSaveButton}
+              >
+                Complete
+              </Button>
+            </Grid>
+          </div>
+        );
     }
 }
 

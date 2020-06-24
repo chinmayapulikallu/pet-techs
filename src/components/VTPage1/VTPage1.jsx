@@ -94,7 +94,7 @@ class VTPage1 extends Component {
   };
 
   handleNext = () => {
-    console.log(this.state);
+    this.props.onNext();
   };
   render() {
     const { classes } = this.props;
@@ -315,14 +315,14 @@ class VTPage1 extends Component {
             />
           </div>
           <div>
-            <Button
+            {/* <Button
               className={classes.botBtn}
               onClick={this.handleBack}
               variant="contained"
               color="primary"
             >
               Back
-            </Button>
+            </Button> */}
             <Button
               className={classes.botBtn}
               onClick={this.handleNext}

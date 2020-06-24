@@ -22,7 +22,7 @@ const styles = theme => ({
     },
     title: {
         backgroundColor: '#faefec',
-        paddingTop: 130,
+        paddingTop: 85,
         width: '100%',
     },
     name: {
@@ -51,44 +51,110 @@ const styles = theme => ({
         marginTop: 200,
 
     },
-
+    editButton: {
+        display: 'flex',
+        justifyContent: "right",
+        marginLeft: '85%',
+    }
 });
 
 
-
 class ClientProfile extends Component {
+    state = {
+        editable: false,
+    }
+
+    state = {
+        id: '',
+        client_name: '',
+        profile_img: '',
+        about_client: '',
+        about_home: '',
+        pet_type: '',
+        pet_name: '',
+        breed: '',
+        pet_img: '',
+        pet_behavior: '',
+    }
 
 
     componentDidMount() {
-        console.log('client profile', this.props.user.username)
+        console.log('client profile', this.props.clientInfo)
+        const currentId = this.props.match.params.id;
+        // const currentClient= this.props.clientInfo.find(client => client.id === parseInt(currentId))
+        console.log('-----> Current client', currentId)
+        this.props.dispatch({
+            type: 'GET_CLIENT_DATA',
+            payload:{id: currentId}
+        })
     }
     handleBackButton = () => {
         console.log('clicked');
         this.props.history.push('/clientdashboard');
     }
-
+    handleEditClient = () => {
+        console.log('edit clicked!');
+        this.setState({
+            editable: true,
+        });
+    }
+    handleSaveClient = () => {
+        console.log('Save clicked!')
+        this.setState({
+            editable: false,
+        });
+    }
+    handleInputChangeFor = property => (event) => {
+        console.log('input change', property, event.target.value)
+        this.setState({
+            [property]: event.target.value,
+        });
+    }
 
     render() {
-        console.log('client profile', this.props.user)
+        console.log('client profile', this.user);
+
 
         const { classes } = this.props;
         return (
-
             <div className={classes.root} >
-                {/* <Container maxWidth="md"> */}
                 <div className={classes.title}>
                     <div className={classes.userBasicInfo}>
                         <Grid container spacing={1}>
                             <Grid item xs={5} className={classes.items}>
                                 <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
                             </Grid>
+
                             <Grid item xs={3} className={classes.clientInfo}>
-                                <h4>{this.props.user.username}</h4>
-                                <p>2.4 miles away</p>
+                                {this.state.editable ?
+                                    <>
+                                        <p><input value={this.props.user.username} onChange={this.handleInputChangeFor("userName")} /></p>
+                                    </>
+                                    :
+                                    <>
+                                        <h4 onClick={this.handleEditClient}>{this.props.user.username}</h4>
+                                    </>
+                                }
                                 <p>Minneapolis, MN</p>
                                 <Button variant="contained" color="primary" > <a href={`mailto:webmaster@example.com`} className='link'> Contact to {this.props.user.username}</a></Button>
                                 {/* <Button variant="contained" color="primary" className='link ><a href={`mailto:${this.props.clientInfo.user_email}`}>Contact to {this.props.user.username}</a></Button> */}
                             </Grid>
+                            <Grid item xs={3} className={classes.editButton} onClick={this.handleEditClient}>
+                                {this.state.editable ?
+                                    <>
+                                        <img src="images/checkmark.png" alt="save_button" height="50" width="50" onClick={this.handleSaveClient} />
+                                        <p>Save</p>
+                                    </>
+                                    :
+                                    <>
+                                        <img src="images/edit.png" alt="edit_button" height="50" width="50" onClick={this.handleEditClient} />
+                                        <p>Edit profile</p>
+                                    </>
+                                }
+                                {/* <img src="images/edit.png" alt="edit_button" height="50" width="50" onClick={this.handleEditClient} /> */}
+                            </Grid>
+
+
                         </Grid>
                     </div>
                 </div>
@@ -146,6 +212,16 @@ class ClientProfile extends Component {
                             </table>
                         </Grid>
                         {/* ---------Content inside pet info array when mapping------------ */}
+                        {/* ---------Content inside pet picture array when mapping------------ */}
+                        <Grid item xs={6} >
+                            <img src="images/blank-profile-picture.png" alt="profile" height="50" width="50" />
+                            <img src="images/blank-profile-picture.png" alt="profile" height="50" width="50" />
+                            <img src="images/blank-profile-picture.png" alt="profile" height="50" width="50" />
+                            <img src="images/blank-profile-picture.png" alt="profile" height="50" width="50" />
+                        </Grid>
+
+                        {/* ---------Content inside pet picture array when mapping------------ */}
+
                     </Grid>
                     <Grid container spacing={12} className={classes.paddingTop}>
                         <Grid item xs={6} className={classes.items}>
@@ -195,9 +271,9 @@ class ClientProfile extends Component {
     }
 }
 const mapStateToProps = (reduxState) => ({
-    clientInfo: reduxState.clientInfoReducer,
-    petInfo: reduxState.petInfoReducer,
-    user: reduxState.user
+    clientInfo: reduxState.clientInfo,
+    petInfo: reduxState.petInfo,
+    user: reduxState.user,
 })
 
 export default withRouter(connect(mapStateToProps)(withStyles(styles, { withTheme: true })(ClientProfile)));

@@ -51,13 +51,34 @@ class ClientServiceRequest extends Component {
     };
 
 
-    handleChange = (event, property) => {
-        console.log(event, "#######")
+    handleDateChange = (event, property) => {
+        // console.log(event.target.value, "#######")
         this.setState({
             [property]: event,
         })
     }
-    
+
+    handleChange = (event, property) => {
+        console.log(event.target.value, "#####")
+        this.setState({
+            [property]: event.target.value
+        })
+    }
+
+    handleChecks = (event, property) => {
+        console.log(event.target.value, property);
+        if (event.target.value === "true" || event.target.value === "false") {
+            this.setState({
+                [property]: event.target.value === "true",
+            });
+        } else {
+            console.log(event.target.value)
+            this.setState({
+                [property]: event.target.checked === true,
+            });
+        }
+    };
+
     handleCancel = () => {
         this.props.history.push("/vt-profile")
     }
@@ -82,6 +103,7 @@ class ClientServiceRequest extends Component {
                                 <FormControl variant="outlined">
                                     <InputLabel>Service:</InputLabel>
                                     <Select
+                                        onChange={(event) => this.handleChange(event, "service_select")}
                                         value={"Sleepover"}
                                         color="secondary"
                                         label="Service"
@@ -100,19 +122,19 @@ class ClientServiceRequest extends Component {
                                         <FormControlLabel
                                             control={<Checkbox name="pet1" />}
                                             //value={this.state.pet1}
-                                            onChange={(event) => this.handleInputChange(event, "pet1")}
+                                            onChange={(event) => this.handleChecks(event, "pet1")}
                                             label="pet1"
                                         />
                                         <FormControlLabel
                                             control={<Checkbox name="pet2" />}
                                             //value={this.state.pet2}
-                                            onChange={(event) => this.handleInputChange(event, "pet2")}
+                                            onChange={(event) => this.handleChecks(event, "pet2")}
                                             label="pet2"
                                         />
                                         <FormControlLabel
                                             control={<Checkbox name="pet3" />}
                                             //value={this.state.pet2}
-                                            onChange={(event) => this.handleInputChange(event, "pet3")}
+                                            onChange={(event) => this.handleChecks(event, "pet3")}
                                             label="pet3"
                                         />
                                     </FormGroup>
@@ -127,29 +149,33 @@ class ClientServiceRequest extends Component {
                                 <div>
                                     <Typography variant="subtitle1">Start Date</Typography>
                                     <DatePicker
+                                       
                                         selected={this.state.start_date}
-                                        onChange={(event) => this.handleChange(event, "start_date")}
+                                        onChange={(event) => this.handleDateChange(event, "start_date")}
                                     />
                                     <Typography variant="subtitle1">End Date</Typography>
                                     <DatePicker
+                                       
                                         selected={this.state.end_date}
-                                        onChange={(event) => this.handleChange(event, "end_date")}
+                                        onChange={(event) => this.handleDateChange(event, "end_date")}
                                     />
                                 </div>
                                 <div>
                                     <TextField className={classes.info}
+                                        onChange={(event) => this.handleChange(event, "input_info")}
                                         fullWidth
                                         multiline
                                         rows={10}
                                         type="text"
                                         id="outlined-basic"
-                                        label="info"
+                                        label="What should the Vet Tech know about your pet?"
                                         variant="outlined"
                                         color="secondary"
                                     />
                                 </div>
                                 <div>
                                     <TextField className={classes.info}
+                                        onChange={(event) => this.handleChange(event, "addt_info")}
                                         fullWidth
                                         multiline
                                         type="text"
@@ -180,7 +206,13 @@ const mapStateToProps = (state) => ({
     clientRequest: {
         start_date: new Date(),
         end_date: new Date(),
-       
+        service_select: '',
+        input_info: '',
+        addt_info: '',
+        pet1: false,
+        pet2: false,
+        pet3: false
+
     }
 });
 

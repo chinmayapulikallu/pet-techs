@@ -5,7 +5,18 @@ const router = express.Router();
 /**
  * GET route template
  */
-router.get("/", (req, res) => {});
+router.get("/:id", (req, res) => {
+    const sqlText = `SELECT * from client where id = $1 `;
+  pool
+    .query(sqlText, [req.params.id])
+    .then((response) => {
+      res.send(response.rows);
+    })
+    .catch((error) => {
+      console.log(`Error making database query ${sqlText}`, error);
+      res.sendStatus(500);
+    });
+});
 
 /**
  * POST route template

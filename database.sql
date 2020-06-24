@@ -98,7 +98,7 @@ CREATE TABLE pet (
             REFERENCES client (id)
             ON DELETE CASCADE ,
   pet_type varchar (50) NOT NULL,
-  other_pet varchar (50) NOT NULL
+  other_pet varchar (50) ,
   pet_name varchar (20) NOT NULL,
   weight int NOT NULL,
   age int NOT NULL,

@@ -83,7 +83,7 @@ class ClientProfile extends Component {
         // const currentClient= this.props.clientInfo.find(client => client.id === parseInt(currentId))
         console.log('-----> Current client', currentId)
         this.props.dispatch({
-            type: 'SET_CLIENT_DATA',
+            type: 'GET_CLIENT_DATA',
         })
     }
     handleBackButton = () => {
@@ -269,8 +269,8 @@ class ClientProfile extends Component {
     }
 }
 const mapStateToProps = (reduxState) => ({
-    clientInfo: reduxState.clientInfoReducer,
-    petInfo: reduxState.petInfoReducer,
+    clientInfo: reduxState.clientInfo,
+    petInfo: reduxState.petInfo,
     user: reduxState.user,
 })
 

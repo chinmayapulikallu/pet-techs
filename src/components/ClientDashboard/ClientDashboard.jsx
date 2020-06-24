@@ -8,6 +8,12 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardActions from '@material-ui/core/CardActions';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const useStyles = (theme) => ({
     root: {
@@ -37,21 +43,33 @@ const useStyles = (theme) => ({
         margin: "10px"
     },
     serviceList: {
-        width: 300,
-        height: 200,
-        marginLeft: 700,
-        marginBottom: 300
-
+        width: 600,
+        height: 400,
+        // marginLeft: 700,
+        marginBottom: 50
+    },
+    childCard: {
+        width: 200,
+        height: 320,
     },
     petTitle: {
-        marginBottom: 500
+        textAlign: "center"
+        // marginBottom: 500
     },
     petList: {
-        width: 300,
-        height: 200,
+        width: 400,
+        height: 300,
         marginRight: 700,
         marginBottom: 400
-    }
+    },
+    media: {
+        height: 100,
+        width: 100,
+        padding: 25,
+        display: "block",
+        marginLeft: "auto",
+        marginRight: "auto",
+    },
 
     
 });
@@ -61,6 +79,7 @@ class ClientDashboard extends Component {
     //search service provider
     searchProvider = () => {
         alert('link to search page');
+        //push to search service provider page
     }
 
     render() {
@@ -74,32 +93,71 @@ class ClientDashboard extends Component {
                             <Typography variant="h6"><b>CLIENT NAME</b></Typography>
                             <img className={classes.profileImage} src="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png" alt="name" height="75" width="75" />     
                         </div>
-                     </CardContent>
-                </Card>
-            </Grid>
-            <Card className={classes.cardSearch}>
-                <CardContent>
-                    <div>                         
-                        <img className={classes.profileImage} src="/images/service-provider.png" alt="serviceProviderIcon"
-                        height="100" width="100" />
-                    </div>
-                    <Button color="primary" variant="contained"
-                    className={classes.buttonMargin} onClick={this.searchProvider}>Find Service Provider</Button>   
-                </CardContent>
-            </Card>
-                <Card className={classes.serviceList}>
-                    <CardContent>
-                        <div>
-                            <Typography variant="h6">Scheduled Services</Typography>
-                        </div>                   
                     </CardContent>
                 </Card>
+            </Grid>
+                <Grid container>
+                <Grid item xs={6}>
+                    <Card className={classes.cardSearch}>
+                        <CardContent>
+                            <div>                         
+                                <img className={classes.profileImage} src="/images/service-provider.png" alt="serviceProviderIcon"
+                                height="100" width="100" />
+                            </div>
+                            <Button color="primary" variant="contained"
+                            className={classes.buttonMargin} onClick={this.searchProvider}>Find Service Provider</Button>   
+                        </CardContent>
+                    </Card>  
+                </Grid>
+                <Grid item xs={6}>
+                    <Card className={classes.serviceList}>
+                        <CardContent>
+                                    {/*Map request and services accepted */}
+                                        <Typography variant="h6">Scheduled Services</Typography>
+                                <Card variant="outlined" className={classes.childCard}>
+                                    <CardHeader
+                                        avatar={
+                                            <Avatar aria-label="recipe" className={classes.avatar}>
+                                                <CheckCircleIcon />
+                                            </Avatar>
+                                        }
+                                        action={
+                                            <IconButton aria-label="settings">
+                                            </IconButton>
+                                        }
+                                        title="Vet Tech Name"
+                                    />
+                                    <CardMedia
+                                        component="img"
+                                        className={classes.media}
+                                        image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
+                                    />
+                                    <CardContent className="align-center">
+                                        <Typography variant="h6">Service Date</Typography>
+                                        <Button color="primary" variant="contained"
+                                        className={classes.buttonMargin} onClick={this.vtProfile}>VT Profile</Button>  
+                                    </CardContent>
+                                    <CardActions>
+                                    </CardActions>
+                                </Card> 
+                            </CardContent>
+                    </Card> 
+                </Grid>
+            </Grid>                          
             <div className={classes.petTitle}>
                 <Typography variant="h6">Your Pets</Typography>
             </div>
                 <Card className={classes.petList}>
+                    {/* Map pets */}               
+                    <Typography variant="h6">Pet Name</Typography>
+                    <CardMedia
+                        component="img"
+                        className={classes.media}
+                        image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
+                     />
                     <CardContent>
-                    <Typography variant="h6">Pet anme</Typography>
+                     <Button color="primary" variant="contained"
+                      className={classes.buttonMargin} onClick={this.carePlan}>carePlan</Button>  
                     </CardContent>
                 </Card>
 

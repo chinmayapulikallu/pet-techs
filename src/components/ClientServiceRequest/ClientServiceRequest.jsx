@@ -30,9 +30,6 @@ const styles = theme => ({
         marginLeft: 20,
         marginTop: 15
     },
-    datePicker: {
-        // marginTop: 50
-    },
     button: {
         margin: "20px 30px 20px 30px",
         height: 45,
@@ -45,10 +42,6 @@ const styles = theme => ({
     services: {
         marginTop: 20
     },
-    // check: {
-    //     textAlign: "center",
-    //     marginLeft: "127px"
-    // }
 })
 
 class ClientServiceRequest extends Component {
@@ -63,18 +56,22 @@ class ClientServiceRequest extends Component {
         this.setState({
             [property]: event,
         })
+    }
+    
+    handleCancel = () => {
+        this.props.history.push("/vt-profile")
+    }
 
+    handleSendRequest = () => {
+        console.log("Clicked Send Request", this.state)
+        // this.props.history.push("/path")
     }
 
 
     render() {
         const { classes } = this.props
-        //const start_date = this.state
-        // const endDate = this.state
-
         return (
             <div className={classes.root}>
-
                 <div>
                     <Grid className={classes.title}>
                         <FormControl>
@@ -128,10 +125,12 @@ class ClientServiceRequest extends Component {
 
 
                                 <div>
+                                    <Typography variant="subtitle1">Start Date</Typography>
                                     <DatePicker
                                         selected={this.state.start_date}
                                         onChange={(event) => this.handleChange(event, "start_date")}
                                     />
+                                    <Typography variant="subtitle1">End Date</Typography>
                                     <DatePicker
                                         selected={this.state.end_date}
                                         onChange={(event) => this.handleChange(event, "end_date")}
@@ -161,8 +160,8 @@ class ClientServiceRequest extends Component {
                                     />
                                 </div>
                                 <div>
-                                    <Button className={classes.button} onClick={this.handleJoinClick} variant="contained" color="primary" >Cancel</Button>
-                                    <Button className={classes.button} onClick={this.handSignInClick} variant="contained" color="primary" >Send Request</Button>
+                                    <Button className={classes.button} onClick={this.handleCancel} variant="contained" color="primary" >Cancel</Button>
+                                    <Button className={classes.button} onClick={this.handleSendRequest} variant="contained" color="primary" >Send Request</Button>
                                 </div>
 
                             </div>

@@ -143,6 +143,6 @@ CREATE TABLE client_request (
   start_date_time date,
   end_date_time date,
   add_info text,
-  resquest_status int 
+  request_status int 
 );
 

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
 import { withStyles } from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
 import FormControl from "@material-ui/core/FormControl";
@@ -11,8 +13,9 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import DatePicker from "react-datepicker";
-import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import 'react-datepicker/dist/react-datepicker.css';
 import Checkbox from "@material-ui/core/Checkbox"
+
 
 const styles = theme => ({
     root: {
@@ -51,48 +54,23 @@ const styles = theme => ({
 class ClientServiceRequest extends Component {
 
     state = {
-        startDate: new Date(),
-        endDate: new Date()
-    }
+        ...this.props.clientRequest,
+    };
 
 
     handleChange = (event, property) => {
-        switch (property) {
-            case "start_date":
-                return this.setState({
-                    [property]: event.target.value
-                });
-            case "end_date":
-                return this.setState({
-                    [property]: event.target.value
-                })
-                case "pet1":
-                    return this.setState({
-                        [property]: event.target.checked
-                    })
-        }
-    }
+        console.log(event, "#######")
+        this.setState({
+            [property]: event,
+        })
 
-    handleInputChange = (event, property) => {
-        console.log("Here is state!", this.state)
-        if (event.target.value === "true" || event.target.value === "false") {
-            this.setState({
-                [property]: event.target.checked === true,
-            });
-        } else {
-            console.log(event.target.value)
-            this.setState({
-                [property]: event.target.value,
-            });
-        }
     }
 
 
     render() {
         const { classes } = this.props
-        const startDate = this.state
-        const endDate = this.state
-
+        //const start_date = this.state
+        // const endDate = this.state
 
         return (
             <div className={classes.root}>
@@ -107,8 +85,6 @@ class ClientServiceRequest extends Component {
                                 <FormControl variant="outlined">
                                     <InputLabel>Service:</InputLabel>
                                     <Select
-                                        
-                                        
                                         value={"Sleepover"}
                                         color="secondary"
                                         label="Service"
@@ -118,30 +94,30 @@ class ClientServiceRequest extends Component {
                                         <MenuItem value="Drop-In">Drop-In</MenuItem>
                                         <MenuItem value="Hospice">Hospice</MenuItem>
                                     </Select>
-                                    
+
                                 </FormControl>
-                           
+
                                 <Typography className={classes.services} variant="h6">Please indicate which pet:</Typography>
                                 <FormControl>
-                                <FormGroup row={true}>
-                                    <FormControlLabel
-                                        control={<Checkbox name="pet1" />}
-                                        value={this.state.pet1}
-                                        onChange={(event) => this.handleInputChange(event, "pet1")}
-                                        label="pet1"
-                                    />
-                                    <FormControlLabel
-                                        control={<Checkbox name="pet2" />}
-                                        value={this.state.pet2}
-                                        onChange={(event) => this.handleInputChange(event, "pet2")}
-                                        label="pet2"
-                                    />
-                                    <FormControlLabel
-                                        control={<Checkbox name="pet3" />}
-                                        value={this.state.pet2}
-                                        onChange={(event) => this.handleInputChange(event, "pet3")}
-                                        label="pet3"
-                                    />
+                                    <FormGroup row={true}>
+                                        <FormControlLabel
+                                            control={<Checkbox name="pet1" />}
+                                            //value={this.state.pet1}
+                                            onChange={(event) => this.handleInputChange(event, "pet1")}
+                                            label="pet1"
+                                        />
+                                        <FormControlLabel
+                                            control={<Checkbox name="pet2" />}
+                                            //value={this.state.pet2}
+                                            onChange={(event) => this.handleInputChange(event, "pet2")}
+                                            label="pet2"
+                                        />
+                                        <FormControlLabel
+                                            control={<Checkbox name="pet3" />}
+                                            //value={this.state.pet2}
+                                            onChange={(event) => this.handleInputChange(event, "pet3")}
+                                            label="pet3"
+                                        />
                                     </FormGroup>
                                 </FormControl>
                             </div>
@@ -149,36 +125,16 @@ class ClientServiceRequest extends Component {
                             <Typography variant="h6">Please select the dates requesting for service:</Typography>
                             <br />
                             <div >
-                               
+
 
                                 <div>
-
-                                    <DatePicker className={classes.datePicker}
-                                        selected={this.state.startDate}
+                                    <DatePicker
+                                        selected={this.state.start_date}
                                         onChange={(event) => this.handleChange(event, "start_date")}
-                                        selectsStart
-                                    //startDate={startDate}
-                                    //endDate={endDate}
                                     />
                                     <DatePicker
-                                        selected={this.state.endDate}
+                                        selected={this.state.end_date}
                                         onChange={(event) => this.handleChange(event, "end_date")}
-                                        selectsEnd
-                                    // startDate={startDate}
-                                    // endDate={endDate}
-                                    // minDate={startDate}
-                                    />
-                                    <TextField className={classes.boxes} id="outlined-basic"
-                                        label="Start Date"
-                                        variant="outlined"
-                                        name="start_date"
-                                        color="secondary"
-                                    />
-                                    <TextField className={classes.boxes} id="outlined-basic"
-                                        label="End Date"
-                                        variant="outlined"
-                                        name="end_date"
-                                        color="secondary"
                                     />
                                 </div>
                                 <div>
@@ -221,4 +177,16 @@ class ClientServiceRequest extends Component {
     }
 }
 
-export default (withStyles(styles)(ClientServiceRequest));
+const mapStateToProps = (state) => ({
+    clientRequest: {
+        start_date: new Date(),
+        end_date: new Date(),
+       
+    }
+});
+
+export default withRouter(
+    connect(mapStateToProps)(withStyles(styles)(ClientServiceRequest))
+);
+
+

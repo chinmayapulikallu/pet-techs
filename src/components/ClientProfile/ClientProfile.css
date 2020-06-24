@@ -1,0 +1,35 @@
+.about_table{
+    border: 2px solid #195C60;
+    border-radius: 50px;
+    border-collapse: collapse;
+    text-align: left;
+    padding-left: 5px;
+}
+th{
+    padding-left: 0px;
+    background-color: rgb(179, 206, 206);
+    border-bottom: 2px solid #195C60;
+    margin-left: 0px;
+    padding-left: 10px;
+}
+td{
+    padding-left: 5px;
+
+}
+.pet_table{
+    
+        border: 2px solid #195C60;
+        border-radius: 50px;
+        border-collapse: collapse;
+        text-align: left;
+        padding-left: 5px;
+
+}
+.table_body{
+    background-color: #faefec;
+    padding: 10px;
+}
+.link{
+    color: #000000;
+    text-decoration: none;
+}

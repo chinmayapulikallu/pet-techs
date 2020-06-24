@@ -58,9 +58,27 @@ const styles = theme => ({
 
 class ClientProfile extends Component {
 
+    state ={
+        client_name :'',
+        profile_img:'',
+        about_client:'',
+        about_home:'',
+        pet_type:'',
+        pet_name:'',
+        breed:'',
+        pet_img:'',
+        pet_behavior:'',
+    }
+
 
     componentDidMount() {
         console.log('client profile', this.props.user.username)
+        const currentId = this.props.match.params.id;
+        // const currentClient= this.props.clientInfo.find(client => client.id === parseInt(currentId))
+        console.log('-----> Current client', currentId)
+        this.props.dispatch({
+            type: 'SET_CLIENT_DATA',
+        })
     }
     handleBackButton = () => {
         console.log('clicked');

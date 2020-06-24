@@ -57,7 +57,7 @@ class VTPage2 extends Component {
 
   handleBackClick = () => {
     console.log("CLICKED BACK");
-    this.props.history.push("/vtreg1");
+    this.props.onBack();
   };
 
   //THIS WILL TAKE THE VET TECH TO THE 3RD VET TECH REGISTRATION PAGE
@@ -68,7 +68,7 @@ class VTPage2 extends Component {
     //     type: '' ,
     //     payload: this.state.vtInfo2
     // })
-    // this.props.history.push("/vtreg3");
+    this.props.onNext();
   };
 
   handleInputChange = (event, property)=>{
@@ -287,7 +287,7 @@ class VTPage2 extends Component {
                 variant="contained"
                 color="primary"
               >
-                Continue
+                Save and Continue
               </Button>
             </Grid>
           </FormControl>

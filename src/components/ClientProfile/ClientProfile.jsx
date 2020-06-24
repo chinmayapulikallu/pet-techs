@@ -64,26 +64,28 @@ class ClientProfile extends Component {
         editable: false,
     }
 
-    state ={
-        client_name :'',
-        profile_img:'',
-        about_client:'',
-        about_home:'',
-        pet_type:'',
-        pet_name:'',
-        breed:'',
-        pet_img:'',
-        pet_behavior:'',
+    state = {
+        id: '',
+        client_name: '',
+        profile_img: '',
+        about_client: '',
+        about_home: '',
+        pet_type: '',
+        pet_name: '',
+        breed: '',
+        pet_img: '',
+        pet_behavior: '',
     }
 
 
     componentDidMount() {
-        console.log('client profile', this.props.user.username)
+        console.log('client profile', this.props.clientInfo)
         const currentId = this.props.match.params.id;
         // const currentClient= this.props.clientInfo.find(client => client.id === parseInt(currentId))
         console.log('-----> Current client', currentId)
         this.props.dispatch({
             type: 'GET_CLIENT_DATA',
+            payload:{id: currentId}
         })
     }
     handleBackButton = () => {
@@ -96,7 +98,7 @@ class ClientProfile extends Component {
             editable: true,
         });
     }
-    handleSaveClient = () =>{
+    handleSaveClient = () => {
         console.log('Save clicked!')
         this.setState({
             editable: false,

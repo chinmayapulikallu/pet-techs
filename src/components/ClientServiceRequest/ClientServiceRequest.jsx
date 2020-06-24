@@ -12,6 +12,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import Checkbox from "@material-ui/core/Checkbox"
 
 const styles = theme => ({
     root: {
@@ -20,9 +21,6 @@ const styles = theme => ({
         marginTop: '100px',
     },
     title: {
-        textAlign: 'center',
-    },
-    helperText: {
         textAlign: 'center',
     },
     boxes: {
@@ -40,7 +38,14 @@ const styles = theme => ({
     },
     info: {
         marginTop: 20
-    }
+    },
+    services: {
+        marginTop: 20
+    },
+    // check: {
+    //     textAlign: "center",
+    //     marginLeft: "127px"
+    // }
 })
 
 class ClientServiceRequest extends Component {
@@ -61,6 +66,24 @@ class ClientServiceRequest extends Component {
                 return this.setState({
                     [property]: event.target.value
                 })
+                case "pet1":
+                    return this.setState({
+                        [property]: event.target.checked
+                    })
+        }
+    }
+
+    handleInputChange = (event, property) => {
+        console.log("Here is state!", this.state)
+        if (event.target.value === "true" || event.target.value === "false") {
+            this.setState({
+                [property]: event.target.checked === true,
+            });
+        } else {
+            console.log(event.target.value)
+            this.setState({
+                [property]: event.target.value,
+            });
         }
     }
 
@@ -79,22 +102,47 @@ class ClientServiceRequest extends Component {
                         <FormControl>
                             <Typography className={classes.title} variant="h3">Request Service</Typography>
                             <div>
-                                <Typography variant="h6">Please select service:</Typography>
+                                <Typography className={classes.services} variant="h6">Please select service:</Typography>
                                 <br />
                                 <FormControl variant="outlined">
-                                    <InputLabel id="demo-simple-select-outlined-label">Pet Type</InputLabel>
+                                    <InputLabel>Service:</InputLabel>
                                     <Select
-                                        labelId="demo-simple-select-outlined-label"
-                                        id="demo-simple-select-outlined"
-                                        value={0}
+                                        
+                                        
+                                        value={"Sleepover"}
                                         color="secondary"
                                         label="Service"
                                     >
-                                        <MenuItem value="0">Pet Sleepover</MenuItem>
-                                        <MenuItem value="Dog">Pet Boarding</MenuItem>
-                                        <MenuItem value="Cat">Drop-In</MenuItem>
-                                        <MenuItem value="Other">Hospice</MenuItem>
+                                        <MenuItem value="Sleepover">Pet Sleepover</MenuItem>
+                                        <MenuItem value="Boarding">Pet Boarding</MenuItem>
+                                        <MenuItem value="Drop-In">Drop-In</MenuItem>
+                                        <MenuItem value="Hospice">Hospice</MenuItem>
                                     </Select>
+                                    
+                                </FormControl>
+                           
+                                <Typography className={classes.services} variant="h6">Please indicate which pet:</Typography>
+                                <FormControl>
+                                <FormGroup row={true}>
+                                    <FormControlLabel
+                                        control={<Checkbox name="pet1" />}
+                                        value={this.state.pet1}
+                                        onChange={(event) => this.handleInputChange(event, "pet1")}
+                                        label="pet1"
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox name="pet2" />}
+                                        value={this.state.pet2}
+                                        onChange={(event) => this.handleInputChange(event, "pet2")}
+                                        label="pet2"
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox name="pet3" />}
+                                        value={this.state.pet2}
+                                        onChange={(event) => this.handleInputChange(event, "pet3")}
+                                        label="pet3"
+                                    />
+                                    </FormGroup>
                                 </FormControl>
                             </div>
                             <br />

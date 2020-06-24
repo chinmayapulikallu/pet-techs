@@ -79,6 +79,7 @@ const styles = theme => ({
       
     },
     catText: {
+        
         fontFamily: 'Quicksand',
         margin: "25px",
         textAlign: 'center',
@@ -198,7 +199,7 @@ class LandingPage extends Component {
                 </div>
                 <div>
                     <Typography className={classes.services} variant="h5"><b>Our Services</b></Typography>
-                    <Grid container direction="row" className={classes.cards} spacing={2}>
+                    <Grid container direction="row" justify="center" className={classes.cards} spacing={2}>
                         <Grid item xs={2}>
                             <Card className={classes.cardService}>
                                 <CardContent>

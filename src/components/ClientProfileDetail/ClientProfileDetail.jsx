@@ -117,7 +117,7 @@ class ClientProfileDetail extends Component {
     handleSaveClient = () => {
         console.log('Save clicked!')
         this.setState({
-            editable: false,
+            editable: !this.state.editable,
         });
     }
     handleInputChangeFor = property => (event) => {
@@ -147,7 +147,7 @@ class ClientProfileDetail extends Component {
                             <Grid item xs={3} className={classes.clientInfo}>
                                 {this.state.editable ?
                                     <>
-                                        <p><input value={this.state.client_name} onChange={this.handleInputChangeFor("userName")} /></p>
+                                        <p><input value={this.state.client_name} onChange={this.handleInputChangeFor("client_name")} /></p>
                                     </>
                                     :
                                     <>
@@ -158,7 +158,7 @@ class ClientProfileDetail extends Component {
                                 <Button variant="contained" color="primary" > <a href={`mailto:webmaster@example.com`} className='link'> Contact to {this.state.client_name}</a></Button>
                                 {/* <Button variant="contained" color="primary" className='link ><a href={`mailto:${this.props.clientInfo.user_email}`}>Contact to {{this.state.client_name}</a></Button> */}
                             </Grid>
-                            <Grid item xs={3} className={classes.editButton} onClick={this.handleEditClient}>
+                            <Grid item xs={3} className={classes.editButton}>
                                 {this.state.editable ?
                                     <>
                                         <img src="images/checkmark.png" alt="save_button" height="50" width="50" onClick={this.handleSaveClient} />

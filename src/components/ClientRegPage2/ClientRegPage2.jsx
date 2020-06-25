@@ -15,7 +15,9 @@ import Typography from "@material-ui/core/Typography";
 // import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import Container from "@material-ui/core/Container";
-// import DatePicker from 'react-datepicker';
+import DatePicker from "react-datepicker";
+// import 'react-datepicker/dist/react-datepicker.css';
+
 
 const useStyles = (theme) => ({
     root: {
@@ -117,7 +119,7 @@ class ClientRegPage2 extends Component {
             
             this.setState({
                 ...this.state,
-                clientInfo: {...this.state.petInfo, pets:
+                petInfo: {...this.state.petInfo, pets:
                     [...this.state.petInfo.pets.filter(pet => pet.id !== petId), currentPet]
                 }
             })
@@ -128,27 +130,37 @@ class ClientRegPage2 extends Component {
         this.props.onBack();
     }
 
-    // //Input function to capture input
-    // handleChange = (property) => (event) => {
-    //     console.log('in handle change', property, event.target.value);
-    //     this.setState({
-    //         ...this.state,
-    //         [property]: event.target.value
-    //     })
-    // }
 
-    handleChange = (property) => (event) => {
-        console.log(property,event.target.value);
-        if (event.target.value === "true" || event.target.value === "false") {
-            this.setState({
-                [property]: event.target.value === "true",
-            });
+    handleChange = (petId, property) => (event) => {
+        console.log(petId, property,event.target, this.state.petInfo);
+        const currentPet = this.state.petInfo.pets.find(pet => pet.id === petId)
+        if (event.target.value === "true" || event.target.value === "false") { 
+            currentPet[property] = (event.target.value === "true")
         } else {
-            this.setState({
-                [property]: event.target.value,
-            });
+            currentPet[property] = event.target.value
         }
+        this.setState({
+            ...this.state,
+            petInfo: {
+                ...this.state.petInfo, pets:
+                    [...this.state.petInfo.pets.filter(pet => pet.id !== petId), currentPet]
+            }
+        })
     }
+
+    //date input for medication 
+    handleDateChange = (petId, property) => (date) => {
+        console.log("handleDateChange", date)
+        const currentPet = this.state.petInfo.pets.find(pet => pet.id === petId)
+        currentPet[property] = date
+        this.setState({
+            ...this.state,
+            petInfo: {
+                ...this.state.petInfo, pets:
+                    [...this.state.petInfo.pets.filter(pet => pet.id !== petId), currentPet]
+            }
+        })
+    } 
 
     //sign in page after completing
     handleNext = () => {
@@ -173,64 +185,68 @@ class ClientRegPage2 extends Component {
         
         return (
             <Container className={classes.root} maxWidth="md">
-                {this.state.petInfo.pets && this.state.petInfo.pets.map(pet =>
-                    <Grid container spacing={3}>
+                {this.state.petInfo.pets && this.state.petInfo.pets.map(pet =>               
+                    <Grid container spacing={3} key={pet.id}>
                     <Grid item xs={12}>
                         <FormControl variant="outlined" className={classes.formControl}>
                             <InputLabel id="demo-simple-select-outlined-label">Pet Type</InputLabel>
-                            <Select
+                            <Select native
                                 labelId="demo-simple-select-outlined-label"
                                 id="demo-simple-select-outlined"
-                                value={0}
                                 color="secondary"
-                                onChange={this.handleChange('pet_type')}
+                                value={pet.pet_type}
+                                onChange={this.handleChange(pet.id, 'pet_type')}
                                 label="Pet Type"
                             >
-                                <MenuItem value="0">None</MenuItem>
-                                <MenuItem value="Dog">Dog</MenuItem>
-                                <MenuItem value="Cat">Cat</MenuItem>
-                                <MenuItem value="Other">Other</MenuItem>
+                                <option value={"none"}>None</option>
+                                <option value={"dog"}>Dog</option>
+                                <option value={"cat"}>Cat</option>
+                                <option value={"other"}>Other</option>
                             </Select>
                         </FormControl>
                         <TextField
                             label="Pet Name"
                             type="text"
+                            value={pet.pet_name}
                             variant="outlined"
                             color="secondary"
                             className={classes.inputField}
-                            onChange={this.handleChange('pet_name')}
+                            onChange={this.handleChange(pet.id, 'pet_name')}
                         />
                     </Grid>
                     <Grid item xs={12}> 
                         <TextField
                             label="If others, please specify"
                             type="text"
+                            value={pet.other_pet}
                             variant="outlined"
                             color="secondary"
                             className={classes.inputField}
-                            onChange={this.handleChange('other_pet')}
+                                onChange={this.handleChange(pet.id,'other_pet')}
                         />
                         <TextField
                             label="Weight"
                             type="text"
+                            value={pet.weight}
                             variant="outlined"
                             color="secondary"
                             className={classes.inputField}
-                            onChange={this.handleChange('weight')}
+                            onChange={this.handleChange(pet.id,'weight')}
                         />
                         <TextField
                             label="Age"
                             type="text"
+                            value={pet.age}
                             variant="outlined"
                             color="secondary"
                             className={classes.inputField}
-                            onChange={this.handleChange('age')}
+                                onChange={this.handleChange(pet.id,'age')}
                         />
                   </Grid>
                     <Grid item xs={12}>
                         <FormControl component="fieldset">
                             <RadioGroup defaultValue="male" aria-label="gender" className={classes.radioAlignment}
-                                name="customized-radios" onChange={this.handleChange('sex')}>
+                                    name="customized-radios" onChange={this.handleChange(pet.id,'sex')}>
                                 <FormControlLabel value="male" control={<Radio />} label="Male" />
                                 <FormControlLabel value="female" control={<Radio />} label="Female" />
                             </RadioGroup>
@@ -238,10 +254,11 @@ class ClientRegPage2 extends Component {
                         <TextField
                             label="Breed"
                             type="text"
+                            value={pet.breed}
                             variant="outlined"
                             color="secondary"
                             className={classes.inputField}
-                            onChange={this.handleChange('breed')}
+                            onChange={this.handleChange(pet.id,'breed')}
                         />
                     </Grid>
                     <Grid item xs={12} className={classes.itemCenter}>
@@ -252,37 +269,41 @@ class ClientRegPage2 extends Component {
                         <TextField
                             label="Pet Food Brand"
                             type="text"
+                            value={pet.food_brand}
                             variant="outlined"
                             color="secondary"
                             className={classes.inputField}
-                            onChange={this.handleChange('food_brand')}
+                            onChange={this.handleChange(pet.id,'food_brand')}
                         />
                         <TextField
                             label="Feedings per day"
                             type="text"
+                            value={pet.feeding_per_day}
                             variant="outlined"
                             color="secondary"
                             className={classes.inputField}
-                            onChange={this.handleChange('feeding_per_day')}
+                            onChange={this.handleChange(pet.id,'feeding_per_day')}
                         />
                         <TextField
                             label="Amount per meal"
                             type="text"
+                            value={pet.amount_per_meal}
                             variant="outlined"
                             color="secondary"
                             className={classes.inputField}
-                            onChange={this.handleChange('amount_per_meal')}
+                            onChange={this.handleChange(pet.id,'amount_per_meal')}
                         />
                     </Grid>
                     <Grid item xs={12}>
                     <TextField
                         label=" Optional* Other dietary restrictions, supplements, etc."  
+                        value={pet.optional_food}
                         type="text" variant="outlined" color="secondary"
                         InputProps={{
                             className: classes.inputField
                         }}
                         fullWidth
-                        onChange={this.handleChange('optional_food')}
+                        onChange={this.handleChange(pet.id,'optional_food')}
                     />
                     </Grid>
                     <Grid item xs={12}>
@@ -291,33 +312,35 @@ class ClientRegPage2 extends Component {
                             <TextField
                                 label="Medication Name"
                                 type="text"
+                                value={pet.medication_name}
                                 variant="outlined"
                                 className={classes.inputField}
-                                onChange={this.handleChange('medication_name')}
+                                onChange={this.handleChange(pet.id,'medication_name')}
                             />
                             <TextField
                                 label="Optional *dosage "
                                 type="text"
                                 variant="outlined"
+                                value={pet.medication_doasge}
                                 className={classes.inputField}
-                                onChange={this.handleChange('medication_dosage')}
+                                onChange={this.handleChange(pet.id,'medication_dosage')}
                             />
-                            {/* <DatePicker
-                                selected="00:00"
-                                onChange={this.handleChange('dosage_time')}
+                             <DatePicker 
+                                selected={pet.dosage_time}
+                                onChange={this.handleDateChange(pet.id,'dosage_time')}
                                 showTimeSelect
                                 showTimeSelectOnly
                                 timeIntervals={15}
                                 timeCaption="Time"
-                                dateFormat="h:mm aa"                           
-                            /> */}
-                            <TextField
+                                dateFormat="h:mm aa"
+                            />
+                            {/* <TextField
                                 label="Time Of Day"
                                 type="text"
                                 variant="outlined"
                                 className={classes.inputField} 
                                 onChange={this.handleChange('dosage_time')}
-                            />
+                            /> */}
                             <br />
                             </>
                         )}
@@ -334,11 +357,12 @@ class ClientRegPage2 extends Component {
                     <TextField
                         label="Type here "
                         type="text" variant="outlined" color="secondary"
+                        value={pet.pet_behavior}
                         InputProps={{
                             className: classes.fullwidth
                         }}
                         fullWidth
-                        onChange={this.handleChange('pet_behavior')}
+                        onChange={this.handleChange(pet.id,'pet_behavior')}
                     />
                     </Grid>
                     <Grid item xs={12} className={classes.inputHeading}>
@@ -348,11 +372,12 @@ class ClientRegPage2 extends Component {
                         <TextField
                             label="Type here "
                             type="text" variant="outlined" color="secondary"
+                            value={pet.care_equipment}
                         InputProps={{
                             className: classes.fullwidth
                         }}
                         fullWidth
-                            onChange={this.handleChange('care_equipment')}
+                                onChange={this.handleChange(pet.id,'care_equipment')}
                         />
                     </Grid>
                     <Grid item xs={12} className={classes.itemCenter}>
@@ -395,7 +420,7 @@ const mapStateToProps = (state) => ({
                         id: 1,
                         medication_name: '',
                         medication_dosage: '',
-                        dosage_time: '00:00'
+                        dosage_time: new Date()
                     }
                 ], 
             }

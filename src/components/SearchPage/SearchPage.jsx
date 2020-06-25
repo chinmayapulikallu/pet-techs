@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField"
 import FormControl from "@material-ui/core/FormControl"
 import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from "react-router"
-import { Typography } from "@material-ui/core";
+import { Typography, CardHeader } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid"
 import InputLabel from "@material-ui/core/InputLabel"
 import MenuItem from "@material-ui/core/MenuItem"
@@ -54,7 +54,7 @@ const styles = theme => ({
         paddingLeft: 200,
         display: "flex"
     },
-    results:{
+    results: {
         paddingTop: 50
     },
     viewProf: {
@@ -62,24 +62,50 @@ const styles = theme => ({
         width: 100,
         textAlign: "center",
         fontSize: 10,
-        
+
     },
     profPic: {
-        
+
     },
     details1: {
         display: "flex",
         flexDirection: "column",
-        paddingBottom: 10
+        paddingBottom: 10,
+        marginLeft: 100
     },
     details2: {
         display: "flex",
-        flexDirection: "column"
+       
+        marginLeft: 70,
+        marginTop: 50
     },
     card: {
+        display: "flex",
         paddingBottom: 20,
         paddingTop: 20,
-    }
+    },
+    about1: {
+      
+        
+        marginRight: 700,
+        outline: 5,
+        border: "solid black 1px",
+        width: 400,
+        marginLeft: 400,
+        height: 100
+       
+    },
+    about: {
+        marginTop: 10,
+        paddingTop: 50,
+        marginRight: 700,
+        outline: 5,
+        border: "solid black 1px",
+        width: 800
+       
+    },
+ 
+
 })
 
 
@@ -106,7 +132,7 @@ class SearchPage extends Component {
                             <Typography className={classes.serviceTitle} variant="h4">Find a service provider</Typography>
                         </FormControl>
                         <Typography variant="subtitle1">Filter</Typography>
-                        <Grid  container direction={"row"} className= {classes.serviceType}>
+                        <Grid container direction={"row"} className={classes.serviceType}>
                             <Select
                                 value={"Sleepover"}
                                 color="secondary"
@@ -123,50 +149,42 @@ class SearchPage extends Component {
                                 {/* <Typography variant="subtitle1">Type:</Typography> */}
                                 <FormControlLabel
                                     control={<Checkbox name="dog" />}
-                                
+
                                     label="Dog"
                                 />
                                 <FormControlLabel
                                     control={<Checkbox name="cat" />}
-                                   
+
                                     label="Cat"
                                 />
                                 <FormControlLabel
                                     control={<Checkbox name="other" />}
-                                    
+
                                     label="Other"
                                 />
                             </FormGroup>
                         </Grid>
                         <Grid className={classes.card}>
-                        <Card>
-                            <CardContent   >
-                                <Typography variant="h6">Test</Typography>
-                                <img className={classes.details1} src="/images/blank-profile-picture.png" alt="profilePic" height="35" width="35" />
-                                <Button className={classes.details2}  variant="contained" color="primary" >View Profile</Button>
-                               
-                            </CardContent>
-                        </Card>
-                        <br />
-                        <br />
-                        <Card>
-                            <CardContent  >
-                                <Typography variant="h6">Test</Typography>
-                                <img className={classes.details1} src="/images/blank-profile-picture.png" alt="profilePic" height="35" width="35" />
-                                <Button className={classes.details2}  variant="contained" color="primary" >View Profile</Button>
-                               
-                            </CardContent>
-                        </Card>
-                        <br />
-                        <br />
-                        <Card >
-                            <CardContent >
-                                <Typography variant="h6">Test</Typography>
-                                <img className={classes.details1} src="/images/blank-profile-picture.png" alt="profilePic" height="35" width="35" />
-                                <Button className={classes.details2}  variant="contained" color="primary" >View Profile</Button>
-                               
-                            </CardContent>
-                        </Card>
+                            <Card>
+                                <CardContent   >
+                                    <Typography variant="h6">Name</Typography>
+                                    <img className={classes.details1} src="/images/blank-profile-picture.png" alt="profilePic" height="75" width="75"/>
+                                    <Button className={classes.details2} variant="contained" color="primary" >View Profile</Button>
+                                    <CardContent className={classes.about1}>
+                                    <div >
+                                       Bio
+                                    </div>
+                                    </CardContent>
+                                    <CardContent className={classes.about}>
+                                    <div >
+                                        Services and Skills
+                                    </div>
+                                    </CardContent>
+                                </CardContent>
+                             
+                            </Card>
+                          
+
                         </Grid>
                     </Grid>
                 </div>

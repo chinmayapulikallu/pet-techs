@@ -61,6 +61,7 @@ const styles = theme => ({
 });
 
 
+
 class ClientProfileDetail extends Component {
 
 
@@ -154,7 +155,20 @@ class ClientProfileDetail extends Component {
                                         <h4 onClick={this.handleEditClient}>{this.state.client_name}</h4>
                                     </>
                                 }
-                                <p>{this.state.city}, {this.state.state}</p>
+                                {/* <p>{this.state.city}, {this.state.state}</p> */}
+                                {this.state.editable ?
+                                    <>
+                                        <p><input value={this.state.city} onChange={this.handleInputChangeFor("city")} /></p>
+                                        <p><input value={this.state.state} onChange={this.handleInputChangeFor("state")} /></p>
+
+                                    </>
+                                    :
+                                    <>
+                                        <h4 onClick={this.handleEditClient}>{this.state.city}</h4>
+                                        <h4 onClick={this.handleEditClient}>{this.state.state}</h4>
+                                    </>
+                                }
+
                                 <Button variant="contained" color="primary" > <a href={`mailto:webmaster@example.com`} className='link'> Contact to {this.state.client_name}</a></Button>
                                 {/* <Button variant="contained" color="primary" className='link ><a href={`mailto:${this.props.clientInfo.user_email}`}>Contact to {{this.state.client_name}</a></Button> */}
                             </Grid>
@@ -201,7 +215,7 @@ class ClientProfileDetail extends Component {
                     <Grid item xs={12} className={classes.name}>
                         <h3>{this.state.client_name}'s Pets</h3>
                     </Grid>
-
+                            {/* <h1>{JSON.stringify(this.props.petInfo)}</h1> */}
                     <Grid container spacing={3} className={classes.items}>
                         {this.props.petInfo.map((pet) => {
                             return (

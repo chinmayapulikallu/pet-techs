@@ -7,10 +7,11 @@ const router = express.Router();
  * GET route template
  */
 router.get("/:id", (req, res) => {
-  const sqlText = `SELECT * from pet where client_id = $1 `;
+  const sqlText = `SELECT * from pet where client_id = $1; `;
   pool
     .query(sqlText, [req.params.id])
     .then((response) => {
+      console.log('pet data:', response.rows)
       res.send(response.rows);
     })
     .catch((error) => {

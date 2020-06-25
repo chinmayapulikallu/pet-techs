@@ -55,9 +55,9 @@ class RegisterPage extends Component {
       this.props.dispatch({
         type: "REGISTER",
         payload: {
-          user_email: this.state.email,
+          user_email: this.state.user_email,
           username: this.state.username,
-          phone_number: this.state.phone,
+          phone_number: this.state.phone_number,
           password: this.state.password,
           hear_about: this.state.hear_about,
           user_type: this.state.user_type,
@@ -121,6 +121,7 @@ class RegisterPage extends Component {
               </div>
               <div className={classes.boxes}>
                 <TextField id="outlined-basic"
+                  type="password"
                   label="Password"
                   variant="outlined"
                   name="password"
@@ -138,8 +139,8 @@ class RegisterPage extends Component {
                   label="How did you hear about Pet Techs?"
                   variant="outlined"
                   color="secondary"
-                // value={this.state.this.state.hear_about}
-                //onChange={(event) => this.handleChange(event, "this.state.hear_about")}
+                  value={this.state.hear_about}
+                  onChange={this.handleInputChangeFor("hear_about")}
                 />
               </div>
 

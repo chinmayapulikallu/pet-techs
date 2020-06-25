@@ -15,7 +15,8 @@ th{
     padding-left: 10px;
 }
 td{
-    padding-left: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     overflow-wrap: break-word;
         /* display: block; */
 

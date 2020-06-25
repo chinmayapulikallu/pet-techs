@@ -43,30 +43,50 @@ const styles = theme => ({
     //  }
 });
 
+const ColorButton = withStyles((theme) => ({
+    root: {
+        color: theme.palette.getContrastText('#FFC2B4'),
+        backgroundColor: '#FFC2B4',
+        '&:hover': {
+            backgroundColor: '#FFC2B4',
+        },
+        boxShadow: '9px 9px 16px #0000004c, -9px -9px 16px rgb(250, 250, 250)'
+
+    },
+
+}))(Button);
+
 
 class Pet extends Component {
 
 
     state = {
-        id: '',
-        pet_name: '',
-        age: '',
-        breed: '',
-        pet_behavior: '',
+        // id: '',
+        // pet_name: '',
+        // age: '',
+        // breed: '',
+        // pet_behavior: '',
     }
 
 
     componentDidMount() {
-        const currentPet = this.props.petInfo.find(pet => pet.id === parseInt(this.props.match.params.id))
-        console.log("-------------->client profile", currentPet);
-        this.setState({
-            id: currentPet.id,
-            pet_name: currentPet.pet_name,
-            age: currentPet.age,
-            breed: currentPet.breed,
-            pet_behavior: currentPet.pet_behavior,
+        // const currentPet = this.props.petInfo.find(pet => pet.id === parseInt(this.props.match.params.id))
+        // console.log("-------------->client profile", currentPet);
+        // this.setState({
+        //     id: currentPet.id,
+        //     pet_name: currentPet.pet_name,
+        //     age: currentPet.age,
+        //     breed: currentPet.breed,
+        //     pet_behavior: currentPet.pet_behavior,
+        // })
+        // console.log('pet state:', this.state)
+    }
+    handleCarePlanButton = () =>{
+        this.props.history.push('/careplan');
+        this.props.dispatch({
+            type: 'GET_PET_CARE_PLAN',
+            payload: { id: this.props.pet.id}
         })
-        console.log('pet state:', this.state)
     }
 
 
@@ -85,13 +105,13 @@ class Pet extends Component {
                                     <img src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
                                 </td>
                                 <td>
-                                    <h4>{this.state.pet_name}</h4>
-                                    <p>{this.state.age} years old</p>
-                                    <p>{this.state.breed}</p>
-                                    <p>{this.state.pet_behavior}</p>
+                                    <h4>{this.props.pet.pet_name}</h4>
+                                    <p>{this.props.pet.age} years old</p>
+                                    <p>{this.props.pet.breed}</p>
+                                    <p>{this.props.pet.pet_behavior}</p>
                                 </td>
                                 <td>
-                                    <Button variant="contained" color="info" onClick={this.handleContactButton}>Care Plan</Button>
+                                    <ColorButton variant="contained" color="info" onClick={this.handleCarePlanButton}>Care Plan</ColorButton>
                                 </td>
                             </tr>
                         </tbody>

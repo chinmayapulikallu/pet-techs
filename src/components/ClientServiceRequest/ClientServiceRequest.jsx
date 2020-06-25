@@ -51,11 +51,15 @@ class ClientServiceRequest extends Component {
     };
 
     componentDidMount = () => {
-
         console.log("Mounted");
         const currentId = this.props.match.params.id;
-        this.props.dispatch({ type: "GET_PET_DATA", payload: { id: currentId } })
+        this.props.dispatch({ type: "GET_PET_DATA", payload: {id: currentId}  })
     }
+
+    // getPetData = () => {
+    //     const currentId = this.props.match.params.id
+    //     this.props.dispatch({type: "GET_PET_DATA", payload: {id: currentId}})
+    // }
 
 
     handleDateChange = (event, property) => {
@@ -79,7 +83,7 @@ class ClientServiceRequest extends Component {
                 [property]: event.target.value === "true",
             });
         } else {
-            console.log(event.target.value)
+            // console.log(event.target.value)
             this.setState({
                 [property]: event.target.checked === true,
             });
@@ -99,11 +103,17 @@ class ClientServiceRequest extends Component {
     render() {
         const { classes } = this.props
         return (
+            <>
+           
+            
             <div className={classes.root}>
                 <div>
                     <Grid className={classes.title}>
                         <FormControl>
                             <Typography className={classes.title} variant="h3">Request Service</Typography>
+                                <div>
+                                    <p>{JSON.stringify(this.props)}</p>
+                                </div>
                             <div>
                                 <Typography className={classes.services} variant="h6">Please select service:</Typography>
                                 <br />
@@ -195,6 +205,7 @@ class ClientServiceRequest extends Component {
                                 <div>
                                     <Button className={classes.button} onClick={this.handleCancel} variant="contained" color="primary" >Cancel</Button>
                                     <Button className={classes.button} onClick={this.handleSendRequest} variant="contained" color="primary" >Send Request</Button>
+                                    {/* <Button className={classes.button} onClick={this.getPetData} variant="contained" color="primary" >Get Pet Data</Button> */}
                                 </div>
 
                             </div>
@@ -203,10 +214,9 @@ class ClientServiceRequest extends Component {
                         </FormControl>
                     </Grid>
                 </div>
-                <div>
-                    <p>{JSON.stringify(this.props)}</p>
-                </div>
+              
             </div>
+            </>
         );
     }
 }

@@ -62,7 +62,7 @@ class App extends Component {
             <Route exact path="/landingPg" component={LandingPage} />
             <Route exact path="/vtdashboard" component={VTDashboard} />
             <Route exact path="/register" component={RegisterPage} />
-            <Route exact path="/client_profile/:id" component={ClientProfile} />
+            <ProtectedRoute exact path="/client_profile/:id" component={ClientProfile} />
             <Route exact path="/vt-profile" component={VTProfile} />
             <Route
               exact

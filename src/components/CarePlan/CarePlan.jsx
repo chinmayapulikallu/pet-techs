@@ -9,6 +9,37 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 
+const useStyles = (theme) => ({
+    root: {
+        marginTop: 100,
+        marginBottom: 40,
+        textAlign: "center",
+    },
+    cardSearch: {
+        width: 300,
+        height: 200
+    },
+    profileCenter: {
+        height: 200,
+        // width: 600,
+    //    marginLeft: 300,
+    textAlign: "center",
+       
+    },
+     profileImage: {
+        display: "block",
+        marginLeft: "auto",
+        marginRight: "auto",
+        borderRadius: 0,
+        paddingTop: 25,
+        width: 100,
+        height: 100
+    },
+   
+
+    
+});
+
 class CarePlan extends Component {
 
   state = {
@@ -34,12 +65,14 @@ class CarePlan extends Component {
     return (
       <Container>
         <img
+        className={this.props.classes.profileImage} 
           src="images/blank-profile-picture.png"
           alt="profile"
           height="150"
           width="150"
         />
-        <h1>Care plan for {this.props.petCarePlan.pet_name}!</h1>
+        <br />
+        <Typography variant="h2" className={this.props.classes.profileCenter}>Care plan for {this.props.petCarePlan.pet_name}!</Typography>
 
         <Card>
           <CardContent>
@@ -87,6 +120,5 @@ const mapStateToProps = (reduxState) => ({
   user: reduxState.user,
   petCarePlan: reduxState.petCarePlan,
 });
-export default withRouter(
-  connect(mapStateToProps)(withStyles({ withTheme: true })(CarePlan))
-);
+export default (withStyles(useStyles))(withRouter(connect(mapStateToProps)(CarePlan)));
+

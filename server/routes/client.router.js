@@ -24,6 +24,7 @@ router.get("/:id", (req, res) => {
  * POST route template
  */
 router.post("/", (req, res) => {
+    // const {user_id, city, state} = req.body;
   const user_id = req.body.user_id;
   const client_name = req.body.client_name;
   const home_address_house = req.body.home_address_house;

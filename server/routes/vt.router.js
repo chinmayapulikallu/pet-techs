@@ -63,7 +63,19 @@ router.post("/", (req, res) => {
   const pet_longer_than_a_week = req.body.pet_longer_than_a_week;
   const diabetic_insulin_care = req.body.diabetic_insulin_care;
   const queryText =
-    'INSERT INTO "vet_tech" ( user_id, vet_name, home_address_house, apt_suite, city, state, zip_code, profile_img, sleep_over, boarding, dropin_care, hospice, about_vet, dogs, cats, other, vet_available, zero_two, two_four, four_eight, not_available, small_dog, medium_dog, large_dog, giant_dog, pet_younger_than_one, pet_more_than_one_family, equipment_list, experience, certifications, current_job_title, expertise, cpr_first_aid, oral_medication, injectable_medication, exp_older_pet, exp_special_pet, daily_exercise, pet_longer_than_a_week, diabetic_insulin_care)VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40)';
+    `INSERT INTO "vet_tech" ( user_id, vet_name, home_address_house, 
+        apt_suite, city, state, zip_code, profile_img, sleep_over, boarding, 
+        dropin_care, hospice, about_vet, dogs, cats, other, vet_available, 
+        zero_two, two_four, four_eight, not_available, small_dog, medium_dog, 
+        large_dog, giant_dog, pet_younger_than_one, pet_more_than_one_family, 
+        equipment_list, experience, certifications, current_job_title, expertise, 
+        cpr_first_aid, oral_medication, injectable_medication, exp_older_pet, 
+        exp_special_pet, daily_exercise, pet_longer_than_a_week, 
+        diabetic_insulin_care)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, 
+            $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, 
+            $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, 
+            $38, $39, $40)`;
   pool
     .query(queryText, [
       user_id,

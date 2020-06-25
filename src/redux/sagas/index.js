@@ -6,6 +6,7 @@ import vetTechRegSaga from "./vetTechRegSaga";
 import clientRegistrationSaga from "./clientRegistrationSaga";
 import clientInfoSaga from "./clientInfoSaga";
 import vtInfoSaga from "./vtInfoSaga";
+import petInfoSaga from "./petInfoSaga";
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     clientInfoSaga(),
     clientRegistrationSaga(),
     vtInfoSaga(),
+    petInfoSaga(),
   ]);
 }

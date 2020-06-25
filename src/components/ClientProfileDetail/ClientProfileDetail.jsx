@@ -152,7 +152,7 @@ class ClientProfileDetail extends Component {
                                     </>
                                     :
                                     <>
-                                        <h4 onClick={this.handleEditClient}>{this.state.client_name}</h4>
+                                        <h3>{this.state.client_name}</h3>
                                     </>
                                 }
                                 {/* <p>{this.state.city}, {this.state.state}</p> */}
@@ -164,12 +164,11 @@ class ClientProfileDetail extends Component {
                                     </>
                                     :
                                     <>
-                                        <h4 onClick={this.handleEditClient}>{this.state.city}</h4>
-                                        <h4 onClick={this.handleEditClient}>{this.state.state}</h4>
+                                        <p>{this.state.city}, {this.state.state}</p>
                                     </>
                                 }
 
-                                <Button variant="contained" color="primary" > <a href={`mailto:webmaster@example.com`} className='link'> Contact to {this.state.client_name}</a></Button>
+                                <Button variant="contained" color="primary" > <a href={`mailto:${this.props.user.user_email}`} target="_blank" className='link'> Contact to {this.state.client_name}</a></Button>
                                 {/* <Button variant="contained" color="primary" className='link ><a href={`mailto:${this.props.clientInfo.user_email}`}>Contact to {{this.state.client_name}</a></Button> */}
                             </Grid>
                             <Grid item xs={3} className={classes.editButton}>
@@ -202,7 +201,15 @@ class ClientProfileDetail extends Component {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>{this.state.about_client}</td>
+                                        {this.state.editable ?
+                                            <>
+                                                <td><input value={this.state.about_client} onChange={this.handleInputChangeFor("about_client")} /></td>
+                                            </>
+                                            :
+                                            <>
+                                                <td>{this.state.about_client}</td>
+                                            </>
+                                        }
                                     </tr>
                                     {/* <tr><td>ksfdnjksdnfjknsjkfsndkjfnsdkjfnskdjnfkjsdnfjkdsnfkjsdnfkjdsnfkjdsnkfndskjfnksdnfksdnfkjsdnfjknsdkjfnsjkdnfjksdnfksjdnfjksdnfjksdfn</td></tr> */}
                                 </tbody>
@@ -215,7 +222,7 @@ class ClientProfileDetail extends Component {
                     <Grid item xs={12} className={classes.name}>
                         <h3>{this.state.client_name}'s Pets</h3>
                     </Grid>
-                            {/* <h1>{JSON.stringify(this.props.petInfo)}</h1> */}
+                    {/* <h1>{JSON.stringify(this.props.petInfo)}</h1> */}
                     <Grid container spacing={3} className={classes.items}>
                         {this.props.petInfo.map((pet) => {
                             return (
@@ -265,7 +272,16 @@ class ClientProfileDetail extends Component {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>{this.state.about_home}</td>
+                                        {/* <td>{this.state.about_home}</td> */}
+                                        {this.state.editable ?
+                                            <>
+                                                <td><input value={this.state.about_home} onChange={this.handleInputChangeFor("about_home")} /></td>
+                                            </>
+                                            :
+                                            <>
+                                                <td>{this.state.about_home}</td>
+                                            </>
+                                        }
                                     </tr>
                                 </tbody>
                             </table>

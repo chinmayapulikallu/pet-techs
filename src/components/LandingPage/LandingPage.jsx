@@ -293,7 +293,7 @@ class LandingPage extends Component {
                         <img className={classes.image} src="/images/mission-logo.png" alt="missionLogoIcon" height="300" width="300" />
                     </div>
                     <div>
-                        <Typography className={classes.description} variant="h5">We're here to connect vetinary technicians with pet owners who want to hire qualified individuals to help give different kinds of out-of-clinic care. Either in your home or theirs, you want to know your precious animals are in great hands. We are commited to giving quality and professional care and to give you ease of mind. </Typography>
+                        <Typography className={classes.description} variant="h6">Pet Techs was created to connect veterinary technicians with pet owners seeking to hire qualified individuals to help offer personalized, out of office care. Either in your home or theirs, we want your loved ones provided with exceptional service. We are committed to giving quality and professional care that offers you peace of mind.  </Typography>
                     </div>
                     <Grid>
                         <div>

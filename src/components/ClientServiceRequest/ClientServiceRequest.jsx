@@ -50,11 +50,11 @@ class ClientServiceRequest extends Component {
         ...this.props.clientRequest,
     };
 
-    componentDidMount=()=>{
+    componentDidMount = () => {
+
         console.log("Mounted");
         const currentId = this.props.match.params.id;
-        this.props.dispatch({ type: "GET_PET_DATA"})
-            // , payload: { id: currentId }
+        this.props.dispatch({ type: "GET_PET_DATA", payload: { id: currentId } })
     }
 
 
@@ -156,13 +156,13 @@ class ClientServiceRequest extends Component {
                                 <div>
                                     <Typography variant="subtitle1">Start Date</Typography>
                                     <DatePicker
-                                       
+
                                         selected={this.state.start_date}
                                         onChange={(event) => this.handleDateChange(event, "start_date")}
                                     />
                                     <Typography variant="subtitle1">End Date</Typography>
                                     <DatePicker
-                                       
+
                                         selected={this.state.end_date}
                                         onChange={(event) => this.handleDateChange(event, "end_date")}
                                     />
@@ -203,9 +203,9 @@ class ClientServiceRequest extends Component {
                         </FormControl>
                     </Grid>
                 </div>
-<div>
-    <p>{JSON.stringify(this.props.petInfoReducer)}</p>
-</div>
+                <div>
+                    <p>{JSON.stringify(this.props)}</p>
+                </div>
             </div>
         );
     }

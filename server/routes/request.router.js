@@ -21,7 +21,8 @@ router.post('/', (req, res) => {
     const add_info = req.body.add_info;
     const request_status = req.body.request_status;
     const queryText =
-      'INSERT INTO "client_request" ( pet_id, vet_id, start_date_time, end_date_time, add_info, request_status) VALUES ($1, $2, $3, $4, $5, $6)';
+      `INSERT INTO "client_request" ( pet_id, vet_id, start_date_time, end_date_time, add_info, request_status) 
+      VALUES ($1, $2, $3, $4, $5, $6)`;
     pool
       .query(queryText, [
         pet_id,

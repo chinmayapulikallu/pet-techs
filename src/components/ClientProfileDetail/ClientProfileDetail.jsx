@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Pet from '../Pet/Pet';
+
 
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -70,11 +72,8 @@ class ClientProfileDetail extends Component {
         profile_img: '',
         about_client: '',
         about_home: '',
-        pet_type: '',
-        pet_name: '',
-        breed: '',
-        pet_img: '',
-        pet_behavior: '',
+        city: '',
+        state: ''
     }
 
 
@@ -87,18 +86,18 @@ class ClientProfileDetail extends Component {
             profile_img: currentClient.profile_img,
             about_client: currentClient.about_client,
             about_home: currentClient.about_home,
-            pet_type: currentClient.pet_type,
-            pet_name: currentClient.pet_name,
-            breed: currentClient.breed,
-            pet_img: currentClient.pet_img,
-            pet_behavior: currentClient.pet_behavior,
+            city: currentClient.city,
+            state: currentClient.state,
         })
         console.log('state:', this.state)
 
-        const currentPet= this.props.petInfo.find(pet => pet.id === parseInt(this.props.match.params.id))
-        console.log("-------------->pet profile", currentPet);
+        const currentId = this.props.match.params.id;
 
-
+        this.props.dispatch({
+            type: 'GET_PET_DATA',
+            payload: { id: currentId }
+        })
+        console.log('pet data:', this.props.petInfo)
 
     }
 
@@ -155,7 +154,7 @@ class ClientProfileDetail extends Component {
                                         <h4 onClick={this.handleEditClient}>{this.state.client_name}</h4>
                                     </>
                                 }
-                                <p>Minneapolis, MN</p>
+                                <p>{this.state.city}, {this.state.state}</p>
                                 <Button variant="contained" color="primary" > <a href={`mailto:webmaster@example.com`} className='link'> Contact to {this.state.client_name}</a></Button>
                                 {/* <Button variant="contained" color="primary" className='link ><a href={`mailto:${this.props.clientInfo.user_email}`}>Contact to {{this.state.client_name}</a></Button> */}
                             </Grid>
@@ -179,8 +178,8 @@ class ClientProfileDetail extends Component {
                 {/* </Container> */}
 
                 <Container className={classes.client_content} maxWidth="md">
-                    <Grid container spacing={3} >
-                        <Grid item xs={6}>
+                    <Grid container xs={12} spacing={3} >
+                        <Grid item xs={6} >
                             <table className="about_table">
                                 <thead >
                                     <tr>
@@ -195,34 +194,24 @@ class ClientProfileDetail extends Component {
                             </table>
                         </Grid>
 
-                    </Grid>
-                     <Grid item xs={12} className={classes.name}>
-                        <h4>{this.state.client_name}'s Pets</h4>
+
                     </Grid>
 
-                     <Grid container spacing={3} className={classes.items}>
-                        <Grid item xs={6} >
-                            <table className="pet_table">
-                                <tbody >
-                                    <tr className="table_body">
+                    <Grid item xs={12} className={classes.name}>
+                        <h3>{this.state.client_name}'s Pets</h3>
+                    </Grid>
 
-                                        {/* <td>
-                                            <img src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
-                                        </td>
-                                        <td>
-                                            <h4>Pet's name</h4>
-                                            <p>8 years old</p>
-                                            <p>Daschund</p>
-                                            <p>Goodest Boy</p>
-                                        </td>
-                                        <td>
-                                            <Button variant="contained" color="info" onClick={this.handleContactButton}>Care Plan</Button>
-                                        </td> */}
+                    <Grid container spacing={3} className={classes.items}>
+                        {this.props.petInfo.map((pet) => {
+                            return (
+                                <div key={pet.id}>
+                                    <Pet
+                                        pet={pet}
+                                    />
+                                </div>
+                            )
+                        })}
 
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </Grid>
                         {/* ---------Content inside pet picture array when mapping------------ */}
                         <Grid item xs={6} >
                             <img src="images/blank-profile-picture.png" alt="profile" height="50" width="50" />

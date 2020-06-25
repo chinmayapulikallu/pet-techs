@@ -17,17 +17,7 @@ const styles = theme => ({
         marginTop: '70px',
         flexGrow: 1,
     },
-    paddingTop: {
-        paddingTop: 50,
-    },
-    title: {
-        backgroundColor: '#faefec',
-        paddingTop: 85,
-        width: '100%',
-    },
-    name: {
-        textAlign: 'center',
-    },
+   
 
     items: {
         padding: theme.spacing(2),
@@ -41,86 +31,44 @@ const styles = theme => ({
         top: 170,
         left: 100,
     },
-    clientInfo: {
-        marginBottom: 0,
-        position: 'absolute',
-        top: 160,
-        left: 330,
-    },
-    client_content: {
-        marginTop: 200,
-
-    },
-    editButton: {
-        display: 'flex',
-        justifyContent: "right",
-        marginLeft: '85%',
-    }
+   
+    // block:{
+    //     display: 'block',
+    //     border: '2px solid #195C60',
+    //     borderRadius: '10px',
+    //     // border-collapse: collapse;
+    //     // text-align: left;
+    //     // padding-left: 5px;
+    //     overflowWrap: 'break-word'   
+    //  }
 });
 
 
-class ClientProfileDetail extends Component {
+class Pet extends Component {
 
 
     state = {
-        editable: false,
-
         id: '',
-        client_name: '',
-        profile_img: '',
-        about_client: '',
-        about_home: '',
-        pet_type: '',
         pet_name: '',
+        age: '',
         breed: '',
-        pet_img: '',
         pet_behavior: '',
     }
 
 
     componentDidMount() {
-        const currentClient = this.props.clientInfo.find(client => client.id === parseInt(this.props.match.params.id))
-        console.log("-------------->client profile", currentClient);
+        const currentPet = this.props.petInfo.find(pet => pet.id === parseInt(this.props.match.params.id))
+        console.log("-------------->client profile", currentPet);
         this.setState({
-            id: currentClient.id,
-            client_name: currentClient.client_name,
-            profile_img: currentClient.profile_img,
-            about_client: currentClient.about_client,
-            about_home: currentClient.about_home,
-            pet_type: currentClient.pet_type,
-            pet_name: currentClient.pet_name,
-            breed: currentClient.breed,
-            pet_img: currentClient.pet_img,
-            pet_behavior: currentClient.pet_behavior,
+            id: currentPet.id,
+            pet_name: currentPet.pet_name,
+            age: currentPet.age,
+            breed: currentPet.breed,
+            pet_behavior: currentPet.pet_behavior,
         })
-        console.log('state:', this.state)
+        console.log('pet state:', this.state)
     }
 
-
-
-
-    handleBackButton = () => {
-        console.log('clicked');
-        this.props.history.push('/clientdashboard');
-    }
-    handleEditClient = () => {
-        console.log('edit clicked!');
-        this.setState({
-            editable: true,
-        });
-    }
-    handleSaveClient = () => {
-        console.log('Save clicked!')
-        this.setState({
-            editable: false,
-        });
-    }
-    handleInputChangeFor = property => (event) => {
-        console.log('input change', property, event.target.value)
-        this.setState({
-            [property]: event.target.value,
-        });
-    }
 
     render() {
 
@@ -128,62 +76,29 @@ class ClientProfileDetail extends Component {
         const { classes } = this.props;
         return (
             <div className={classes.root} >
-                {/* <h1>{JSON.stringify(this.props.clientInfo)}</h1> */}
-                {/* {this.props.clientInfo.map((client) => {
-                    return (<h1>{client.client_name} </h1>)
-                })} */}
+                
+                <Grid item xs={6} >
+                    <table className="pet_table">
+                        <tbody >
+                            <tr className="table_body">
+                                <td>
+                                    <img src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                </td>
+                                <td>
+                                    <h4>{this.state.pet_name}</h4>
+                                    <p>{this.state.age} years old</p>
+                                    <p>{this.state.breed}</p>
+                                    <p>{this.state.pet_behavior}</p>
+                                </td>
+                                <td>
+                                    <Button variant="contained" color="info" onClick={this.handleContactButton}>Care Plan</Button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </Grid>
 
-                <td>
-                    <img src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
-                </td>
-                <td>
-                    <h4>Pet's name</h4>
-                    <p>8 years old</p>
-                    <p>Daschund</p>
-                    <p>Goodest Boy</p>
-                </td>
-                <td>
-                    <Button variant="contained" color="info" onClick={this.handleContactButton}>Care Plan</Button>
-                </td>
 
-                <Container>
-                    <Grid container spacing={12} className={classes.paddingTop}>
-                        <Grid item xs={6} className={classes.items}>
-                            <img src="images/house-icon.png" alt="profile" height="80" width="90" />
-                            <table className="about_table">
-                                <thead>
-                                    <tr>
-                                        <th className="table_head">{this.state.client_name}'s Pet Equipment</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        {/* I have a kennel for both animals, as well as extra medical equipment for my preecious... */}
-                                        <td>{this.state.care_equipment}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </Grid>
-                        <Grid item xs={6} className={classes.items}>
-                            <img src="images/house-icon.png" alt="profile" height="80" width="90" />
-                            <table className="about_table">
-                                <thead >
-                                    <tr>
-                                        <th className="table_head">{this.state.client_name}'s Home Enviroment</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{this.state.about_home}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </Grid>
-                    </Grid>
-                    <Grid item xs={12} className={classes.items}>
-                        <Button variant="contained" color="primary" onClick={this.handleBackButton}>Back to Dashboard</Button>
-                    </Grid>
-                </Container>
 
             </div >
         )
@@ -197,5 +112,5 @@ const mapStateToProps = (reduxState) => ({
 })
 
 
-export default withRouter(connect(mapStateToProps)(withStyles(styles, { withTheme: true })(ClientProfileDetail)));
+export default withRouter(connect(mapStateToProps)(withStyles(styles, { withTheme: true })(Pet)));
 

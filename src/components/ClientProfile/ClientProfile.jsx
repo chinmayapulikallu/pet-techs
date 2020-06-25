@@ -35,6 +35,7 @@ const styles = theme => ({
         textAlign: 'center',
         justifyContent: "center",
         alignItems: "center",
+        display:'block',
     },
     img: {
         borderRadius: '50%',
@@ -69,11 +70,7 @@ class ClientProfile extends Component {
             type: 'GET_CLIENT_DATA',
             payload: { id: currentId }
         })
-        this.props.dispatch({
-            type: 'GET_PET_DATA',
-            payload: { id: currentId }
-        })
-        console.log('pet data:', this.petInfo)
+       
 
     }
 

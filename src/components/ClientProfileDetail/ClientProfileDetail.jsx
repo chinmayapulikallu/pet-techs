@@ -32,7 +32,7 @@ const styles = theme => ({
     },
 
     items: {
-        padding: theme.spacing(2),
+        padding: 15,
         textAlign: 'center',
         justifyContent: "center",
         alignItems: "center",
@@ -57,14 +57,15 @@ const styles = theme => ({
         display: 'flex',
         justifyContent: "right",
         marginLeft: '85%',
+    },
+    contentInTable: {
+        padding: '0px 10px',
     }
 });
 
 
 
 class ClientProfileDetail extends Component {
-
-
     state = {
         editable: false,
 
@@ -190,10 +191,10 @@ class ClientProfileDetail extends Component {
                 </div>
                 {/* </Container> */}
 
-                <Container className={classes.client_content} maxWidth="md">
+                <Container className={classes.client_content} maxWidth="lg">
                     <Grid container spacing={3} >
-                        <Grid item xs={6} sm={3} >
-                            <table className="about_table">
+                        <Grid item xs={9}>
+                            <table className="about_table" width="100%" height="150px">
                                 <thead >
                                     <tr>
                                         <th className="table_head">About {this.state.client_name}</th>
@@ -203,11 +204,11 @@ class ClientProfileDetail extends Component {
                                     <tr>
                                         {this.state.editable ?
                                             <>
-                                                <td><input value={this.state.about_client} onChange={this.handleInputChangeFor("about_client")} /></td>
+                                                <td className={classes.contentInTable}><input value={this.state.about_client} onChange={this.handleInputChangeFor("about_client")} /></td>
                                             </>
                                             :
                                             <>
-                                                <td>{this.state.about_client}</td>
+                                                <td className={classes.contentInTable}>{this.state.about_client}</td>
                                             </>
                                         }
                                     </tr>
@@ -223,32 +224,30 @@ class ClientProfileDetail extends Component {
                         <h3>{this.state.client_name}'s Pets</h3>
                     </Grid>
                     {/* <h1>{JSON.stringify(this.props.petInfo)}</h1> */}
-                    <Grid container spacing={3} className={classes.items}>
-                        {this.props.petInfo.map((pet) => {
-                            return (
-                                <div key={pet.id}>
+
+                    {this.props.petInfo.map((pet) => {
+                        return (
+                            <div key={pet.id}>
+                                <Grid container spacing={3}>
                                     <Pet
                                         pet={pet}
+                
                                     />
-                                </div>
-                            )
-                        })}
+                                </Grid>
 
-                        {/* ---------Content inside pet picture array when mapping------------ */}
-                        <Grid item xs={6} >
-                            <img src="images/blank-profile-picture.png" alt="profile" height="50" width="50" />
-                            <img src="images/blank-profile-picture.png" alt="profile" height="50" width="50" />
-                            <img src="images/blank-profile-picture.png" alt="profile" height="50" width="50" />
-                            <img src="images/blank-profile-picture.png" alt="profile" height="50" width="50" />
+                            </div>
+                        )
+                    })}
+                    <Grid container spacing={3} className={classes.paddingTop}>
+                        <Grid item xs={6} className={classes.items}>
+                            <img src="images/belt.png" alt="profile" height="80" width="130" />
                         </Grid>
-
-                        {/* ---------Content inside pet picture array when mapping------------ */}
-
-                    </Grid>
-                    <Grid container spacing={12} className={classes.paddingTop}>
                         <Grid item xs={6} className={classes.items}>
                             <img src="images/house-icon.png" alt="profile" height="80" width="90" />
-                            <table className="about_table">
+                        </Grid>
+                        <Grid item xs={6} className={classes.items}>
+
+                            <table className="about_table" width="100%" height="150px">
                                 <thead>
                                     <tr>
                                         <th className="table_head">{this.state.client_name}'s Pet Equipment</th>
@@ -256,15 +255,14 @@ class ClientProfileDetail extends Component {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        {/* I have a kennel for both animals, as well as extra medical equipment for my preecious... */}
-                                        <td>{this.state.care_equipment}</td>
+                                        <td className={classes.contentInTable}>I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...</td>
+                                        {/* <td className={classes.contentInTable}>{this.state.care_equipment}</td> */}
                                     </tr>
                                 </tbody>
                             </table>
                         </Grid>
                         <Grid item xs={6} className={classes.items}>
-                            <img src="images/house-icon.png" alt="profile" height="80" width="90" />
-                            <table className="about_table">
+                            <table className="about_table" width="100%" height="150px">
                                 <thead >
                                     <tr>
                                         <th className="table_head">{this.state.client_name}'s Home Enviroment</th>
@@ -275,11 +273,11 @@ class ClientProfileDetail extends Component {
                                         {/* <td>{this.state.about_home}</td> */}
                                         {this.state.editable ?
                                             <>
-                                                <td><input value={this.state.about_home} onChange={this.handleInputChangeFor("about_home")} /></td>
+                                                <td className={classes.contentInTable}><input value={this.state.about_home} onChange={this.handleInputChangeFor("about_home")} /></td>
                                             </>
                                             :
                                             <>
-                                                <td>{this.state.about_home}</td>
+                                                <td className={classes.contentInTable}>{this.state.about_home}</td>
                                             </>
                                         }
                                     </tr>
@@ -292,7 +290,7 @@ class ClientProfileDetail extends Component {
                     </Grid>
                 </Container>
 
-            </div>
+            </div >
         )
     }
 

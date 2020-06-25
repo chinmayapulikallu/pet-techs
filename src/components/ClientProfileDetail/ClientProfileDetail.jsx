@@ -178,8 +178,8 @@ class ClientProfileDetail extends Component {
                 {/* </Container> */}
 
                 <Container className={classes.client_content} maxWidth="md">
-                    <Grid container xs={12} spacing={3} >
-                        <Grid item xs={6} >
+                    <Grid container spacing={3} >
+                        <Grid item xs={6} sm={3} >
                             <table className="about_table">
                                 <thead >
                                     <tr>
@@ -190,6 +190,7 @@ class ClientProfileDetail extends Component {
                                     <tr>
                                         <td>{this.state.about_client}</td>
                                     </tr>
+                                    {/* <tr><td>ksfdnjksdnfjknsjkfsndkjfnsdkjfnskdjnfkjsdnfjkdsnfkjsdnfkjdsnfkjdsnkfndskjfnksdnfksdnfkjsdnfjknsdkjfnsjkdnfjksdnfksjdnfjksdnfjksdfn</td></tr> */}
                                 </tbody>
                             </table>
                         </Grid>

@@ -12,6 +12,9 @@ import Select from "@material-ui/core/Select"
 import FormGroup from "@material-ui/core/FormGroup"
 import Checkbox from "@material-ui/core/Checkbox"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
+import Card from "@material-ui/core/Card"
+import CardContent from "@material-ui/core/CardContent"
+import Button from "@material-ui/core/Button"
 
 
 const styles = theme => ({
@@ -45,10 +48,37 @@ const styles = theme => ({
 
     },
     groupCheck: {
-        paddingLeft: 150
+        paddingLeft: 125
     },
     serviceType: {
-        paddingLeft: 200
+        paddingLeft: 200,
+        display: "flex"
+    },
+    results:{
+        paddingTop: 50
+    },
+    viewProf: {
+        height: 40,
+        width: 100,
+        textAlign: "center",
+        fontSize: 10,
+        
+    },
+    profPic: {
+        
+    },
+    details1: {
+        display: "flex",
+        flexDirection: "column",
+        paddingBottom: 10
+    },
+    details2: {
+        display: "flex",
+        flexDirection: "column"
+    },
+    card: {
+        paddingBottom: 20,
+        paddingTop: 20,
     }
 })
 
@@ -56,6 +86,12 @@ const styles = theme => ({
 
 class SearchPage extends Component {
 
+    handleChange = (event, property) => {
+        console.log(event.target.value, "#####")
+        this.setState({
+            [property]: event.target.value
+        })
+    }
 
     render() {
         const { classes } = this.props
@@ -76,6 +112,7 @@ class SearchPage extends Component {
                                 color="secondary"
                                 label="Service"
                                 variant="outlined"
+                                onChange={(event) => this.handleChange(event, "service_select")}
                             >
                                 <MenuItem value="Sleepover">Pet Sleepover</MenuItem>
                                 <MenuItem value="Boarding">Pet Boarding</MenuItem>
@@ -100,6 +137,36 @@ class SearchPage extends Component {
                                     label="Other"
                                 />
                             </FormGroup>
+                        </Grid>
+                        <Grid className={classes.card}>
+                        <Card>
+                            <CardContent   >
+                                <Typography variant="h6">Test</Typography>
+                                <img className={classes.details1} src="/images/blank-profile-picture.png" alt="profilePic" height="35" width="35" />
+                                <Button className={classes.details2}  variant="contained" color="primary" >View Profile</Button>
+                               
+                            </CardContent>
+                        </Card>
+                        <br />
+                        <br />
+                        <Card>
+                            <CardContent  >
+                                <Typography variant="h6">Test</Typography>
+                                <img className={classes.details1} src="/images/blank-profile-picture.png" alt="profilePic" height="35" width="35" />
+                                <Button className={classes.details2}  variant="contained" color="primary" >View Profile</Button>
+                               
+                            </CardContent>
+                        </Card>
+                        <br />
+                        <br />
+                        <Card >
+                            <CardContent >
+                                <Typography variant="h6">Test</Typography>
+                                <img className={classes.details1} src="/images/blank-profile-picture.png" alt="profilePic" height="35" width="35" />
+                                <Button className={classes.details2}  variant="contained" color="primary" >View Profile</Button>
+                               
+                            </CardContent>
+                        </Card>
                         </Grid>
                     </Grid>
                 </div>

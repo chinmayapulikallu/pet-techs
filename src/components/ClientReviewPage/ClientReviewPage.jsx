@@ -65,7 +65,8 @@ class ClientReviewPage extends Component {
             <Container className={classes.root} maxWidth="md">
                 <Typography variant="h3">Client Review Page</Typography>
                 <div>
-                    <Typography variant="h5" className={classes.inputHeading}>Client Information</Typography>
+        <Typography variant="h5" className={classes.inputHeading}>Client Information:</Typography>
+
                     <Typography variant="h6" className={classes.inputHeading}>Your Name:</Typography>
                     <Typography variant="body1" gutterBottom>{clientInfo.username}</Typography>
                     <Typography variant="h6" className={classes.inputHeading}>Address:</Typography>

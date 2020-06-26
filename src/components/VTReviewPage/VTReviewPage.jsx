@@ -84,13 +84,15 @@ class VTReviewPage extends Component {
       workHour += this.state.hourSelectFour;
     }
 
+    const {vetInfo } = this.props;
+
 
     return (
       <Container className={classes.root} maxWidth="sm">
-        {/* <h1>{JSON.stringify(this.state.sleep_over)}</h1> */}
+        <h1>{JSON.stringify(vetInfo)}</h1>
         <h1 className={classes.title}>Vet tech review</h1>
         <p>
-          Home address: <spand>{this.state.home_address_house}</spand>
+          Home address: <spand>{vetInfo.home_address_house}</spand>
         </p>
         <p>
           Apartment or Suite #: <span>{this.state.apt_suite}</span>
@@ -207,51 +209,6 @@ class VTReviewPage extends Component {
 }
 
 const mapStateToProps = (reduxState) => ({
-
   vtInfo: reduxState.vtInfo
-  // vtInfo: {
-  //   home_address_house: "",
-  //   apt_suite: "",
-  //   city: "",
-  //   state: "",
-  //   zipcode: "",
-  //   profile_img: "",
-  //   sleep_over: false,
-  //   boarding: false,
-  //   dropin_care: false,
-  //   hospice: false,
-  //   bio: "",
-
-  //   dog: false,
-  //   cat: false,
-  //   other: false,
-  //   hourSelectOne: false,
-  //   hourSelectTwo: false,
-  //   hourSelectThree: false,
-  //   hourSelectFour: false,
-  //   smallAnimal: false,
-  //   mediumAnimal: false,
-  //   largeAnimal: false,
-  //   giantAnimal: false,
-  //   youngAnimals: '',
-  //   multipleAnimals: '',
-  //   optionalEquipment: '',
-
-  //   experienceYear: '',
-  //   certifications: '',
-  //   currentJob: '',
-  //   expertise: '',
-  //   bioYourself: '',
-  //   cpr: false,
-  //   oralMedication: false,
-  //   injectableMedication: false,
-  //   expOlderPet: false,
-  //   expSpecialPet: false,
-  //   dailyExercise: false,
-  //   petLongerThanAWeek: false,
-  //   diabeticInsulinCare: false,
-  //   ...state.vtInfo,
-  // },
-  // error: state.errors,
 })
 export default withRouter(connect(mapStateToProps)(withStyles(styles, { withTheme: true })(VTReviewPage)));

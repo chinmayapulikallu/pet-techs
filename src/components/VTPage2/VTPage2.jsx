@@ -64,10 +64,9 @@ class VTPage2 extends Component {
   //AND DISPATCH THE STATE
   handleContClick = () => {
     console.log("CLICKED CONTINUE", this.state);
-    // this.props.dispatch({
-    //     type: '' ,
-    //     payload: this.state.vtInfo2
-    // })
+    this.props.dispatch({
+      type: 'VT_REGISTER'
+    })
     this.props.onNext();
   };
 

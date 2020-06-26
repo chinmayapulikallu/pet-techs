@@ -95,6 +95,9 @@ class VTPage1 extends Component {
 
   handleNext = () => {
     this.props.onNext();
+    this.props.dispatch({
+      type: 'VT_REGISTER'
+    })
   };
   render() {
     const { classes } = this.props;

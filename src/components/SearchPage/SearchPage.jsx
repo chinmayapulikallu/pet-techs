@@ -17,8 +17,7 @@ import CardContent from "@material-ui/core/CardContent"
 import Button from "@material-ui/core/Button"
 import { ButtonBase } from "@material-ui/core"
 import Paper from "@material-ui/core/Paper"
-import { blue } from "@material-ui/core/colors";
-
+import { fade } from "@material-ui/core/styles/colorManipulator";
 
 
 const styles = theme => ({
@@ -51,7 +50,6 @@ const styles = theme => ({
     serviceTitle: {
         paddingTop: 50,
         paddingBottom: 10
-
     },
     groupCheck: {
         paddingLeft: 400
@@ -64,7 +62,8 @@ const styles = theme => ({
         marginTop: 20,
         borderRadius: "5px",
         width: "75%",
-        marginLeft: 150
+        marginLeft: 150,
+        border: "2px solid #195C60",
     },
     profPic: {
         marginTop: 20,
@@ -73,14 +72,21 @@ const styles = theme => ({
         borderRadius: "50px"
     },
     header: {
-        background: '#195C60'
+
+        backgroundColor: fade("#195C60", 0.50),
     },
     btn: {
+        marginBottom: 20,
+        marginTop: 10
+    },
+
+    certifications: {
+        display: "flex",
+        backgroundColor: fade("#195C60", 0.25),
         marginBottom: 20
     },
-    outlined: {
-        outline: "1px solid #195C60",
-        marginBottom: 20
+    aboutMe: {
+        display: "flex"
     }
 
 
@@ -89,6 +95,11 @@ const styles = theme => ({
 
 
 class SearchPage extends Component {
+
+    state = {
+        ...this.props.serviceProvider,
+    };
+
 
     handleChange = (event, property) => {
         console.log(event.target.value, "#####")
@@ -112,12 +123,13 @@ class SearchPage extends Component {
                         <Typography variant="subtitle1">Filter</Typography>
                         <Grid container direction={"row"} className={classes.serviceType}>
                             <Select
-                                value={"Sleepover"}
+                                value={"Select"}
                                 color="secondary"
                                 label="Service"
                                 variant="outlined"
                                 onChange={(event) => this.handleChange(event, "service_select")}
                             >
+                                <MenuItem value="Select">Select Service Type</MenuItem>
                                 <MenuItem value="Sleepover">Pet Sleepover</MenuItem>
                                 <MenuItem value="Boarding">Pet Boarding</MenuItem>
                                 <MenuItem value="Drop-In">Drop-In</MenuItem>
@@ -127,17 +139,14 @@ class SearchPage extends Component {
                                 {/* <Typography variant="subtitle1">Type:</Typography> */}
                                 <FormControlLabel
                                     control={<Checkbox name="dog" />}
-
                                     label="Dog"
                                 />
                                 <FormControlLabel
                                     control={<Checkbox name="cat" />}
-
                                     label="Cat"
                                 />
                                 <FormControlLabel
                                     control={<Checkbox name="other" />}
-
                                     label="Other"
                                 />
                             </FormGroup>
@@ -148,9 +157,10 @@ class SearchPage extends Component {
                         <Grid>
                             <Paper elevation="5" className={classes.paper}>
                                 <CardHeader title="Name" className={classes.header} />
-                                <img className={classes.profPic} src="/images/girl-profile.png" alt="profilePic" height="75" width="75"/>
+                                <img className={classes.profPic} src="/images/girl-profile.png" alt="profilePic" height="100" width="100" />
+                                <Typography className={classes.certifications} variant="h6">Certifications:</Typography>
                                 <div className={classes.outlined}>
-                                <Typography variant="subtitle1">
+                                    <Typography variant="subtitle1">
                                         Avian Practice,
                                         Beef Cattle Practice,
                                         Canine and Feline Practice,
@@ -159,8 +169,11 @@ class SearchPage extends Component {
                                     </Typography>
                                 </div>
                                 <div className={classes.outlined}>
-                                <Typography variant="subtitle1">
-                                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. 
+                                    <Typography className={classes.certifications} variant="h6">About me:</Typography>
+                                </div>
+                                <div className={classes.outlined}>
+                                    <Typography variant="subtitle1">
+                                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
                                     </Typography>
                                 </div>
                                 <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
@@ -169,9 +182,10 @@ class SearchPage extends Component {
                         <Grid>
                             <Paper elevation="5" className={classes.paper}>
                                 <CardHeader title="Name" className={classes.header} />
-                                <img className={classes.profPic} src="/images/girl-profile.png" alt="profilePic" height="75" width="75"/>
+                                <img className={classes.profPic} src="/images/girl-profile.png" alt="profilePic" height="100" width="100" />
+                                <Typography className={classes.certifications} variant="h6">Certifications:</Typography>
                                 <div className={classes.outlined}>
-                                <Typography variant="subtitle1">
+                                    <Typography variant="subtitle1">
                                         Avian Practice,
                                         Beef Cattle Practice,
                                         Canine and Feline Practice,
@@ -180,15 +194,19 @@ class SearchPage extends Component {
                                     </Typography>
                                 </div>
                                 <div className={classes.outlined}>
-                                <Typography variant="subtitle1">
-                                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. 
+                                    <Typography className={classes.certifications} variant="h6">About me:</Typography>
+                                </div>
+                                <div className={classes.outlined}>
+                                    <Typography variant="subtitle1">
+                                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
                                     </Typography>
                                 </div>
                                 <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
                             </Paper>
                         </Grid>
-                        
-                       
+
+
+
                     </Grid>
 
                 </div>
@@ -199,7 +217,10 @@ class SearchPage extends Component {
 
 
 const mapStateToProps = (state) => ({
-    errors: state.errors,
+    serviceProvider: {
+        service_select: '',
+    }
+
 });
 
 

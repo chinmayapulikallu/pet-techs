@@ -21,7 +21,7 @@ CREATE TABLE "user" (
 
 
 CREATE TABLE client (
-  id SERIAL PRIMARY KEY,
+  
   user_id INT NOT NULL
         REFERENCES "user" (id)
         ON DELETE CASCADE ,
@@ -44,7 +44,7 @@ CREATE TABLE client (
 );
 
 CREATE TABLE vet_tech (
-  id SERIAL PRIMARY KEY,
+  
   user_id INT NOT NULL
         REFERENCES "user" (id)
         ON DELETE CASCADE ,
@@ -94,8 +94,8 @@ CREATE TABLE vet_tech (
 
 CREATE TABLE pet (
   id SERIAL PRIMARY KEY,
-  client_id INT NOT NULL
-            REFERENCES client (id)
+  user_id INT NOT NULL
+            REFERENCES "user" (id)
             ON DELETE CASCADE ,
   pet_type varchar (50) NOT NULL,
   other_pet varchar (50) ,
@@ -139,7 +139,7 @@ CREATE TABLE client_request (
          REFERENCES pet (id)
          ON DELETE CASCADE ,
   vet_id INT NOT NULL
-         REFERENCES vet_tech (id)
+         REFERENCES "user" (id)
          ON DELETE CASCADE ,
   start_date_time date,
   end_date_time date,

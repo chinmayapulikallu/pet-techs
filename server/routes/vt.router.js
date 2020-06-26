@@ -1,14 +1,15 @@
 const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 /**
  * GET route template
  */
-router.get("/:id", (req, res) => {
-  const sqlText = `SELECT * from vet_tech where vet_tech.id = $1; `;
+router.get("/", rejectUnauthenticated, (req, res) => {
+  const sqlText = `SELECT * from vet_tech where user_id = $1; `;
   pool
-    .query(sqlText, [req.params.id])
+    .query(sqlText, [req.user.id])
     .then((response) => {
       res.send(response.rows);
     })
@@ -22,7 +23,7 @@ router.get("/:id", (req, res) => {
  * POST route template
  */
 router.post("/", (req, res) => {
-  const user_id = req.body.user_id;
+  const user_id = req.user.id;
   const vet_name = req.body.vet_name;
   const home_address_house = req.body.home_address_house;
   const apt_suite = req.body.apt_suite;

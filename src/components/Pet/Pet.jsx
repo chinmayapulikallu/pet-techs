@@ -27,9 +27,7 @@ const styles = theme => ({
     },
     img: {
         borderRadius: '50%',
-        position: 'absolute',
-        top: 170,
-        left: 100,
+       
     },
     contentInTable: {
         padding: '0px 10px',
@@ -93,7 +91,7 @@ class Pet extends Component {
                         <tbody >
                             <tr className="table_body">
                                 <td className={classes.contentInTable}>
-                                    <img src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                    <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
                                 </td>
                                 <td className={classes.contentInTable}>
                                     <h4>{this.props.pet.pet_name}</h4>

@@ -29,7 +29,10 @@ const styles = theme => ({
     top: '7px',
     left: 5,
     marginBottom: '50%',
-  }
+  },
+  img: {
+    borderRadius: '50%',
+  },
 
 })
 
@@ -46,7 +49,7 @@ function HideOnScroll(props) {
 
 
 class Nav extends Component {
- 
+
 
   render() {
     const { classes } = this.props;
@@ -89,7 +92,7 @@ class Nav extends Component {
                 </div>
                 <div className="profile_icon">
                   <Link to="/info">
-                    <img src="images/blank-profile-picture.png" alt="profile" height="30" width="30" />
+                    <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="30" width="30" />
                   </Link>
                 </div>
                 <LogOutButton className="nav-link" />

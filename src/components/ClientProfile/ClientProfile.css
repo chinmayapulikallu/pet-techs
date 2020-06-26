@@ -1,9 +1,8 @@
 .about_table{
     border: 2px solid #195C60;
-    border-radius: 10px;
-    border-collapse: collapse;
+    border-radius: 5px;
     text-align: left;
-    padding-left: 5px;
+    padding-left: 0px;
     overflow-wrap: break-word;
     table-layout: fixed;
 }
@@ -14,22 +13,14 @@ th{
     margin-left: 0px;
     padding-left: 10px;
 }
-td{
-    padding-left: 10px;
-    padding-right: 10px;
-    overflow-wrap: break-word;
-        /* display: block; */
 
-
-}
 .pet_table{
     
-        border: 2px solid #195C60;
-        border-radius: 10px;
-        border-collapse: collapse;
-        text-align: left;
-        padding-left: 5px;
-        overflow-wrap: break-word;
+    border: 2px solid #195C60;
+    border-radius: 10px;
+    text-align: left;
+    border-collapse: collapse;
+    overflow-wrap: break-word;
 }
 .table_body{
     background-color: #faefec;

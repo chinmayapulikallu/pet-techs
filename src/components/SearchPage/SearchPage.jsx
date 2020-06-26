@@ -15,6 +15,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Card from "@material-ui/core/Card"
 import CardContent from "@material-ui/core/CardContent"
 import Button from "@material-ui/core/Button"
+import { ButtonBase } from "@material-ui/core"
 
 
 const styles = theme => ({
@@ -75,7 +76,7 @@ const styles = theme => ({
     },
     details2: {
         display: "flex",
-       
+
         marginLeft: 70,
         marginTop: 50
     },
@@ -84,27 +85,18 @@ const styles = theme => ({
         paddingBottom: 20,
         paddingTop: 20,
     },
-    about1: {
-      
-        
-        marginRight: 700,
-        outline: 5,
-        border: "solid black 1px",
-        width: 400,
-        marginLeft: 400,
-        height: 100
-       
+    image: {
+        width: 128,
+        height: 128,
     },
-    about: {
-        marginTop: 10,
-        paddingTop: 50,
-        marginRight: 700,
-        outline: 5,
-        border: "solid black 1px",
-        width: 800
-       
+    img: {
+        margin: 'auto',
+        display: 'block',
+        maxWidth: '100%',
+        maxHeight: '100%',
     },
- 
+
+
 
 })
 
@@ -164,27 +156,69 @@ class SearchPage extends Component {
                                 />
                             </FormGroup>
                         </Grid>
-                        <Grid className={classes.card}>
-                            <Card>
+                        {/* <Grid justify="center">
+                            <Card className>
                                 <CardContent   >
                                     <Typography variant="h6">Name</Typography>
-                                    <img className={classes.details1} src="/images/blank-profile-picture.png" alt="profilePic" height="75" width="75"/>
-                                    <Button className={classes.details2} variant="contained" color="primary" >View Profile</Button>
-                                    <CardContent className={classes.about1}>
+                                    <img src="/images/blank-profile-picture.png" alt="profilePic" height="75" width="75" />
+                                    <Button variant="contained" color="primary" >View Profile</Button>
                                     <div >
-                                       Bio
+                                        Bio
                                     </div>
-                                    </CardContent>
-                                    <CardContent className={classes.about}>
                                     <div >
                                         Services and Skills
                                     </div>
-                                    </CardContent>
                                 </CardContent>
-                             
-                            </Card>
-                          
 
+
+                            </Card>
+
+                            <Card className={classes.about}>
+                                <CardContent   >
+                                    <Typography variant="h6">Name</Typography>
+                                    
+                                    <img className={classes.details1} src="/images/blank-profile-picture.png" alt="profilePic" height="75" width="75"/>
+                                    
+                                    <Button className={classes.details2} variant="contained" color="primary" >View Profile</Button>
+                                   
+                                  
+                                </CardContent>
+                            </Card>
+
+
+                        </Grid> */}
+
+
+                        <Grid>
+                            <Grid container spacing={2}>
+                               
+                                <Grid item>
+                                    <ButtonBase className={classes.image}>
+                                        <img className={classes.img} alt="complex" src="/images/blank-profile-picture.png" />
+                                    </ButtonBase>
+                                </Grid>
+                                <Grid item xs={12} sm container>
+                                    <Grid item xs container direction="column" >
+                                        <Grid item>
+                                            <Typography gutterBottom variant="subtitle1">
+                                                Name
+                                                </Typography>
+                                            <Typography variant="body2" gutterBottom>
+                                                Certs
+                                            </Typography>
+                                            <Typography variant="body2" color="textSecondary">
+                                              About
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item>
+                                            <Typography variant="body2" style={{ cursor: 'pointer' }}>
+                                                View Profile
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                    </Grid>
+                                   
+                            </Grid>
                         </Grid>
                     </Grid>
                 </div>

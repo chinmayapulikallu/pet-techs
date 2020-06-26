@@ -110,7 +110,7 @@ class VTPage1 extends Component {
             fullWidth
             color="secondary"
             variant="outlined"
-            value={this.state.home_adress_house}
+            value={this.state.home_address_house}
             onChange={this.handleInputChange("home_address_house")}
           />
         </div>

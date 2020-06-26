@@ -7,8 +7,7 @@ function* vtInfoSaga() {
 
 function* getVTData(action) {
   try {
-    const id = action.payload.id;
-    const response = yield axios.get(`/api/vt/${id}`);
+    const response = yield axios.get(`/api/vt`);
     yield put({
       type: "GET_VT_DATA_SUCCESSFUL",
       payload: response.data,

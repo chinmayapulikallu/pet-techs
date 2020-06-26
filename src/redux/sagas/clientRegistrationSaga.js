@@ -3,13 +3,14 @@ import axios from 'axios';
 
 // worker Saga: will be fired on "REGISTER" actions
 function* registerClient(action) {
+    console.log('client registration saga::::----->', action.payload )
     try {
        yield axios.post('/api/client', action.payload)
-        try {
+      
        yield axios.post('/api/pet', action.payload)
-        } catch (error) {
-        console.log('Error with client registration:', error);
-    }
+        
+    
+    
     } catch (error) {
         console.log('Error with client registration:', error);
     }

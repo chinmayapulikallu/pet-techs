@@ -14,10 +14,10 @@ const styles = theme => ({
     root: {
         marginLeft: 0,
         marginRight: 0,
-        marginTop: '70px',
+        marginTop: '30px',
         flexGrow: 1,
     },
-   
+
 
     items: {
         padding: theme.spacing(2),
@@ -27,11 +27,12 @@ const styles = theme => ({
     },
     img: {
         borderRadius: '50%',
-        position: 'absolute',
-        top: 170,
-        left: 100,
+       
     },
-   
+    contentInTable: {
+        padding: '0px 10px',
+    }
+
     // block:{
     //     display: 'block',
     //     border: '2px solid #195C60',
@@ -60,32 +61,20 @@ const ColorButton = withStyles((theme) => ({
 class Pet extends Component {
 
 
-    state = {
-        // id: '',
-        // pet_name: '',
-        // age: '',
-        // breed: '',
-        // pet_behavior: '',
-    }
-
 
     componentDidMount() {
-        // const currentPet = this.props.petInfo.find(pet => pet.id === parseInt(this.props.match.params.id))
-        // console.log("-------------->client profile", currentPet);
-        // this.setState({
-        //     id: currentPet.id,
-        //     pet_name: currentPet.pet_name,
-        //     age: currentPet.age,
-        //     breed: currentPet.breed,
-        //     pet_behavior: currentPet.pet_behavior,
-        // })
-        // console.log('pet state:', this.state)
+
+        this.props.dispatch({
+            type: 'GET_PET_PICTURE',
+            payload: { petId: this.props.pet.id }
+        })
+        console.log("pet's id:", this.props.pet.id)
     }
-    handleCarePlanButton = () =>{
-        this.props.history.push(`/careplan/${this.props.pet.id}`);
+    handleCarePlanButton = () => {
+        this.props.history.push('/careplan');
         this.props.dispatch({
             type: 'GET_PET_CARE_PLAN',
-            payload: { id: this.props.pet.id}
+            payload: { id: this.props.pet.id }
         })
     }
 
@@ -96,30 +85,71 @@ class Pet extends Component {
         const { classes } = this.props;
         return (
             <div className={classes.root} >
-                
-                <Grid item xs={6} >
-                    <table className="pet_table">
+
+                <Grid item xs={6} className={classes.items}>
+                    <table className="pet_table" width="100%" height="150px">
                         <tbody >
                             <tr className="table_body">
-                                <td>
-                                    <img src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                <td className={classes.contentInTable}>
+                                    <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
                                 </td>
-                                <td>
+                                <td className={classes.contentInTable}>
                                     <h4>{this.props.pet.pet_name}</h4>
                                     <p>{this.props.pet.age} years old</p>
                                     <p>{this.props.pet.breed}</p>
                                     <p>{this.props.pet.pet_behavior}</p>
                                 </td>
-                                <td>
+                                <td className={classes.contentInTable}>
                                     <ColorButton variant="contained" color="info" onClick={this.handleCarePlanButton}>Care Plan</ColorButton>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+
+                </Grid>
+                {/* ---------Content inside pet picture array when mapping------------ */}
+                <Grid item xs={6}>
+                    {/* <p>{JSON.stringify(this.props.pet.array_agg)}</p> */}
+                    {/* {this.props.pet.array_agg.map((petImg) => {
+                        if (petImg === null) {
+                            return (
+                                <div key={petImg}>
+                                    <Button
+                                        variant="contained"
+                                        component="label"
+                                    >
+                                        Upload pet's picture
+                        <input
+                                            type="file"
+                                            style={{ display: "none" }}
+                                        />
+                                    </Button>
+                                </div>
+                            )
+                        } else {
+                            return (
+                                <div key={petImg}>
+                                    <img src={petImg} alt="pet_img" height="100" width="100" />
+                                </div>
+                            )
+                        }
+
+                    })} */}
+                    {/* <Button
+                        variant="contained"
+                        component="label"
+                    >
+                        Upload pet's picture
+                        <input
+                            type="file"
+                            style={{ display: "none" }}
+                        />
+                    </Button> */}
+                    
+
                 </Grid>
 
-
-
+                {/* ---------Content inside pet picture array when mapping------------ */}
             </div >
         )
     }

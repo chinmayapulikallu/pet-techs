@@ -34,6 +34,7 @@ CREATE TABLE client (
   profile_img varchar (1000),
   about_client text NOT NULL,
   about_home text NOT NULL,
+  about_equipment text NOT NULL,
   contact_name_1 varchar (80),
   contact_phone_1 varchar (20),
   contact_email_1 varchar (100),
@@ -104,7 +105,6 @@ CREATE TABLE pet (
   age int NOT NULL,
   sex varchar NOT NULL,
   breed varchar (50) NOT NULL,
-  pet_img varchar (1000),
   pet_bio varchar NOT NULL,
   food_brand varchar (250) NOT NULL,
   feeding_per_day int NOT NULL,
@@ -130,6 +130,7 @@ CREATE TABLE pet_picture (
   pet_id INT NOT NULL
          REFERENCES pet (id)
          ON DELETE CASCADE ,
+  pet_profile_img varchar (1000),
   pet_img varchar (1000)
 );
 

@@ -16,8 +16,8 @@ import Typography from "@material-ui/core/Typography";
 import Button from '@material-ui/core/Button';
 import Container from "@material-ui/core/Container";
 import DatePicker from "react-datepicker";
-
-
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 
 const useStyles = (theme) => ({
     root: {
@@ -51,6 +51,9 @@ const useStyles = (theme) => ({
     buttonMargin: {
         margin: "10px"
     },
+    petContainer: {
+        marginBottom: 40
+    }
 });
 
 class ClientRegPage2 extends Component {
@@ -58,11 +61,9 @@ class ClientRegPage2 extends Component {
     state = {
         ...this.props,
     }
-
     componentDidMount() {
-        console.log('in component did mount')
+        console.log('componentDidMount :: ', this.state)
     }
-
 
     //add AnotherPet
     addPets = () => {
@@ -80,6 +81,7 @@ class ClientRegPage2 extends Component {
                         weight: '',
                         age: '',
                         breed: '',
+                        pet_bio: '',
                         sex: '',
                         food_brand: '',
                         feeding_per_day: '',
@@ -93,7 +95,7 @@ class ClientRegPage2 extends Component {
                                 id: 1,
                                 medication_name: '',
                                 medication_dosage: '',
-                                dosage_time:''
+                                dosage_time: new Date()
                             }
                     ]
                 }]
@@ -110,10 +112,11 @@ class ClientRegPage2 extends Component {
             let nextMedicationId = Math.max(...currentPet.medications.map(m => m.id)) + 1
             currentPet.medications.push(
                 {
-                    id: nextMedicationId,
+                    id: nextMedicationId, 
+                    pet_id: '',
                     medication_name: '',
                     medication_dosage: '',
-                    dosage_time: ''
+                    dosage_time: new Date()
                 }
             )
             
@@ -148,11 +151,32 @@ class ClientRegPage2 extends Component {
         })
     }
 
-    //date input for medication 
-    handleDateChange = (petId, property) => (date) => {
-        console.log("handleDateChange", date)
+    handleMedicationChange = (petId, medicationId, property) => (event) => {
+        console.log(petId, property,event.target, this.state.petInfo);
         const currentPet = this.state.petInfo.pets.find(pet => pet.id === petId)
-        currentPet[property] = date
+        const currentMedication = currentPet.medications.find(med => med.id === medicationId)
+        if (event.target.value === "true" || event.target.value === "false") { 
+            currentMedication[property] = (event.target.value === "true")
+        } else {
+            currentMedication[property] = event.target.value
+        }
+        currentPet.medications = [...currentPet.medications.filter(med => med.id != medicationId), currentMedication]
+        this.setState({
+            ...this.state,
+            petInfo: {
+                ...this.state.petInfo, pets:
+                    [...this.state.petInfo.pets.filter(pet => pet.id !== petId), currentPet]
+            }
+        })
+    }
+
+    //date input for medication 
+    handleDateChange = (petId, medicationId, property) => (date) => {
+        console.log("handleDateChange", date, this.state.petInfo.pets[0])
+        const currentPet = this.state.petInfo.pets.find(pet => pet.id === petId)
+        const currentMedication = currentPet.medications.find(med => med.id === medicationId)
+        currentMedication[property] = date
+        currentPet.medications = [...currentPet.medications.filter(med => med.id != medicationId), currentMedication]
         this.setState({
             ...this.state,
             petInfo: {
@@ -167,7 +191,8 @@ class ClientRegPage2 extends Component {
         this.props.dispatch({
             type: 'SET_PET',
             payload: {
-                ...this.state
+                //...this.state
+                ...this.state.petInfo
             }
         })
         this.props.onNext();
@@ -185,8 +210,13 @@ class ClientRegPage2 extends Component {
         
         return (
             <Container className={classes.root} maxWidth="md">
-                {this.state.petInfo.pets && this.state.petInfo.pets.map(pet =>               
-                    <Grid container spacing={3} key={pet.id}>
+                
+                   
+
+                {this.state.petInfo.pets && this.state.petInfo.pets.map(pet =>     
+                    <Card key={pet.id} className={classes.petContainer}>
+                        <CardContent>     
+                    <Grid container spacing={3} key={pet.id}>            
                     <Grid item xs={12}>
                         <FormControl variant="outlined" className={classes.formControl}>
                             <InputLabel id="demo-simple-select-outlined-label">Pet Type</InputLabel>
@@ -261,6 +291,18 @@ class ClientRegPage2 extends Component {
                             onChange={this.handleChange(pet.id,'breed')}
                         />
                     </Grid>
+                    <Grid item xs={12}>
+                    <TextField
+                        label="Bio about Your Pet "  
+                        value={pet.pet_bio}
+                        type="text" variant="outlined" color="secondary"
+                        InputProps={{
+                            className: classes.inputField
+                        }}
+                        fullWidth
+                        onChange={this.handleChange(pet.id,'pet_bio')}
+                    />
+                    </Grid>
                     <Grid item xs={12} className={classes.itemCenter}>
                         <Button color="primary" variant="contained"
                             onClick={this.uploadPhoto}>Upload Photo</Button>
@@ -308,26 +350,26 @@ class ClientRegPage2 extends Component {
                     </Grid>
                     <Grid item xs={12}>
                         {pet.medications && pet.medications.map(medication =>
-                            <>
+                            <div key={medication.id}>
                             <TextField
                                 label="Medication Name"
                                 type="text"
-                                value={pet.medication_name}
+                                value={medication.medication_name}
                                 variant="outlined"
                                 className={classes.inputField}
-                                onChange={this.handleChange(pet.id,'medication_name')}
+                                onChange={this.handleMedicationChange(pet.id, medication.id, 'medication_name')}
                             />
                             <TextField
                                 label="Optional *dosage "
                                 type="text"
                                 variant="outlined"
-                                value={pet.medication_doasge}
+                                value={medication.medication_dosage}
                                 className={classes.inputField}
-                                onChange={this.handleChange(pet.id,'medication_dosage')}
+                                onChange={this.handleMedicationChange(pet.id, medication.id,'medication_dosage')}
                             />
                              <DatePicker 
-                                selected={pet.dosage_time}
-                                onChange={this.handleDateChange(pet.id,'dosage_time')}
+                                selected={medication.dosage_time}
+                                onChange={this.handleDateChange(pet.id, medication.id,'dosage_time')}
                                 showTimeSelect
                                 showTimeSelectOnly
                                 timeIntervals={15}
@@ -342,7 +384,7 @@ class ClientRegPage2 extends Component {
                                 onChange={this.handleChange('dosage_time')}
                             /> */}
                             <br />
-                            </>
+                            </div>
                         )}
                     </Grid>
                     
@@ -380,18 +422,23 @@ class ClientRegPage2 extends Component {
                                 onChange={this.handleChange(pet.id,'care_equipment')}
                         />
                     </Grid>
-                    <Grid item xs={12} className={classes.itemCenter}>
-                        <Button color="primary" variant="contained"
-                            className={classes.buttonMargin} onClick={this.handleBack}>Back</Button>
-                        <Button color="primary" variant="contained"
-                            className={classes.buttonMargin} onClick={this.addPets}>Add Another Pet</Button>
-                        <Button color="primary" variant="contained" 
-                        className={classes.buttonMargin} onClick={this.handleNext}>Save and Continue</Button>
-                    </Grid>
-
                 </Grid>
+                        </CardContent>
+                    </Card>
                 )}
+                     
+
+                <Grid item xs={12} className={classes.itemCenter}>
+                    <Button color="primary" variant="contained"
+                        className={classes.buttonMargin} onClick={this.handleBack}>Back</Button>
+                    <Button color="primary" variant="contained"
+                        className={classes.buttonMargin} onClick={this.addPets}>Add Another Pet</Button>
+                    <Button color="primary" variant="contained"
+                        className={classes.buttonMargin} onClick={this.handleNext}>Save and Continue</Button>
+                </Grid>
+                
             </Container>
+            
         )
     }
 }
@@ -407,17 +454,18 @@ const mapStateToProps = (state) => ({
                 weight: '',
                 age: '',
                 breed: '',
+                pet_bio: '',
                 sex: '',
                 food_brand: '',
                 feeding_per_day: '',
                 amount_per_meal: '',
-                other_food: '',
                 optional_food: '',
                 care_equipment: '',
                 pet_behavior: '',
                 medications: [
                     {
                         id: 1,
+                        pet_id:'',
                         medication_name: '',
                         medication_dosage: '',
                         dosage_time: new Date()
@@ -425,7 +473,7 @@ const mapStateToProps = (state) => ({
                 ], 
             }
         ],
-         ...state.petInfo
+        ...state.petInfo
     } 
 })
 

@@ -6,18 +6,15 @@ import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from "react-router"
 import { Typography, CardHeader } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid"
-import InputLabel from "@material-ui/core/InputLabel"
-import MenuItem from "@material-ui/core/MenuItem"
+import {MenuItem} from "@material-ui/core"
+import Button from "@material-ui/core/Button"
 import Select from "@material-ui/core/Select"
 import FormGroup from "@material-ui/core/FormGroup"
 import Checkbox from "@material-ui/core/Checkbox"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
-import Card from "@material-ui/core/Card"
-import CardContent from "@material-ui/core/CardContent"
-import Button from "@material-ui/core/Button"
-import { ButtonBase } from "@material-ui/core"
 import Paper from "@material-ui/core/Paper"
 import { fade } from "@material-ui/core/styles/colorManipulator";
+import {Input} from "@material-ui/core"
 
 
 const styles = theme => ({
@@ -102,8 +99,11 @@ class SearchPage extends Component {
 
     state = {
         ...this.props.serviceProvider,
+        search: ''
     };
 
+
+    
 
     handleChange = (event, property) => {
         console.log(event.target.value, "#####")
@@ -120,8 +120,19 @@ class SearchPage extends Component {
 
     };
 
+    // onChange = e =>{
+    //     console.log(e.target.value);
+        
+    //     this.setState({search : e.target.value})
+    // }
+
+    
+
     render() {
+
         const { classes } = this.props
+        //const {search}=this.state;
+
         return (
             <div className={classes.root}>
                 <div>
@@ -132,7 +143,18 @@ class SearchPage extends Component {
                             </div>
                             <Typography className={classes.serviceTitle} variant="h4">Find a service provider</Typography>
                         </FormControl>
-                        <Typography variant="subtitle1">Filter</Typography>
+                        
+                        <Typography variant="subtitle1">Filter</Typography> 
+
+
+
+                        {/* <Input label="Search" onChange={this.onChange}/> */}
+
+
+
+
+
+
                         <Grid container direction={"row"} className={classes.serviceType}>
                             {/* <InputLabel>Service:</InputLabel> */}
                             <Select
@@ -170,6 +192,8 @@ class SearchPage extends Component {
                                 />
                             </FormGroup>
                         </Grid>
+                        
+
 
 
 
@@ -198,13 +222,15 @@ class SearchPage extends Component {
                                 <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
                             </Paper>
                         </Grid>
+                       
+
                         <Grid>
                             <Paper elevation="5" className={classes.paper}>
                                 <CardHeader title="Name" className={classes.header} />
                                 <img className={classes.profPic} src="/images/girl-profile.png" alt="profilePic" height="100" width="100" />
                                 <Typography className={classes.certifications} variant="h6">Certifications:</Typography>
                                 <div className={classes.outlined}>
-                                    <Typography variant="subtitle1">
+                                    <Typography className={classes.list} variant="subtitle1">
                                         Avian Practice,
                                         Beef Cattle Practice,
                                         Canine and Feline Practice,
@@ -223,7 +249,7 @@ class SearchPage extends Component {
                                 <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
                             </Paper>
                         </Grid>
-
+                       
 
 
                     </Grid>

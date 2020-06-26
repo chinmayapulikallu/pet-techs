@@ -76,6 +76,7 @@ class ClientRegPage1 extends Component {
 //autofill form
   autoFillForm = () => {
         this.setState({
+            username: "Sam",
             home_address_house: "8901 Portland Ave",
             apt_suite: "",
             city: "Bloomington",
@@ -88,7 +89,7 @@ class ClientRegPage1 extends Component {
             contact_email_1: "sam@in",
             vet_clinic: "Pet clinic",
             clinic_address: "60 E Broadway",
-            clinic_phone: "889898",
+            clinic_phone: "88989",
             transport: false,
         })
     }
@@ -133,6 +134,16 @@ class ClientRegPage1 extends Component {
           This information will be displayed on your profile
         </Typography>
         <img src="/images/house-icon.png" alt="House" height="70" />
+        <div className={classes.inputs}>
+          <TextField
+            label={"Name"}
+            fullWidth
+            color="secondary"
+            variant="outlined"
+            value={this.state.username}
+            onChange={(event) => this.handleChange(event, "username")}
+          />
+        </div>
         <div className={classes.inputs}>
           <TextField
             label={"Home Address"}
@@ -343,6 +354,7 @@ class ClientRegPage1 extends Component {
 }
 const mapStateToProps = (state) => ({
   clientInfo: {
+    username: "",
     home_address_house: "",
     apt_suite: "",
     city: "",

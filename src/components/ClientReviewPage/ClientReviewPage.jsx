@@ -67,7 +67,7 @@ class ClientReviewPage extends Component {
                 <div>
                     <Typography variant="h5" className={classes.inputHeading}>Client Information</Typography>
                     <Typography variant="h6" className={classes.inputHeading}>Your Name:</Typography>
-                    <Typography variant="body1" gutterBottom>NAME</Typography>
+                    <Typography variant="body1" gutterBottom>{clientInfo.username}</Typography>
                     <Typography variant="h6" className={classes.inputHeading}>Address:</Typography>
                     <Typography variant="body1" gutterBottom>{clientInfo.home_address_house}</Typography>
                     <Typography variant="body1" gutterBottom>{clientInfo.apt_suite}</Typography>
@@ -89,7 +89,8 @@ class ClientReviewPage extends Component {
                     <Typography variant="h6" className={classes.inputHeading}>
                         Are you Ok with a Vet Tech transporting your animal to the Vet in an emergency?
                     </Typography>
-                    <Typography variant="body1" gutterBottom>{clientInfo.transport}</Typography>
+                    <Typography variant="body1" gutterBottom>{clientInfo.transport ? "True" : "False"}</Typography>
+                   
                     <div></div>
                     <Button color="primary" variant="contained"
                         onClick={this.editClientProfile}>Edit Client Profile</Button>               

@@ -83,7 +83,7 @@ const styles = theme => ({
         backgroundColor: fade("#195C60", 0.25),
         marginBottom: 20,
         paddingLeft: 30,
-        
+
     },
     aboutMe: {
         display: "flex"
@@ -111,6 +111,14 @@ class SearchPage extends Component {
             [property]: event.target.value
         })
     }
+
+    handleCheckChange = (event, property) => {
+        console.log(event.target.checked, property)
+        this.setState({
+            [property]: event.target.checked === true,
+        });
+
+    };
 
     render() {
         const { classes } = this.props
@@ -143,14 +151,20 @@ class SearchPage extends Component {
                                 {/* <Typography variant="subtitle1">Type:</Typography> */}
                                 <FormControlLabel
                                     control={<Checkbox name="dog" />}
+                                    onChange={(event) => this.handleCheckChange(event, "dogFilter")}
+                                    value={this.state.dogFilter}
                                     label="Dog"
                                 />
                                 <FormControlLabel
                                     control={<Checkbox name="cat" />}
+                                    onChange={(event) => this.handleCheckChange(event, "catFilter")}
+                                    value={this.state.catFilter}
                                     label="Cat"
                                 />
                                 <FormControlLabel
                                     control={<Checkbox name="other" />}
+                                    onChange={(event) => this.handleCheckChange(event, "otherFilter")}
+                                    value={this.state.otherFilter}
                                     label="Other"
                                 />
                             </FormGroup>
@@ -223,6 +237,10 @@ class SearchPage extends Component {
 const mapStateToProps = (state) => ({
     serviceProvider: {
         service_select: '',
+        dogFilter: false,
+        catFilter: false,
+        otherFilter: false,
+
     }
 
 });

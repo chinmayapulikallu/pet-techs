@@ -76,7 +76,7 @@ class ClientRegPage1 extends Component {
 //autofill form
   autoFillForm = () => {
         this.setState({
-            username: "Sam",
+            client_name: "Sam",
             home_address_house: "8901 Portland Ave",
             apt_suite: "",
             city: "Bloomington",
@@ -141,8 +141,8 @@ class ClientRegPage1 extends Component {
             fullWidth
             color="secondary"
             variant="outlined"
-            value={this.state.username}
-            onChange={(event) => this.handleChange(event, "username")}
+            value={this.state.client_name}
+            onChange={(event) => this.handleChange(event, "client_name")}
           />
         </div>
         <div className={classes.inputs}>
@@ -371,7 +371,7 @@ class ClientRegPage1 extends Component {
 }
 const mapStateToProps = (state) => ({
   clientInfo: {
-    username: "",
+    client_name: "",
     home_address_house: "",
     apt_suite: "",
     city: "",

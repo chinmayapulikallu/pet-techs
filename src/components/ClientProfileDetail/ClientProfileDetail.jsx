@@ -10,6 +10,7 @@ import Container from "@material-ui/core/Container";
 
 import { withRouter } from 'react-router-dom';
 import '../ClientProfile/ClientProfile.css';
+import TextField from '@material-ui/core/TextField';
 
 
 const styles = theme => ({
@@ -60,7 +61,13 @@ const styles = theme => ({
     },
     contentInTable: {
         padding: '0px 10px',
-    }
+    },
+    textField: {
+        '& > *': {
+            margin: theme.spacing(1),
+            width: '25ch',
+        },
+    },
 });
 
 
@@ -118,9 +125,15 @@ class ClientProfileDetail extends Component {
     }
     handleSaveClient = () => {
         console.log('Save clicked!')
-        this.setState({
-            editable: !this.state.editable,
-        });
+        if (this.state.client_name === '' || this.state.city === '' || this.state.state === '' || this.state.about_client === '' || this.state.about_home === '') {
+            alert('Please make sure that you filled all the infomation!')
+        } else {
+            this.setState({
+                editable: !this.state.editable,
+            });
+        }
+
+
     }
     handleInputChangeFor = property => (event) => {
         console.log('input change', property, event.target.value)
@@ -149,28 +162,32 @@ class ClientProfileDetail extends Component {
                             <Grid item xs={3} className={classes.clientInfo}>
                                 {this.state.editable ?
                                     <>
-                                        <p><input value={this.state.client_name} onChange={this.handleInputChangeFor("client_name")} /></p>
+                                        <p><TextField id="filled-basic"
+                                            label="Your name"
+                                            color="secondary"
+                                            variant="filled"
+                                            value={this.state.client_name}
+                                            height="10px"
+                                            onChange={this.handleInputChangeFor("client_name")} /></p>
+                                        <Grid container spacing={1}>
+                                            <Grid item xs={6} >
+                                                <TextField id="filled-basic" label="City" color="secondary" variant="filled" value={this.state.city} onChange={this.handleInputChangeFor("city")} />
+                                            </Grid>
+                                            <Grid item xs={6}>
+                                                <TextField id="filled-basic" label="State" color="secondary" variant="filled" value={this.state.state} onChange={this.handleInputChangeFor("state")} />
+                                            </Grid>
+                                        </Grid>
+
+
                                     </>
                                     :
                                     <>
                                         <h3>{this.state.client_name}</h3>
-                                    </>
-                                }
-                                {/* <p>{this.state.city}, {this.state.state}</p> */}
-                                {this.state.editable ?
-                                    <>
-                                        <p><input value={this.state.city} onChange={this.handleInputChangeFor("city")} /></p>
-                                        <p><input value={this.state.state} onChange={this.handleInputChangeFor("state")} /></p>
-
-                                    </>
-                                    :
-                                    <>
                                         <p>{this.state.city}, {this.state.state}</p>
+                                        <Button variant="contained" color="primary" > <a href={`mailto:${this.props.user.user_email}`} target="_blank" className='link'> Contact {this.state.client_name}</a></Button>
                                     </>
                                 }
 
-                                <Button variant="contained" color="primary" > <a href={`mailto:${this.props.user.user_email}`} target="_blank" className='link'> Contact to {this.state.client_name}</a></Button>
-                                {/* <Button variant="contained" color="primary" className='link ><a href={`mailto:${this.props.clientInfo.user_email}`}>Contact to {{this.state.client_name}</a></Button> */}
                             </Grid>
                             <Grid item xs={3} className={classes.editButton}>
                                 {this.state.editable ?
@@ -204,7 +221,17 @@ class ClientProfileDetail extends Component {
                                     <tr>
                                         {this.state.editable ?
                                             <>
-                                                <td className={classes.contentInTable}><input value={this.state.about_client} onChange={this.handleInputChangeFor("about_client")} /></td>
+                                                <td className={classes.contentInTable}>
+                                                    <TextField id="filled-basic"
+                                                        label="Filled"
+                                                        color="secondary"
+                                                        variant="filled"
+                                                        multiline
+                                                        fullWidth
+                                                        rowsMax={4}
+                                                        value={this.state.about_client}
+                                                        onChange={this.handleInputChangeFor("about_client")} />
+                                                </td>
                                             </>
                                             :
                                             <>
@@ -231,7 +258,6 @@ class ClientProfileDetail extends Component {
                                 <Grid container spacing={3}>
                                     <Pet
                                         pet={pet}
-                
                                     />
                                 </Grid>
 
@@ -255,8 +281,26 @@ class ClientProfileDetail extends Component {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td className={classes.contentInTable}>I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...</td>
-                                        {/* <td className={classes.contentInTable}>{this.state.care_equipment}</td> */}
+                                        {this.state.editable ?
+                                            <>
+                                                <td className={classes.contentInTable}>
+                                                    <TextField id="filled-basic"
+                                                        label="Filled"
+                                                        color="secondary"
+                                                        variant="filled"
+                                                        multiline
+                                                        fullWidth
+                                                        rowsMax={4}
+                                                        value={this.state.care_equipment}
+                                                        onChange={this.handleInputChangeFor("care_equipment")} />                                                    </td>
+                                            </>
+                                            :
+                                            <>
+                                                <td className={classes.contentInTable}>I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...</td>
+                                                {/* <td className={classes.contentInTable}>{this.state.care_equipment}</td> */}
+
+                                            </>
+                                        }
                                     </tr>
                                 </tbody>
                             </table>
@@ -266,6 +310,7 @@ class ClientProfileDetail extends Component {
                                 <thead >
                                     <tr>
                                         <th className="table_head">{this.state.client_name}'s Home Enviroment</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -273,7 +318,16 @@ class ClientProfileDetail extends Component {
                                         {/* <td>{this.state.about_home}</td> */}
                                         {this.state.editable ?
                                             <>
-                                                <td className={classes.contentInTable}><input value={this.state.about_home} onChange={this.handleInputChangeFor("about_home")} /></td>
+                                                <td className={classes.contentInTable}>
+                                                    <TextField id="filled-basic"
+                                                        label="Filled"
+                                                        color="secondary"
+                                                        variant="filled"
+                                                        multiline
+                                                        fullWidth
+                                                        rowsMax={4}
+                                                        value={this.state.about_home}
+                                                        onChange={this.handleInputChangeFor("about_home")} />                                                    </td>
                                             </>
                                             :
                                             <>

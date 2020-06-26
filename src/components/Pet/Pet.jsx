@@ -65,12 +65,12 @@ class Pet extends Component {
 
 
     componentDidMount() {
-       
+
         this.props.dispatch({
             type: 'GET_PET_PICTURE',
             payload: { petId: this.props.pet.id }
         })
-        console.log("pet's id:", this.props.pet.id )
+        console.log("pet's id:", this.props.pet.id)
     }
     handleCarePlanButton = () => {
         this.props.history.push('/careplan');
@@ -107,16 +107,50 @@ class Pet extends Component {
                             </tr>
                         </tbody>
                     </table>
-                    
+
                 </Grid>
                 {/* ---------Content inside pet picture array when mapping------------ */}
-                {/* <Grid item xs={6}>
-                    <img src="images/blank-profile-picture.png" alt="profile" height="50" width="50" />
-                    <img src="images/blank-profile-picture.png" alt="profile" height="50" width="50" />
-                    <img src="images/blank-profile-picture.png" alt="profile" height="50" width="50" />
-                    <img src="images/blank-profile-picture.png" alt="profile" height="50" width="50" />
-                </Grid> */}
-                
+                <Grid item xs={6}>
+                    {/* <p>{JSON.stringify(this.props.pet.array_agg)}</p> */}
+                    {/* {this.props.pet.array_agg.map((petImg) => {
+                        if (petImg === null) {
+                            return (
+                                <div key={petImg}>
+                                    <Button
+                                        variant="contained"
+                                        component="label"
+                                    >
+                                        Upload pet's picture
+                        <input
+                                            type="file"
+                                            style={{ display: "none" }}
+                                        />
+                                    </Button>
+                                </div>
+                            )
+                        } else {
+                            return (
+                                <div key={petImg}>
+                                    <img src={petImg} alt="pet_img" height="100" width="100" />
+                                </div>
+                            )
+                        }
+
+                    })} */}
+                    {/* <Button
+                        variant="contained"
+                        component="label"
+                    >
+                        Upload pet's picture
+                        <input
+                            type="file"
+                            style={{ display: "none" }}
+                        />
+                    </Button> */}
+                    
+
+                </Grid>
+
                 {/* ---------Content inside pet picture array when mapping------------ */}
             </div >
         )

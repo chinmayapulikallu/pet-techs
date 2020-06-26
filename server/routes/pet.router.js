@@ -7,7 +7,11 @@ const router = express.Router();
  * GET route for Pets by client ID
  */
 router.get("/:id", (req, res) => {
-  const sqlText = `SELECT * from pet where client_id = $1; `;
+  const sqlText = `SELECT  pet.id, "client_id", "pet_type", "pet_name","weight", "age", 
+                   "sex", "breed", "pet_bio", "food_brand", "feeding_per_day",
+                   "amount_per_meal", "other_food", "pet_behavior", "care_equipment", array_agg(pet_picture.pet_profile_img), array_agg(pet_picture.pet_img)
+                    FROM pet 
+                  JOIN pet_picture ON pet.id = pet_picture.pet_id WHERE pet.client_id = $1 GROUP BY pet.id ;`;
   pool
     .query(sqlText, [req.params.id])
     .then((response) => {
@@ -41,9 +45,9 @@ router.post("/", async (req, res) => {
   try {
     let queryPet = `INSERT INTO "pet" 
                         ("client_id", "pet_type", "other_pet", "pet_name","weight", "age", 
-                        "sex", "breed", "pet_img", "pet_bio", "food_brand", "feeding_per_day",
+                        "sex", "breed", "pet_bio", "food_brand", "feeding_per_day",
                         "amount_per_meal", "other_food", "pet_behavior", "care_equipment")
-                        VALUES( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16);`;
+                        VALUES( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15);`;
     let valuesPet = [
       req.body.client_id,
       req.body.pet_type,
@@ -53,7 +57,6 @@ router.post("/", async (req, res) => {
       req.body.age,
       req.body.sex,
       req.body.breed,
-      req.body.pet_img,
       req.body.pet_bio,
       req.body.food_brand,
       req.body.feeding_per_day,

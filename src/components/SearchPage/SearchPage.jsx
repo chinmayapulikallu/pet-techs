@@ -134,12 +134,13 @@ class SearchPage extends Component {
                         </FormControl>
                         <Typography variant="subtitle1">Filter</Typography>
                         <Grid container direction={"row"} className={classes.serviceType}>
+                            {/* <InputLabel>Service:</InputLabel> */}
                             <Select
-                                value={"Select"}
+                               
                                 color="secondary"
                                 label="Service"
                                 variant="outlined"
-                                onChange={(event) => this.handleChange(event, "service_select")}
+                                onChange={(event) => this.handleChange(event, "service_filter")}
                             >
                                 <MenuItem value="Select">Select Service Type</MenuItem>
                                 <MenuItem value="Sleepover">Pet Sleepover</MenuItem>
@@ -236,7 +237,7 @@ class SearchPage extends Component {
 
 const mapStateToProps = (state) => ({
     serviceProvider: {
-        service_select: '',
+        service_filter: '',
         dogFilter: false,
         catFilter: false,
         otherFilter: false,

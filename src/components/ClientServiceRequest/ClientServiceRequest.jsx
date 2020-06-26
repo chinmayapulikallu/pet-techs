@@ -52,7 +52,6 @@ class ClientServiceRequest extends Component {
 
 
     handleDateChange = (event, property) => {
-        // console.log(event.target.value, "#######")
         this.setState({
             [property]: event,
         })

@@ -5,6 +5,7 @@ import user from './userReducer';
 import vtInfo from './vetTechReducer';
 import clientInfo from './clientInfoReducer';
 import petInfo from './petInfoReducer';
+import petCarePlan from './petCarePlanReducer';
 
 
 
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   clientInfo,
   petInfo,
   vtInfo,
+  petCarePlan,
 });
 
 export default rootReducer;

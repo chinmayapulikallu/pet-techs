@@ -73,6 +73,28 @@ class ClientRegPage1 extends Component {
     ...this.props.clientInfo,
   };
 
+//autofill form
+  autoFillForm = () => {
+        this.setState({
+            client_name: "Sam",
+            home_address_house: "8901 Portland Ave",
+            apt_suite: "",
+            city: "Bloomington",
+            state: "MN",
+            zip_code: "55420",
+            about_client: "Loves Dogs and cats",
+            about_home: "Single family home",
+            about_equipment: "toys",
+            contact_name_1: "Sam",
+            contact_phone_1: "9999999",
+            contact_email_1: "sam@in",
+            vet_clinic: "Pet clinic",
+            clinic_address: "60 E Broadway",
+            clinic_phone: "88989",
+            transport: false,
+        })
+    }
+
   handleChange = (event, property) => {
     console.log("in handleChange", event.target.value, property);
     if (event.target.value === "true" || event.target.value === "false") {
@@ -92,7 +114,7 @@ class ClientRegPage1 extends Component {
 
   handleNext = () => {
     this.props.dispatch({
-      type: "SET_CLIENT",
+      type: "SET_CLIENT_DATA",
       payload: { ...this.state },
     });
     this.props.onNext();
@@ -107,6 +129,7 @@ class ClientRegPage1 extends Component {
       <Container className={classes.root} maxWidth="sm">
         <Typography variant="h4" className={classes.title}>
           Hi NAME! Let's set up your profile
+          <Button onClick={this.autoFillForm}></Button>
         </Typography>
         <Typography variant="subtitle1" className={classes.subTitle}>
           This information will be displayed on your profile
@@ -114,18 +137,26 @@ class ClientRegPage1 extends Component {
         <img src="/images/house-icon.png" alt="House" height="70" />
         <div className={classes.inputs}>
           <TextField
-            id="outlined-basic"
+            label={"Name"}
+            fullWidth
+            color="secondary"
+            variant="outlined"
+            value={this.state.client_name}
+            onChange={(event) => this.handleChange(event, "client_name")}
+          />
+        </div>
+        <div className={classes.inputs}>
+          <TextField
             label={"Home Address"}
             fullWidth
             color="secondary"
             variant="outlined"
-            value={this.state.home_adress_house}
+            value={this.state.home_address_house}
             onChange={(event) => this.handleChange(event, "home_address_house")}
           />
         </div>
         <div className={classes.inputs}>
           <TextField
-            id="outlined-basic"
             label={"Apartment or Suite #"}
             fullWidth
             color="secondary"
@@ -136,7 +167,6 @@ class ClientRegPage1 extends Component {
         </div>
         <div className={classes.inputs}>
           <TextField
-            id="outlined-basic"
             label={"City"}
             variant="outlined"
             value={this.state.city}
@@ -145,7 +175,6 @@ class ClientRegPage1 extends Component {
             className={classes.city}
           />
           <TextField
-            id="outlined-basic"
             label={"State"}
             variant="outlined"
             value={this.state.state}
@@ -154,7 +183,6 @@ class ClientRegPage1 extends Component {
             className={classes.flex}
           />
           <TextField
-            id="outlined-basic"
             label={"Zipcode"}
             variant="outlined"
             color="secondary"
@@ -194,6 +222,22 @@ class ClientRegPage1 extends Component {
         </div>
         <div>
           <Typography variant="subtitle1" className={classes.labels}>
+            Describe a bit about your pet toys for providers
+            to get a sense of what equipment your pet uses.
+          </Typography>
+          <TextField
+            value={this.state.about_equipment}
+            variant="outlined"
+            className={classes.inputs}
+            fullWidth
+            color="secondary"
+            multiline
+            rows={5}
+            onChange={(event) => this.handleChange(event, "about_equipment")}
+          />
+        </div>
+        <div>
+          <Typography variant="subtitle1" className={classes.labels}>
             Describe a bit about your home environment and space for providers
             to get a sense of where they might provide services
           </Typography>
@@ -224,7 +268,6 @@ class ClientRegPage1 extends Component {
         </Typography>
         <div className={classes.inputs}>
           <TextField
-            id="outlined-basic"
             fullWidth
             label={"Emergency Contact Name"}
             color="secondary"
@@ -235,7 +278,6 @@ class ClientRegPage1 extends Component {
         </div>
         <div className={classes.inputs}>
           <TextField
-            id="outlined-basic"
             label={"Emergency Contact Phone"}
             variant="outlined"
             value={this.state.contact_phone_1}
@@ -244,7 +286,6 @@ class ClientRegPage1 extends Component {
             className={classes.em_phone}
           />
           <TextField
-            id="outlined-basic"
             label={"Emergency Contact Email"}
             variant="outlined"
             color="secondary"
@@ -264,7 +305,6 @@ class ClientRegPage1 extends Component {
         </Typography>
         <div className={classes.inputs}>
           <TextField
-            id="outlined-basic"
             label={"Vet Clinic Name"}
             variant="outlined"
             value={this.state.vet_clinic}
@@ -275,7 +315,6 @@ class ClientRegPage1 extends Component {
         </div>
         <div className={classes.inputs}>
           <TextField
-            id="outlined-basic"
             label={"Vet Clinic Phone"}
             variant="outlined"
             value={this.state.clinic_phone}
@@ -284,7 +323,6 @@ class ClientRegPage1 extends Component {
             className={classes.em_phone}
           />
           <TextField
-            id="outlined-basic"
             label={"Vet Clinic Address (street & city)"}
             variant="outlined"
             color="secondary"
@@ -333,6 +371,7 @@ class ClientRegPage1 extends Component {
 }
 const mapStateToProps = (state) => ({
   clientInfo: {
+    client_name: "",
     home_address_house: "",
     apt_suite: "",
     city: "",
@@ -340,6 +379,7 @@ const mapStateToProps = (state) => ({
     zip_code: "",
     about_client: "",
     about_home: "",
+    about_equipment:"",
     contact_name_1: "",
     contact_phone_1: "",
     contact_email_1: "",

@@ -27,6 +27,7 @@ import VTStepper from "../VTStepper/VTStepper";
 import SearchPage from "../SearchPage/SearchPage"
 
 import ClientDashBoard from "../ClientDashboard/ClientDashboard";
+import CarePlan from "../CarePlan/CarePlan";
 
 import "./App.css";
 
@@ -76,10 +77,15 @@ class App extends Component {
               component={SearchPage}
             />
             <Route exact path="/clientdashboard" component={ClientDashBoard} />
+            <Route exact path="/careplan/:id" component={CarePlan} />
+
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
+          
+          {/* <ProtectedRoute component={Footer} /> */}
           <Footer />
+
         </div>
       </Router>
     );

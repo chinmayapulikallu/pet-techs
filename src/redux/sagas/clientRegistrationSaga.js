@@ -3,6 +3,7 @@ import axios from 'axios';
 
 // worker Saga: will be fired on "REGISTER" actions
 function* registerClient(action) {
+    console.log('client registration saga::::----->', action.payload )
     try {
        yield axios.post('/api/client', action.payload)
         try {

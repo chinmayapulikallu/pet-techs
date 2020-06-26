@@ -87,10 +87,10 @@ class ClientProfileDetail extends Component {
 
 
     componentDidMount() {
-        const currentClient = this.props.clientInfo.find(client => client.id === parseInt(this.props.match.params.id))
+        const currentClient = this.props.clientInfo.find(client => client.user_id === parseInt(this.props.match.params.id))
         console.log("-------------->client profile", currentClient);
         this.setState({
-            id: currentClient.id,
+            id: currentClient.user_id,
             client_name: currentClient.client_name,
             profile_img: currentClient.profile_img,
             about_client: currentClient.about_client,
@@ -101,7 +101,7 @@ class ClientProfileDetail extends Component {
         console.log('state:', this.state)
 
         const currentId = this.props.match.params.id;
-
+console.log("currentID", currentId)
         this.props.dispatch({
             type: 'GET_PET_DATA',
             payload: { id: currentId }

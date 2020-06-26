@@ -11,9 +11,9 @@ function* petInfoSaga() {
 
 function* getPetData(action) {
   try {
-    
+    const id = action.payload.id
     console.log('from petInfoSaga')
-    const response = yield axios.get(`/api/pet`);
+    const response = yield axios.get(`/api/pet/${id}`);
     yield put({
       type: "GET_PET_DATA_SUCCESSFUL",
       payload: response.data,

@@ -10,11 +10,12 @@ const {
  */
 
 router.get("/:id", (req, res) => {
-  const sqlText = `SELECT  pet.id, "client_id", "pet_type", "pet_name","weight", "age", 
-                   "sex", "breed", "pet_bio", "food_brand", "feeding_per_day",
-                   "amount_per_meal", "other_food", "pet_behavior", "care_equipment", array_agg(pet_picture.pet_profile_img), array_agg(pet_picture.pet_img)
-                    FROM pet 
-                  JOIN pet_picture ON pet.id = pet_picture.pet_id WHERE pet.client_id = $1 GROUP BY pet.id ;`;
+//   const sqlText = `SELECT  pet.id, "user_id", "pet_type", "pet_name","weight", "age", 
+//                    "sex", "breed", "pet_bio", "food_brand", "feeding_per_day",
+//                    "amount_per_meal", "other_food", "pet_behavior", "care_equipment", array_agg(pet_picture.pet_profile_img), array_agg(pet_picture.pet_img)
+//                     FROM pet 
+//                   JOIN pet_picture ON pet.id = pet_picture.pet_id WHERE pet.user_id = $1 GROUP BY pet.id ;`;
+const sqlText = `SELECT * from pet where user_id = $1;`;
   pool
     .query(sqlText, [req.user.id])
     .then((response) => {

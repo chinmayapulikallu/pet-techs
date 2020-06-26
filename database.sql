@@ -83,14 +83,14 @@ CREATE TABLE vet_tech (
   current_job_title text,
   expertise text,
   bioYourself text,
-  CPR_first_aid boolean DEFAULT FALSE NOT NULL ,
-  oral_medication boolean DEFAULT FALSE NOT NULL,
-  injectable_medication boolean DEFAULT FALSE NOT NULL,
-  exp_older_pet boolean DEFAULT FALSE NOT NULL,
-  exp_special_pet boolean DEFAULT FALSE NOT NULL,
-  daily_exercise boolean DEFAULT FALSE NOT NULL,
-  pet_longer_than_a_week boolean DEFAULT FALSE NOT NULL,
-  diabetic_insulin_care boolean DEFAULT FALSE NOT NULL
+  CPR_first_aid boolean DEFAULT FALSE  ,
+  oral_medication boolean DEFAULT FALSE ,
+  injectable_medication boolean DEFAULT FALSE ,
+  exp_older_pet boolean DEFAULT FALSE ,
+  exp_special_pet boolean DEFAULT FALSE  ,
+  daily_exercise boolean DEFAULT FALSE  ,
+  pet_longer_than_a_week boolean DEFAULT FALSE  ,
+  diabetic_insulin_care boolean DEFAULT FALSE  
 );
 
 CREATE TABLE pet (
@@ -120,9 +120,9 @@ CREATE TABLE medication (
   pet_id INT NOT NULL
          REFERENCES pet (id)
          ON DELETE CASCADE ,
-  medication_name varchar (500) NOT NULL,
-  dosage varchar (500) NOT NULL,
-  dosage_time time NOT NULL
+  medication_name varchar (500) ,
+  dosage varchar (500) ,
+  dosage_time timestamp with time zone,
 );
 
 CREATE TABLE pet_picture (

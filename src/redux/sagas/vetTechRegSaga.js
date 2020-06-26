@@ -2,7 +2,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* vetTechRegSaga() {
-    yield takeLatest('ADD_VT', addVetTech);
+    yield takeLatest('VT_REGISTER', addVetTech);
 
 }
 

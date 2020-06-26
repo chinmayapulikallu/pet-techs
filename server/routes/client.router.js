@@ -9,7 +9,7 @@ const {
  * GET route template
  */
 router.get("/", rejectUnauthenticated, (req, res) => {
-    const sqlText = `SELECT * from client where id = $1;`;
+    const sqlText = `SELECT * from client where user_id = $1;`;
     console.log(req.user.id);
   pool
     .query(sqlText, [req.user.id])

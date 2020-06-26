@@ -5,8 +5,10 @@ function* vtInfoSaga() {
   yield takeLatest("GET_VT_DATA", getVTData);
 }
 
+
 function* getVTData(action) {
   try {
+    // const id = action.payload.id;
     const response = yield axios.get(`/api/vt`);
     yield put({
       type: "GET_VT_DATA_SUCCESSFUL",
@@ -17,4 +19,6 @@ function* getVTData(action) {
     console.log("Error with get vet_tech data:", error);
   }
 }
+
+
 export default vtInfoSaga;

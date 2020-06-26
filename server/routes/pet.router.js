@@ -10,11 +10,12 @@ const {
  */
 
 router.get("/:id", (req, res) => {
-  const sqlText = `SELECT  pet.id, "client_id", "pet_type", "pet_name","weight", "age", 
-                   "sex", "breed", "pet_bio", "food_brand", "feeding_per_day",
-                   "amount_per_meal", "other_food", "pet_behavior", "care_equipment", array_agg(pet_picture.pet_profile_img), array_agg(pet_picture.pet_img)
-                    FROM pet 
-                  JOIN pet_picture ON pet.id = pet_picture.pet_id WHERE pet.client_id = $1 GROUP BY pet.id ;`;
+//   const sqlText = `SELECT  pet.id, "user_id", "pet_type", "pet_name","weight", "age", 
+//                    "sex", "breed", "pet_bio", "food_brand", "feeding_per_day",
+//                    "amount_per_meal", "other_food", "pet_behavior", "care_equipment", array_agg(pet_picture.pet_profile_img), array_agg(pet_picture.pet_img)
+//                     FROM pet 
+//                   JOIN pet_picture ON pet.id = pet_picture.pet_id WHERE pet.user_id = $1 GROUP BY pet.id ;`;
+const sqlText = `SELECT * from pet where user_id = $1;`;
   pool
     .query(sqlText, [req.user.id])
     .then((response) => {
@@ -95,35 +96,22 @@ router.post("/", async (req, res) => {
     console.log("error in post pet", error);
     res.sendStatus(500);
   }
-  //   pool
-  //     .query(queryPet, valuesPet)
-  //     .then((result) => {
-  //       console.log("created in pet table", result);
-  //       let queryMedication = `INSERT INTO "medication"
-  //                                ("pet_id", "medication_name", "dosage", "dosage_time")
-  //                                VALUES($1, $2, $3, $4);`;
-  //       let valuesMedication = [
-  //         req.body.pet_id,
-  //         req.body.medication_name,
-  //         req.body.dosage,
-  //         req.body.dosage_time,
-  //       ];
-
-  //       pool
-  //         .query(queryMedication, valuesMedication)
-  //         .then((result) => {
-  //           console.log("created in medication", result);
-  //           res.sendStatus(200);
-  //         })
-  //         .catch((error) => {
-  //           console.log("error in post medication:::", error);
-  //           res.sendStatus(500);
-  //         });
-  //     })
-  //     .catch((error) => {
-  //       console.log("error in post pet:::", error);
-  //       res.sendStatus(500);
-  //     });
+  
+ 
 });
 
+router.put("/", rejectUnauthenticated, (req, res) => {
+    const {id, pet_bio, care_equipment, age, weight, pet_behavior, feeding_per_day, food_brand, amount_per_meal} = req.body;
+    const sqlText = `UPDATE pet SET pet_bio = $2, care_equipment = $3, age = $4, weight = $5, 
+    pet_behavior = $6, feeding_per_day = $7, food_brand = $8, amount_per_meal = $9 where pet.id = $1; `;
+    pool
+      .query(sqlText, [id, pet_bio, care_equipment, age, weight, pet_behavior, feeding_per_day, food_brand, amount_per_meal])
+      .then((response) => {
+        res.sendStatus(200);
+      })
+      .catch((error) => {
+        console.log(`Error updating pets by id request. ${sqlText}`, error);
+        res.sendStatus(500);
+      });
+  });
 module.exports = router;

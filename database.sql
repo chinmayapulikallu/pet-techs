@@ -120,9 +120,9 @@ CREATE TABLE medication (
   pet_id INT NOT NULL
          REFERENCES pet (id)
          ON DELETE CASCADE ,
-  medication_name varchar (500) NOT NULL,
-  dosage varchar (500) NOT NULL,
-  dosage_time time NOT NULL
+  medication_name varchar (500) ,
+  dosage varchar (500) ,
+  dosage_time timestamp with time zone,
 );
 
 CREATE TABLE pet_picture (

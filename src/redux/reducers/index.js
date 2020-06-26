@@ -6,6 +6,9 @@ import vtInfo from './vetTechReducer';
 import clientInfo from './clientInfoReducer';
 import petInfo from './petInfoReducer';
 import petCarePlan from './petCarePlanReducer';
+import vtInfoPage1 from './vetTechReducerPage1';
+import vtInfoPage2 from './vetTechReducerPage2';
+import vtInfoPage3 from './vetTechReducerPage3';
 
 
 
@@ -24,6 +27,9 @@ const rootReducer = combineReducers({
   petInfo,
   vtInfo,
   petCarePlan,
+  vtInfoPage1,
+  vtInfoPage2,
+  vtInfoPage3,
 });
 
 export default rootReducer;

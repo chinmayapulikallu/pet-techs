@@ -34,6 +34,7 @@ CREATE TABLE client (
   profile_img varchar (1000),
   about_client text NOT NULL,
   about_home text NOT NULL,
+  about_equipment text NOT NULL,
   contact_name_1 varchar (80),
   contact_phone_1 varchar (20),
   contact_email_1 varchar (100),
@@ -82,14 +83,14 @@ CREATE TABLE vet_tech (
   current_job_title text,
   expertise text,
   bioYourself text,
-  CPR_first_aid boolean DEFAULT FALSE NOT NULL ,
-  oral_medication boolean DEFAULT FALSE NOT NULL,
-  injectable_medication boolean DEFAULT FALSE NOT NULL,
-  exp_older_pet boolean DEFAULT FALSE NOT NULL,
-  exp_special_pet boolean DEFAULT FALSE NOT NULL,
-  daily_exercise boolean DEFAULT FALSE NOT NULL,
-  pet_longer_than_a_week boolean DEFAULT FALSE NOT NULL,
-  diabetic_insulin_care boolean DEFAULT FALSE NOT NULL
+  CPR_first_aid boolean DEFAULT FALSE  ,
+  oral_medication boolean DEFAULT FALSE ,
+  injectable_medication boolean DEFAULT FALSE ,
+  exp_older_pet boolean DEFAULT FALSE ,
+  exp_special_pet boolean DEFAULT FALSE  ,
+  daily_exercise boolean DEFAULT FALSE  ,
+  pet_longer_than_a_week boolean DEFAULT FALSE  ,
+  diabetic_insulin_care boolean DEFAULT FALSE  
 );
 
 CREATE TABLE pet (

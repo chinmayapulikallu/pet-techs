@@ -72,21 +72,25 @@ const styles = theme => ({
         borderRadius: "50px"
     },
     header: {
-
         backgroundColor: fade("#195C60", 0.50),
     },
     btn: {
         marginBottom: 20,
-        marginTop: 10
+        marginTop: 20
     },
-
     certifications: {
         display: "flex",
         backgroundColor: fade("#195C60", 0.25),
-        marginBottom: 20
+        marginBottom: 20,
+        paddingLeft: 30,
+        
     },
     aboutMe: {
         display: "flex"
+    },
+    list: {
+        marginBottom: 20,
+        marginTop: 10
     }
 
 
@@ -160,7 +164,7 @@ class SearchPage extends Component {
                                 <img className={classes.profPic} src="/images/girl-profile.png" alt="profilePic" height="100" width="100" />
                                 <Typography className={classes.certifications} variant="h6">Certifications:</Typography>
                                 <div className={classes.outlined}>
-                                    <Typography variant="subtitle1">
+                                    <Typography className={classes.list} variant="subtitle1">
                                         Avian Practice,
                                         Beef Cattle Practice,
                                         Canine and Feline Practice,

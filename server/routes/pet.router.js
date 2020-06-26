@@ -78,7 +78,7 @@ router.post("/", async (req, res) => {
       req.body.dosage,
       req.body.dosage_time,
     ];
-
+    console.log("medication info::::", valuesMedication);
     let medicationResult = await pool.query(queryMedication, valuesMedication);
     res.sendStatus(200);
   } catch (error) {

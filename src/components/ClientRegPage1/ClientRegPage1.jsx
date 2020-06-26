@@ -84,6 +84,7 @@ class ClientRegPage1 extends Component {
             zip_code: "55420",
             about_client: "Loves Dogs and cats",
             about_home: "Single family home",
+            about_equipment: "toys",
             contact_name_1: "Sam",
             contact_phone_1: "9999999",
             contact_email_1: "sam@in",
@@ -217,6 +218,22 @@ class ClientRegPage1 extends Component {
             multiline
             rows={5}
             onChange={(event) => this.handleChange(event, "about_client")}
+          />
+        </div>
+        <div>
+          <Typography variant="subtitle1" className={classes.labels}>
+            Describe a bit about your pet toys for providers
+            to get a sense of what equipment your pet uses.
+          </Typography>
+          <TextField
+            value={this.state.about_equipment}
+            variant="outlined"
+            className={classes.inputs}
+            fullWidth
+            color="secondary"
+            multiline
+            rows={5}
+            onChange={(event) => this.handleChange(event, "about_equipment")}
           />
         </div>
         <div>
@@ -362,6 +379,7 @@ const mapStateToProps = (state) => ({
     zip_code: "",
     about_client: "",
     about_home: "",
+    about_equipment:"",
     contact_name_1: "",
     contact_phone_1: "",
     contact_email_1: "",

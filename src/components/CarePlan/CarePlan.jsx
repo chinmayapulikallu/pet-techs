@@ -38,43 +38,33 @@ const useStyles = (theme) => ({
 });
 
 class CarePlan extends Component {
-  componentDidMount = () => {
-      console.log("Log in petcareplan", this.props.petCarePlan)
-    // const currentCarePlan = this.props.petCarePlan.find(carePlan => carePlan.id === parseInt(this.props.match.params.id))
-    // this.setState({
-    //   id: this.props.petCarePlan.id,
-    //   pet_name: this.props.petCarePlan.pet_name,
-    //   age: this.props.petCarePlan.age,
-    //   weight: this.props.petCarePlan.weight,
-    //   pet_behavior: this.props.petCarePlan.pet_behavior,
-    //   pet_bio: this.props.petCarePlan.pet_bio,
-    //   feedings_per_day: this.props.petCarePlan.feedings_per_day,
-    //   food_brand: this.props.petCarePlan.food_brand,
-    //   amount_per_meal: this.props.petCarePlan.amount_per_meal,
-    //   care_equipment: this.props.petCarePlan.care_equipment,
-    // });
-  };
   state = {
-    // isEditing: false,
-   ...this.props.petCarePlan,
+    isEditing: false,
   };
 
   handleEditToggle = () => {
-      console.log("In edit/save toggle", this.state)
-    this.setState({
-        
-      isEditing: true,
+    console.log(
+      "In edit/save toggle",
+      this.state,
+      "redux state",
+      this.props.petCarePlan
+    );
+    this.props.dispatch({
+      type: "SAVE_PET_DETAILS",
+      payload: this.props.petCarePlan,
     });
-
     this.setState({
       isEditing: !this.state.isEditing,
     });
   };
 
-  handleInputChange = (event, property) => {
+  handleInputChange = (property) => (event) => {
     console.log("in handleinputchange", event.target.value, this.state);
-    this.setState({
-      [property]: event.target.value,
+    this.props.dispatch({
+      type: "UPDATE_PET_CARE_PLAN",
+      payload: {
+        [property]: event.target.value,
+      },
     });
   };
 
@@ -92,31 +82,42 @@ class CarePlan extends Component {
         <Typography variant="h2" className={this.props.classes.profileCenter}>
           Care plan for {this.props.petCarePlan.pet_name}!
         </Typography>
-
         <Card>
           <CardContent>
+            <div>
+              <Typography>
+                General Info:
+                {this.state.isEditing ? (
+                  <TextField
+                    id="outlined-basic"
+                    variant="outlined"
+                    color="secondary"
+                    label="Pet Info"
+                    value={this.props.petCarePlan.pet_bio}
+                    onChange={this.handleInputChange("pet_bio")}
+                  />
+                ) : (
+                  this.props.petCarePlan.pet_bio
+                )}
+              </Typography>
+            </div>
             <Typography>
-              General Info:{" "}
+              Pet Feeding Info: I like to eat{" "}
               {this.state.isEditing ? (
                 <TextField
                   id="outlined-basic"
                   variant="outlined"
                   color="secondary"
-                  value={this.state.pet_bio}
-                  onChange={(event) => {
-                    this.handleInputChange(event, "pet_bio");
-                  }}
+                  label="Pet Info"
+                  value={this.props.petCarePlan.feeding_per_day}
+                  onChange={this.handleInputChange("feeding_per_day")}
                 />
               ) : (
-                this.state.pet_bio
+                this.props.petCarePlan.feeding_per_day
               )}
-              .
-            </Typography>
-            <Typography>
-              Pet Feeding Info: I like to eat{" "}
-              {this.props.petCarePlan.feeding_per_day} meals per day, and my
-              favorite food is {this.props.petCarePlan.food_brand}. Please feed
-              me {this.props.petCarePlan.amount_per_meal} for each meal!
+              meals per day, and my favorite food is{" "}
+              {this.props.petCarePlan.food_brand}. Please feed me{" "}
+              {this.props.petCarePlan.amount_per_meal} for each meal!
             </Typography>
 
             <Typography>
@@ -143,7 +144,7 @@ class CarePlan extends Component {
               color="primary"
               onClick={this.handleEditToggle}
             >
-              {this.state.isEditing ? <>Save</> : <>Edit</>}
+              {this.state.isEditing ? "Save" : "Edit"}
             </Button>
           </CardContent>
         </Card>
@@ -151,21 +152,8 @@ class CarePlan extends Component {
     );
   }
 }
-const mapStateToProps = (state) => ({
-//   clientInfo: state.clientInfo,
-//   petInfo: state.petInfo,
-//   user: state.user,
-  petCarePlan: {id: "",
-  pet_name: "",
-  age: "",
-  weight: "",
-  pet_behavior: "",
-  pet_bio: "",
-  feedings_per_day: "",
-  food_brand: "",
-  amount_per_meal: "",
-  care_equipment: "",
-...state.petCarePlan}
+const mapStateToProps = (reduxState) => ({
+  petCarePlan: reduxState.petCarePlan,
 });
 export default withStyles(useStyles)(
   withRouter(connect(mapStateToProps)(CarePlan))

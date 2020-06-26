@@ -293,7 +293,7 @@ class ClientRegPage2 extends Component {
                     </Grid>
                     <Grid item xs={12}>
                     <TextField
-                        label=" Optional* Other dietary restrictions, supplements, etc."  
+                        label="Bio about Your Pet "  
                         value={pet.pet_bio}
                         type="text" variant="outlined" color="secondary"
                         InputProps={{

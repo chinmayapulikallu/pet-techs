@@ -104,7 +104,6 @@ CREATE TABLE pet (
   age int NOT NULL,
   sex varchar NOT NULL,
   breed varchar (50) NOT NULL,
-  pet_img varchar (1000),
   pet_bio varchar NOT NULL,
   food_brand varchar (250) NOT NULL,
   feeding_per_day int NOT NULL,
@@ -130,6 +129,7 @@ CREATE TABLE pet_picture (
   pet_id INT NOT NULL
          REFERENCES pet (id)
          ON DELETE CASCADE ,
+  pet_profile_img varchar (1000),
   pet_img varchar (1000)
 );
 

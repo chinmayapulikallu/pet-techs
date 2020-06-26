@@ -69,12 +69,18 @@ const styles = theme => ({
     profPic: {
         marginTop: 20,
         marginBottom: 20,
+        border: "2px solid #F8E16C",
+        borderRadius: "50px"
     },
     header: {
         background: '#195C60'
     },
     btn: {
-        marginBottom: 10
+        marginBottom: 20
+    },
+    outlined: {
+        outline: "1px solid #195C60",
+        marginBottom: 20
     }
 
 
@@ -142,29 +148,47 @@ class SearchPage extends Component {
                         <Grid>
                             <Paper elevation="5" className={classes.paper}>
                                 <CardHeader title="Name" className={classes.header} />
-                                <img className={classes.profPic} src="/images/blank-profile-picture.png" alt="profilePic" height="75" width="75"/>
-                                <Typography variant="h6">
-                                    Certs
+                                <img className={classes.profPic} src="/images/girl-profile.png" alt="profilePic" height="75" width="75"/>
+                                <div className={classes.outlined}>
+                                <Typography variant="subtitle1">
+                                        Avian Practice,
+                                        Beef Cattle Practice,
+                                        Canine and Feline Practice,
+                                        Dairy Practice,
+                                        Equine Practice
                                     </Typography>
-                                <Typography variant="h6">
-                                    Bio
+                                </div>
+                                <div className={classes.outlined}>
+                                <Typography variant="subtitle1">
+                                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. 
                                     </Typography>
+                                </div>
                                 <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
                             </Paper>
                         </Grid>
                         <Grid>
                             <Paper elevation="5" className={classes.paper}>
                                 <CardHeader title="Name" className={classes.header} />
-                                <img className={classes.profPic} src="/images/blank-profile-picture.png" alt="profilePic" height="75" width="75"/>
-                                <Typography variant="h6">
-                                    Certs
+                                <img className={classes.profPic} src="/images/girl-profile.png" alt="profilePic" height="75" width="75"/>
+                                <div className={classes.outlined}>
+                                <Typography variant="subtitle1">
+                                        Avian Practice,
+                                        Beef Cattle Practice,
+                                        Canine and Feline Practice,
+                                        Dairy Practice,
+                                        Equine Practice
                                     </Typography>
-                                <Typography variant="h6">
-                                    Bio
+                                </div>
+                                <div className={classes.outlined}>
+                                <Typography variant="subtitle1">
+                                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. 
                                     </Typography>
+                                </div>
                                 <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
                             </Paper>
                         </Grid>
+                        
+                       
                     </Grid>
 
                 </div>

@@ -75,7 +75,6 @@ const styles = theme => ({
 class ClientProfileDetail extends Component {
     state = {
         editable: false,
-
         id: '',
         client_name: '',
         profile_img: '',
@@ -87,10 +86,10 @@ class ClientProfileDetail extends Component {
 
 
     componentDidMount() {
-        const currentClient = this.props.clientInfo.find(client => client.id === parseInt(this.props.match.params.id))
+        const currentClient = this.props.clientInfo.find(user => user.id === parseInt(this.props.match.params.id))
         console.log("-------------->client profile", currentClient);
         this.setState({
-            id: currentClient.id,
+            id: this.props.user.id,
             client_name: currentClient.client_name,
             profile_img: currentClient.profile_img,
             about_client: currentClient.about_client,
@@ -104,7 +103,7 @@ class ClientProfileDetail extends Component {
 
         this.props.dispatch({
             type: 'GET_PET_DATA',
-            payload: { id: currentId }
+            // payload: { id: currentId }
         })
         console.log('pet data:', this.props.petInfo)
 
@@ -223,7 +222,7 @@ class ClientProfileDetail extends Component {
                                             <>
                                                 <td className={classes.contentInTable}>
                                                     <TextField id="filled-basic"
-                                                        label="Filled"
+                                                        // label="Filled"
                                                         color="secondary"
                                                         variant="filled"
                                                         multiline
@@ -285,7 +284,7 @@ class ClientProfileDetail extends Component {
                                             <>
                                                 <td className={classes.contentInTable}>
                                                     <TextField id="filled-basic"
-                                                        label="Filled"
+                                                        // label="Filled"
                                                         color="secondary"
                                                         variant="filled"
                                                         multiline
@@ -320,7 +319,7 @@ class ClientProfileDetail extends Component {
                                             <>
                                                 <td className={classes.contentInTable}>
                                                     <TextField id="filled-basic"
-                                                        label="Filled"
+                                                        // label="Filled"
                                                         color="secondary"
                                                         variant="filled"
                                                         multiline

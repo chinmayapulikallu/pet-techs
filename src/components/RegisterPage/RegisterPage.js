@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import TextField from "@material-ui/core/TextField"
-import FormControl from "@material-ui/core/FormControl"
+import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
 import { withStyles } from '@material-ui/core/styles';
-import { withRouter } from "react-router"
+import { withRouter } from "react-router";
 import { Typography } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid"
-import FormGroup from "@material-ui/core/FormGroup"
-import FormControlLabel from "@material-ui/core/FormControlLabel"
-import Radio from "@material-ui/core/Radio"
-import Button from "@material-ui/core/Button"
+import Grid from "@material-ui/core/Grid";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from "@material-ui/core/Radio";
+import Button from "@material-ui/core/Button";
 import RadioGroup from "@material-ui/core/RadioGroup";
 
 

@@ -22,7 +22,7 @@ router.get("/", rejectUnauthenticated, (req, res) => {
 /**
  * POST route template
  */
-router.post("/", (req, res) => {
+router.post("/", rejectUnauthenticated, (req, res) => {
   const user_id = req.user.id;
   const vet_name = req.body.vet_name;
   const home_address_house = req.body.home_address_house;

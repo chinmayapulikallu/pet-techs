@@ -81,6 +81,7 @@ class ClientRegPage2 extends Component {
                         weight: '',
                         age: '',
                         breed: '',
+                        pet_bio: '',
                         sex: '',
                         food_brand: '',
                         feeding_per_day: '',
@@ -111,7 +112,8 @@ class ClientRegPage2 extends Component {
             let nextMedicationId = Math.max(...currentPet.medications.map(m => m.id)) + 1
             currentPet.medications.push(
                 {
-                    id: nextMedicationId,
+                    id: nextMedicationId, 
+                    pet_id: '',
                     medication_name: '',
                     medication_dosage: '',
                     dosage_time: new Date()
@@ -289,6 +291,18 @@ class ClientRegPage2 extends Component {
                             onChange={this.handleChange(pet.id,'breed')}
                         />
                     </Grid>
+                    <Grid item xs={12}>
+                    <TextField
+                        label=" Optional* Other dietary restrictions, supplements, etc."  
+                        value={pet.pet_bio}
+                        type="text" variant="outlined" color="secondary"
+                        InputProps={{
+                            className: classes.inputField
+                        }}
+                        fullWidth
+                        onChange={this.handleChange(pet.id,'pet_bio')}
+                    />
+                    </Grid>
                     <Grid item xs={12} className={classes.itemCenter}>
                         <Button color="primary" variant="contained"
                             onClick={this.uploadPhoto}>Upload Photo</Button>
@@ -440,6 +454,7 @@ const mapStateToProps = (state) => ({
                 weight: '',
                 age: '',
                 breed: '',
+                pet_bio: '',
                 sex: '',
                 food_brand: '',
                 feeding_per_day: '',
@@ -450,6 +465,7 @@ const mapStateToProps = (state) => ({
                 medications: [
                     {
                         id: 1,
+                        pet_id:'',
                         medication_name: '',
                         medication_dosage: '',
                         dosage_time: new Date()

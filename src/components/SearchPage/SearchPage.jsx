@@ -16,6 +16,7 @@ import Card from "@material-ui/core/Card"
 import CardContent from "@material-ui/core/CardContent"
 import Button from "@material-ui/core/Button"
 import { ButtonBase } from "@material-ui/core"
+import Paper from "@material-ui/core/Paper"
 
 
 const styles = theme => ({
@@ -35,10 +36,12 @@ const styles = theme => ({
         marginBottom: 10
     },
     button: {
-        margin: "20px 30px 20px 30px",
+        margin: "20px 30px",
         height: 45,
         width: 180,
         borderRadius: 12,
+        display: "flex",
+        marginTop: -100
     },
     searchImage: {
         paddingTop: 50
@@ -55,47 +58,16 @@ const styles = theme => ({
         paddingLeft: 200,
         display: "flex"
     },
-    results: {
-        paddingTop: 50
-    },
-    viewProf: {
-        height: 40,
-        width: 100,
-        textAlign: "center",
-        fontSize: 10,
-
+    paper: {
+        marginTop: 20,
+        borderRadius: "10px",
+        width: "75%",
+        marginLeft: 150
     },
     profPic: {
-
-    },
-    details1: {
-        display: "flex",
-        flexDirection: "column",
-        paddingBottom: 10,
-        marginLeft: 100
-    },
-    details2: {
-        display: "flex",
-
-        marginLeft: 70,
-        marginTop: 50
-    },
-    card: {
-        display: "flex",
-        paddingBottom: 20,
-        paddingTop: 20,
-    },
-    image: {
-        width: 128,
-        height: 128,
-    },
-    img: {
-        margin: 'auto',
-        display: 'block',
-        maxWidth: '100%',
-        maxHeight: '100%',
-    },
-
+        marginTop: 20,
+        marginBottom: 20
+    }
 
 
 })
@@ -156,73 +128,56 @@ class SearchPage extends Component {
                                 />
                             </FormGroup>
                         </Grid>
-                        {/* <Grid justify="center">
-                            <Card className>
-                                <CardContent   >
-                                    <Typography variant="h6">Name</Typography>
-                                    <img src="/images/blank-profile-picture.png" alt="profilePic" height="75" width="75" />
-                                    <Button variant="contained" color="primary" >View Profile</Button>
-                                    <div >
-                                        Bio
-                                    </div>
-                                    <div >
-                                        Services and Skills
-                                    </div>
-                                </CardContent>
 
-
-                            </Card>
-
-                            <Card className={classes.about}>
-                                <CardContent   >
-                                    <Typography variant="h6">Name</Typography>
-                                    
-                                    <img className={classes.details1} src="/images/blank-profile-picture.png" alt="profilePic" height="75" width="75"/>
-                                    
-                                    <Button className={classes.details2} variant="contained" color="primary" >View Profile</Button>
-                                   
-                                  
-                                </CardContent>
-                            </Card>
-
-
-                        </Grid> */}
 
 
                         <Grid>
-                            <Grid container spacing={2}>
-                               
-                                <Grid item>
-                                    <ButtonBase className={classes.image}>
-                                        <img className={classes.img} alt="complex" src="/images/blank-profile-picture.png" />
-                                    </ButtonBase>
-                                </Grid>
-                                <Grid item xs={12} sm container>
-                                    <Grid item xs container direction="column" >
-                                        <Grid item>
-                                            <Typography gutterBottom variant="subtitle1">
-                                                Name
-                                                </Typography>
-                                            <Typography variant="body2" gutterBottom>
-                                                Certs
-                                            </Typography>
-                                            <Typography variant="body2" color="textSecondary">
-                                              About
-                                            </Typography>
-                                        </Grid>
-                                        <Grid item>
-                                            <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                                                View Profile
-                                            </Typography>
-                                        </Grid>
-                                    </Grid>
-                                    </Grid>
-                                   
-                            </Grid>
+                            <Paper elevation="5" className={classes.paper}>
+                                <img className={classes.profPic} src="/images/blank-profile-picture.png" alt="profilePic" height="75" width="75" />
+                                <Typography variant="h5">
+                                    Name
+                                    </Typography>
+                                <Typography variant="h6">
+                                    Certs
+                                    </Typography>
+                                <Typography variant="h6">
+                                    Bio
+                                    </Typography>
+                            </Paper>
                         </Grid>
-                    </Grid>
-                </div>
+                        {/* <Grid>
+                            <Paper elevation="5" className={classes.paper}>
+                                <img className={classes.profPic} src="/images/blank-profile-picture.png" alt="profilePic" height="75" width="75" />
+                                <Typography variant="h5">
+                                    Name
+                                    </Typography>
+                                <Typography variant="h6">
+                                    Certs
+                                    </Typography>
+                                <Typography variant="h6">
+                                    Bio
+                                    </Typography>
+                            </Paper>
+                        </Grid>
+                        <Grid>
+                            <Paper elevation="5" className={classes.paper}>
+                                <img className={classes.profPic} src="/images/blank-profile-picture.png" alt="profilePic" height="75" width="75" />
+                                <Typography variant="h5">
+                                    Name
+                                    </Typography>
+                                <Typography variant="h6">
+                                    Certs
+                                    </Typography>
+                                <Typography variant="h6">
+                                    Bio
+                                    </Typography>
+                            </Paper>
+                        </Grid> */}
 
+
+                    </Grid>
+
+                </div>
             </div>
         );
     }

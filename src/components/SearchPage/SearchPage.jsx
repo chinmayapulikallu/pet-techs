@@ -17,6 +17,8 @@ import CardContent from "@material-ui/core/CardContent"
 import Button from "@material-ui/core/Button"
 import { ButtonBase } from "@material-ui/core"
 import Paper from "@material-ui/core/Paper"
+import { blue } from "@material-ui/core/colors";
+
 
 
 const styles = theme => ({
@@ -52,21 +54,27 @@ const styles = theme => ({
 
     },
     groupCheck: {
-        paddingLeft: 125
+        paddingLeft: 400
     },
     serviceType: {
-        paddingLeft: 200,
+        paddingLeft: 150,
         display: "flex"
     },
     paper: {
         marginTop: 20,
-        borderRadius: "10px",
+        borderRadius: "5px",
         width: "75%",
         marginLeft: 150
     },
     profPic: {
         marginTop: 20,
-        marginBottom: 20
+        marginBottom: 20,
+    },
+    header: {
+        background: '#195C60'
+    },
+    btn: {
+        marginBottom: 10
     }
 
 
@@ -133,48 +141,30 @@ class SearchPage extends Component {
 
                         <Grid>
                             <Paper elevation="5" className={classes.paper}>
-                                <img className={classes.profPic} src="/images/blank-profile-picture.png" alt="profilePic" height="75" width="75" />
-                                <Typography variant="h5">
-                                    Name
-                                    </Typography>
+                                <CardHeader title="Name" className={classes.header} />
+                                <img className={classes.profPic} src="/images/blank-profile-picture.png" alt="profilePic" height="75" width="75"/>
                                 <Typography variant="h6">
                                     Certs
                                     </Typography>
                                 <Typography variant="h6">
                                     Bio
                                     </Typography>
-                            </Paper>
-                        </Grid>
-                        {/* <Grid>
-                            <Paper elevation="5" className={classes.paper}>
-                                <img className={classes.profPic} src="/images/blank-profile-picture.png" alt="profilePic" height="75" width="75" />
-                                <Typography variant="h5">
-                                    Name
-                                    </Typography>
-                                <Typography variant="h6">
-                                    Certs
-                                    </Typography>
-                                <Typography variant="h6">
-                                    Bio
-                                    </Typography>
+                                <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
                             </Paper>
                         </Grid>
                         <Grid>
                             <Paper elevation="5" className={classes.paper}>
-                                <img className={classes.profPic} src="/images/blank-profile-picture.png" alt="profilePic" height="75" width="75" />
-                                <Typography variant="h5">
-                                    Name
-                                    </Typography>
+                                <CardHeader title="Name" className={classes.header} />
+                                <img className={classes.profPic} src="/images/blank-profile-picture.png" alt="profilePic" height="75" width="75"/>
                                 <Typography variant="h6">
                                     Certs
                                     </Typography>
                                 <Typography variant="h6">
                                     Bio
                                     </Typography>
+                                <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
                             </Paper>
-                        </Grid> */}
-
-
+                        </Grid>
                     </Grid>
 
                 </div>

@@ -1,15 +1,15 @@
 const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
-// const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 /**
  * GET route for Pets by client ID
  */
-router.get("/:id", (req, res) => {
-  const sqlText = `SELECT * from pet where client_id = $1; `;
+router.get("/", rejectUnauthenticated, (req, res) => {
+  const sqlText = `SELECT * from pet where user_id = $1; `;
   pool
-    .query(sqlText, [req.params.id])
+    .query(sqlText, [req.user.id])
     .then((response) => {
       console.log("pet data:", response.rows);
       res.send(response.rows);
@@ -40,12 +40,12 @@ router.get("/careplan/:id", (req, res) => {
 router.post("/", async (req, res) => {
   try {
     let queryPet = `INSERT INTO "pet" 
-                        ("client_id", "pet_type", "other_pet", "pet_name","weight", "age", 
+                        ("user_id", "pet_type", "other_pet", "pet_name","weight", "age", 
                         "sex", "breed", "pet_img", "pet_bio", "food_brand", "feeding_per_day",
                         "amount_per_meal", "other_food", "pet_behavior", "care_equipment")
                         VALUES( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16);`;
     let valuesPet = [
-      req.body.client_id,
+      req.user.id,
       req.body.pet_type,
       req.body.other_pet,
       req.body.pet_name,

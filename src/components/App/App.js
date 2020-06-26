@@ -71,7 +71,7 @@ class App extends Component {
               component={ClientServiceRequest}
             />
             <Route exact path="/clientdashboard" component={ClientDashBoard} />
-            <Route exact path="/careplan" component={CarePlan} />
+            <Route exact path="/careplan/:id" component={CarePlan} />
 
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

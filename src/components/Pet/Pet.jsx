@@ -82,7 +82,7 @@ class Pet extends Component {
         // console.log('pet state:', this.state)
     }
     handleCarePlanButton = () =>{
-        this.props.history.push('/careplan');
+        this.props.history.push(`/careplan/${this.props.pet.id}`);
         this.props.dispatch({
             type: 'GET_PET_CARE_PLAN',
             payload: { id: this.props.pet.id}

@@ -39,44 +39,40 @@ const useStyles = (theme) => ({
 
 class CarePlan extends Component {
   componentDidMount = () => {
-    this.setState({
-      id: this.props.petCarePlan.id,
-      pet_name: this.props.petCarePlan.pet_name,
-      age: this.props.petCarePlan.age,
-      weight: this.props.petCarePlan.weight,
-      pet_behavior: this.props.petCarePlan.pet_behavior,
-      pet_bio: this.props.petCarePlan.pet_bio,
-      feedings_per_day: this.props.petCarePlan.feedings_per_day,
-      food_brand: this.props.petCarePlan.food_brand,
-      amount_per_meal: this.props.petCarePlan.amount_per_meal,
-      care_equipment: this.props.petCarePlan.care_equipment,
-    });
+      console.log("Log in petcareplan", this.props.petCarePlan)
+    // const currentCarePlan = this.props.petCarePlan.find(carePlan => carePlan.id === parseInt(this.props.match.params.id))
+    // this.setState({
+    //   id: this.props.petCarePlan.id,
+    //   pet_name: this.props.petCarePlan.pet_name,
+    //   age: this.props.petCarePlan.age,
+    //   weight: this.props.petCarePlan.weight,
+    //   pet_behavior: this.props.petCarePlan.pet_behavior,
+    //   pet_bio: this.props.petCarePlan.pet_bio,
+    //   feedings_per_day: this.props.petCarePlan.feedings_per_day,
+    //   food_brand: this.props.petCarePlan.food_brand,
+    //   amount_per_meal: this.props.petCarePlan.amount_per_meal,
+    //   care_equipment: this.props.petCarePlan.care_equipment,
+    // });
   };
   state = {
-    isEditing: false,
-    id: "",
-    pet_name: "",
-    age: "",
-    weight: "",
-    pet_behavior: "",
-    pet_bio: "",
-    feedings_per_day: "",
-    food_brand: "",
-    amount_per_meal: "",
-    care_equipment: "",
+    // isEditing: false,
+   ...this.props.petCarePlan,
   };
 
   handleEditToggle = () => {
-    if (this.state.isEditing) {
-      this.setState({});
-    }
+      console.log("In edit/save toggle", this.state)
+    this.setState({
+        
+      isEditing: true,
+    });
+
     this.setState({
       isEditing: !this.state.isEditing,
     });
   };
 
   handleInputChange = (event, property) => {
-    console.log("in handleinputchange", event.target.value);
+    console.log("in handleinputchange", event.target.value, this.state);
     this.setState({
       [property]: event.target.value,
     });
@@ -112,7 +108,7 @@ class CarePlan extends Component {
                   }}
                 />
               ) : (
-                this.props.petCarePlan.pet_bio
+                this.state.pet_bio
               )}
               .
             </Typography>
@@ -147,7 +143,7 @@ class CarePlan extends Component {
               color="primary"
               onClick={this.handleEditToggle}
             >
-              {this.state.isEditing ? <div>Save</div> : <div>Edit</div>}
+              {this.state.isEditing ? <>Save</> : <>Edit</>}
             </Button>
           </CardContent>
         </Card>
@@ -155,11 +151,21 @@ class CarePlan extends Component {
     );
   }
 }
-const mapStateToProps = (reduxState) => ({
-  clientInfo: reduxState.clientInfo,
-  petInfo: reduxState.petInfo,
-  user: reduxState.user,
-  petCarePlan: reduxState.petCarePlan,
+const mapStateToProps = (state) => ({
+//   clientInfo: state.clientInfo,
+//   petInfo: state.petInfo,
+//   user: state.user,
+  petCarePlan: {id: "",
+  pet_name: "",
+  age: "",
+  weight: "",
+  pet_behavior: "",
+  pet_bio: "",
+  feedings_per_day: "",
+  food_brand: "",
+  amount_per_meal: "",
+  care_equipment: "",
+...state.petCarePlan}
 });
 export default withStyles(useStyles)(
   withRouter(connect(mapStateToProps)(CarePlan))

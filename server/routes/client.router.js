@@ -1,15 +1,18 @@
 const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+  } = require("../modules/authentication-middleware");
 
 /**
  * GET route template
  */
-router.get("/:id", (req, res) => {
+router.get("/", rejectUnauthenticated, (req, res) => {
     const sqlText = `SELECT * from client where id = $1;`;
-    console.log(req.params.id);
+    console.log(req.user.id);
   pool
-    .query(sqlText, [req.params.id])
+    .query(sqlText, [req.user.id])
     .then((response) => {
       console.log('---->client data:', response.rows)
       res.send(response.rows);

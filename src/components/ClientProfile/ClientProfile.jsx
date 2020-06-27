@@ -83,7 +83,7 @@ class ClientProfile extends Component {
             <div className={classes.root} >
                 {this.props.clientInfo.map((client) => {
                     return (
-                        <div key={client.id}>
+                        <div key={client.user_id}>
                             <ClientProfileDetail
                                 client={client}
                             />

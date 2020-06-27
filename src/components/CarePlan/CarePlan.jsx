@@ -109,6 +109,7 @@ class CarePlan extends Component {
                   variant="outlined"
                   color="secondary"
                   label="Pet Info"
+                  size="small"
                   value={this.props.petCarePlan.feeding_per_day}
                   onChange={this.handleInputChange("feeding_per_day")}
                 />

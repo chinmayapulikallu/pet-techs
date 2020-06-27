@@ -71,29 +71,30 @@ const styles = {
 class ClientRegPage1 extends Component {
   state = {
     ...this.props.clientInfo,
+    file: null,
   };
 
-//autofill form
+  //autofill form
   autoFillForm = () => {
-        this.setState({
-            client_name: "Sam",
-            home_address_house: "8901 Portland Ave",
-            apt_suite: "",
-            city: "Bloomington",
-            state: "MN",
-            zip_code: "55420",
-            about_client: "Loves Dogs and cats",
-            about_home: "Single family home",
-            about_equipment: "toys",
-            contact_name_1: "Sam",
-            contact_phone_1: "9999999",
-            contact_email_1: "sam@in",
-            vet_clinic: "Pet clinic",
-            clinic_address: "60 E Broadway",
-            clinic_phone: "88989",
-            transport: false,
-        })
-    }
+    this.setState({
+      client_name: "Sam",
+      home_address_house: "8901 Portland Ave",
+      apt_suite: "",
+      city: "Bloomington",
+      state: "MN",
+      zip_code: "55420",
+      about_client: "Loves Dogs and cats",
+      about_home: "Single family home",
+      about_equipment: "toys",
+      contact_name_1: "Sam",
+      contact_phone_1: "9999999",
+      contact_email_1: "sam@in",
+      vet_clinic: "Pet clinic",
+      clinic_address: "60 E Broadway",
+      clinic_phone: "88989",
+      transport: false,
+    })
+  }
 
   handleChange = (event, property) => {
     console.log("in handleChange", event.target.value, property);
@@ -119,10 +120,17 @@ class ClientRegPage1 extends Component {
     });
     this.props.onNext();
   };
+//-----------------------------------
+  handlePictureChangeFor = (event) => {
+    console.log('changing', event.target.files[0])
 
-  // handleBack = () => {
-  //   this.props.history.push("/register");
-  // };
+    this.setState({
+      file: event.target.files[0]
+    });
+  }
+ //-----------------------------------
+
+
   render() {
     const { classes } = this.props;
     return (
@@ -194,14 +202,16 @@ class ClientRegPage1 extends Component {
           <Typography variant="h6" className={classes.section}>
             You look purr-fect! Let's add a photo for your profile!
           </Typography>
-          <Button
+          {/* <Button
             className={classes.btn}
             onClick={this.handleUploadPhoto}
             variant="contained"
             color="primary"
           >
             Select Photo to Upload
-          </Button>
+          </Button> */}
+          <input type="file" onChange={this.handlePictureChangeFor} />
+
         </div>
         <div>
           <Typography variant="subtitle1" className={classes.labels}>
@@ -379,7 +389,7 @@ const mapStateToProps = (state) => ({
     zip_code: "",
     about_client: "",
     about_home: "",
-    about_equipment:"",
+    about_equipment: "",
     contact_name_1: "",
     contact_phone_1: "",
     contact_email_1: "",

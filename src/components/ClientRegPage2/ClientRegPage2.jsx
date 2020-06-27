@@ -64,6 +64,21 @@ class ClientRegPage2 extends Component {
     componentDidMount() {
         console.log('componentDidMount :: ', this.state)
     }
+     handlePictureChangeFor = (event) => {
+        console.log('changing', event.target.files[0])
+
+        this.setState({
+            file: event.target.files[0]
+        });
+    }
+    handleSavePicture = (event) => {
+        this.props.dispatch({
+            type: 'UPLOAD_PICTURE_CLIENT',
+            payload: {
+                file: this.state.file,
+            }
+        });
+    }
 
     //add AnotherPet
     addPets = () => {

@@ -79,10 +79,11 @@ class ClientProfileDetail extends Component {
         client_name: '',
         profile_img: '',
         about_client: '',
-        about_equipment:'',
+        about_equipment: '',
         about_home: '',
         city: '',
-        state: ''
+        state: '',
+        file: null,
     }
 
 
@@ -102,7 +103,7 @@ class ClientProfileDetail extends Component {
         console.log('state:', this.state)
 
         const currentId = this.props.match.params.id;
-console.log("currentID", currentId)
+        console.log("currentID", currentId)
         this.props.dispatch({
             type: 'GET_PET_DATA',
             payload: { id: currentId }
@@ -133,8 +134,6 @@ console.log("currentID", currentId)
                 editable: !this.state.editable,
             });
         }
-
-
     }
     handleInputChangeFor = property => (event) => {
         console.log('input change', property, event.target.value)
@@ -143,6 +142,22 @@ console.log("currentID", currentId)
         });
     }
 
+    // handlePictureChangeFor = (event) => {
+    //     console.log('changing', event.target.files[0])
+
+    //     this.setState({
+    //         file: event.target.files[0]
+    //     });
+    // }
+    // handleSavePicture = (event) => {
+    //     this.props.dispatch({
+    //         type: 'UPLOAD_PICTURE_CLIENT',
+    //         payload: {
+    //             file: this.state.file,
+    //         }
+    //     });
+    // }
+
     render() {
 
 
@@ -150,9 +165,17 @@ console.log("currentID", currentId)
         return (
             <div className={classes.root} >
                 {/* <h1>{JSON.stringify(this.props.clientInfo)}</h1> */}
-                {/* {this.props.clientInfo.map((client) => {
-                    return (<h1>{client.client_name} </h1>)
-                })} */}
+
+                {/* <Button
+                        variant="contained"
+                        component="label"
+                    >
+                        Upload pet's picture
+                        <input
+                            type="file"
+                            style={{ display: "none" }}
+                        />
+                    </Button> */}
                 <div className={classes.title}>
                     <div className={classes.userBasicInfo}>
                         <Grid container spacing={1}>
@@ -161,6 +184,16 @@ console.log("currentID", currentId)
                             </Grid>
 
                             <Grid item xs={3} className={classes.clientInfo}>
+
+
+
+
+
+
+
+
+
+
                                 {this.state.editable ?
                                     <>
                                         <p><TextField id="filled-basic"
@@ -169,13 +202,16 @@ console.log("currentID", currentId)
                                             variant="filled"
                                             value={this.state.client_name}
                                             height="10px"
+                                            size="small"
                                             onChange={this.handleInputChangeFor("client_name")} /></p>
                                         <Grid container spacing={1}>
                                             <Grid item xs={6} >
-                                                <TextField id="filled-basic" label="City" color="secondary" variant="filled" value={this.state.city} onChange={this.handleInputChangeFor("city")} />
+                                                <TextField id="filled-basic" label="City" color="secondary" variant="filled" size="small"
+                                                    value={this.state.city} onChange={this.handleInputChangeFor("city")} />
                                             </Grid>
                                             <Grid item xs={6}>
-                                                <TextField id="filled-basic" label="State" color="secondary" variant="filled" value={this.state.state} onChange={this.handleInputChangeFor("state")} />
+                                                <TextField id="filled-basic" label="State" color="secondary" variant="filled" size="small"
+                                                    value={this.state.state} onChange={this.handleInputChangeFor("state")} />
                                             </Grid>
                                         </Grid>
 
@@ -212,37 +248,38 @@ console.log("currentID", currentId)
                 <Container className={classes.client_content} maxWidth="lg">
                     <Grid container spacing={3} >
                         <Grid item xs={9}>
-                            <table className="about_table" width="100%" height="150px">
-                                <thead >
-                                    <tr>
-                                        <th className="table_head">About {this.state.client_name}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        {this.state.editable ?
-                                            <>
-                                                <td className={classes.contentInTable}>
-                                                    <TextField id="filled-basic"
-                                                        // label="Filled"
-                                                        color="secondary"
-                                                        variant="filled"
-                                                        multiline
-                                                        fullWidth
-                                                        rowsMax={4}
-                                                        value={this.state.about_client}
-                                                        onChange={this.handleInputChangeFor("about_client")} />
-                                                </td>
-                                            </>
-                                            :
-                                            <>
+
+                            {this.state.editable ?
+                                <>
+                                    <TextField
+                                        id="outlined-multiline-static"
+                                        label="About you"
+                                        multiline
+                                        rows={4}
+                                        fullWidth
+                                        defaultValue={this.state.about_client}
+                                        variant="outlined"
+                                        onChange={this.handleInputChangeFor("about_client")}
+                                    />
+                                </>
+                                :
+                                <>
+                                    <table className="about_table" width="100%" height="150px">
+                                        <thead >
+                                            <tr>
+                                                <th className="table_head">About {this.state.client_name}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
                                                 <td className={classes.contentInTable}>{this.state.about_client}</td>
-                                            </>
-                                        }
-                                    </tr>
-                                    {/* <tr><td>ksfdnjksdnfjknsjkfsndkjfnsdkjfnskdjnfkjsdnfjkdsnfkjsdnfkjdsnfkjdsnkfndskjfnksdnfksdnfkjsdnfjknsdkjfnsjkdnfjksdnfksjdnfjksdnfjksdfn</td></tr> */}
-                                </tbody>
-                            </table>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </>
+                            }
+                            {/* <tr><td>ksfdnjksdnfjknsjkfsndkjfnsdkjfnskdjnfkjsdnfjkdsnfkjsdnfkjdsnfkjdsnkfndskjfnksdnfksdnfkjsdnfjknsdkjfnsjkdnfjksdnfksjdnfjksdnfjksdfn</td></tr> */}
+
                         </Grid>
 
 
@@ -274,70 +311,70 @@ console.log("currentID", currentId)
                         </Grid>
                         <Grid item xs={6} className={classes.items}>
 
-                            <table className="about_table" width="100%" height="150px">
-                                <thead>
-                                    <tr>
-                                        <th className="table_head">{this.state.client_name}'s Pet Equipment</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        {this.state.editable ?
-                                            <>
-                                                <td className={classes.contentInTable}>
-                                                    <TextField id="filled-basic"
-                                                        // label="Filled"
-                                                        color="secondary"
-                                                        variant="filled"
-                                                        multiline
-                                                        fullWidth
-                                                        rowsMax={4}
-                                                        value={this.state.about_equipment}
-                                                        onChange={this.handleInputChangeFor("about_equipment")} />                                                    </td>
-                                            </>
-                                            :
-                                            <>
-                                                {/* <td className={classes.contentInTable}>I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...</td> */}
-                                                <td className={classes.contentInTable}>{this.state.about_equipment}</td>
 
-                                            </>
-                                        }
-                                    </tr>
-                                </tbody>
-                            </table>
+                            {this.state.editable ?
+                                <>
+                                    <TextField
+                                        id="outlined-multiline-static"
+                                        label="Pet's equipment"
+                                        multiline
+                                        rows={4}
+                                        fullWidth
+                                        defaultValue={this.state.client_name}
+                                        variant="outlined"
+                                        onChange={this.handleInputChangeFor("client_name")}
+                                    />
+                                </>
+                                :
+                                <>
+                                    {/* <td className={classes.contentInTable}>I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...</td> */}
+                                    <table className="about_table" width="100%" height="150px">
+                                        <thead >
+                                            <tr>
+                                                <th className="table_head">{this.state.client_name}'s Pet Equipment</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td className={classes.contentInTable}>{this.state.about_equipment}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </>
+                            }
+
                         </Grid>
                         <Grid item xs={6} className={classes.items}>
-                            <table className="about_table" width="100%" height="150px">
-                                <thead >
-                                    <tr>
-                                        <th className="table_head">{this.state.client_name}'s Home Enviroment</th>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        {/* <td>{this.state.about_home}</td> */}
-                                        {this.state.editable ?
-                                            <>
-                                                <td className={classes.contentInTable}>
-                                                    <TextField id="filled-basic"
-                                                        // label="Filled"
-                                                        color="secondary"
-                                                        variant="filled"
-                                                        multiline
-                                                        fullWidth
-                                                        rowsMax={4}
-                                                        value={this.state.about_home}
-                                                        onChange={this.handleInputChangeFor("about_home")} />                                                    </td>
-                                            </>
-                                            :
-                                            <>
+                            {this.state.editable ?
+                                <>
+                                    <TextField
+                                        id="outlined-multiline-static"
+                                        label="Pet's equipment"
+                                        multiline
+                                        rows={4}
+                                        fullWidth
+                                        defaultValue={this.state.about_home}
+                                        variant="outlined"
+                                        onChange={this.handleInputChangeFor("about_home")}
+                                    />
+                                </>
+                                :
+                                <>
+                                    <table className="about_table" width="100%" height="150px">
+                                        <thead >
+                                            <tr>
+                                                <th className="table_head">{this.state.about_home}'s Home Enviroment</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
                                                 <td className={classes.contentInTable}>{this.state.about_home}</td>
-                                            </>
-                                        }
-                                    </tr>
-                                </tbody>
-                            </table>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </>
+                            }
                         </Grid>
                     </Grid>
                     <Grid item xs={12} className={classes.items}>

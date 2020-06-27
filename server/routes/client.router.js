@@ -35,6 +35,7 @@ router.post("/", (req, res) => {
   const city = req.body.city;
   const state = req.body.state;
   const zip_code = req.body.zip_code;
+  const profile_img = req.body.profile_img;
   const about_client = req.body.about_client;
   const about_home = req.body.about_home;
   const about_equipment = req.body.about_equipment;
@@ -46,7 +47,7 @@ router.post("/", (req, res) => {
   const clinic_phone = req.body.clinic_phone;
   const transport = req.body.transport;
   const queryText =
-    'INSERT INTO "client" ( user_id, client_name, home_address_house, apt_suite, city, state, zip_code, about_client, about_home, about_equipment, contact_name_1, contact_phone_1, contact_email_1, vet_clinic, clinic_address, clinic_phone, transport) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)';
+    'INSERT INTO "client" ( user_id, client_name, home_address_house, apt_suite, city, state, zip_code, profile_img, about_client, about_home, about_equipment, contact_name_1, contact_phone_1, contact_email_1, vet_clinic, clinic_address, clinic_phone, transport) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)';
   pool
     .query(queryText, [
       user_id,
@@ -56,6 +57,7 @@ router.post("/", (req, res) => {
       city,
       state,
       zip_code,
+      profile_img,
       about_client,
       about_home,
       about_equipment,

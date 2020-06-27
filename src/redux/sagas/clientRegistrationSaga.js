@@ -16,14 +16,14 @@ function* registerClient(action) {
         console.log('send this client data to server', action.payload);
 
 
-        yield axios.post('/api/client', action.payload)
-        // yield axios.post(`/api/client`, data, action.payload, {
-        //     headers: {
-        //         'accept': 'application/json',
-        //         'Accept-Language': 'en-US,en;q=0.8',
-        //         'Content-Type': action.payload.file.type,
-        //     }
-        // });
+        // yield axios.post('/api/client', action.payload)
+        yield axios.post(`/api/client`, data, action.payload, {
+            headers: {
+                'accept': 'application/json',
+                'Accept-Language': 'en-US,en;q=0.8',
+                'Content-Type': action.payload.file.type,
+            }
+        });
 
         yield axios.post('/api/pet', action.payload)
     } catch (error) {

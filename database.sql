@@ -122,7 +122,7 @@ CREATE TABLE medication (
          ON DELETE CASCADE ,
   medication_name varchar (500) ,
   dosage varchar (500) ,
-  dosage_time timestamp with time zone,
+  dosage_time timestamp with time zone
 );
 
 CREATE TABLE pet_picture (

@@ -6,11 +6,7 @@ function* registerClient(action) {
     console.log('client registration saga::::----->', action.payload )
     try {
        yield axios.post('/api/client', action.payload)
-      
        yield axios.post('/api/pet', action.payload)
-        
-    
-    
     } catch (error) {
         console.log('Error with client registration:', error);
     }

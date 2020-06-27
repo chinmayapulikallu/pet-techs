@@ -79,6 +79,7 @@ class ClientProfileDetail extends Component {
         client_name: '',
         profile_img: '',
         about_client: '',
+        about_equipment:'',
         about_home: '',
         city: '',
         state: ''
@@ -93,6 +94,7 @@ class ClientProfileDetail extends Component {
             client_name: currentClient.client_name,
             profile_img: currentClient.profile_img,
             about_client: currentClient.about_client,
+            about_equipment: currentClient.about_equipment,
             about_home: currentClient.about_home,
             city: currentClient.city,
             state: currentClient.state,
@@ -124,7 +126,7 @@ console.log("currentID", currentId)
     }
     handleSaveClient = () => {
         console.log('Save clicked!')
-        if (this.state.client_name === '' || this.state.city === '' || this.state.state === '' || this.state.about_client === '' || this.state.about_home === '') {
+        if (this.state.client_name === '' || this.state.city === '' || this.state.state === '' || this.state.about_client === '' || this.state.about_home === '' || this.state.about_equipment === '') {
             alert('Please make sure that you filled all the infomation!')
         } else {
             this.setState({
@@ -290,13 +292,13 @@ console.log("currentID", currentId)
                                                         multiline
                                                         fullWidth
                                                         rowsMax={4}
-                                                        value={this.state.care_equipment}
-                                                        onChange={this.handleInputChangeFor("care_equipment")} />                                                    </td>
+                                                        value={this.state.about_equipment}
+                                                        onChange={this.handleInputChangeFor("about_equipment")} />                                                    </td>
                                             </>
                                             :
                                             <>
-                                                <td className={classes.contentInTable}>I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...</td>
-                                                {/* <td className={classes.contentInTable}>{this.state.care_equipment}</td> */}
+                                                {/* <td className={classes.contentInTable}>I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...</td> */}
+                                                <td className={classes.contentInTable}>{this.state.about_equipment}</td>
 
                                             </>
                                         }

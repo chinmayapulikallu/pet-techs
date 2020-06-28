@@ -80,17 +80,17 @@ class ClientProfile extends Component {
 
         const { classes } = this.props;
         return (
+            // <p>{JSON.stringify(this.props.clientInfo)}</p>
             <div className={classes.root} >
                 {this.props.clientInfo.map((client) => {
                     return (
-                        <div key={client.id}>
+                        <div key={client.user_id}>
                             <ClientProfileDetail
                                 client={client}
                             />
                         </div>
                     )
                 })}
-
             </div>
         )
     }

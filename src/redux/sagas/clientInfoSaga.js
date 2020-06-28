@@ -19,4 +19,5 @@ function* getClientInfo(action) {
     console.log("Error with get client info:", error);
   }
 }
+
 export default clientInfoSaga;

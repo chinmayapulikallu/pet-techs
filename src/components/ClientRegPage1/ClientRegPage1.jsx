@@ -73,7 +73,8 @@ const styles = {
 class ClientRegPage1 extends Component {
   state = {
     file: null,
-    ...this.props.clientInfo,
+      ...this.props.clientInfo,
+    
   };
 
   //autofill form
@@ -121,23 +122,23 @@ class ClientRegPage1 extends Component {
       payload: {
         file: this.state.file,
         text: {
-          client_name: "Sam",
-          home_address_house: "8901 Portland Ave",
-          apt_suite: "",
-          city: "Bloomington",
-          state: "MN",
-          zip_code: "55420",
-          profile_img: "",
-          about_client: "Loves Dogs and cats",
-          about_home: "Single family home",
-          about_equipment: "toys",
-          contact_name_1: "Sam",
-          contact_phone_1: "9999999",
-          contact_email_1: "sam@in",
-          vet_clinic: "Pet clinic",
-          clinic_address: "60 E Broadway",
-          clinic_phone: "88989",
-          transport: false,
+          client_name: this.state.client_name,
+          home_address_house: this.state.home_address_house,
+          apt_suite: this.state.apt_suite,
+          city: this.state.city,
+          state: this.state.state,
+          zip_code: this.state.zip_code,
+          profile_img: this.state.profile_img,
+          about_client: this.state.about_client,
+          about_home: this.state.about_home,
+          about_equipment: this.state.about_equipment,
+          contact_name_1: this.state.contact_name_1,
+          contact_phone_1: this.state.contact_phone_1,
+          contact_email_1: this.state.contact_email_1,
+          vet_clinic: this.state.vet_clinic,
+          clinic_address: this.state.clinic_address,
+          clinic_phone: this.state.clinic_phone,
+          transport: this.state.transport,
         }
 
       },
@@ -446,25 +447,27 @@ class ClientRegPage1 extends Component {
 }
 const mapStateToProps = (state) => ({
   clientInfo: {
-    client_name: "",
-    home_address_house: "",
-    apt_suite: "",
-    city: "",
-    state: "",
-    zip_code: "",
-    profile_img: "",
-    about_client: "",
-    about_home: "",
-    about_equipment: "",
-    contact_name_1: "",
-    contact_phone_1: "",
-    contact_email_1: "",
-    vet_clinic: "",
-    clinic_address: "",
-    clinic_phone: "",
-    transport: false,
-    ...state.clientInfo,
-  },
+    
+      client_name: "",
+      home_address_house: "",
+      apt_suite: "",
+      city: "",
+      state: "",
+      zip_code: "",
+      profile_img: "",
+      about_client: "",
+      about_home: "",
+      about_equipment: "",
+      contact_name_1: "",
+      contact_phone_1: "",
+      contact_email_1: "",
+      vet_clinic: "",
+      clinic_address: "",
+      clinic_phone: "",
+      transport: false,
+      ...state.clientInfo,
+    },
+  
 });
 
 export default connect(mapStateToProps)(

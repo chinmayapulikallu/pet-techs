@@ -182,8 +182,7 @@ class ClientProfileDetail extends Component {
                             <Grid item xs={5} className={classes.items}>
                                 {/* <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" /> */}
                                 <img className={classes.img} src={this.props.client.media_url} alt="profile" height="150" width="150" />
-                                {/* <img className={classes.img} src='https://pettechsbucket.s3-us-west-1.amazonaws.com/08946e713c5967832d1922f36cc5753e.jpg' alt="post" height="150" width="150" /> */}
-
+                                                                
 
                             </Grid>
 

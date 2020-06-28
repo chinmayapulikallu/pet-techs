@@ -80,6 +80,7 @@ class ClientProfile extends Component {
 
         const { classes } = this.props;
         return (
+            // <p>{JSON.stringify(this.props.clientInfo)}</p>
             <div className={classes.root} >
                 {this.props.clientInfo.map((client) => {
                     return (
@@ -90,7 +91,6 @@ class ClientProfile extends Component {
                         </div>
                     )
                 })}
-
             </div>
         )
     }

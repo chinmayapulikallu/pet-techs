@@ -310,7 +310,7 @@ class ClientRegPage2 extends Component {
                                     />
                                     <TextField
                                         label="Weight"
-                                        type="text"
+                                        type="number"
                                         value={pet.weight}
                                         variant="outlined"
                                         color="secondary"
@@ -319,7 +319,7 @@ class ClientRegPage2 extends Component {
                                     />
                                     <TextField
                                         label="Age"
-                                        type="text"
+                                        type="number"
                                         value={pet.age}
                                         variant="outlined"
                                         color="secondary"
@@ -373,7 +373,7 @@ class ClientRegPage2 extends Component {
                                     />
                                     <TextField
                                         label="Feedings per day"
-                                        type="text"
+                                        type="number"
                                         value={pet.feeding_per_day}
                                         variant="outlined"
                                         color="secondary"

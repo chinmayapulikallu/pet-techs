@@ -72,6 +72,7 @@ const styles = {
 
 class ClientRegPage1 extends Component {
   state = {
+    file: null,
     ...this.props.clientInfo,
   };
 
@@ -117,59 +118,78 @@ class ClientRegPage1 extends Component {
   handleNext = () => {
     this.props.dispatch({
       type: "SET_CLIENT_DATA",
-      payload: { 
-        ...this.state,
-       },
+      payload: {
+        file: this.state.file,
+        text: {
+          client_name: "Sam",
+          home_address_house: "8901 Portland Ave",
+          apt_suite: "",
+          city: "Bloomington",
+          state: "MN",
+          zip_code: "55420",
+          profile_img: "",
+          about_client: "Loves Dogs and cats",
+          about_home: "Single family home",
+          about_equipment: "toys",
+          contact_name_1: "Sam",
+          contact_phone_1: "9999999",
+          contact_email_1: "sam@in",
+          vet_clinic: "Pet clinic",
+          clinic_address: "60 E Broadway",
+          clinic_phone: "88989",
+          transport: false,
+        }
+
+      },
     });
     this.props.onNext();
   };
-//-----------------------------------
-  // handlePictureChangeFor = (event) => {
-  //   console.log('changing', event.target.files[0])
+  //-----------------------------------
+  handlePictureChangeFor = (event) => {
+    console.log('changing', event.target.files[0])
 
-  //   this.setState({
-  //     file: event.target.files[0]
-  //   });
+    this.setState({
+      file: event.target.files[0]
+    });
+  }
+
+  // uppy = Uppy({
+  //   meta: { type: 'profilePicture' },
+  //   restrictions: { maxNumberOfFiles: 1 },
+  //   autoProceed: true
+  // })
+
+  // reader = new FileReader()
+
+  // componentDidMount = () => {
+  //   this.uppy.on('upload', file => {
+  //     let fileKey = Object.keys(this.uppy.state.files)[0];
+  //     let fileFromUppy = this.uppy.state.files[fileKey].data;
+  //     this.setImage(fileFromUppy);
+  //   })
+
+  //   this.reader.onloadend = () => {
+  //     this.setState({
+  //       ...this.state,
+  //       profile_img: this.reader.result,
+  //     })
+  //   }
+  //   console.log('data from client reg page 1', this.state)
+
   // }
 
-  uppy = Uppy({
-    meta: { type: 'profilePicture' },
-    restrictions: { maxNumberOfFiles: 1 },
-    autoProceed: true
-  })
-  
-  reader = new FileReader()
+  // setImage = file => {
+  //   //reads the file into a local data url
+  //   this.reader.readAsDataURL(file);
+  //   //sets the file into state and opens the walkthrough
+  //   this.setState({
+  //     ...this.state,
+  //     file: file,
+  //   })
+  // }
 
-  componentDidMount = () => {
-    this.uppy.on('upload', file => {
-      let fileKey = Object.keys(this.uppy.state.files)[0];
-      let fileFromUppy = this.uppy.state.files[fileKey].data;
-      this.setImage(fileFromUppy);
-    })
-    
-    this.reader.onloadend = () => {
-      this.setState({
-        ...this.state,
-        profile_img: this.reader.result,
-      })
-    }
-    console.log('data from client reg page 1', this.state)
 
-  }
-
-  setImage = file => {
-    //reads the file into a local data url
-    this.reader.readAsDataURL(file);
-
-    //sets the file into state and opens the walkthrough
-    this.setState({
-      ...this.state,
-      file: file,
-    })
-  }
-
-  
- //-----------------------------------
+  //-----------------------------------
 
 
   render() {
@@ -251,8 +271,10 @@ class ClientRegPage1 extends Component {
           >
             Select Photo to Upload
           </Button> */}
-        <DragDrop uppy={this.uppy} />
-        <img className="upload-image-for-details" src={this.state.profile_img} alt="profilePictureUrl" width="100px" height="100px"/>          
+          {/* <DragDrop uppy={this.uppy} /> */}
+          <input type="file" onChange={this.handlePictureChangeFor} />
+
+          <img className="upload-image-for-details" src={this.state.profile_img} alt="profilePictureUrl" width="100px" height="100px" />
 
 
         </div>
@@ -430,8 +452,7 @@ const mapStateToProps = (state) => ({
     city: "",
     state: "",
     zip_code: "",
-    file:"",
-    profile_img:"",
+    profile_img: "",
     about_client: "",
     about_home: "",
     about_equipment: "",

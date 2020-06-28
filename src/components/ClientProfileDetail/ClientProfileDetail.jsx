@@ -164,7 +164,7 @@ class ClientProfileDetail extends Component {
         const { classes } = this.props;
         return (
             <div className={classes.root} >
-                {/* <h1>{JSON.stringify(this.props.clientInfo)}</h1> */}
+                {/* <h1>{JSON.stringify(this.props.client.media_url)}</h1> */}
 
                 {/* <Button
                         variant="contained"
@@ -180,18 +180,14 @@ class ClientProfileDetail extends Component {
                     <div className={classes.userBasicInfo}>
                         <Grid container spacing={1}>
                             <Grid item xs={5} className={classes.items}>
-                                <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                {/* <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" /> */}
+                                <img className={classes.img} src={this.props.client.media_url} alt="profile" height="150" width="150" />
+                                {/* <img className={classes.img} src='https://pettechsbucket.s3-us-west-1.amazonaws.com/08946e713c5967832d1922f36cc5753e.jpg' alt="post" height="150" width="150" /> */}
+
+
                             </Grid>
 
                             <Grid item xs={3} className={classes.clientInfo}>
-
-
-
-
-
-
-
-
 
 
                                 {this.state.editable ?

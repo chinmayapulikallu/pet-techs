@@ -9,21 +9,22 @@ const IAM_USER_SECRET = process.env.IAM_USER_SECRET;
 const verbose = true; //turns on and off console.logs
 
 const uploadPost = async (req, res) => {
-    let media_key = await uploadToS3(req.file, res);
-    uploadToSQL(req, media_key, res);
+    let profile_img = await uploadToS3(req.file, res);
+    uploadToSQL(req, profile_img, res);
 }
-
 
 const generateSignedUrls = async (res, rows) => {
     const newRows = await addSignedUrls(rows);
-    verbose && console.log({ newRows });
+    verbose && console.log({newRows});
     res.send(newRows);
 }
+
+
 
 const addSignedUrls = async rows => {
     const newRows = [];
     for (const row of rows) {
-        const media_url = await generateSignedUrl(row.media_key);
+        const media_url = await generateSignedUrl(row.profile_img);
         row.media_url = media_url;
         newRows.push(row);
     }
@@ -89,7 +90,7 @@ function uploadToS3(file, res) {
     })
 }
 
-function uploadToSQL(req, media_key, res) {
+function uploadToSQL(req, profile_img, res) {
     const user_id = req.user.id;
     const client_name = req.body.client_name;
     const home_address_house = req.body.home_address_house;
@@ -97,7 +98,7 @@ function uploadToSQL(req, media_key, res) {
     const city = req.body.city;
     const state = req.body.state;
     const zip_code = req.body.zip_code;
-    const profile_img = req.body.profile_img;
+    // const profile_img = req.body.profile_img;
     const about_client = req.body.about_client;
     const about_home = req.body.about_home;
     const about_equipment = req.body.about_equipment;
@@ -108,7 +109,7 @@ function uploadToSQL(req, media_key, res) {
     const clinic_address = req.body.clinic_address;
     const clinic_phone = req.body.clinic_phone;
     const transport = req.body.transport;
-    console.log('client id from imageHandler', media_key, user_id, client_name, home_address_house, apt_suite, city, state, zip_code, profile_img, about_client, about_home, about_equipment, contact_name_1, contact_phone_1, contact_email_1, vet_clinic, clinic_address, clinic_phone, transport)
+    console.log('client id from imageHandler', profile_img, user_id, client_name, home_address_house, apt_suite, city, state, zip_code, profile_img, about_client, about_home, about_equipment, contact_name_1, contact_phone_1, contact_email_1, vet_clinic, clinic_address, clinic_phone, transport)
 
     return new Promise(resolve => {
         const queryText =
@@ -123,7 +124,7 @@ function uploadToSQL(req, media_key, res) {
             city,
             state,
             zip_code,
-            media_key,
+            profile_img,
             about_client,
             about_home,
             about_equipment,

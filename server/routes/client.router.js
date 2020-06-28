@@ -19,10 +19,15 @@ router.get("/", rejectUnauthenticated, (req, res) => {
     console.log(req.user.id);
   pool
     .query(sqlText, [req.user.id])
-    .then((response) => {
+    .then(response => {
       console.log('---->client data:', response.rows)
-      res.send(response.rows);
-    })
+       generateSignedUrls(res, response.rows) 
+      })
+
+    // .then((response) => {
+    //   console.log('---->client data:', response.rows)
+    //   res.send(response.rows);
+    // })
     .catch((error) => {
       console.log(`Error making database query ${sqlText}`, error);
       res.sendStatus(500);

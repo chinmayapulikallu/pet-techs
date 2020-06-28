@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from "react-router"
 import { Typography, CardHeader } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid"
-import {MenuItem} from "@material-ui/core"
+import { MenuItem } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
 import Select from "@material-ui/core/Select"
 import FormGroup from "@material-ui/core/FormGroup"
@@ -14,7 +14,7 @@ import Checkbox from "@material-ui/core/Checkbox"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Paper from "@material-ui/core/Paper"
 import { fade } from "@material-ui/core/styles/colorManipulator";
-import {Input} from "@material-ui/core"
+import { Input } from "@material-ui/core"
 
 
 const styles = theme => ({
@@ -102,8 +102,17 @@ class SearchPage extends Component {
         search: ''
     };
 
+    componentDidMount = () => {
+        console.log("MOUNTED)")
+        this.getVtInfo()
+    }
 
-    
+
+
+    getVtInfo = () => {
+        this.props.dispatch({ type: "GET_VT_DATA" });
+    };
+
 
     handleChange = (event, property) => {
         console.log(event.target.value, "#####")
@@ -122,11 +131,11 @@ class SearchPage extends Component {
 
     // onChange = e =>{
     //     console.log(e.target.value);
-        
+
     //     this.setState({search : e.target.value})
     // }
 
-    
+
 
     render() {
 
@@ -134,17 +143,26 @@ class SearchPage extends Component {
         //const {search}=this.state;
 
         return (
+
+
             <div className={classes.root}>
+
                 <div>
+                   <div>
+                     
+                        <h1>{JSON.stringify(this.props.serviceProvider)}</h1>
+                      
+                   </div>
                     <Grid className={classes.title}>
                         <FormControl onSubmit={this.registerUser}>
                             <div>
                                 <img className={classes.searchImage} src="/images/search-mag.png" alt="searchIcon" height="75" width="75" />
+
                             </div>
                             <Typography className={classes.serviceTitle} variant="h4">Find a service provider</Typography>
                         </FormControl>
-                        
-                        <Typography variant="subtitle1">Filter</Typography> 
+
+                        <Typography variant="subtitle1">Filter</Typography>
 
 
 
@@ -158,7 +176,7 @@ class SearchPage extends Component {
                         <Grid container direction={"row"} className={classes.serviceType}>
                             {/* <InputLabel>Service:</InputLabel> */}
                             <Select
-                               
+
                                 color="secondary"
                                 label="Service"
                                 variant="outlined"
@@ -192,12 +210,13 @@ class SearchPage extends Component {
                                 />
                             </FormGroup>
                         </Grid>
-                        
+
 
 
 
 
                         <Grid>
+
                             <Paper elevation="5" className={classes.paper}>
                                 <CardHeader title="Name" className={classes.header} />
                                 <img className={classes.profPic} src="/images/girl-profile.png" alt="profilePic" height="100" width="100" />
@@ -222,9 +241,10 @@ class SearchPage extends Component {
                                 <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
                             </Paper>
                         </Grid>
-                       
+
 
                         <Grid>
+
                             <Paper elevation="5" className={classes.paper}>
                                 <CardHeader title="Name" className={classes.header} />
                                 <img className={classes.profPic} src="/images/girl-profile.png" alt="profilePic" height="100" width="100" />
@@ -249,7 +269,7 @@ class SearchPage extends Component {
                                 <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
                             </Paper>
                         </Grid>
-                       
+
 
 
                     </Grid>

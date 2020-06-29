@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import TextField from "@material-ui/core/TextField"
 import FormControl from "@material-ui/core/FormControl"
 import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from "react-router"
@@ -14,7 +13,8 @@ import Checkbox from "@material-ui/core/Checkbox"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Paper from "@material-ui/core/Paper"
 import { fade } from "@material-ui/core/styles/colorManipulator";
-import { Input } from "@material-ui/core"
+
+
 
 
 const styles = theme => ({
@@ -104,6 +104,7 @@ class SearchPage extends Component {
 
     componentDidMount = () => {
         console.log("MOUNTED)")
+        
         this.getVtInfo()
     }
 
@@ -150,7 +151,13 @@ class SearchPage extends Component {
                 <div>
                    <div>
                      
-                        <h1>{JSON.stringify(this.props.serviceProvider)}</h1>
+                        <p>{JSON.stringify(this.props.vtInfo)}</p>
+                        {/* <h1>{JSON.stringify(this.props.vetTechReducer)}</h1> */}
+                        {/* <h1>{JSON.stringify(this.props.vetTechReducer.vet_name)}</h1> */}
+                        {/* <h1>{JSON.stringify(this.props.reduxState.vet_name)}</h1> */}
+
+                        
+                        
                       
                    </div>
                     <Grid className={classes.title}>
@@ -211,11 +218,66 @@ class SearchPage extends Component {
                             </FormGroup>
                         </Grid>
 
+                        {this.props.vtInfo.map((vet, index) => {
+                            return (
+                                <Grid>
+
+                                    <Paper elevation="5" className={classes.paper}>
+                                        <CardHeader title={vet.vet_name} className={classes.header} />
+                                        <img className={classes.profPic} src="/images/girl-profile.png" alt="profilePic" height="100" width="100" />
+                                        <Typography className={classes.certifications} variant="h6">Certifications:</Typography>
+                                        <div className={classes.outlined}>
+                                            <Typography className={classes.list} variant="subtitle1">
+                                            {vet.expertise}
+                                    </Typography>
+                                        </div>
+                                        <div className={classes.outlined}>
+                                            <Typography className={classes.certifications} variant="h6">About me:</Typography>
+                                        </div>
+                                        <div className={classes.outlined}>
+                                            <Typography variant="subtitle1">
+                                          {vet.about_vet}
+                                    </Typography>
+                                        </div>
+                                        <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
+                                    </Paper>
+                                </Grid>
+                            )
+                        })}
 
 
 
 
-                        <Grid>
+
+                        {/* <Grid>
+                            
+                            <Paper elevation="5" className={classes.paper}>
+                                <CardHeader title={this.props.vtInfo.vet_name} className={classes.header} />
+                                <img className={classes.profPic} src="/images/girl-profile.png" alt="profilePic" height="100" width="100" />
+                                <Typography className={classes.certifications} variant="h6">Certifications:</Typography>
+                                <div className={classes.outlined}>
+                                    <Typography className={classes.list} variant="subtitle1">
+                                        Avian Practice,
+                                        Beef Cattle Practice,
+                                        Canine and Feline Practice,
+                                        Dairy Practice,
+                                        Equine Practice
+                                    </Typography>
+                                </div>
+                                <div className={classes.outlined}>
+                                    <Typography className={classes.certifications} variant="h6">About me:</Typography>
+                                </div>
+                                <div className={classes.outlined}>
+                                    <Typography variant="subtitle1">
+                                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
+                                    </Typography>
+                                </div>
+                                <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
+                            </Paper>
+                        </Grid> */}
+
+
+                        {/* <Grid>
 
                             <Paper elevation="5" className={classes.paper}>
                                 <CardHeader title="Name" className={classes.header} />
@@ -240,35 +302,7 @@ class SearchPage extends Component {
                                 </div>
                                 <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
                             </Paper>
-                        </Grid>
-
-
-                        <Grid>
-
-                            <Paper elevation="5" className={classes.paper}>
-                                <CardHeader title="Name" className={classes.header} />
-                                <img className={classes.profPic} src="/images/girl-profile.png" alt="profilePic" height="100" width="100" />
-                                <Typography className={classes.certifications} variant="h6">Certifications:</Typography>
-                                <div className={classes.outlined}>
-                                    <Typography className={classes.list} variant="subtitle1">
-                                        Avian Practice,
-                                        Beef Cattle Practice,
-                                        Canine and Feline Practice,
-                                        Dairy Practice,
-                                        Equine Practice
-                                    </Typography>
-                                </div>
-                                <div className={classes.outlined}>
-                                    <Typography className={classes.certifications} variant="h6">About me:</Typography>
-                                </div>
-                                <div className={classes.outlined}>
-                                    <Typography variant="subtitle1">
-                                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
-                                    </Typography>
-                                </div>
-                                <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
-                            </Paper>
-                        </Grid>
+                        </Grid> */}
 
 
 
@@ -282,14 +316,15 @@ class SearchPage extends Component {
 
 
 const mapStateToProps = (state) => ({
-    serviceProvider: {
-        service_filter: '',
-        dogFilter: false,
-        catFilter: false,
-        otherFilter: false,
-
-    }
-
+   vtInfo: state.vtInfo
+    // serviceProvider: {
+    //     service_filter: '',
+    //     dogFilter: false,
+    //     catFilter: false,
+    //     otherFilter: false,
+    // }
+    
+    
 });
 
 

@@ -112,8 +112,8 @@ class LoginPage extends Component {
                 <img className={classes.loginImage} src="/images/careTakerDog.png" alt="searchIcon" height="150" width="150" />
               </div>
               <div>
-                <Button className={classes.button} onClick={this.login} variant="contained" color="primary" >Log In</Button>
                 <Button className={classes.button} onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }} variant="contained" color="primary" >Register</Button>
+                <Button className={classes.button} onClick={this.login} variant="contained" color="primary" >Log In</Button>
               </div>
             </FormControl>
           </Grid>

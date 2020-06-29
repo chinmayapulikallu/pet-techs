@@ -138,17 +138,10 @@ class VTProfile extends Component {
   };
 
   handleRadio = (event, property) => {
-    console.log("IN HANDLE RADIO", property, event.target.value);
-    if (property === "pottyBreaks") {
-      this.setState({
-        [property]: event.target.value,
-      });
-    } else {
-        this.setState({
+   this.setState({
         [property]: event.target.value === "true",
-      });
-    }
-  };
+  })
+};
 
   handleBack = () => {
     console.log(this.state);
@@ -392,37 +385,57 @@ class VTProfile extends Component {
                       </div>
                       <div>
                         Bathroom Breaks every:
-                        <FormControl component="fieldset">
-                          <RadioGroup
-                            aria-label="pottyBreaks"
-                            name="pottyBreaks"
-                            row
-                            value={this.value}
-                            onChange={(event) =>
-                              this.handleRadio(event, "pottyBreaks")
-                            }
-                          >
+                        <FormControl>
+                          <FormGroup row>
                             <FormControlLabel
-                              value="zero_two"
-                              control={<Radio />}
+                              control={
+                                <Checkbox
+                                  checked={this.state.zero_two}
+                                  onChange={(event) =>
+                                    this.handleChecked(event, "zero_two")
+                                  }
+                                  name="zero_two"
+                                />
+                              }
                               label="0-2"
                             />
                             <FormControlLabel
-                              value="two_four"
-                              control={<Radio />}
+                              control={
+                                <Checkbox
+                                  checked={this.state.two_four}
+                                  onChange={(event) =>
+                                    this.handleChecked(event, "two_four")
+                                  }
+                                  name="two_four"
+                                />
+                              }
                               label="2-4"
                             />
                             <FormControlLabel
-                              value="four_eight"
-                              control={<Radio />}
+                              control={
+                                <Checkbox
+                                  checked={this.state.four_eight}
+                                  onChange={(event) =>
+                                    this.handleChecked(event, "four_eight")
+                                  }
+                                  name="four_eight"
+                                />
+                              }
                               label="4-8"
                             />
                             <FormControlLabel
-                              value="not_available"
-                              control={<Radio />}
+                              control={
+                                <Checkbox
+                                  checked={this.state.not_available}
+                                  onChange={(event) =>
+                                    this.handleChecked(event, "not_available")
+                                  }
+                                  name="not_available"
+                                />
+                              }
                               label="N/A"
                             />
-                          </RadioGroup>
+                          </FormGroup>
                         </FormControl>
                       </div>
                       <div>
@@ -543,9 +556,9 @@ class VTProfile extends Component {
                       </div>
                       <div className={classes.equipment}>
                         Bathroom Breaks every{" "}
-                        {this.state.zero_two ? "0-2 hours" : ""}
-                        {this.state.two_four ? "2-4 hours" : ""}
-                        {this.state.four_eight ? "4-8 hours" : ""}
+                        {this.state.zero_two ? "0-2 hours" : ""}{" "}
+                        {this.state.two_four ? "2-4 hours" : ""}{" "}
+                        {this.state.four_eight ? "4-8 hours" : ""}{" "}
                         {this.state.not_available ? "Not Applicable" : ""}
                       </div>
                       <div className={classes.equipment}>

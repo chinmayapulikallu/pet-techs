@@ -1,3 +1,6 @@
+// TODO: remove mock data
+
+
 const vtInfo = (state = {}, action) => {
   switch (action.type) {
     case 'SET_VT_DATA':

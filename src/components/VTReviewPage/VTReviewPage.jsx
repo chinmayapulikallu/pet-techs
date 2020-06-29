@@ -65,7 +65,7 @@ class VTReviewPage extends Component {
 
       }
     })
-    this.props.history.push("/home");
+    this.props.history.push("/vtdashboard");
   }
 
 

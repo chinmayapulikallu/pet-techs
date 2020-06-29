@@ -236,7 +236,9 @@ class SearchPage extends Component {
                                         </div>
                                         <div className={classes.outlined}>
                                             <Typography variant="subtitle1">
-                                          {vet.about_vet}
+                                         
+                                          {vet.bioyourself}
+
                                     </Typography>
                                         </div>
                                         <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>

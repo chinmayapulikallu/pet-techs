@@ -69,7 +69,10 @@ const styles = {
   subTitle: {
     marginTop: 10,
     marginBottom: 40
-  }
+  }, 
+  img: {
+      borderRadius: '50%',
+  },
 };
 
 class ClientRegPage1 extends Component {
@@ -285,7 +288,7 @@ class ClientRegPage1 extends Component {
            />
           {/* <input type="file" onChange={this.handlePictureChangeFor} /> */}
 
-          <img className="upload-image-for-details" src={this.state.profile_img} alt="profilePictureUrl" width= "100%" height="100%" />
+          <img className={classes.img} src={this.state.profile_img} alt="profilePictureUrl" width= "50%" height="50%" />
 
 
         </div>

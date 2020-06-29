@@ -9,6 +9,8 @@ import Container from "@material-ui/core/Container";
 import { withRouter } from 'react-router-dom';
 import '../ClientProfile/ClientProfile.css';
 
+import Uppy, { XHRUpload, DragDrop } from 'uppy'
+
 
 const styles = theme => ({
     root: {
@@ -27,7 +29,7 @@ const styles = theme => ({
     },
     img: {
         borderRadius: '50%',
-       
+
     },
     contentInTable: {
         padding: '0px 10px',
@@ -59,8 +61,10 @@ const ColorButton = withStyles((theme) => ({
 
 
 class Pet extends Component {
-
-
+    state = {
+        file: '',
+        editPicture: true,
+    }
 
     componentDidMount() {
 
@@ -69,6 +73,7 @@ class Pet extends Component {
             payload: { petId: this.props.pet.id }
         })
         console.log("pet's id:", this.props.pet.id)
+
     }
     handleCarePlanButton = () => {
         this.props.history.push(`/careplan/${this.props.pet.id}`);
@@ -77,6 +82,29 @@ class Pet extends Component {
             payload: { id: this.props.pet.id }
         })
     }
+    handlePictureChangeFor = (event) => {
+        console.log('changing', event.target.files[0])
+        console.log('this.state.file in pet', this.state.file)
+        this.setState({
+            file: event.target.files[0]
+        });
+    }
+    handleEditPicture = () => {
+        console.log('handleEditPicture clicked', this.state.file)
+        this.setState({
+            editPicture: !this.state.editPicture
+        })
+        this.props.dispatch({
+            type: 'UPDATE_PROFILE_PICTURE',
+            payload: {
+                id: this.props.pet.id,
+                file: "this.state.file"
+            }
+        })
+    }
+
+
+
 
 
     render() {
@@ -92,6 +120,18 @@ class Pet extends Component {
                             <tr className="table_body">
                                 <td className={classes.contentInTable}>
                                     <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                    {this.state.editPicture ?
+                                        <>
+                                            <img className={classes.img} src={this.props.pet.age} alt="profile" height="150" width="150" />
+                                            <input type="file" onChange={this.handlePictureChangeFor} onClick={this.handleEditPicture} />
+
+                                        </>
+                                        :
+                                        <button onClick={this.handleEditPicture}>Save</button>
+                                    }
+
+                                    {/* <input type="file" onChange={this.handlePictureChangeFor} /> */}
+
                                 </td>
                                 <td className={classes.contentInTable}>
                                     <h4>{this.props.pet.pet_name}</h4>
@@ -145,7 +185,7 @@ class Pet extends Component {
                             style={{ display: "none" }}
                         />
                     </Button> */}
-                    
+
 
                 </Grid>
 

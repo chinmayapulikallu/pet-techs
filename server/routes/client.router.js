@@ -28,10 +28,10 @@ router.get("/", rejectUnauthenticated, (req, res) => {
     //    generateSignedUrls(res, response.rows)
     //   })
 
-    .then((response) => {
-      console.log("---->client data:", response.rows[0]);
-      res.send(response.rows[0]);
-    })
+    // .then((response) => {
+    //   console.log("---->client data:", response.rows[0]);
+    //   res.send(response.rows[0]);
+    // })
     .catch((error) => {
       console.log(`Error making database query ${sqlText}`, error);
       res.sendStatus(500);

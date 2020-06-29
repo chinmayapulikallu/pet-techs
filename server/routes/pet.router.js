@@ -114,4 +114,22 @@ router.put("/", rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
       });
   });
+
+  router.put("/updateProfilePicture", rejectUnauthenticated, (req, res) => {
+    const {id, file} = req.body;
+    console.log('send this img url to server', req.body.file)
+    const sqlText = `UPDATE pet SET pet_profile_img = $2 where pet.id = $1; `;
+    pool
+      .query(sqlText, [id, file])
+      .then((response) => {
+        res.sendStatus(200);
+      })
+      .catch((error) => {
+        console.log(`Error updating pets by id request. ${sqlText}`, error);
+        res.sendStatus(500);
+      });
+    // res.sendStatus(200);
+  });
+
+
 module.exports = router;

@@ -24,8 +24,8 @@ router.get("/", rejectUnauthenticated, (req, res) => {
     //   })
 
     .then((response) => {
-      console.log("---->client data:", response.rows);
-      res.send(response.rows);
+      console.log("---->client data:", response.rows[0]);
+      res.send(response.rows[0]);
     })
     .catch((error) => {
       console.log(`Error making database query ${sqlText}`, error);

@@ -14,7 +14,7 @@ function* registerClient(action) {
         }
         console.log('----------->data', action.payload.file);
         console.log('----------->formdata', action.payload.file.type);
-        console.log('send this client data to server', action.payload.text);
+        console.log('send this client data to server', action.payload);
 
 
         // yield axios.post('/api/client', action.payload)
@@ -25,8 +25,8 @@ function* registerClient(action) {
                 'Content-Type': action.payload.file.type,
             }
         });
-        console.log('successfully uploaded to the S3: ', response);
-        window.location.reload();
+        // console.log('successfully uploaded to the S3: ', response);
+        // window.location.reload();
 
         yield axios.post('/api/pet', action.payload)
     }

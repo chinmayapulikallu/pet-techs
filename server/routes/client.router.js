@@ -20,8 +20,8 @@ router.get("/", rejectUnauthenticated, (req, res) => {
   pool
     .query(sqlText, [req.user.id])
     .then(response => {
-      console.log('---->client data:', response.rows)
-       generateSignedUrls(res, response.rows) 
+      console.log('---->client data:', response.rows);
+       generateSignedUrls(res, response.rows);
       })
 
     // .then((response) => {

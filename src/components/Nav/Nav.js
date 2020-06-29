@@ -106,7 +106,6 @@ class Nav extends Component {
                           </div>
                         )
                       }
-
                     })} */}
                     {/* <p>here{JSON.stringify(client.media_url)}</p> */}
 

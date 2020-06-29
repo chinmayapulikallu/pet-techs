@@ -68,29 +68,29 @@ class ClientReviewPage extends Component {
         <Typography variant="h5" className={classes.inputHeading}>Client Information:</Typography>
 
                     <Typography variant="h6" className={classes.inputHeading}>Your Name:</Typography>
-                    <Typography variant="body1" gutterBottom>{clientInfo.client_name}</Typography>
+                    <Typography variant="body1" gutterBottom>{clientInfo.text.client_name}</Typography>
                     <Typography variant="h6" className={classes.inputHeading}>Address:</Typography>
-                    <Typography variant="body1" gutterBottom>{clientInfo.home_address_house}</Typography>
-                    <Typography variant="body1" gutterBottom>{clientInfo.apt_suite}</Typography>
-                    <Typography variant="body1" gutterBottom>{clientInfo.city}</Typography>
-                    <Typography variant="body1" gutterBottom>{clientInfo.state}</Typography>
-                    <Typography variant="body1" gutterBottom>{clientInfo.zip_code}</Typography>
+                    <Typography variant="body1" gutterBottom>{clientInfo.text.home_address_house}</Typography>
+                    <Typography variant="body1" gutterBottom>{clientInfo.text.apt_suite}</Typography>
+                    <Typography variant="body1" gutterBottom>{clientInfo.text.city}</Typography>
+                    <Typography variant="body1" gutterBottom>{clientInfo.text.state}</Typography>
+                    <Typography variant="body1" gutterBottom>{clientInfo.text.zip_code}</Typography>
                     <Typography variant="h6" className={classes.inputHeading}>About You:</Typography>
-                    <Typography variant="body1" gutterBottom>{clientInfo.about_client}</Typography>
+                    <Typography variant="body1" gutterBottom>{clientInfo.text.about_client}</Typography>
                     <Typography variant="h6" className={classes.inputHeading}>About Your Home:</Typography>
-                    <Typography variant="body1" gutterBottom>{clientInfo.about_home}</Typography>
+                    <Typography variant="body1" gutterBottom>{clientInfo.text.about_home}</Typography>
                     <Typography variant="h6" className={classes.inputHeading}>Contact Information:</Typography>
-                    <Typography variant="body1" gutterBottom>{clientInfo.contact_name_1}</Typography>
-                    <Typography variant="body1" gutterBottom>{clientInfo.contact_phone_1}</Typography>
-                    <Typography variant="body1" gutterBottom>{clientInfo.contact_email_1}</Typography>
+                    <Typography variant="body1" gutterBottom>{clientInfo.text.contact_name_1}</Typography>
+                    <Typography variant="body1" gutterBottom>{clientInfo.text.contact_phone_1}</Typography>
+                    <Typography variant="body1" gutterBottom>{clientInfo.text.contact_email_1}</Typography>
                     <Typography variant="h6" className={classes.inputHeading}>Vet Tech Information:</Typography>
-                    <Typography variant="body1" gutterBottom>{clientInfo.vet_clinic}</Typography>
-                    <Typography variant="body1" gutterBottom>{clientInfo.clinic_address}</Typography>
-                    <Typography variant="body1" gutterBottom>{clientInfo.clinic_phone}</Typography>
+                    <Typography variant="body1" gutterBottom>{clientInfo.text.vet_clinic}</Typography>
+                    <Typography variant="body1" gutterBottom>{clientInfo.text.clinic_address}</Typography>
+                    <Typography variant="body1" gutterBottom>{clientInfo.text.clinic_phone}</Typography>
                     <Typography variant="h6" className={classes.inputHeading}>
                         Are you Ok with a Vet Tech transporting your animal to the Vet in an emergency?
                     </Typography>
-                    <Typography variant="body1" gutterBottom>{clientInfo.transport ? "True" : "False"}</Typography>
+                    <Typography variant="body1" gutterBottom>{clientInfo.text.transport ? "True" : "False"}</Typography>
                    
                     <div></div>
                     <Button color="primary" variant="contained"

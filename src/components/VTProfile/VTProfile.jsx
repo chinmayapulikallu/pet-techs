@@ -9,7 +9,9 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 
-const styles = {
+const PROFILE_IMG_HEIGHT = 225;
+
+const styles = (theme) => ({
   root: {
     marginTop: 20,
     marginBottom: 40,
@@ -21,10 +23,12 @@ const styles = {
     marginTop: 50,
   },
   mainHeader: {
-    paddingTop: 150,
     backgroundColor: fade("#FFC2B4", 0.25),
-    textAlign: "center",
     paddingBottom: 10,
+  },
+  editContainer: {
+    paddingTop: 100,
+    paddingBottom: 50,
   },
   header: {
     backgroundColor: fade("#195C60", 0.25),
@@ -38,39 +42,29 @@ const styles = {
     paddingBottom: 2.5,
   },
   location: {
-    textAlign: "center",
-    paddingTop: 10,
-  },
-  btnCon: {
-    textAlign: "right",
+    marginTop: 10,
+    marginBottom: 30,
   },
   btn: {
-    marginTop: 40,
     marginRight: 20,
   },
-  btnRS: {
-    marginTop: 40,
-    marginRight: 100,
+  profilePic: {
+    marginTop: -(PROFILE_IMG_HEIGHT / 3),
+    height: PROFILE_IMG_HEIGHT,
+    borderRadius: "50%",
+
+    [theme.breakpoints.down("xs")]: {
+      marginTop: 10,
+    },
   },
-  serv: {
-    marginTop: 100,
-  },
-  about: {
-    marginTop: -100,
-  },
-  equip: {
-    marginTop: -70,
-  },
-  exp: {
-    marginTop: -60,
+  profilePicContainer: {
+    display: "flex",
+    justifyContent: "center",
   },
   pic: {
-    marginRight: 50
+    marginTop: 20,
   },
-  pref: {
-marginTop: -110
-  }
-};
+});
 
 class VTProfile extends Component {
   state = {
@@ -79,7 +73,7 @@ class VTProfile extends Component {
   };
 
   handleEdit = () => {
-      console.log(this.props.vtInfo)
+    console.log(this.props.vtInfo);
     this.setState((prevState) => ({
       editable: !prevState.editable,
     }));
@@ -87,9 +81,13 @@ class VTProfile extends Component {
 
   handleChange = (property) => (event) => {
     console.log(event.target.value, property);
-      this.setState({
-        [property]: event.target.value,
-      });
+    this.setState({
+      [property]: event.target.value,
+    });
+  };
+
+  handleBack = () => {
+    console.log(this.state);
   };
 
   componentDidMount() {
@@ -100,46 +98,62 @@ class VTProfile extends Component {
     return (
       <div>
         <div className={classes.mainHeader}>
-          <Typography variant="h4">
-            {this.state.editable ? (
-              <TextField
-                id="outlined-basic"
-                color="secondary"
-                variant="outlined"
-                defaultValue={this.state.username}
-                onChange={this.handleChange("username")}
-              />
-            ) : (
-              this.state.username
-            )}
-          </Typography>
+          <Container maxWidth="md" className={classes.root}>
+            <Grid container spacing={10} className={classes.editContainer}>
+              {false && (
+                <>
+                  <Grid item xs={12} sm={9}>
+                    <Typography variant="h6">
+                      This is where the public will see your text yayadsa
+                      sdafsdfa sdfasd asdf sdfasdfa sdfa sdfasd fad
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12} sm={3}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      className={classes.btn}
+                      onClick={this.handleEdit}
+                    >
+                      {this.state.editable ? "Save" : "Edit"}
+                    </Button>
+                  </Grid>
+                </>
+              )}
+            </Grid>
+          </Container>
+          <Container maxWidth="md" classesName={classes.root}>
+            <Grid container spacing={10}>
+              <Grid item xs={12} sm={5}></Grid>
+              <Grid item xs={12} sm={7}>
+                <Typography variant="h4">
+                  {this.state.editable ? (
+                    <TextField
+                      id="outlined-basic"
+                      color="secondary"
+                      variant="outlined"
+                      defaultValue={this.state.username}
+                      onChange={this.handleChange("username")}
+                    />
+                  ) : (
+                    this.state.username
+                  )}
+                </Typography>
+              </Grid>
+            </Grid>
+          </Container>
         </div>
         <Container maxWidth="md" classesName={classes.root}>
-          <Typography variant="subtitle1" className={classes.location}>
-            Location
-          </Typography>
-          <div className={classes.btnCon}>
-            <Button variant="contained" color="primary" className={classes.btn}>
-              Back to Search
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.btnRS}
-            >
-              Request Service
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.btn}
-              onClick={this.handleEdit}
-            >
-              {this.state.editable ? "Save" : "Edit"}
-            </Button>
-          </div>
-          <Grid container direction="row" justify="space-between" spacing={10}>
-            <Grid item xs={5} className={classes.serv}>
+          <Grid container spacing={10}>
+            <Grid item xs={12} sm={5}>
+              <div className={classes.profilePicContainer}>
+                <img
+                  className={classes.profilePic}
+                  src={this.state.profile_img}
+                  alt="Profile Picture"
+                />
+              </div>
+
               <Paper variant="outlined" className={classes.paper}>
                 <header className={classes.header}>
                   <Typography variant="h6">Services Offered</Typography>
@@ -151,8 +165,47 @@ class VTProfile extends Component {
                   <li>Pet Sleepover</li>
                 </Typography>
               </Paper>
+              <Paper variant="outlined" className={classes.paper}>
+                <header className={classes.header}>
+                  <Typography variant="h6">NAME's Care Equipment</Typography>
+                </header>
+                <Typography variant="body1" className={classes.body}>
+                  <li>Pet Sleepover</li>
+                  <li>Pet Sleepover</li>
+                  <li>Pet Sleepover</li>
+                  <li>Pet Sleepover</li>
+                </Typography>
+              </Paper>
+              <Paper variant="outlined" className={classes.paper}>
+                <header className={classes.header}>
+                  <Typography variant="h6">NAME's Preferences</Typography>
+                </header>
+                <Typography variant="body1" className={classes.body}>
+                  Preferences here
+                </Typography>
+              </Paper>
             </Grid>
-            <Grid item xs={7}>
+            <Grid item xs={12} sm={7}>
+              <Typography variant="subtitle1" className={classes.location}>
+                Location
+              </Typography>
+              <div>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.btn}
+                  onClick={this.handleBack}
+                >
+                  Back to Search
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.btnRS}
+                >
+                  Request Service
+                </Button>
+              </div>
               <Paper variant="outlined" className={classes.paper}>
                 <header className={classes.header}>
                   <Typography variant="h6">Qualifications</Typography>
@@ -168,21 +221,6 @@ class VTProfile extends Component {
                   mollit anim id est laborum.
                 </Typography>
               </Paper>
-            </Grid>
-            <Grid item xs={5} className={classes.equip}>
-              <Paper variant="outlined" className={classes.paper}>
-                <header className={classes.header}>
-                  <Typography variant="h6">NAME's Care Equipment</Typography>
-                </header>
-                <Typography variant="body1" className={classes.body}>
-                  <li>Pet Sleepover</li>
-                  <li>Pet Sleepover</li>
-                  <li>Pet Sleepover</li>
-                  <li>Pet Sleepover</li>
-                </Typography>
-              </Paper>
-            </Grid>
-            <Grid item xs={7} className={classes.about}>
               <Paper variant="outlined" className={classes.paper}>
                 <header className={classes.header}>
                   <Typography variant="h6">About NAME</Typography>
@@ -198,36 +236,29 @@ class VTProfile extends Component {
                   mollit anim id est laborum.
                 </Typography>
               </Paper>
+              <Grid container spacing={5}>
+                <Grid item xs={12} sm={8}>
+                  <Paper variant="outlined" className={classes.paper}>
+                    <header className={classes.header}>
+                      <Typography variant="h6">
+                        Experience & Relevant Skills
+                      </Typography>
+                    </header>
+                    <Typography variant="body1" className={classes.body}>
+                      Experience & Relevant Skills here
+                    </Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} sm={3}>
+                  <img
+                    src="/images/careTakerDog.png"
+                    alt="Care Taker"
+                    height="150"
+                    className={classes.pic}
+                  />
+                </Grid>
+              </Grid>
             </Grid>
-            <Grid item xs={5} className={classes.pref}>
-              <Paper variant="outlined" className={classes.paper}>
-                <header className={classes.header}>
-                  <Typography variant="h6">NAME's Preferences</Typography>
-                </header>
-                <Typography variant="body1" className={classes.body}>
-                  Preferences here
-                </Typography>
-              </Paper>
-            </Grid>
-            <Grid item xs={5} className={classes.exp}>
-              <Paper variant="outlined" className={classes.paper}>
-                <header className={classes.header}>
-                  <Typography variant="h6">
-                    Experience & Relevant Skills
-                  </Typography>
-                </header>
-                <Typography variant="body1" className={classes.body}>
-                  Experience & Relevant Skills here
-                </Typography>
-              </Paper>
-            </Grid>
-
-            <img
-              src="/images/careTakerDog.png"
-              alt="Care Taker"
-              height="150"
-              className={classes.pic}
-            />
           </Grid>
         </Container>
       </div>

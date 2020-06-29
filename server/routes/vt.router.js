@@ -20,7 +20,34 @@ router.get("/", rejectUnauthenticated, (req, res) => {
 });
 
 router.get("/all", rejectUnauthenticated, (req, res) => {
-  const sqlText = `SELECT * FROM "vet_tech"; `;
+  const sqlText = `SELECT * FROM "vet_tech" ORDER BY vet_name ASC; `;
+  pool
+    .query(sqlText)
+    .then((response) => {
+      res.send(response.rows);
+    })
+    .catch((error) => {
+      console.log(`Error getting Pet Tech info ${sqlText}`, error);
+      res.sendStatus(500);
+    });
+});
+
+//FILTER DOG TEST
+router.get("/dog", rejectUnauthenticated, (req, res) => {
+  const sqlText = `SELECT * FROM "vet_tech" WHERE dogs=true; `;
+  pool
+    .query(sqlText)
+    .then((response) => {
+      res.send(response.rows);
+    })
+    .catch((error) => {
+      console.log(`Error getting Pet Tech info ${sqlText}`, error);
+      res.sendStatus(500);
+    });
+});
+//FILTER CAT TEST
+router.get("/cat", rejectUnauthenticated, (req, res) => {
+  const sqlText = `SELECT * FROM "vet_tech" WHERE cats=true; `;
   pool
     .query(sqlText)
     .then((response) => {

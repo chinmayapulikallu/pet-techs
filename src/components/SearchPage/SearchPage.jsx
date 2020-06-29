@@ -13,9 +13,7 @@ import Checkbox from "@material-ui/core/Checkbox"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Paper from "@material-ui/core/Paper"
 import { fade } from "@material-ui/core/styles/colorManipulator";
-
-
-
+import Input from "@material-ui/core/Input"
 
 const styles = theme => ({
     root: {
@@ -49,7 +47,7 @@ const styles = theme => ({
         paddingBottom: 10
     },
     groupCheck: {
-        paddingLeft: 400
+        paddingLeft: 525
     },
     serviceType: {
         paddingLeft: 150,
@@ -80,7 +78,6 @@ const styles = theme => ({
         backgroundColor: fade("#195C60", 0.25),
         marginBottom: 20,
         paddingLeft: 30,
-
     },
     aboutMe: {
         display: "flex"
@@ -89,32 +86,27 @@ const styles = theme => ({
         marginBottom: 20,
         marginTop: 10
     }
-
-
 })
-
 
 
 class SearchPage extends Component {
 
+
+
+
     state = {
         ...this.props.serviceProvider,
-        search: ''
+        searchedValue: ''
     };
 
     componentDidMount = () => {
         console.log("MOUNTED)")
-        
         this.getAllVtInfo()
     }
 
-
-
     getAllVtInfo = () => {
-        
         this.props.dispatch({ type: "GET_ALL_VT_DATA" });
     };
-
 
     handleChange = (event, property) => {
         console.log(event.target.value, "#####")
@@ -131,56 +123,42 @@ class SearchPage extends Component {
 
     };
 
-    // onChange = e =>{
-    //     console.log(e.target.value);
-
-    //     this.setState({search : e.target.value})
+    // dogCheck = (event) => {
+    //     console.log(event.target.checked, '!!!!!!!!!!')
+    //     this.props.dispatch({type: "GET_DOG_VETS"})
     // }
 
+    dogCheck = (event) => {
+    if (event.target.checked === true){
+        this.props.dispatch({type: "GET_DOG_VETS"})
+    } else if (event.target.checked = false){
+        this.props.dispatch({ type:" GET_ALL_VT_DATA "})  
+    }
+}
+    catCheck = (event) => {
+    if (event.target.checked === true){
+        this.props.dispatch({type: "GET_CAT_VETS"})
+    } else if (event.target.checked = false){
+        this.props.dispatch({ type:" GET_ALL_VT_DATA "})  
+    }
+}
 
 
     render() {
-
         const { classes } = this.props
-        //const {search}=this.state;
-
         return (
-
-
             <div className={classes.root}>
-
                 <div>
-                   <div>
-                     
-                        <p>{JSON.stringify(this.props.vtInfo)}</p>
-                        
-                        
-                      
-                   </div>
                     <Grid className={classes.title}>
                         <FormControl onSubmit={this.registerUser}>
                             <div>
                                 <img className={classes.searchImage} src="/images/search-mag.png" alt="searchIcon" height="75" width="75" />
-
                             </div>
                             <Typography className={classes.serviceTitle} variant="h4">Find a service provider</Typography>
                         </FormControl>
-
                         <Typography variant="subtitle1">Filter</Typography>
-
-
-
-                        {/* <Input label="Search" onChange={this.onChange}/> */}
-
-
-
-
-
-
                         <Grid container direction={"row"} className={classes.serviceType}>
-                            {/* <InputLabel>Service:</InputLabel> */}
                             <Select
-
                                 color="secondary"
                                 label="Service"
                                 variant="outlined"
@@ -197,12 +175,14 @@ class SearchPage extends Component {
                                 <FormControlLabel
                                     control={<Checkbox name="dog" />}
                                     onChange={(event) => this.handleCheckChange(event, "dogFilter")}
+                                    onChange={(event) => this.dogCheck(event)}
                                     value={this.state.dogFilter}
                                     label="Dog"
                                 />
                                 <FormControlLabel
                                     control={<Checkbox name="cat" />}
                                     onChange={(event) => this.handleCheckChange(event, "catFilter")}
+                                    onChange={(event) => this.catCheck(event)}
                                     value={this.state.catFilter}
                                     label="Cat"
                                 />
@@ -214,97 +194,33 @@ class SearchPage extends Component {
                                 />
                             </FormGroup>
                         </Grid>
-                        {/* <Grid container> */}
                         {this.props.vtInfo.map((vet, index) => {
                             return (
                                 <Grid>
                                     <Paper elevation="5" className={classes.paper}>
                                         <div key={vet.id}>
-                                        <CardHeader title={vet.vet_name} className={classes.header} />
-                                        <img className={classes.profPic} src="/images/girl-profile.png" alt="profilePic" height="100" width="100" />
-                                        <Typography className={classes.certifications} variant="h6">Certifications:</Typography>
-                                        <div className={classes.outlined}>
-                                            <Typography className={classes.list} variant="subtitle1">
-                                            {vet.expertise}
-                                    </Typography>
-                                        </div>
-                                        <div className={classes.outlined}>
-                                            <Typography className={classes.certifications} variant="h6">About me:</Typography>
-                                        </div>
-                                        <div className={classes.outlined}>
-                                            <Typography variant="subtitle1">
-                                          {vet.bioyourself}
-                                    </Typography>
-                                        </div>
-                                        <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
+                                            <CardHeader title={vet.vet_name} className={classes.header} />
+                                            <img className={classes.profPic} src={vet.profile_img} alt="profilePic" height="100" width="100" />
+                                            <Typography className={classes.certifications} variant="h6">Certifications:</Typography>
+                                            <div className={classes.outlined}>
+                                                <Typography className={classes.list} variant="subtitle1">
+                                                    {vet.expertise}
+                                                </Typography>
+                                            </div>
+                                            <div className={classes.outlined}>
+                                                <Typography className={classes.certifications} variant="h6">About me:</Typography>
+                                            </div>
+                                            <div className={classes.outlined}>
+                                                <Typography variant="subtitle1">
+                                                    {vet.bioyourself}
+                                                </Typography>
+                                            </div>
+                                            <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
                                         </div>
                                     </Paper>
                                 </Grid>
                             )
                         })}
-                        {/* </Grid> */}
-
-
-
-
-
-                        {/* <Grid>
-                            
-                            <Paper elevation="5" className={classes.paper}>
-                                <CardHeader title={this.props.vtInfo.vet_name} className={classes.header} />
-                                <img className={classes.profPic} src="/images/girl-profile.png" alt="profilePic" height="100" width="100" />
-                                <Typography className={classes.certifications} variant="h6">Certifications:</Typography>
-                                <div className={classes.outlined}>
-                                    <Typography className={classes.list} variant="subtitle1">
-                                        Avian Practice,
-                                        Beef Cattle Practice,
-                                        Canine and Feline Practice,
-                                        Dairy Practice,
-                                        Equine Practice
-                                    </Typography>
-                                </div>
-                                <div className={classes.outlined}>
-                                    <Typography className={classes.certifications} variant="h6">About me:</Typography>
-                                </div>
-                                <div className={classes.outlined}>
-                                    <Typography variant="subtitle1">
-                                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
-                                    </Typography>
-                                </div>
-                                <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
-                            </Paper>
-                        </Grid> */}
-
-
-                        {/* <Grid>
-
-                            <Paper elevation="5" className={classes.paper}>
-                                <CardHeader title="Name" className={classes.header} />
-                                <img className={classes.profPic} src="/images/girl-profile.png" alt="profilePic" height="100" width="100" />
-                                <Typography className={classes.certifications} variant="h6">Certifications:</Typography>
-                                <div className={classes.outlined}>
-                                    <Typography className={classes.list} variant="subtitle1">
-                                        Avian Practice,
-                                        Beef Cattle Practice,
-                                        Canine and Feline Practice,
-                                        Dairy Practice,
-                                        Equine Practice
-                                    </Typography>
-                                </div>
-                                <div className={classes.outlined}>
-                                    <Typography className={classes.certifications} variant="h6">About me:</Typography>
-                                </div>
-                                <div className={classes.outlined}>
-                                    <Typography variant="subtitle1">
-                                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
-                                    </Typography>
-                                </div>
-                                <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
-                            </Paper>
-                        </Grid> */}
-
-
-
                     </Grid>
 
                 </div>
@@ -313,19 +229,15 @@ class SearchPage extends Component {
     }
 }
 
-
 const mapStateToProps = (state) => ({
-   vtInfo: state.vtInfo
+    vtInfo: state.vtInfo
     // serviceProvider: {
     //     service_filter: '',
     //     dogFilter: false,
     //     catFilter: false,
     //     otherFilter: false,
     // }
-    
-    
 });
-
 
 export default withRouter(
     connect(mapStateToProps)(withStyles(styles)(SearchPage))

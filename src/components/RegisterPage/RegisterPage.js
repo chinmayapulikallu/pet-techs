@@ -169,7 +169,31 @@ class RegisterPage extends Component {
                   </RadioGroup>
               </FormControl>
 
-              {/* <FormGroup row={true}>
+             
+              <div>
+                <Button className={classes.button} type="submit" name="submit" value="Register" onClick={this.registerUser} variant="contained" color="primary" >Register</Button>
+              
+              </div>
+            </FormControl>
+          </Grid>
+        </div>
+       
+      </div>
+    );
+  }
+}
+
+// Instead of taking everything from state, we just want the error messages.
+// if you wanted you could write this code like this:
+// const mapStateToProps = ({errors}) => ({ errors });
+const mapStateToProps = (state) => ({
+  errors: state.errors,
+});
+
+// export default connect(mapStateToProps)(RegisterPage);
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(RegisterPage)));
+
+{/* <FormGroup row={true}>
                 <FormControlLabel
                   control={<Radio name="owner" />}
                   value="0"
@@ -187,7 +211,7 @@ class RegisterPage extends Component {
                   label="I want to sign up as a Vet Tech"
                 />
               </FormGroup> */}
-              {/* <div>
+{/* <div>
                 <input
                   type="radio"
                   id="client"
@@ -206,19 +230,15 @@ class RegisterPage extends Component {
                 />
                 <label>I want to sign up at a Vet Tech.</label>
               </div> */}
-              <div>
-                <Button className={classes.button} type="submit" name="submit" value="Register" onClick={this.registerUser} variant="contained" color="primary" >Register</Button>
-                {/* <input
+
+{/* <input
                   className="register"
                   type="submit"
                   name="submit"
                   value="Register"
                 /> */}
-              </div>
-            </FormControl>
-          </Grid>
-        </div>
-        {/* <br />
+
+{/* <br />
         <button
           type="button"
           className="link-button"
@@ -228,17 +248,3 @@ class RegisterPage extends Component {
         >
           Login
           </button> */}
-      </div>
-    );
-  }
-}
-
-// Instead of taking everything from state, we just want the error messages.
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({errors}) => ({ errors });
-const mapStateToProps = (state) => ({
-  errors: state.errors,
-});
-
-// export default connect(mapStateToProps)(RegisterPage);
-export default withRouter(connect(mapStateToProps)(withStyles(styles)(RegisterPage)));

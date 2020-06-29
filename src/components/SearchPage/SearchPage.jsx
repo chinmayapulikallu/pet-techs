@@ -105,13 +105,14 @@ class SearchPage extends Component {
     componentDidMount = () => {
         console.log("MOUNTED)")
         
-        this.getVtInfo()
+        this.getAllVtInfo()
     }
 
 
 
-    getVtInfo = () => {
-        this.props.dispatch({ type: "GET_VT_DATA" });
+    getAllVtInfo = () => {
+        
+        this.props.dispatch({ type: "GET_ALL_VT_DATA" });
     };
 
 
@@ -152,10 +153,6 @@ class SearchPage extends Component {
                    <div>
                      
                         <p>{JSON.stringify(this.props.vtInfo)}</p>
-                        {/* <h1>{JSON.stringify(this.props.vetTechReducer)}</h1> */}
-                        {/* <h1>{JSON.stringify(this.props.vetTechReducer.vet_name)}</h1> */}
-                        {/* <h1>{JSON.stringify(this.props.reduxState.vet_name)}</h1> */}
-
                         
                         
                       
@@ -217,12 +214,12 @@ class SearchPage extends Component {
                                 />
                             </FormGroup>
                         </Grid>
-
+                        {/* <Grid container> */}
                         {this.props.vtInfo.map((vet, index) => {
                             return (
                                 <Grid>
-
                                     <Paper elevation="5" className={classes.paper}>
+                                        <div key={vet.id}>
                                         <CardHeader title={vet.vet_name} className={classes.header} />
                                         <img className={classes.profPic} src="/images/girl-profile.png" alt="profilePic" height="100" width="100" />
                                         <Typography className={classes.certifications} variant="h6">Certifications:</Typography>
@@ -236,16 +233,16 @@ class SearchPage extends Component {
                                         </div>
                                         <div className={classes.outlined}>
                                             <Typography variant="subtitle1">
-                                         
                                           {vet.bioyourself}
-
                                     </Typography>
                                         </div>
                                         <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
+                                        </div>
                                     </Paper>
                                 </Grid>
                             )
                         })}
+                        {/* </Grid> */}
 
 
 

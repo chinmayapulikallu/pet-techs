@@ -19,6 +19,19 @@ router.get("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
+router.get("/all", rejectUnauthenticated, (req, res) => {
+  const sqlText = `SELECT * FROM "vet_tech"; `;
+  pool
+    .query(sqlText)
+    .then((response) => {
+      res.send(response.rows);
+    })
+    .catch((error) => {
+      console.log(`Error getting Pet Tech info ${sqlText}`, error);
+      res.sendStatus(500);
+    });
+});
+
 /**
  * POST route template
  */

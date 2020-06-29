@@ -100,6 +100,7 @@ class LoginPage extends Component {
               </div>
               <div className={classes.boxes}>
                 <TextField id="outlined-basic"
+                  type="password"
                   label="Password"
                   variant="outlined"
                   name="password"

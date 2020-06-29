@@ -15,6 +15,7 @@ const petRouter = require('./routes/pet.router');
 const vtRouter = require('./routes/vt.router');
 const searchRouter = require('./routes/search.router');
 const requestRouter = require('./routes/request.router');
+const petPictureRouter = require('./routes/petPicture.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -34,6 +35,12 @@ app.use('/api/pet', petRouter);
 app.use('/api/vt', vtRouter);
 app.use('/api/search', searchRouter);
 app.use('/api/request', requestRouter);
+app.use('/api/pet/picture', petPictureRouter);
+
+// app.use(function (err, req, res, next) {
+//   console.log('This is the invalid field ->', err.field)
+//   next(err)
+// })
 
 
 // Serve static files

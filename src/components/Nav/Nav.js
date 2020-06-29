@@ -29,7 +29,10 @@ const styles = theme => ({
     top: '7px',
     left: 5,
     marginBottom: '50%',
-  }
+  },
+  img: {
+    borderRadius: '50%',
+  },
 
 })
 
@@ -46,10 +49,10 @@ function HideOnScroll(props) {
 
 
 class Nav extends Component {
- 
+
 
   render() {
-    const { classes } = this.props;
+    const { classes, clientInfo, user } = this.props;
     // console.log('---------->user id:', this.props.user.id)
 
 
@@ -66,11 +69,11 @@ class Nav extends Component {
               {/* Show this link if they are logged in or not,
           but call this link 'Home' if they are logged in,
           and call this link 'Login / Register' if they are not */}
-              {this.props.user.id ? 'Home' : 'Login / Register'}
+              {user.id ? 'Home' : 'Login / Register'}
             </Link>
 
             {/* Show the link to the info page and the logout button if the user is logged in */}
-            {this.props.user.id && (
+            {user.id && (
               <>
                 <Link className="nav-link" to="/info">
                   Search for services
@@ -80,16 +83,34 @@ class Nav extends Component {
             <Link className="nav-link" to="/about">
               About
         </Link>
-            {this.props.user.id && (
+            {user.id && (
               <>
                 <div className="nav-link">
-                  <Link className="profile" to="/info">
-                    Profile
-              </Link>
+                  <Link className="profile" to={`/client-profile/${user.id}`}>
+                    {user.username}
+                  </Link>
                 </div>
                 <div className="profile_icon">
-                  <Link to="/info">
-                    <img src="images/blank-profile-picture.png" alt="profile" height="30" width="30" />
+                  <Link to={`/client-profile/${user.id}`}>
+                    {/* {clientInfo.map((client) => {
+                      if (client.media_url === null || client.media_url === '') {
+                        return (
+                          <div key={client.user_id}>
+                            <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="30" width="30" />
+                          </div>
+                        )
+                      } else {
+                        return (
+                          <div key={client.user_id}>
+                            <img className={classes.img} src={client.media_url} alt="profile" height="30" width="30" />
+                          </div>
+                        )
+                      }
+
+                    })} */}
+                    {/* <p>here{JSON.stringify(client.media_url)}</p> */}
+
+                   
                   </Link>
                 </div>
                 <LogOutButton className="nav-link" />
@@ -111,8 +132,9 @@ class Nav extends Component {
 // if they are logged in, we show them a few more links 
 // if you wanted you could write this code like this:
 // const mapStateToProps = ({ user }) => ({ user });
-const mapStateToProps = (state) => ({
-  user: state.user
+const mapStateToProps = (reduxState) => ({
+  user: reduxState.user,
+  clientInfo: reduxState.clientInfo
 
 });
 

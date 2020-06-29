@@ -8,8 +8,8 @@ function* clientInfoSaga() {
 
 function* getClientInfo(action) {
   try {
-    const id = action.payload;
-    const response = yield axios.get(`/api/client/${id}`);
+    console.log('--------> from client info Saga')
+    const response = yield axios.get(`/api/client`);
     yield put({
       type: "SET_CLIENT_DATA",
       payload: response.data,
@@ -19,4 +19,5 @@ function* getClientInfo(action) {
     console.log("Error with get client info:", error);
   }
 }
+
 export default clientInfoSaga;

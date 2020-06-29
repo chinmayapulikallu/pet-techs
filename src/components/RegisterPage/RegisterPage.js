@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import TextField from "@material-ui/core/TextField"
-import FormControl from "@material-ui/core/FormControl"
+import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
 import { withStyles } from '@material-ui/core/styles';
-import { withRouter } from "react-router"
+import { withRouter } from "react-router";
 import { Typography } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid"
-import FormGroup from "@material-ui/core/FormGroup"
-import FormControlLabel from "@material-ui/core/FormControlLabel"
-import Radio from "@material-ui/core/Radio"
-import Button from "@material-ui/core/Button"
+import Grid from "@material-ui/core/Grid";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from "@material-ui/core/Radio";
+import Button from "@material-ui/core/Button";
+import RadioGroup from "@material-ui/core/RadioGroup";
 
 
 const styles = theme => ({
@@ -34,6 +34,10 @@ const styles = theme => ({
     width: 180,
     borderRadius: 12,
   },
+  radioAlignment: {
+        display: "block",
+        margin: "10px"
+  },
 })
 
 
@@ -51,27 +55,41 @@ class RegisterPage extends Component {
   registerUser = (event) => {
     event.preventDefault();
 
-    if (this.state.username && this.state.password) {
+    if (this.state.user_email
+          && this.state.username 
+          && this.state.phone_number 
+          && this.state.password 
+          && this.state.hear_about 
+          && this.state.user_type) {
       this.props.dispatch({
         type: "REGISTER",
         payload: {
-          user_email: this.state.email,
+          user_email: this.state.user_email,
           username: this.state.username,
-          phone_number: this.state.phone,
+          phone_number: this.state.phone_number,
           password: this.state.password,
           hear_about: this.state.hear_about,
           user_type: this.state.user_type,
         },
       });
+      const redirectPage = this.state.user_type === '0' ? '/client-registration' : '/vet-tech-registration'
+      this.props.history.push(redirectPage)
     } else {
       this.props.dispatch({ type: "REGISTRATION_INPUT_ERROR" });
     }
   }; // end registerUser
 
-  handleInputChangeFor = (propertyName) => (event) => {
-    this.setState({
-      [propertyName]: event.target.value,
-    });
+  handleInputChangeFor = (property) => (event) => {
+    console.log("in handleChange", event.target.value, property);
+    if (event.target.value === "true" || event.target.value === "false") {
+      this.setState({
+        [property]: event.target.value === "true",
+      });
+    } else {
+      this.setState({
+        [property]: event.target.value,
+      });
+    }
   };
 
   render() {
@@ -88,7 +106,6 @@ class RegisterPage extends Component {
             <FormControl onSubmit={this.registerUser}>
               <Typography className={classes.title} variant="h3">Sign up with email!</Typography>
               <Typography className={classes.title} variant="h6">*All fields required</Typography>
-
               <div className={classes.boxes}>
                 <TextField id="outlined-basic"
                   label="Email"
@@ -121,6 +138,7 @@ class RegisterPage extends Component {
               </div>
               <div className={classes.boxes}>
                 <TextField id="outlined-basic"
+                  type="password"
                   label="Password"
                   variant="outlined"
                   name="password"
@@ -138,12 +156,20 @@ class RegisterPage extends Component {
                   label="How did you hear about Pet Techs?"
                   variant="outlined"
                   color="secondary"
-                // value={this.state.this.state.hear_about}
-                //onChange={(event) => this.handleChange(event, "this.state.hear_about")}
+                  value={this.state.hear_about}
+                  onChange={this.handleInputChangeFor("hear_about")}
                 />
               </div>
 
-              <FormGroup row={true}>
+              <FormControl component="fieldset">
+                  <RadioGroup defaultValue="male" aria-label="gender" className={classes.radioAlignment}
+                            name="customized-radios" onChange={this.handleInputChangeFor("user_type")}>
+                                <FormControlLabel value="0" control={<Radio />} label="I want to sign up as a pet owner" />
+                                <FormControlLabel value="1" control={<Radio />} label="I want to sign up as a Vet Tech" />
+                  </RadioGroup>
+              </FormControl>
+
+              {/* <FormGroup row={true}>
                 <FormControlLabel
                   control={<Radio name="owner" />}
                   value="0"
@@ -160,7 +186,7 @@ class RegisterPage extends Component {
                   name="noAgeRadio"
                   label="I want to sign up as a Vet Tech"
                 />
-              </FormGroup>
+              </FormGroup> */}
               {/* <div>
                 <input
                   type="radio"

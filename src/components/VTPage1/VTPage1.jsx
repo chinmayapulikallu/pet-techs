@@ -74,7 +74,7 @@ const styles = {
 
 class VTPage1 extends Component {
   state = {
-    ...this.props.vtInfo,
+    ...this.props.vtInfoPage1,
   };
 
   handleInputChange = (property) => (event) => {
@@ -95,9 +95,16 @@ class VTPage1 extends Component {
 
   handleNext = () => {
     this.props.onNext();
+    this.props.dispatch({
+      type: 'SET_VT_DATA_PAGE_1',
+      payload: { ...this.state },
+    })
+    console.log('Vet reg data page 1:', this.state)
   };
   render() {
     const { classes } = this.props;
+    console.log('----page1-------->', this.props.vtInfoPage1)
+
     return (
       <Container className={classes.root} maxWidth="sm">
         <Typography variant="h3" className={classes.title}>
@@ -106,11 +113,22 @@ class VTPage1 extends Component {
         <div className={classes.inputs}>
           <TextField
             id="outlined-basic"
+            label={"Your name"}
+            fullWidth
+            color="secondary"
+            variant="outlined"
+            value={this.state.vet_name}
+            onChange={this.handleInputChange("vet_name")}
+          />
+        </div>
+        <div className={classes.inputs}>
+          <TextField
+            id="outlined-basic"
             label={"Home Address"}
             fullWidth
             color="secondary"
             variant="outlined"
-            value={this.state.home_adress_house}
+            value={this.state.home_address_house}
             onChange={this.handleInputChange("home_address_house")}
           />
         </div>
@@ -339,7 +357,8 @@ class VTPage1 extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  vtInfo: {
+  vtInfoPage1: {
+    vet_name: '',
     home_address_house: "",
     apt_suite: "",
     city: "",
@@ -351,7 +370,8 @@ const mapStateToProps = (state) => ({
     dropin_care: false,
     hospice: false,
     about_vet: "",
-    ...state.vtInfo, // overrides default with any existing vt values
+    
+    ...state.vtInfoPage1, // overrides default with any existing vt values
   },
   errors: state.errors,
 });

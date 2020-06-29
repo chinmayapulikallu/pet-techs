@@ -1,17 +1,30 @@
 const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 /**
  * GET route template
  */
-router.get("/", (req, res) => {});
+router.get("/", rejectUnauthenticated, (req, res) => {
+  const sqlText = `SELECT * from vet_tech where user_id = $1; `;
+  pool
+    .query(sqlText, [req.user.id])
+    .then((response) => {
+      res.send(response.rows);
+    })
+    .catch((error) => {
+      console.log(`Error getting Pet Tech info ${sqlText}`, error);
+      res.sendStatus(500);
+    });
+});
 
 /**
  * POST route template
  */
-router.post("/", (req, res) => {
-  const user_id = req.body.user_id;
+router.post("/", rejectUnauthenticated, (req, res) => {
+  console.log('req.body', req.body)
+  const user_id = req.user.id;
   const vet_name = req.body.vet_name;
   const home_address_house = req.body.home_address_house;
   const apt_suite = req.body.apt_suite;
@@ -43,6 +56,7 @@ router.post("/", (req, res) => {
   const certifications = req.body.certifications;
   const current_job_title = req.body.current_job_title;
   const expertise = req.body.expertise;
+  const bioYourself = req.body.bioYourself;
   const cpr_first_aid = req.body.cpr_first_aid;
   const oral_medication = req.body.oral_medication;
   const injectable_medication = req.body.injectable_medication;
@@ -52,7 +66,19 @@ router.post("/", (req, res) => {
   const pet_longer_than_a_week = req.body.pet_longer_than_a_week;
   const diabetic_insulin_care = req.body.diabetic_insulin_care;
   const queryText =
-    'INSERT INTO "vet_tech" ( user_id, vet_name, home_address_house, apt_suite, city, state, zip_code, profile_img, sleep_over, boarding, dropin_care, hospice, about_vet, dogs, cats, other, vet_available, zero_two, two_four, four_eight, not_available, small_dog, medium_dog, large_dog, giant_dog, pet_younger_than_one, pet_more_than_one_family, equipment_list, experience, certifications, current_job_title, expertise, cpr_first_aid, oral_medication, injectable_medication, exp_older_pet, exp_special_pet, daily_exercise, pet_longer_than_a_week, diabetic_insulin_care)VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40)';
+    `INSERT INTO "vet_tech" ( user_id, vet_name, home_address_house, 
+        apt_suite, city, state, zip_code, profile_img, sleep_over, boarding, 
+        dropin_care, hospice, about_vet, dogs, cats, other, vet_available, 
+        zero_two, two_four, four_eight, not_available, small_dog, medium_dog, 
+        large_dog, giant_dog, pet_younger_than_one, pet_more_than_one_family, 
+        equipment_list, experience, certifications, current_job_title, expertise,bioYourself, 
+        cpr_first_aid, oral_medication, injectable_medication, exp_older_pet, 
+        exp_special_pet, daily_exercise, pet_longer_than_a_week, 
+        diabetic_insulin_care)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, 
+            $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, 
+            $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, 
+            $38, $39, $40, $41)`;
   pool
     .query(queryText, [
       user_id,
@@ -87,6 +113,7 @@ router.post("/", (req, res) => {
       certifications,
       current_job_title,
       expertise,
+      bioYourself,
       cpr_first_aid,
       oral_medication,
       injectable_medication,

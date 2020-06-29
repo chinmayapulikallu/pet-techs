@@ -129,19 +129,33 @@ class SearchPage extends Component {
     // }
 
     dogCheck = (event) => {
-    if (event.target.checked === true){
-        this.props.dispatch({type: "GET_DOG_VETS"})
-    } else if (event.target.checked = false){
-        this.props.dispatch({ type:" GET_ALL_VT_DATA "})  
+        console.log(event.target.checked);
+        
+        if (event.target.checked === true) {
+            this.props.dispatch({ type: "GET_DOG_VETS" })
+        } else if (event.target.checked !== "true") {
+            this.getAllVtInfo()
+            // this.props.dispatch({ type: " GET_ALL_VT_DATA " })
+        }
     }
-}
+
+  
+
     catCheck = (event) => {
-    if (event.target.checked === true){
-        this.props.dispatch({type: "GET_CAT_VETS"})
-    } else if (event.target.checked = false){
-        this.props.dispatch({ type:" GET_ALL_VT_DATA "})  
+        if (event.target.checked === true) {
+            this.props.dispatch({ type: "GET_CAT_VETS" })
+        } else if (event.target.checked !== true) {
+            this.getAllVtInfo()
+        }
     }
-}
+
+    otherCheck = (event) => {
+        if (event.target.checked === true) {
+            this.props.dispatch({ type: "GET_OTHER_VETS" })
+        } else if (event.target.checked !== true) {
+            this.getAllVtInfo()
+        }
+    }
 
 
     render() {
@@ -170,8 +184,7 @@ class SearchPage extends Component {
                                 <MenuItem value="Drop-In">Drop-In</MenuItem>
                                 <MenuItem value="Hospice">Hospice</MenuItem>
                             </Select>
-                            <FormGroup className={classes.groupCheck} row={true}>
-                                {/* <Typography variant="subtitle1">Type:</Typography> */}
+                            <FormGroup className={classes.groupCheck} row={true}> 
                                 <FormControlLabel
                                     control={<Checkbox name="dog" />}
                                     onChange={(event) => this.handleCheckChange(event, "dogFilter")}
@@ -189,6 +202,7 @@ class SearchPage extends Component {
                                 <FormControlLabel
                                     control={<Checkbox name="other" />}
                                     onChange={(event) => this.handleCheckChange(event, "otherFilter")}
+                                    onChange={(event) => this.otherCheck(event)}
                                     value={this.state.otherFilter}
                                     label="Other"
                                 />
@@ -197,7 +211,7 @@ class SearchPage extends Component {
                         {this.props.vtInfo.map((vet, index) => {
                             return (
                                 <Grid>
-                                    <Paper elevation="5" className={classes.paper}>
+                                    <Paper elevation={5} className={classes.paper}>
                                         <div key={vet.id}>
                                             <CardHeader title={vet.vet_name} className={classes.header} />
                                             <img className={classes.profPic} src={vet.profile_img} alt="profilePic" height="100" width="100" />
@@ -230,13 +244,13 @@ class SearchPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    vtInfo: state.vtInfo
-    // serviceProvider: {
-    //     service_filter: '',
-    //     dogFilter: false,
-    //     catFilter: false,
-    //     otherFilter: false,
-    // }
+    vtInfo: state.vtInfo,
+    serviceProvider: {
+        service_filter: '',
+        dogFilter: false,
+        catFilter: false,
+        otherFilter: false,
+    }
 });
 
 export default withRouter(

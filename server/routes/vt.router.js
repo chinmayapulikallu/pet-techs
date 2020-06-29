@@ -59,6 +59,20 @@ router.get("/cat", rejectUnauthenticated, (req, res) => {
     });
 });
 
+//FILTER OTHER TEST
+router.get("/other", rejectUnauthenticated, (req, res) => {
+  const sqlText = `SELECT * FROM "vet_tech" WHERE other=true; `;
+  pool
+    .query(sqlText)
+    .then((response) => {
+      res.send(response.rows);
+    })
+    .catch((error) => {
+      console.log(`Error getting Pet Tech info ${sqlText}`, error);
+      res.sendStatus(500);
+    });
+});
+
 /**
  * POST route template
  */

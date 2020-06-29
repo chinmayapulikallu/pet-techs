@@ -76,6 +76,11 @@ const useStyles = (theme) => ({
 
 class ClientDashboard extends Component {
 
+    componentDidMount() {
+        // console.log('CLient DashboaRd', clientInfo)
+        this.props.dispatch({type: 'GET_CLIENT_DASHBOARD'});
+    }
+
     //search service provider
     searchProvider = () => {
         alert('link to search page');
@@ -86,92 +91,98 @@ class ClientDashboard extends Component {
         const { classes, user, clientInfo, petInfo } = this.props;
         return (
           <Container className={classes.root} maxWidth="md">
-            <Grid item xs={12} className={classes.profileCenter}>
-                <Card>
-                    <CardContent>
-                        <div>
-                            <Typography variant="h6"><b>CLIENT NAME</b></Typography>
-                            <img className={classes.profileImage} src="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png" alt="name" height="75" width="75" />     
-                        </div>
-                    </CardContent>
-                </Card>
-            </Grid>
-                <Grid container>
-                <Grid item xs={6}>
-                    <Card className={classes.cardSearch}>
-                        <CardContent>
-                            <div>                         
-                                <img className={classes.profileImage} src="/images/service-provider.png" alt="serviceProviderIcon"
-                                height="100" width="100" />
-                            </div>
-                            <Button color="primary" variant="contained"
-                            className={classes.buttonMargin} onClick={this.searchProvider}>Find Service Provider</Button>   
-                        </CardContent>
-                    </Card>  
-                </Grid>
-                <Grid item xs={6}>
-                    <Card className={classes.serviceList}>
-                        <CardContent>
-                                    {/*Map request and services accepted */}
-                                        <Typography variant="h6">Scheduled Services</Typography>
-                                <Card variant="outlined" className={classes.childCard}>
-                                    <CardHeader
-                                        avatar={
-                                            <Avatar aria-label="recipe" className={classes.avatar}>
-                                                <CheckCircleIcon />
-                                            </Avatar>
-                                        }
-                                        action={
-                                            <IconButton aria-label="settings">
-                                            </IconButton>
-                                        }
-                                        title="Vet Tech Name"
-                                    />
-                                    <CardMedia
-                                        component="img"
-                                        className={classes.media}
-                                        image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
-                                    />
-                                    <CardContent className="align-center">
-                                        <Typography variant="h6">Service Date</Typography>
-                                        <Button color="primary" variant="contained"
-                                        className={classes.buttonMargin} onClick={this.vtProfile}>VT Profile</Button>  
-                                    </CardContent>
-                                    <CardActions>
-                                    </CardActions>
-                                </Card> 
+                {clientInfo.map((client) =>    
+                    <span key={client.user_id}>
+                        <Grid item xs={12} className={classes.profileCenter}>
+                          <Card>
+                             <CardContent>
+                               <div>
+                                <Typography variant="h6"><b>{client.client_name}</b></Typography>
+                                 <img className={classes.profileImage} src="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png" alt="name" height="75" width="75" />     
+                                </div>
                             </CardContent>
-                    </Card> 
-                </Grid>
-            </Grid>                          
-            <div className={classes.petTitle}>
-                <Typography variant="h6">Your Pets</Typography>
-            </div>
+                         </Card>
+                        </Grid>
+                        <Grid container>
+                            <Grid item xs={6}>
+                                <Card className={classes.cardSearch}>
+                                    <CardContent>
+                                        <div>
+                                            <img className={classes.profileImage} src="/images/service-provider.png" alt="serviceProviderIcon"
+                                                height="100" width="100" />
+                                        </div>
+                                        <Button color="primary" variant="contained"
+                                            className={classes.buttonMargin} onClick={this.searchProvider}>Find Service Provider</Button>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Card className={classes.serviceList}>
+                                    <CardContent>
+                                        {/*Map request and services accepted */}
+                                        <Typography variant="h6">Scheduled Services</Typography>
+                                        <Card variant="outlined" className={classes.childCard}>
+                                            <CardHeader
+                                                avatar={
+                                                    <Avatar aria-label="recipe" className={classes.avatar}>
+                                                        <CheckCircleIcon />
+                                                    </Avatar>
+                                                }
+                                                action={
+                                                    <IconButton aria-label="settings">
+                                                    </IconButton>
+                                                }
+                                                title="Vet Tech Name"
+                                            />
+                                            <CardMedia
+                                                component="img"
+                                                className={classes.media}
+                                                image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
+                                            />
+                                            <CardContent className="align-center">
+                                                <Typography variant="h6">Service Date</Typography>
+                                                <Button color="primary" variant="contained"
+                                                    className={classes.buttonMargin} onClick={this.vtProfile}>VT Profile</Button>
+                                            </CardContent>
+                                            <CardActions>
+                                            </CardActions>
+                                        </Card>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        </Grid>                          
+                    </span>                   
+                )}
+                <div className={classes.petTitle}>
+                    <Typography variant="h6">Your Pets</Typography>
+                </div>
                 <Card className={classes.petList}>
-                    {/* Map pets */}               
-                    <Typography variant="h6">Pet Name</Typography>
-                    <CardMedia
-                        component="img"
-                        className={classes.media}
-                        image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
-                     />
-                    <CardContent>
-                     <Button color="primary" variant="contained"
-                      className={classes.buttonMargin} onClick={this.carePlan}>carePlan</Button>  
-                    </CardContent>
+                    {petInfo.map(pet =>
+                        <span key={pet.id}>
+                            <Typography variant="h6">{pet.pet_name}</Typography>
+                            <CardMedia
+                                component="img"
+                                className={classes.media}
+                                image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
+                            />
+                            <CardContent>
+                                <Button color="primary" variant="contained"
+                                    className={classes.buttonMargin} onClick={this.carePlan}>carePlan</Button>
+                            </CardContent>
+                        </span>
+                    )}
                 </Card>
-
-               
-
-            </Container>
+          </Container>
         )
-    }
+    }   
 }
 
-const mapStateToProps = (reduxState) => ({
-    clientInfo: reduxState.clientInfoReducer,
-    petInfo: reduxState.petInfoReducer,
-    user: reduxState.userReducer
+const putReduxStateOnProps = (reduxState) => ({
+    clientInfo: reduxState.clientInfo,
+    petInfo: reduxState.petInfo,
+
+    user: reduxState.user
 
 })
-export default (withStyles(useStyles))(withRouter(connect(mapStateToProps)(ClientDashboard)));
+
+export default (withStyles(useStyles))(withRouter(connect(putReduxStateOnProps)(ClientDashboard)));

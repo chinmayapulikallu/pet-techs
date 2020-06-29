@@ -85,6 +85,7 @@ class ClientServiceRequest extends Component {
 
     handleSendRequest = () => {
         console.log("Clicked Send Request", this.state)
+        this.props.dispatch({type: 'SET_CLIENT_SERVICE_REQUEST', payload:this.state})
         // this.props.history.push("/path")
     }
 

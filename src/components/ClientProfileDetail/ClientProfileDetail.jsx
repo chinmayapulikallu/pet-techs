@@ -181,7 +181,7 @@ class ClientProfileDetail extends Component {
                         <Grid container spacing={1}>
                             <Grid item xs={5} className={classes.items}>
                                 {/* <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" /> */}
-                                <img className={classes.img} src={this.props.client.media_url} alt="profile" height="150" width="150" />
+                                <img className={classes.img} src={this.props.client.profile_img} alt="profile" height="150" width="150" />
                                                                 
 
                             </Grid>

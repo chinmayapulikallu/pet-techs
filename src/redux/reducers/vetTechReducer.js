@@ -1,7 +1,7 @@
 // TODO: remove mock data
 
 
-const vtInfo = (state = {}, action) => {
+const vtInfo = (state = [], action) => {
   switch (action.type) {
     case 'SET_VT_DATA':
       console.log('in vt reducer:', action.payload)

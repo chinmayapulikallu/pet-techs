@@ -47,7 +47,7 @@ const styles = theme => ({
         paddingBottom: 10
     },
     groupCheck: {
-        paddingLeft: 525
+        paddingLeft: 50
     },
     serviceType: {
         paddingLeft: 150,
@@ -115,6 +115,51 @@ class SearchPage extends Component {
         })
     }
 
+
+    //HANDLE SERVICE CHANGES
+    handleServiceChange = (event, property) => {
+        console.log("CLICKED SERVICE TYPE", event.target.checked, property)
+        this.setState({
+            [property]: event.target.checked === true 
+        })
+    }
+
+    petSleepoverCheck = (event) => {
+        if (event.target.checked === true){
+            this.props.dispatch({type: "GET_SLEEPOVER_VETS"})
+        } else if (event.target.checked !== "true"){
+            this.getAllVtInfo()
+        }
+    }
+
+    petBoardingCheck = (event) => {
+        if (event.target.checked === true){
+            this.props.dispatch({type: "GET_BOARDING_VETS"})
+        } else if (event.target.checked !== "true"){
+            this.getAllVtInfo()
+        }
+    }
+
+    dropInCheck = (event) => {
+        if (event.target.checked === true) {
+            this.props.dispatch({ type: "GET_DROPIN_VETS" })
+        } else if (event.target.checked !== "true") {
+            this.getAllVtInfo()
+        }
+    }
+
+    hospiceCheck=(event) => {
+        if (event.target.checked === true) {
+            this.props.dispatch({ type: "GET_HOSPICE_VETS" })
+        } else if (event.target.checked !== "true") {
+            this.getAllVtInfo()
+        }
+
+    }
+
+
+
+    //HANDLE CHANGES FOR PET TYPE FILTER 
     handleCheckChange = (event, property) => {
         console.log(event.target.checked, property)
         this.setState({
@@ -123,23 +168,16 @@ class SearchPage extends Component {
 
     };
 
-    // dogCheck = (event) => {
-    //     console.log(event.target.checked, '!!!!!!!!!!')
-    //     this.props.dispatch({type: "GET_DOG_VETS"})
-    // }
-
+    //FILTER CHECK MARKS
     dogCheck = (event) => {
         console.log(event.target.checked);
-        
+
         if (event.target.checked === true) {
             this.props.dispatch({ type: "GET_DOG_VETS" })
         } else if (event.target.checked !== "true") {
             this.getAllVtInfo()
-            // this.props.dispatch({ type: " GET_ALL_VT_DATA " })
         }
     }
-
-  
 
     catCheck = (event) => {
         if (event.target.checked === true) {
@@ -157,7 +195,6 @@ class SearchPage extends Component {
         }
     }
 
-
     render() {
         const { classes } = this.props
         return (
@@ -172,7 +209,7 @@ class SearchPage extends Component {
                         </FormControl>
                         <Typography variant="subtitle1">Filter</Typography>
                         <Grid container direction={"row"} className={classes.serviceType}>
-                            <Select
+                            {/* <Select
                                 color="secondary"
                                 label="Service"
                                 variant="outlined"
@@ -183,8 +220,8 @@ class SearchPage extends Component {
                                 <MenuItem value="Boarding">Pet Boarding</MenuItem>
                                 <MenuItem value="Drop-In">Drop-In</MenuItem>
                                 <MenuItem value="Hospice">Hospice</MenuItem>
-                            </Select>
-                            <FormGroup className={classes.groupCheck} row={true}> 
+                            </Select> */}
+                            <FormGroup className={classes.groupCheck} row={true}>
                                 <FormControlLabel
                                     control={<Checkbox name="dog" />}
                                     onChange={(event) => this.handleCheckChange(event, "dogFilter")}
@@ -205,6 +242,34 @@ class SearchPage extends Component {
                                     onChange={(event) => this.otherCheck(event)}
                                     value={this.state.otherFilter}
                                     label="Other"
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox name="petSleepover" />}
+                                    onChange={(event) => this.handleServiceChange(event, "petSleepover")}
+                                    onChange={(event) => this.petSleepoverCheck(event)}
+                                    value={this.state.petSleepover}
+                                    label="Pet Sleepover"
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox name="petBoarding" />}
+                                    onChange={(event) => this.handleServiceChange(event, "petBoarding")}
+                                    onChange={(event) => this.petBoardingCheck(event)}
+                                    value={this.state.petBoarding}
+                                    label="Pet Boarding"
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox name="dropIn" />}
+                                    onChange={(event) => this.handleServiceChange(event, "dropIn")}
+                                    onChange={(event) => this.dropInCheck(event)}
+                                    value={this.state.dropIn}
+                                    label="Drop-In"
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox name="hospice" />}
+                                    onChange={(event) => this.handleServiceChange(event, "hospice")}
+                                    onChange={(event) => this.hospiceCheck(event)}
+                                    value={this.state.hospice}
+                                    label="Hospice"
                                 />
                             </FormGroup>
                         </Grid>
@@ -250,6 +315,13 @@ const mapStateToProps = (state) => ({
         dogFilter: false,
         catFilter: false,
         otherFilter: false,
+        petSleepover: false,
+        petBoarding: false,
+        dropIn: false,
+        hospice: false
+
+
+
     }
 });
 

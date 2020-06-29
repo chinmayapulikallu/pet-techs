@@ -34,7 +34,7 @@ router.get("/all", rejectUnauthenticated, (req, res) => {
 
 //FILTER DOG TEST
 router.get("/dog", rejectUnauthenticated, (req, res) => {
-  const sqlText = `SELECT * FROM "vet_tech" WHERE dogs=true; `;
+  const sqlText = `SELECT * FROM "vet_tech" WHERE dogs=true ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
     .then((response) => {
@@ -47,7 +47,7 @@ router.get("/dog", rejectUnauthenticated, (req, res) => {
 });
 //FILTER CAT TEST
 router.get("/cat", rejectUnauthenticated, (req, res) => {
-  const sqlText = `SELECT * FROM "vet_tech" WHERE cats=true; `;
+  const sqlText = `SELECT * FROM "vet_tech" WHERE cats=true ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
     .then((response) => {
@@ -61,7 +61,7 @@ router.get("/cat", rejectUnauthenticated, (req, res) => {
 
 //FILTER OTHER TEST
 router.get("/other", rejectUnauthenticated, (req, res) => {
-  const sqlText = `SELECT * FROM "vet_tech" WHERE other=true; `;
+  const sqlText = `SELECT * FROM "vet_tech" WHERE other=true ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
     .then((response) => {
@@ -72,6 +72,65 @@ router.get("/other", rejectUnauthenticated, (req, res) => {
       res.sendStatus(500);
     });
 });
+
+//FILTER PET SLEEPOVER 
+router.get("/sleepover", rejectUnauthenticated, (req, res) => {
+  const sqlText = `SELECT * FROM "vet_tech" WHERE sleep_over=true ORDER BY vet_name ASC; `;
+  pool
+    .query(sqlText)
+    .then((response) => {
+      res.send(response.rows);
+    })
+    .catch((error) => {
+      console.log(`Error getting Pet Tech info ${sqlText}`, error);
+      res.sendStatus(500);
+    });
+});
+
+//FILTER PET BOARDING
+router.get("/boarding", rejectUnauthenticated, (req, res) => {
+  const sqlText = `SELECT * FROM "vet_tech" WHERE boarding=true ORDER BY vet_name ASC; `;
+  pool
+    .query(sqlText)
+    .then((response) => {
+      res.send(response.rows);
+    })
+    .catch((error) => {
+      console.log(`Error getting Pet Tech info ${sqlText}`, error);
+      res.sendStatus(500);
+    });
+});
+
+//FILTER DROP_IN VETS
+router.get("/dropin", rejectUnauthenticated, (req, res) => {
+  const sqlText = `SELECT * FROM "vet_tech" WHERE dropin_care=true ORDER BY vet_name ASC; `;
+  pool
+    .query(sqlText)
+    .then((response) => {
+      res.send(response.rows);
+    })
+    .catch((error) => {
+      console.log(`Error getting Pet Tech info ${sqlText}`, error);
+      res.sendStatus(500);
+    });
+});
+
+//FILTER HOSPICE VETS
+router.get("/hospice", rejectUnauthenticated, (req, res) => {
+  const sqlText = `SELECT * FROM "vet_tech" WHERE hospice=true ORDER BY vet_name ASC; `;
+  pool
+    .query(sqlText)
+    .then((response) => {
+      res.send(response.rows);
+    })
+    .catch((error) => {
+      console.log(`Error getting Pet Tech info ${sqlText}`, error);
+      res.sendStatus(500);
+    });
+});
+
+
+
 
 /**
  * POST route template

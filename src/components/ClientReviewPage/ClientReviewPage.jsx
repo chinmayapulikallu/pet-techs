@@ -38,7 +38,7 @@ class ClientReviewPage extends Component {
                 ...this.props.userInfo,
             }
         });
-        this.props.history.push('/home')
+        this.props.history.push('/clientdashboard')
 
     }
     

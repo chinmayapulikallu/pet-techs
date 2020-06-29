@@ -17,6 +17,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Checkbox from "@material-ui/core/Checkbox"
 
 
+
 const styles = theme => ({
     root: {
         marginLeft: theme.spacing(20),
@@ -52,7 +53,6 @@ class ClientServiceRequest extends Component {
 
 
     handleDateChange = (event, property) => {
-        // console.log(event.target.value, "#######")
         this.setState({
             [property]: event,
         })

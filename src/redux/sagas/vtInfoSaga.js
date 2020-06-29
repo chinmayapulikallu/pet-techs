@@ -3,6 +3,8 @@ import axios from "axios";
 
 function* vtInfoSaga() {
   yield takeLatest("GET_VT_DATA", getVTData);
+  yield takeLatest("GET_ALL_VT_DATA", getAllVtData);
+  
 }
 
 
@@ -19,6 +21,23 @@ function* getVTData(action) {
     console.log("Error with get vet_tech data:", error);
   }
 }
+
+function* getAllVtData(action) {
+  try {
+    const response = yield axios.get(`/api/vt/all`);
+    yield put({
+      type: "GET_VT_DATA_SUCCESSFUL",
+      payload: response.data,
+    });
+    console.log("ALL VT DATA", response.data);
+  } catch (error) {
+    console.log("Error with GET_ALL_VT_DATA:", error);
+  }
+}
+
+
+
+
 
 
 export default vtInfoSaga;

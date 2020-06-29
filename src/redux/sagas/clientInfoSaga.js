@@ -4,6 +4,7 @@ import axios from "axios";
 
 function* clientInfoSaga() {
   yield takeLatest("GET_CLIENT_DATA", getClientInfo);
+  yield takeLatest("UPDATE_CLIENT_DATA", updateClientData);
 }
 
 function* getClientInfo(action) {
@@ -20,4 +21,19 @@ function* getClientInfo(action) {
   }
 }
 
+function* updateClientData(action) {
+    try {
+      
+      console.log('from in updateClientData', action.payload)
+      const response = yield axios.put(`/api/client`, action.payload);
+      yield put({
+        type: "GET_CLIENT_DATA",
+        payload: action.payload,
+      });
+
+      console.log("here is data from pet update", response.data);
+    } catch (error) {
+      console.log("Error with get pet data:", error);
+    }
+  }
 export default clientInfoSaga;

@@ -10,6 +10,11 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormGroup from "@material-ui/core/FormGroup";
+import Checkbox from "@material-ui/core/Checkbox";
+import { FormControl } from "@material-ui/core";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
 
 const PROFILE_IMG_HEIGHT = 225;
 
@@ -79,7 +84,15 @@ const styles = (theme) => ({
     marginTop: 10,
     paddingBottom: 10,
     paddingRight: 15,
-    maxWidth: "95%"
+    maxWidth: "95%",
+  },
+  size: {
+    textAlign: "center",
+    backgroundColor: fade("#195C60", 0.25),
+    marginBottom: 10,
+    marginTop: 10,
+    marginRight: 10,
+    marginLeft: -5,
   },
 });
 
@@ -87,10 +100,11 @@ class VTProfile extends Component {
   state = {
     ...this.props.vtInfo,
     editable: false,
+    pottyBreaks: "",
   };
 
   handleEdit = () => {
-    console.log(this.props.vtInfo);
+    console.log(this.state);
     this.setState((prevState) => ({
       editable: !prevState.editable,
     }));
@@ -107,6 +121,27 @@ class VTProfile extends Component {
     this.setState({
       [property]: event.target.checked === true,
     });
+  };
+
+  handleChecked = (event, property) => {
+    if (event.target.checked === true) {
+      this.setState({
+        [property]: true,
+      });
+    } else if (event.target.checked === false) {
+      this.setState({
+        [property]: false,
+      });
+    }
+  };
+
+  handleRadio = (event, property) => {
+    console.log("IN HANDLE RADIO", property, event.target.value);
+    if (property === "pottyBreaks" && event.target.checked) {
+      this.setState({
+        [property]: event.target.value,
+      });
+    }
   };
 
   handleBack = () => {
@@ -304,7 +339,191 @@ class VTProfile extends Component {
                   </Typography>
                 </header>
                 <Typography variant="body1" className={classes.body}>
-                  Preferences here
+                  {this.state.editable ? (
+                    <>
+                      <div>
+                        Provides service for:
+                        <FormControl>
+                          <FormGroup row>
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={this.state.dogs}
+                                  onChange={(event) =>
+                                    this.handleChecked(event, "dogs")
+                                  }
+                                  name="Dogs"
+                                />
+                              }
+                              label="Dogs"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={this.state.cats}
+                                  onChange={(event) =>
+                                    this.handleChecked(event, "cats")
+                                  }
+                                  name="Cats"
+                                />
+                              }
+                              label="Cats"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={this.state.other}
+                                  onChange={(event) =>
+                                    this.handleChecked(event, "other")
+                                  }
+                                  name="Other"
+                                />
+                              }
+                              label="Other"
+                            />
+                          </FormGroup>
+                        </FormControl>
+                      </div>
+                      <div>
+                        Bathroom Breaks every:
+                        <FormControl component="fieldset">
+                          <RadioGroup
+                            aria-label="pottyBreaks"
+                            name="pottyBreaks"
+                            row
+                            value={this.value}
+                            onChange={(event) =>
+                              this.handleRadio(event, "pottyBreaks")
+                            }
+                          >
+                            <FormControlLabel
+                              value="zero_two"
+                              control={<Radio />}
+                              label="0-2"
+                            />
+                            <FormControlLabel
+                              value="two_four"
+                              control={<Radio />}
+                              label="2-4"
+                            />
+                            <FormControlLabel
+                              value="four_eight"
+                              control={<Radio />}
+                              label="4-8"
+                            />
+                            <FormControlLabel
+                              value="not_available"
+                              control={<Radio />}
+                              label="N/A"
+                            />
+                          </RadioGroup>
+                        </FormControl>
+                      </div>
+                      <div>
+                        Animal size prefrences:
+                        <FormControl>
+                          <FormGroup row>
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={this.state.small_dog}
+                                  onChange={(event) =>
+                                    this.handleChecked(event, "small_dog")
+                                  }
+                                  name="small_dog"
+                                />
+                              }
+                              label="Small"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={this.state.medium_dog}
+                                  onChange={(event) =>
+                                    this.handleChecked(event, "medium_dog")
+                                  }
+                                  name="medium_dog"
+                                />
+                              }
+                              label="Medium"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={this.state.large_dog}
+                                  onChange={(event) =>
+                                    this.handleChecked(event, "large_dog")
+                                  }
+                                  name="large_dog"
+                                />
+                              }
+                              label="Large"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={this.state.giant_dog}
+                                  onChange={(event) =>
+                                    this.handleChecked(event, "giant_dog")
+                                  }
+                                  name="giant_dog"
+                                />
+                              }
+                              label="Giant"
+                            />
+                          </FormGroup>
+                        </FormControl>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className={classes.equipment}>
+                        Provides services for {this.state.dogs ? "dogs" : ""}{" "}
+                        {this.state.cats ? " cats" : ""}{" "}
+                        {this.state.other ? " and other types of animals" : ""}
+                      </div>
+                      <div className={classes.equipment}>
+                        Bathroom Breaks every{" "}
+                        {this.state.zero_two ? "0-2 hours" : ""}
+                        {this.state.two_four ? "2-4 hours" : ""}
+                        {this.state.four_eight ? "4-8 hours" : ""}
+                        {this.state.not_available ? "Not Applicable" : ""}
+                      </div>
+                      <div>
+                        Animal Size Preferences:
+                        <Grid container>
+                          {this.state.small_dog ? (
+                            <Grid item xs={12} sm={3}>
+                              <Paper className={classes.size}>Small</Paper>
+                            </Grid>
+                          ) : (
+                            ""
+                          )}
+                          {this.state.medium_dog ? (
+                            <Grid item xs={12} sm={3}>
+                              <Paper className={classes.size}>Medium</Paper>
+                            </Grid>
+                          ) : (
+                            ""
+                          )}
+                          {this.state.large_dog ? (
+                            <Grid item xs={12} sm={3}>
+                              <Paper className={classes.size}>Large</Paper>
+                            </Grid>
+                          ) : (
+                            ""
+                          )}
+                          {this.state.giant_dog ? (
+                            <Grid item xs={12} sm={3}>
+                              <Paper className={classes.size}>Giant</Paper>
+                            </Grid>
+                          ) : (
+                            ""
+                          )}
+                        </Grid>
+                      </div>
+                    </>
+                  )}
                 </Typography>
               </Paper>
             </Grid>

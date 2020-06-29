@@ -9,7 +9,18 @@ const initialState = {
   boarding: false,
   dropin_care: true,
   hospice: true,
-  equipment_list: "Stethoscope, Glucose Monitor, Dog and Cat Carriers, First Aid Kit, Leashes"
+  equipment_list: "Stethoscope, Glucose Monitor, Dog and Cat Carriers, First Aid Kit, Leashes",
+  dogs: true,
+  cats: false,
+  other: true,
+  zero_two: false,
+  two_four: false,
+  four_eight: true,
+  not_available: false,
+  small_dog: true,
+  medium_dog: true,
+  large_dog: true,
+  giant_dog: true,
 };
 
 const vtInfo = (state = initialState, action) => {

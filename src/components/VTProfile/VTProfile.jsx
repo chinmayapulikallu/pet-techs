@@ -69,7 +69,7 @@ const styles = (theme) => ({
     justifyContent: "center",
   },
   pic: {
-    marginTop: 20,
+    marginTop: 30,
   },
   headngTitle: {
     textAlign: "center",
@@ -92,8 +92,10 @@ const styles = (theme) => ({
     marginBottom: 10,
     marginTop: 10,
     marginRight: 10,
-    marginLeft: -5,
   },
+  botBtn: {
+    marginTop: 25
+  }
 });
 
 class VTProfile extends Component {
@@ -137,9 +139,13 @@ class VTProfile extends Component {
 
   handleRadio = (event, property) => {
     console.log("IN HANDLE RADIO", property, event.target.value);
-    if (property === "pottyBreaks" && event.target.checked) {
+    if (property === "pottyBreaks") {
       this.setState({
         [property]: event.target.value,
+      });
+    } else {
+        this.setState({
+        [property]: event.target.value === "true",
       });
     }
   };
@@ -420,6 +426,59 @@ class VTProfile extends Component {
                         </FormControl>
                       </div>
                       <div>
+                        Will host animals from multiple families
+                        <FormControl component="fieldset">
+                          <RadioGroup
+                            row
+                            aria-label="pet_more_than_one_family"
+                            name="pet_more_than_one_family"
+                            value={String(this.state.pet_more_than_one_family)}
+                            onChange={(event) =>
+                              this.handleRadio(
+                                event,
+                                "pet_more_than_one_family"
+                              )
+                            }
+                          >
+                            <FormControlLabel
+                              value="false"
+                              control={<Radio />}
+                              label="No"
+                            />
+                            <FormControlLabel
+                              value="true"
+                              control={<Radio />}
+                              label="Yes"
+                            />
+                          </RadioGroup>
+                        </FormControl>
+                      </div>
+                      <div>
+                        Will host pets younger than one years old
+                        <FormControl component="fieldset">
+                          <RadioGroup
+                            row
+                            aria-label="pet_younger_than_one"
+                            name="pet_younger_than_one"
+                            value={String(this.state.pet_younger_than_one)}
+                            onChange={(event) =>
+                              this.handleRadio(event, "pet_younger_than_one")
+                            }
+                          >
+                            <FormControlLabel
+                              value="false"
+                              control={<Radio />}
+                              label="No"
+                            />
+                            <FormControlLabel
+                              value="true"
+                              control={<Radio />}
+                              label="Yes"
+                            />
+                          </RadioGroup>
+                        </FormControl>
+                      </div>
+                      <div>
                         Animal size prefrences:
                         <FormControl>
                           <FormGroup row>
@@ -489,7 +548,17 @@ class VTProfile extends Component {
                         {this.state.four_eight ? "4-8 hours" : ""}
                         {this.state.not_available ? "Not Applicable" : ""}
                       </div>
-                      <div>
+                      <div className={classes.equipment}>
+                        {this.state.pet_more_than_one_family
+                          ? "Hosts animals from multiple families"
+                          : "Will only host animals from one family"}
+                      </div>
+                      <div className={classes.equipment}>
+                        {this.state.pet_younger_than_one
+                          ? "Hosts pets younger than one years old"
+                          : "Will only host pets older than one"}
+                      </div>
+                      <div className={classes.equipment}>
                         Animal Size Preferences:
                         <Grid container>
                           {this.state.small_dog ? (
@@ -580,14 +649,58 @@ class VTProfile extends Component {
                   <Typography variant="h6">Qualifications</Typography>
                 </header>
                 <Typography variant="body1" className={classes.body}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
+                  {this.state.editable ? (
+                    <>
+                      <TextField
+                        className={classes.equipment}
+                        id="outlined-basic"
+                        label="Years of Experience"
+                        color="secondary"
+                        size="small"
+                        variant="outlined"
+                        defaultValue={this.state.experience}
+                        onChange={this.handleChange("experience")}
+                      />
+                      <TextField
+                        className={classes.equipment}
+                        id="outlined-basic"
+                        label="Education/Degree/Cerifications"
+                        color="secondary"
+                        multiline
+                        fullWidth
+                        rows={5}
+                        variant="outlined"
+                        defaultValue={this.state.certifications}
+                        onChange={this.handleChange("certifications")}
+                      />
+                      <TextField
+                        className={classes.equipment}
+                        id="outlined-basic"
+                        label="Current Job Title"
+                        color="secondary"
+                        size="small"
+                        variant="outlined"
+                        defaultValue={this.state.current_job_title}
+                        onChange={this.handleChange("current_job_title")}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <div className={classes.equipment}>
+                        Professional pet experiences: {this.state.experience}{" "}
+                        years
+                      </div>
+                      <div className={classes.equipment}>
+                        Education/Degree/Cerifications:
+                        <div className={classes.listItem}>
+                          {this.state.certifications}
+                        </div>
+                      </div>
+                      <div className={classes.equipment}>
+                        Current Job Title: {this.state.current_job_title}
+                      </div>
+                    </>
+                  )}
                 </Typography>
               </Paper>
               <Paper variant="outlined" className={classes.paper}>
@@ -597,14 +710,24 @@ class VTProfile extends Component {
                   </Typography>
                 </header>
                 <Typography variant="body1" className={classes.body}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
+                  {this.state.editable ? (
+                    <TextField
+                      className={classes.equipment}
+                      id="outlined-basic"
+                      label="About yourself"
+                      color="secondary"
+                      multiline
+                      fullWidth
+                      rows={7}
+                      variant="outlined"
+                      defaultValue={this.state.bioYourself}
+                      onChange={this.handleChange("bioYourself")}
+                    />
+                  ) : (
+                    <div className={classes.equipment}>
+                      {this.state.bioYourself}
+                    </div>
+                  )}
                 </Typography>
               </Paper>
               <Grid container spacing={5}>
@@ -616,7 +739,24 @@ class VTProfile extends Component {
                       </Typography>
                     </header>
                     <Typography variant="body1" className={classes.body}>
-                      Experience & Relevant Skills here
+                      {this.state.editable ? (
+                        <TextField
+                          className={classes.equipment}
+                          id="outlined-basic"
+                          label="Experience and Relevant Skills"
+                          color="secondary"
+                          multiline
+                          fullWidth
+                          rows={5}
+                          variant="outlined"
+                          defaultValue={this.state.expertise}
+                          onChange={this.handleChange("expertise")}
+                        />
+                      ) : (
+                        <div className={classes.equipment}>
+                          {this.state.expertise}
+                        </div>
+                      )}
                     </Typography>
                   </Paper>
                 </Grid>
@@ -631,6 +771,20 @@ class VTProfile extends Component {
               </Grid>
             </Grid>
           </Grid>
+          {this.props.isVetTech && (
+            <>
+              <Grid container spacing={10}>
+                <Grid item xs={12} sm={5}></Grid>
+                <Grid item xs={12} sm={7}>
+                  <div className={classes.botBtn}>
+                    <Button variant="contained" color="primary">
+                      Back to DashBoard
+                    </Button>
+                  </div>
+                </Grid>
+              </Grid>
+            </>
+          )}
         </Container>
       </div>
     );

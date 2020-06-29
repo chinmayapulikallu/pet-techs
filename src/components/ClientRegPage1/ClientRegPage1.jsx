@@ -12,6 +12,8 @@ import FormControl from "@material-ui/core/FormControl";
 // import { withRouter } from 'react-router-dom';
 import Uppy from '@uppy/core';
 import DragDrop from '@uppy/react/lib/DragDrop';
+import '@uppy/core/dist/style.css'
+import '@uppy/drag-drop/dist/style.css'
 
 const styles = {
   root: {
@@ -73,6 +75,7 @@ const styles = {
 class ClientRegPage1 extends Component {
   state = {
     file: this.props.clientInfo.file,
+    // text:this.props.clientInfo.text,
     ...this.props.clientInfo.text,
 
   };
@@ -80,7 +83,7 @@ class ClientRegPage1 extends Component {
   //autofill form
   autoFillForm = () => {
     this.setState({
-      text: {
+      // text: {
         client_name: "Sam",
         home_address_house: "8901 Portland Ave",
         apt_suite: "",
@@ -97,7 +100,7 @@ class ClientRegPage1 extends Component {
         clinic_address: "60 E Broadway",
         clinic_phone: "88989",
         transport: false,
-      }
+      // }
     })
   }
 
@@ -125,23 +128,23 @@ class ClientRegPage1 extends Component {
         file: this.state.file,
         // text: this.state.text,
         text: {
-          client_name: this.state.text.client_name,
-          home_address_house: this.state.text.home_address_house,
-          apt_suite: this.state.text.apt_suite,
-          city: this.state.text.city,
-          state: this.state.text.state,
-          zip_code: this.state.text.zip_code,
+          client_name: this.state.client_name,
+          home_address_house: this.state.home_address_house,
+          apt_suite: this.state.apt_suite,
+          city: this.state.city,
+          state: this.state.state,
+          zip_code: this.state.zip_code,
           profile_img: this.state.profile_img,
-          about_client: this.state.text.about_client,
-          about_home: this.state.text.about_home,
-          about_equipment: this.state.text.about_equipment,
-          contact_name_1: this.state.text.contact_name_1,
-          contact_phone_1: this.state.text.contact_phone_1,
-          contact_email_1: this.state.text.contact_email_1,
-          vet_clinic: this.state.text.vet_clinic,
-          clinic_address: this.state.text.clinic_address,
-          clinic_phone: this.state.text.clinic_phone,
-          transport: this.state.text.transport,
+          about_client: this.state.about_client,
+          about_home: this.state.about_home,
+          about_equipment: this.state.about_equipment,
+          contact_name_1: this.state.contact_name_1,
+          contact_phone_1: this.state.contact_phone_1,
+          contact_email_1: this.state.contact_email_1,
+          vet_clinic: this.state.vet_clinic,
+          clinic_address: this.state.clinic_address,
+          clinic_phone: this.state.clinic_phone,
+          transport: this.state.transport,
         }
 
       },
@@ -174,11 +177,9 @@ class ClientRegPage1 extends Component {
 
     this.reader.onloadend = () => {
       this.setState({
-        // ...this.state.text,
         text: {
           profile_img: this.reader.result,
-          ...this.state.text,
-
+          ...this.state,
         }
       })
     }
@@ -279,10 +280,12 @@ class ClientRegPage1 extends Component {
           >
             Select Photo to Upload
           </Button> */}
-          <DragDrop uppy={this.uppy} />
+          <DragDrop
+           uppy={this.uppy} 
+           />
           {/* <input type="file" onChange={this.handlePictureChangeFor} /> */}
 
-          <img className="upload-image-for-details" src={this.state.profile_img} alt="profilePictureUrl" width="100px" height="100px" />
+          <img className="upload-image-for-details" src={this.state.profile_img} alt="profilePictureUrl" width= "100%" height="100%" />
 
 
         </div>

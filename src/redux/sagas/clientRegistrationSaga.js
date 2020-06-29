@@ -29,6 +29,12 @@ function* registerClient(action) {
         // window.location.reload();
 
         yield axios.post('/api/pet', action.payload)
+
+        yield put({type: 'GET_CLIENT_DATA'});
+        yield put({type: 'GET_PET_DATA'});
+
+        
+
     }
     catch (error) {
         console.log('Error with client registration:', error);

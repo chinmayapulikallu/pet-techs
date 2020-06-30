@@ -3,6 +3,7 @@ import axios from "axios";
 
 function* vtInfoSaga() {
   yield takeLatest("GET_VT_DATA", getVTData);
+  yield takeLatest("GET_SINGLE_VT_DATA", getSingleVTData)
   yield takeLatest("GET_ALL_VT_DATA", getAllVtData);
   yield takeLatest("UPDATE_VT_DATA", updateVTData); 
 }
@@ -17,6 +18,21 @@ function* getVTData(action) {
       payload: response.data[0],
     });
     console.log("here is data from vet_tech", response.data);
+  } catch (error) {
+    console.log("Error with get vet_tech data:", error);
+  }
+}
+//GET VET INFO FOR PROFILE ON CLICK OF VIEW PROFILE FROM SERVICE PAGE 
+function* getSingleVTData(action) {
+  try {
+    console.log("$$$$$$$$$$$$$", action.payload)
+    const id = action.payload;
+    const response = yield axios.get(`/api/vt/profile/${id}`);
+    yield put({
+      type: "GET_VT_DATA",
+      // payload: response.data,
+    });
+    console.log("!!!!!!!!!!!!!!!", response.data);
   } catch (error) {
     console.log("Error with get vet_tech data:", error);
   }

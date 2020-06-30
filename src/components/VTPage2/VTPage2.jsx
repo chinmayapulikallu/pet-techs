@@ -36,8 +36,10 @@ const styles = (theme) => ({
 });
 
 class VTPage2 extends Component {
+    
   state = {
     ...this.props.vtInfoPage2,
+
   };
 
   //THIS WILL HANDLE ALL THE INPUTS FROM THE VET TECH PREFERENCES

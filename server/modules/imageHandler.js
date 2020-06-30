@@ -13,9 +13,14 @@ const uploadPost = async (req, res) => {
     uploadToSQL(req, profile_img, res);
 }
 
+const uploadPetProfile = async (req, res) => {
+    let profile_img = await uploadToS3(req.file, res);
+    uploadPetProfileToSQL(req, profile_img, res);
+}
+
 const generateSignedUrls = async (res, rows) => {
     const newRows = await addSignedUrls(rows);
-    verbose && console.log({newRows});
+    verbose && console.log({ newRows });
     res.send(newRows);
 }
 
@@ -149,5 +154,24 @@ function uploadToSQL(req, profile_img, res) {
 
 
 
+function uploadPetProfileToSQL(req, profile_img, res) {
+    return new Promise(resolve => {
+        const id = req.params.id;
+        console.log('pet data from imageHandler', profile_img, id)
 
-module.exports = { uploadPost, generateSignedUrls };
+        const queryText = `UPDATE pet SET profile_img = $2 where pet.id = $1;`;
+
+        pool.query(queryText, [id, profile_img])
+            .then((result) => {
+                verbose && console.log('back from db pet table with:', result);
+                res.sendStatus(200);
+            })
+            .catch((error) => {
+                console.log(`Error updating pets by id request. ${sqlText}`, error);
+                res.sendStatus(500);
+            })
+    })
+}
+
+
+module.exports = { uploadPost, generateSignedUrls, uploadPetProfile };

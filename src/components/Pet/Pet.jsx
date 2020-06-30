@@ -89,6 +89,7 @@ class Pet extends Component {
             file: event.target.files[0]
         });
     }
+
     handleEditPicture = () => {
         console.log('handleEditPicture clicked', this.state.file)
         this.setState({
@@ -98,7 +99,7 @@ class Pet extends Component {
             type: 'UPDATE_PROFILE_PICTURE',
             payload: {
                 id: this.props.pet.id,
-                file: "this.state.file"
+                file: this.state.file
             }
         })
     }
@@ -120,7 +121,7 @@ class Pet extends Component {
                             <tr className="table_body">
                                 <td className={classes.contentInTable}>
                                     <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
-                                    {this.state.editPicture ?
+                                    {/* {this.state.editPicture ?
                                         <>
                                             <img className={classes.img} src={this.props.pet.age} alt="profile" height="150" width="150" />
                                             <input type="file" onChange={this.handlePictureChangeFor} onClick={this.handleEditPicture} />
@@ -128,9 +129,11 @@ class Pet extends Component {
                                         </>
                                         :
                                         <button onClick={this.handleEditPicture}>Save</button>
-                                    }
+                                    } */}
 
-                                    {/* <input type="file" onChange={this.handlePictureChangeFor} /> */}
+                                    <input type="file" onChange={this.handlePictureChangeFor} />
+                                    <img className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img} height="150" width="150" />
+                                    <button onClick={this.handleEditPicture}>Save</button>
 
                                 </td>
                                 <td className={classes.contentInTable}>

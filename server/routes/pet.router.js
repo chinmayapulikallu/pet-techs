@@ -5,6 +5,11 @@ const {
   rejectUnauthenticated,
 } = require("../modules/authentication-middleware");
 
+const multer = require("multer");
+const multerDest = process.env.multer_dest || "../uploads";
+const upload = multer({ dest: multerDest });
+const { uploadPetProfile, generateSignedUrls } = require("../modules/imageHandler");
+
 /**
  * GET route for Pets by client ID
  */
@@ -18,10 +23,15 @@ router.get("/:id", (req, res) => {
 const sqlText = `SELECT * from pet where user_id = $1;`;
   pool
     .query(sqlText, [req.user.id])
-    .then((response) => {
-      console.log("pet data:", response.rows);
-      res.send(response.rows);
-    })
+    // .then((response) => {
+    //   console.log("pet data:", response.rows);
+    //   res.send(response.rows);
+    // })
+    .then(response => {
+      console.log('---->pet data:', response.rows);
+       generateSignedUrls(res, response.rows);
+      })
+
     .catch((error) => {
       console.log(`Error making get pets by id request. ${sqlText}`, error);
       res.sendStatus(500);
@@ -115,21 +125,30 @@ router.put("/", rejectUnauthenticated, (req, res) => {
       });
   });
 
-  router.put("/updateProfilePicture", rejectUnauthenticated, (req, res) => {
-    const {id, file} = req.body;
-    console.log('send this img url to server', req.body.file)
-    const sqlText = `UPDATE pet SET pet_profile_img = $2 where pet.id = $1; `;
-    pool
-      .query(sqlText, [id, file])
-      .then((response) => {
-        res.sendStatus(200);
-      })
-      .catch((error) => {
-        console.log(`Error updating pets by id request. ${sqlText}`, error);
-        res.sendStatus(500);
-      });
-    // res.sendStatus(200);
+
+
+  // router.put("/updateProfilePicture", rejectUnauthenticated, (req, res) => {
+  //   const {id, file} = req.body;
+  //   console.log('send this img url to database', req.body.id)
+  //   const sqlText = `UPDATE pet SET profile_img = $2 where pet.id = $1; `;
+  //   pool
+  //     .query(sqlText, [id, file])
+  //     .then((response) => {
+  //       res.sendStatus(200);
+  //     })
+  //     .catch((error) => {
+  //       console.log(`Error updating pets by id request. ${sqlText}`, error);
+  //       res.sendStatus(500);
+  //     });
+  //   // res.sendStatus(200);
+  // });
+
+
+  router.put("/updateProfilePicture/:id", upload.single("file"), (req, res) => {
+    uploadPetProfile(req, res);
+    console.log("client data from post route", req.params.id);
   });
+
 
 
 module.exports = router;

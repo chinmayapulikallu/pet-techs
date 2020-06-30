@@ -13,6 +13,7 @@ import Paper from "@material-ui/core/Paper"
 import { fade } from "@material-ui/core/styles/colorManipulator";
 
 
+
 const styles = theme => ({
     root: {
         marginLeft: theme.spacing(20),
@@ -91,9 +92,7 @@ class SearchPage extends Component {
 
 
     state = {
-       
         ...this.props.serviceProvider,
-       
     };
 
     componentDidMount = () => {
@@ -162,7 +161,7 @@ class SearchPage extends Component {
 
     }
 
-
+   
 
     //HANDLE CHANGES FOR PET TYPE FILTER 
     handleCheckChange = (event, property) => {
@@ -292,6 +291,7 @@ class SearchPage extends Component {
                                                 </Typography>
                                             </div>
                                             <Button className={classes.btn} onClick={() => this.viewProfileClick(vet.user_id)} variant="contained" color="primary" >View Profile</Button>
+                                          
                                         </div>
                                     </Paper>
                                 </Grid>

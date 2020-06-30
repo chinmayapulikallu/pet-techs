@@ -66,16 +66,8 @@ class App extends Component {
             <Route exact path="/register" component={RegisterPage} />
             <ProtectedRoute exact path="/client-profile/:id" component={ClientProfile} />
             <Route exact path="/vt-profile" component={VTProfile} />
-            <Route
-              exact
-              path="/client_service"
-              component={ClientServiceRequest}
-            />
-            <Route
-              exact
-              path="/search"
-              component={SearchPage}
-            />
+            <Route exact path="/client_service" component={ClientServiceRequest}/>
+            <Route exact path="/search" component={SearchPage}/>
             <Route exact path="/clientdashboard" component={ClientDashBoard} />
             <Route exact path="/careplan/:id" component={CarePlan} />
 

@@ -14,6 +14,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Paper from "@material-ui/core/Paper"
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import Input from "@material-ui/core/Input"
+import RadioGroup from "@material-ui/core/RadioGroup"
+import Radio from "@material-ui/core/Radio"
 
 const styles = theme => ({
     root: {
@@ -92,11 +94,9 @@ const styles = theme => ({
 class SearchPage extends Component {
 
 
-
-
     state = {
         ...this.props.serviceProvider,
-        searchedValue: ''
+       
     };
 
     componentDidMount = () => {
@@ -115,6 +115,8 @@ class SearchPage extends Component {
         })
     }
 
+
+    
 
     //HANDLE SERVICE CHANGES
     handleServiceChange = (event, property) => {
@@ -209,19 +211,7 @@ class SearchPage extends Component {
                         </FormControl>
                         <Typography variant="subtitle1">Filter</Typography>
                         <Grid container direction={"row"} className={classes.serviceType}>
-                            {/* <Select
-                                color="secondary"
-                                label="Service"
-                                variant="outlined"
-                                onChange={(event) => this.handleChange(event, "service_filter")}
-                            >
-                                <MenuItem value="Select">Select Service Type</MenuItem>
-                                <MenuItem value="Sleepover">Pet Sleepover</MenuItem>
-                                <MenuItem value="Boarding">Pet Boarding</MenuItem>
-                                <MenuItem value="Drop-In">Drop-In</MenuItem>
-                                <MenuItem value="Hospice">Hospice</MenuItem>
-                            </Select> */}
-                            <FormGroup className={classes.groupCheck} row={true}>
+                            <FormGroup className={classes.groupCheck} row={true} >
                                 <FormControlLabel
                                     control={<Checkbox name="dog" />}
                                     onChange={(event) => this.handleCheckChange(event, "dogFilter")}
@@ -231,6 +221,7 @@ class SearchPage extends Component {
                                 />
                                 <FormControlLabel
                                     control={<Checkbox name="cat" />}
+                                    onChange={this.onChange}
                                     onChange={(event) => this.handleCheckChange(event, "catFilter")}
                                     onChange={(event) => this.catCheck(event)}
                                     value={this.state.catFilter}

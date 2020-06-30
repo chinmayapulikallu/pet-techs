@@ -114,7 +114,8 @@ class SearchPage extends Component {
 
     viewProfileClick = (id) => {
         console.log("CLICKED VIEW PROFILE", id)
-        this.props.history.push(`/vt-profile/${id}`)
+        this.props.dispatch({ type: "GET_SINGLE_VT_DATA", payload: id})
+        this.props.history.push(`/vt-profile`)
     }
 
 
@@ -204,9 +205,9 @@ class SearchPage extends Component {
         return (
             <div className={classes.root}>
                 <div>
-                    <div>
+                    {/* <div>
                         {JSON.stringify(this.props.vtInfo)}
-                    </div>
+                    </div> */}
                     <Grid className={classes.title}>
                         <FormControl onSubmit={this.registerUser}>
                             <div>

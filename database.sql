@@ -143,8 +143,8 @@ CREATE TABLE client_request (
   vet_id INT NOT NULL
          REFERENCES "user" (id)
          ON DELETE CASCADE ,
-  start_date_time date,
-  end_date_time date,
+  start_date_time timestamp with time zone ,
+  end_date_time timestamp with time zone,
   add_info text,
   request_status int 
 );

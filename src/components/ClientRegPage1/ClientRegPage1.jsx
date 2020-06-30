@@ -12,6 +12,8 @@ import FormControl from "@material-ui/core/FormControl";
 // import { withRouter } from 'react-router-dom';
 import Uppy from '@uppy/core';
 import DragDrop from '@uppy/react/lib/DragDrop';
+import '@uppy/core/dist/style.css'
+import '@uppy/drag-drop/dist/style.css'
 
 const styles = {
   root: {
@@ -67,35 +69,41 @@ const styles = {
   subTitle: {
     marginTop: 10,
     marginBottom: 40
-  }
+  }, 
+  img: {
+      borderRadius: '50%',
+  },
 };
 
 class ClientRegPage1 extends Component {
   state = {
-    file: null,
-      ...this.props.clientInfo,
-    
+    file: this.props.clientInfo.file,
+    // text:this.props.clientInfo.text,
+    ...this.props.clientInfo.text,
+
   };
 
   //autofill form
   autoFillForm = () => {
     this.setState({
-      client_name: "Sam",
-      home_address_house: "8901 Portland Ave",
-      apt_suite: "",
-      city: "Bloomington",
-      state: "MN",
-      zip_code: "55420",
-      about_client: "Loves Dogs and cats",
-      about_home: "Single family home",
-      about_equipment: "toys",
-      contact_name_1: "Sam",
-      contact_phone_1: "9999999",
-      contact_email_1: "sam@in",
-      vet_clinic: "Pet clinic",
-      clinic_address: "60 E Broadway",
-      clinic_phone: "88989",
-      transport: false,
+      // text: {
+        client_name: "Sam",
+        home_address_house: "8901 Portland Ave",
+        apt_suite: "",
+        city: "Bloomington",
+        state: "MN",
+        zip_code: "55420",
+        about_client: "Loves Dogs and cats",
+        about_home: "Single family home",
+        about_equipment: "toys",
+        contact_name_1: "Sam",
+        contact_phone_1: "9999999",
+        contact_email_1: "sam@in",
+        vet_clinic: "Pet clinic",
+        clinic_address: "60 E Broadway",
+        clinic_phone: "88989",
+        transport: false,
+      // }
     })
   }
 
@@ -121,6 +129,7 @@ class ClientRegPage1 extends Component {
       type: "SET_CLIENT_DATA",
       payload: {
         file: this.state.file,
+        // text: this.state.text,
         text: {
           client_name: this.state.client_name,
           home_address_house: this.state.home_address_house,
@@ -171,8 +180,10 @@ class ClientRegPage1 extends Component {
 
     this.reader.onloadend = () => {
       this.setState({
-        ...this.state,
-        profile_img: this.reader.result,
+        text: {
+          profile_img: this.reader.result,
+          ...this.state,
+        }
       })
     }
     console.log('data from client reg page 1', this.state)
@@ -194,11 +205,11 @@ class ClientRegPage1 extends Component {
 
 
   render() {
-    const { classes } = this.props;
+    const { classes, user } = this.props;
     return (
       <Container className={classes.root} maxWidth="sm">
         <Typography variant="h4" className={classes.title}>
-          Hi NAME! Let's set up your profile
+          Hi {user.username}! Let's set up your profile
           <Button onClick={this.autoFillForm}></Button>
         </Typography>
         <Typography variant="subtitle1" className={classes.subTitle}>
@@ -272,10 +283,12 @@ class ClientRegPage1 extends Component {
           >
             Select Photo to Upload
           </Button> */}
-          <DragDrop uppy={this.uppy} />
+          <DragDrop
+           uppy={this.uppy} 
+           />
           {/* <input type="file" onChange={this.handlePictureChangeFor} /> */}
 
-          <img className="upload-image-for-details" src={this.state.profile_img} alt="profilePictureUrl" width="100px" height="100px" />
+          <img className={classes.img} src={this.state.profile_img} alt="profilePictureUrl" width= "50%" height="50%" />
 
 
         </div>
@@ -446,28 +459,30 @@ class ClientRegPage1 extends Component {
   }
 }
 const mapStateToProps = (state) => ({
-  clientInfo: {
-    
-      client_name: "",
-      home_address_house: "",
-      apt_suite: "",
-      city: "",
-      state: "",
-      zip_code: "",
-      profile_img: "",
-      about_client: "",
-      about_home: "",
-      about_equipment: "",
-      contact_name_1: "",
-      contact_phone_1: "",
-      contact_email_1: "",
-      vet_clinic: "",
-      clinic_address: "",
-      clinic_phone: "",
-      transport: false,
-      ...state.clientInfo,
-    },
-  
+  // clientInfo: {
+  //   // client_name: "",
+  //   // // home_address_house: "",
+  //   // // apt_suite: "",
+  //   // // city: "",
+  //   // // state: "",
+  //   // // zip_code: "",
+  //   // // profile_img: "",
+  //   // // about_client: "",
+  //   // // about_home: "",
+  //   // // about_equipment: "",
+  //   // // contact_name_1: "",
+  //   // // contact_phone_1: "",
+  //   // // contact_email_1: "",
+  //   // // vet_clinic: "",
+  //   // // clinic_address: "",
+  //   // // clinic_phone: "",
+  //   // // transport: false,
+  //   // ...state.clientInfo,
+  // },
+  clientInfo: state.clientInfo,
+
+  user: state.user
+
 });
 
 export default connect(mapStateToProps)(

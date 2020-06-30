@@ -31,7 +31,7 @@ CREATE TABLE client (
   city varchar (100) NOT NULL,
   state varchar (20) NOT NULL,
   zip_code int NOT NULL,
-  profile_img varchar (1000),
+  profile_img text DEFAULT 'images/blank-profile-picture.png',
   about_client text NOT NULL,
   about_home text NOT NULL,
   about_equipment text NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE vet_tech (
   city varchar (80) NOT NULL,
   state varchar (80) NOT NULL,
   zip_code int NOT NULL,
-  profile_img varchar (1000),
+  profile_img text DEFAULT 'images/blank-profile-picture.png',
   sleep_over boolean DEFAULT FALSE,
   boarding boolean DEFAULT FALSE,
   dropin_care boolean DEFAULT FALSE,
@@ -106,6 +106,7 @@ CREATE TABLE pet (
   sex varchar NOT NULL,
   breed varchar (50) NOT NULL,
   pet_bio varchar NOT NULL,
+  profile_img text DEFAULT 'images/blank-profile-picture.png',
   food_brand varchar (250) NOT NULL,
   feeding_per_day int NOT NULL,
   amount_per_meal varchar (100) NOT NULL,
@@ -147,4 +148,5 @@ CREATE TABLE client_request (
   add_info text,
   request_status int 
 );
+
 

@@ -104,6 +104,7 @@ class ClientProfileDetail extends Component {
 
         const currentId = this.props.match.params.id;
         console.log("currentID", currentId)
+        
         this.props.dispatch({
             type: 'GET_PET_DATA',
             payload: { id: currentId }
@@ -130,12 +131,17 @@ class ClientProfileDetail extends Component {
         if (this.state.client_name === '' || this.state.city === '' || this.state.state === '' || this.state.about_client === '' || this.state.about_home === '' || this.state.about_equipment === '') {
             alert('Please make sure that you filled all the infomation!')
         } else {
+            //dispatch
+            this.props.dispatch({
+                type: "UPDATE_CLIENT_DATA",
+                payload: this.state
+            });
             this.setState({
                 editable: !this.state.editable,
             });
         }
     }
-    handleInputChangeFor = property => (event) => {
+    handleInputChangeFor = (property) => (event) => {
         console.log('input change', property, event.target.value)
         this.setState({
             [property]: event.target.value,
@@ -180,6 +186,7 @@ class ClientProfileDetail extends Component {
                     <div className={classes.userBasicInfo}>
                         <Grid container spacing={1}>
                             <Grid item xs={5} className={classes.items}>
+                    
                                 {/* <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" /> */}
                                 <img className={classes.img} src={this.props.client.media_url} alt="profile" height="150" width="150" />
                                                                 
@@ -315,9 +322,9 @@ class ClientProfileDetail extends Component {
                                         multiline
                                         rows={4}
                                         fullWidth
-                                        defaultValue={this.state.client_name}
+                                        defaultValue={this.state.about_equipment}
                                         variant="outlined"
-                                        onChange={this.handleInputChangeFor("client_name")}
+                                        onChange={this.handleInputChangeFor("about_equipment")}
                                     />
                                 </>
                                 :
@@ -345,7 +352,7 @@ class ClientProfileDetail extends Component {
                                 <>
                                     <TextField
                                         id="outlined-multiline-static"
-                                        label="Pet's equipment"
+                                        label="About your home"
                                         multiline
                                         rows={4}
                                         fullWidth
@@ -359,7 +366,7 @@ class ClientProfileDetail extends Component {
                                     <table className="about_table" width="100%" height="150px">
                                         <thead >
                                             <tr>
-                                                <th className="table_head">{this.state.about_home}'s Home Enviroment</th>
+                                                <th className="table_head">{this.state.client_name}'s Home Environment</th>
                                             </tr>
                                         </thead>
                                         <tbody>

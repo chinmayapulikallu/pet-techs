@@ -326,7 +326,7 @@ const mapStateToProps = (state) => ({
     current_job_title: '',
     expertise: '',
     bioYourself: '',
-    CPR_first_aid: false,
+    cpr_first_aid: false,
     oral_medication: false,
     injectable_medication: false,
     exp_older_pet: false,

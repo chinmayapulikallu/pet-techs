@@ -19,6 +19,11 @@ import DatePicker from "react-datepicker";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
+import Uppy from '@uppy/core';
+import DragDrop from '@uppy/react/lib/DragDrop';
+import '@uppy/core/dist/style.css'
+import '@uppy/drag-drop/dist/style.css'
+
 const useStyles = (theme) => ({
     root: {
         marginTop: 50,
@@ -252,7 +257,16 @@ class ClientRegPage2 extends Component {
     uploadPhoto = () => {
         alert('upload photo');
     }
+  //-----------------------------------
 
+    uppy = Uppy({
+        meta: { type: 'profilePicture' },
+        restrictions: { maxNumberOfFiles: 1 },
+        autoProceed: true
+      })
+    
+
+  //-----------------------------------
 
 
     render() {
@@ -358,8 +372,12 @@ class ClientRegPage2 extends Component {
                                     />
                                 </Grid>
                                 <Grid item xs={12} className={classes.itemCenter}>
-                                    <Button color="primary" variant="contained"
-                                        onClick={this.uploadPhoto}>Upload Photo</Button>
+                                    {/* <Button color="primary" variant="contained"
+                                        onClick={this.uploadPhoto}>Upload Photo</Button> */}
+
+                                    <DragDrop
+                                        uppy={this.uppy}
+                                    />
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField

@@ -50,7 +50,6 @@ function HideOnScroll(props) {
 
 class Nav extends Component {
 
-
   render() {
     const { classes, clientInfo, user } = this.props;
     // console.log('---------->user id:', this.props.user.id)
@@ -75,7 +74,7 @@ class Nav extends Component {
             {/* Show the link to the info page and the logout button if the user is logged in */}
             {user.id && (
               <>
-                <Link className="nav-link" to="/info">
+                <Link className="nav-link" to="/searchcame">
                   Search for services
             </Link>
               </>
@@ -86,7 +85,7 @@ class Nav extends Component {
             {user.id && (
               <>
                 <div className="nav-link">
-                  <Link className="profile" to={`/client-profile/${user.id}`}>
+                  <Link className="profile" to={this.props.isVetTech ? `/vt-profile` : `/client-profile/${user.id}`}>
                     {user.username}
                   </Link>
                 </div>
@@ -106,7 +105,6 @@ class Nav extends Component {
                           </div>
                         )
                       }
-
                     })} */}
                     {/* <p>here{JSON.stringify(client.media_url)}</p> */}
 
@@ -134,7 +132,8 @@ class Nav extends Component {
 // const mapStateToProps = ({ user }) => ({ user });
 const mapStateToProps = (reduxState) => ({
   user: reduxState.user,
-  clientInfo: reduxState.clientInfo
+  clientInfo: reduxState.clientInfo,
+  isVetTech: reduxState.user.user_type === 1
 
 });
 

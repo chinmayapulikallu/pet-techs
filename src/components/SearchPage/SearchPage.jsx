@@ -111,11 +111,11 @@ class SearchPage extends Component {
         })
     }
 
-    viewProfileClick = (id) => {
-        console.log("CLICKED VIEW PROFILE", id)
-        this.props.dispatch({ type: "GET_SINGLE_VT_DATA", payload: id})
-        this.props.history.push(`/vt-profile`)
-    }
+    // viewProfileClick = (id) => {
+    //     console.log("CLICKED VIEW PROFILE", id)
+    //     this.props.dispatch({ type: "GET_SINGLE_VT_DATA", payload: id})
+    //     this.props.history.push(`/vt-profile`)
+    // }
 
 
     
@@ -208,7 +208,7 @@ class SearchPage extends Component {
                         {JSON.stringify(this.props.vtInfo)}
                     </div> */}
                     <Grid className={classes.title}>
-                        <FormControl onSubmit={this.registerUser}>
+                        <FormControl >
                             <div>
                                 <img className={classes.searchImage} src="/images/search-mag.png" alt="searchIcon" height="75" width="75" />
                             </div>

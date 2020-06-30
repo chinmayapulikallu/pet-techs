@@ -8,6 +8,7 @@ import clientInfoSaga from "./clientInfoSaga";
 import vtInfoSaga from "./vtInfoSaga";
 import petInfoSaga from "./petInfoSaga";
 import clientServiceRequestSaga from "./clientServiceRequestSaga";
+import filterSaga from "./filterSaga"
 
 
 
@@ -27,5 +28,6 @@ export default function* rootSaga() {
     vtInfoSaga(),
     petInfoSaga(),
     clientServiceRequestSaga(),
+    filterSaga(),
   ])
 }

@@ -89,7 +89,7 @@ class ClientServiceRequest extends Component {
     handleSendRequest = () => {
         console.log("Clicked Send Request", this.state)
         this.props.dispatch({type: 'SET_CLIENT_SERVICE_REQUEST', payload:this.state})
-        // this.props.history.push("/path")
+        this.props.history.push("/clientDashboard")
     }
 
 
@@ -97,7 +97,6 @@ class ClientServiceRequest extends Component {
         const { classes } = this.props
         return (
             <div className={classes.root}>
-                {JSON.stringify(this.props.petInfo)}
                 <div>
                     <Grid className={classes.title}>
                         <FormControl>

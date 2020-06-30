@@ -82,27 +82,37 @@ const useStyles = (theme) => ({
 class ClientDashboard extends Component {
 
     componentDidMount() {
-        const currentId = this.props.match.params.id;
-        // console.log('-----> Current client', currentId)
+        // const currentId = this.props.match.params.id;
+       const currentId = this.props.clientInfo.user_id
+        console.log('-----> Current client', currentId)
         this.props.dispatch({
-            type: 'GET_CLIENT_DATA',
-            payload: { id: currentId }
+            type: 'GET_CLIENT_DATA'
+            // payload: { id: currentId }
         })
         this.props.dispatch({
             type: 'GET_PET_DATA',
             payload: { id: currentId }
         })
         this.props.dispatch({
-            type: 'GET_CLIENT_SERVICE_REQUEST',
-            payload: { id: currentId }
+            type: 'GET_CLIENT_SERVICE_REQUEST'
+            // payload: { id: currentId }
         })
 
     }
 
     //search service provider
     searchProvider = () => {
-        alert('link to search page');
-        //push to search service provider page
+        this.props.history.push('/search')
+    }
+
+    //link to care plan
+    carePlan = (petId) => {
+        console.log('care plan id ::::', petId)
+        this.props.history.push(`/careplan/${petId}`);
+        this.props.dispatch({
+            type: 'GET_PET_CARE_PLAN',
+            payload: { id: petId }
+        })
     }
 
     render() {
@@ -184,22 +194,22 @@ class ClientDashboard extends Component {
                     <Typography variant="h6">Your Pets</Typography>
                 </div>
                 <Grid container>
-                    {petInfo.map(pet =>
-                        <Grid item xs={6}>
-                            <Card key={pet.id} className={classes.petCard}>
-
-                                <Typography variant="h6">{pet.pet_name}</Typography>
-                                <CardMedia
-                                    component="img"
-                                    className={classes.media}
-                                    image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
-                                />
-                                <CardContent>
-                                    <Button color="primary" variant="contained"
-                                        className={classes.buttonMargin} onClick={this.carePlan}>carePlan</Button>
-                                </CardContent>
-                            </Card>
-                        </Grid>
+                 {petInfo.map(pet =>
+                     <Grid item xs={6}>
+                         <Card key={pet.id} className={classes.petCard}>
+                   
+                            <Typography variant="h6">{pet.pet_name}</Typography>
+                            <CardMedia
+                                component="img"
+                                className={classes.media}
+                                image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
+                            />
+                            <CardContent>
+                                <Button color="primary" variant="contained"
+                                    className={classes.buttonMargin} onClick={() => this.carePlan(pet.id)}>carePlan</Button>
+                            </CardContent>
+                 </Card>
+                     </Grid>
                     )}
                 </Grid>
 

@@ -5,17 +5,13 @@ import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from "react-router"
 import { Typography, CardHeader } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid"
-import { MenuItem } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
-import Select from "@material-ui/core/Select"
 import FormGroup from "@material-ui/core/FormGroup"
 import Checkbox from "@material-ui/core/Checkbox"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Paper from "@material-ui/core/Paper"
 import { fade } from "@material-ui/core/styles/colorManipulator";
-import Input from "@material-ui/core/Input"
-import RadioGroup from "@material-ui/core/RadioGroup"
-import Radio from "@material-ui/core/Radio"
+
 
 const styles = theme => ({
     root: {
@@ -95,6 +91,7 @@ class SearchPage extends Component {
 
 
     state = {
+       
         ...this.props.serviceProvider,
        
     };
@@ -207,6 +204,9 @@ class SearchPage extends Component {
         return (
             <div className={classes.root}>
                 <div>
+                    <div>
+                        {JSON.stringify(this.props.vtInfo)}
+                    </div>
                     <Grid className={classes.title}>
                         <FormControl onSubmit={this.registerUser}>
                             <div>
@@ -290,7 +290,7 @@ class SearchPage extends Component {
                                                     {vet.bioyourself}
                                                 </Typography>
                                             </div>
-                                            <Button className={classes.btn} onClick={() => this.viewProfileClick(vet.id)} variant="contained" color="primary" >View Profile</Button>
+                                            <Button className={classes.btn} onClick={() => this.viewProfileClick(vet.user_id)} variant="contained" color="primary" >View Profile</Button>
                                         </div>
                                     </Paper>
                                 </Grid>
@@ -315,9 +315,6 @@ const mapStateToProps = (state) => ({
         petBoarding: false,
         dropIn: false,
         hospice: false
-
-
-
     }
 });
 

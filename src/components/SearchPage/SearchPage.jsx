@@ -115,6 +115,11 @@ class SearchPage extends Component {
         })
     }
 
+    viewProfileClick = (id) => {
+        console.log("CLICKED VIEW PROFILE", id)
+        this.props.history.push(`/vt-profile/${id}`)
+    }
+
 
     
 
@@ -285,7 +290,7 @@ class SearchPage extends Component {
                                                     {vet.bioyourself}
                                                 </Typography>
                                             </div>
-                                            <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
+                                            <Button className={classes.btn} onClick={() => this.viewProfileClick(vet.id)} variant="contained" color="primary" >View Profile</Button>
                                         </div>
                                     </Paper>
                                 </Grid>

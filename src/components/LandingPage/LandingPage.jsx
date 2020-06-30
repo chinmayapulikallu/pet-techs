@@ -22,12 +22,12 @@ const styles = theme => ({
     btngroup: {
         position: "absolute",
         top: "70%",
-        left: "75%",
+        left: "79%",
     },
     btngroup2: {
         position: "absolute",
         top: "70%",
-        left: "85%",
+        left: "87%",
     },
     dogText:{
         position: "absolute",
@@ -85,14 +85,14 @@ const styles = theme => ({
         margin: "25px",
         textAlign: 'center',
         justifyContent: "center",
-        marginBottom: 100,
+        marginBottom: 30,
         backgroundColor: "transparent",
         fontSize: 100,
         
     },
     catPaw: {
         position: "absolute",
-        top: "0%",
+        top: "25%",
         left: "65%",
         borderRadius: 40
     },

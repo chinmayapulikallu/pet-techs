@@ -18,7 +18,7 @@ function* registerClient(action) {
 
 
         // yield axios.post('/api/client', action.payload)
-         let response = yield axios.post(`/api/client`, data, action.payload, {
+        let response = yield axios.post(`/api/client`, data, action.payload, {
             headers: {
                 'accept': 'application/json',
                 'Accept-Language': 'en-US,en;q=0.8',
@@ -30,8 +30,13 @@ function* registerClient(action) {
 
         yield axios.post('/api/pet', action.payload)
 
-        yield put({type: 'GET_CLIENT_DATA'});
-        yield put({type: 'GET_PET_DATA'});
+        yield put({ type: 'GET_CLIENT_DATA' });
+        yield put({ type: 'GET_PET_DATA' });
+
+        
+        // setTimeout(function () {
+        // }, 1000);
+
 
     }
     catch (error) {

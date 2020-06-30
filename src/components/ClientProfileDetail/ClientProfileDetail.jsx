@@ -104,6 +104,8 @@ class ClientProfileDetail extends Component {
 
         const currentId = this.props.match.params.id;
         console.log("currentID", currentId)
+
+
         
         this.props.dispatch({
             type: 'GET_PET_DATA',
@@ -186,10 +188,17 @@ class ClientProfileDetail extends Component {
                     <div className={classes.userBasicInfo}>
                         <Grid container spacing={1}>
                             <Grid item xs={5} className={classes.items}>
-                    
+
                                 {/* <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" /> */}
-                                <img className={classes.img} src={this.props.client.media_url} alt="profile" height="150" width="150" />
-                                                                
+                                {/* <img className={classes.img} src={this.props.client.media_url} alt="profile" height="150" width="150" /> */}
+                                {this.props.client.profile_img === 'images/blank-profile-picture.png' ?
+                                    <>
+                                        <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                    </>
+                                    :
+                                    <img className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} height="150" width="150" />
+                                }
+
 
                             </Grid>
 

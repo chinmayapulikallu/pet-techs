@@ -8,6 +8,8 @@ const vtInfo = (state = [], action) => {
       return action.payload;
     case 'GET_VT_DATA_SUCCESSFUL':
       return action.payload;
+      case "UNSET_VT":
+      return [];
     default:
       return state;
   }

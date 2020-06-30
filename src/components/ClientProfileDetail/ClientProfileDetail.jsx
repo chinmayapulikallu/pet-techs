@@ -7,11 +7,20 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Container from "@material-ui/core/Container";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { withRouter } from 'react-router-dom';
 import '../ClientProfile/ClientProfile.css';
 import TextField from '@material-ui/core/TextField';
 
+import Uppy from '@uppy/core';
+import DragDrop from '@uppy/react/lib/DragDrop';
+import '@uppy/core/dist/style.css'
+import '@uppy/drag-drop/dist/style.css'
 
 const styles = theme => ({
     root: {
@@ -68,7 +77,22 @@ const styles = theme => ({
             width: '25ch',
         },
     },
+    form: {
+        display: 'flex',
+        flexDirection: 'column',
+        margin: 'auto',
+        width: 'fit-content',
+    },
+    formControl: {
+        marginTop: theme.spacing(2),
+        minWidth: 120,
+    },
+    formControlLabel: {
+        marginTop: theme.spacing(1),
+    },
 });
+
+
 
 
 
@@ -84,7 +108,59 @@ class ClientProfileDetail extends Component {
         city: '',
         state: '',
         file: null,
+        open: false,
     }
+    componentWillReceiveProps = () => {
+        this.setState({
+            ...this.state,
+            open: this.props.open,
+        })
+    }
+
+    handleClickOpen = () => {
+        this.setState({
+            ...this.state,
+            open: true,
+        })
+    }
+
+    handleCancel = () => {
+        this.setState({
+            ...this.state,
+            open: false,
+        });
+    };
+
+    handleSubmitImg = () => {
+        this.props.dispatch({
+            type: 'UPDATE_CLIENT_PROFILE_PICTURE',
+            payload: {
+                file: this.state.file
+            }
+        })
+        this.setState({
+            ...this.state,
+            open: false,
+        });
+    };
+
+    uppy = Uppy({
+        meta: { type: 'profilePicture' },
+        restrictions: { maxNumberOfFiles: 1 },
+        autoProceed: true
+    })
+    reader = new FileReader()
+
+    setImage = file => {
+        //reads the file into a local data url
+        this.reader.readAsDataURL(file);
+        //sets the file into state and opens the walkthrough
+        this.setState({
+            ...this.state,
+            file: file,
+        })
+    }
+    //-----------------------------------
 
 
     componentDidMount() {
@@ -105,15 +181,30 @@ class ClientProfileDetail extends Component {
         const currentId = this.props.match.params.id;
         console.log("currentID", currentId)
 
-
-
         this.props.dispatch({
             type: 'GET_PET_DATA',
             payload: { id: currentId }
         })
         console.log('pet data:', this.props.petInfo)
 
+
+        this.uppy.on('upload', file => {
+            let fileKey = Object.keys(this.uppy.state.files)[0];
+            let fileFromUppy = this.uppy.state.files[fileKey].data;
+            this.setImage(fileFromUppy);
+        })
+
+        // this.reader.onloadend = () => {
+        //     this.setState({
+        //         profile_img: this.reader.result,
+        //         ...this.state,
+        //     })
+        // }
+        console.log('data from client profile', this.state)
     }
+    //-----------------------------------
+
+   
 
 
 
@@ -131,7 +222,7 @@ class ClientProfileDetail extends Component {
     handleSaveClient = () => {
         console.log('Save clicked!')
         if (this.state.client_name === '' || this.state.city === '' || this.state.state === '' || this.state.about_client === '' || this.state.about_home === '' || this.state.about_equipment === '') {
-            alert('Please make sure that you filled all the infomation!')
+            alert('Please make sure that you filled all the information!')
         } else {
             //dispatch
             this.props.dispatch({
@@ -150,21 +241,11 @@ class ClientProfileDetail extends Component {
         });
     }
 
-    // handlePictureChangeFor = (event) => {
-    //     console.log('changing', event.target.files[0])
 
-    //     this.setState({
-    //         file: event.target.files[0]
-    //     });
-    // }
-    // handleSavePicture = (event) => {
-    //     this.props.dispatch({
-    //         type: 'UPLOAD_PICTURE_CLIENT',
-    //         payload: {
-    //             file: this.state.file,
-    //         }
-    //     });
-    // }
+
+
+
+
 
     render() {
 
@@ -189,22 +270,64 @@ class ClientProfileDetail extends Component {
                         <Grid container spacing={1}>
                             <Grid item xs={5} className={classes.items}>
 
-                                {/* <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" /> */}
-                                {/* <img className={classes.img} src={this.props.client.media_url} alt="profile" height="150" width="150" /> */}
-                                {this.props.client.profile_img === 'images/blank-profile-picture.png' ?
+                                {this.state.editable ?
                                     <>
-                                        <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                        <button onClick={this.handleClickOpen}>Edit</button>
+                                        {this.props.client.profile_img === 'images/blank-profile-picture.png' ?
+                                            <>
+                                                <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                            </>
+                                            :
+                                            <img className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} height="150" width="150" />
+                                        }
+
+                                        <Dialog
+                                            open={this.state.open}
+                                            onClose={this.handleClose}
+                                            aria-labelledby="alert-dialog-title"
+                                            aria-describedby="alert-dialog-description"
+                                        >
+                                            <DialogTitle id="alert-dialog-title">{"Edit Your Profile Picture"}</DialogTitle>
+                                            <DialogContent>
+                                                {/* <DialogContentText id="alert-dialog-description"> */}
+                                                <DragDrop
+                                                    uppy={this.uppy}
+                                                />
+                                                <img className={classes.img} src={this.state.profile_img} alt='profile_picture' height="50%" width="50%" />
+
+                                                {/* </DialogContentText> */}
+
+                                            </DialogContent>
+
+                                            <DialogActions>
+                                                <Button onClick={this.handleCancel} color="primary">
+                                                    Cancel
+                                                  </Button>
+                                                <Button onClick={this.handleSubmitImg} color="primary" autoFocus>
+                                                    Upload
+                                                </Button>
+                                            </DialogActions>
+                                        </Dialog>
                                     </>
                                     :
-                                    <img className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} height="150" width="150" />
+                                    <>
+                                        {this.props.client.profile_img === 'images/blank-profile-picture.png' ?
+                                            <>
+                                                <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                            </>
+                                            :
+                                            <img className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} height="150" width="150" />
+                                        }
+                                    </>
                                 }
+
+
+
 
 
                             </Grid>
 
                             <Grid item xs={3} className={classes.clientInfo}>
-
-
                                 {this.state.editable ?
                                     <>
                                         <p><TextField id="filled-basic"

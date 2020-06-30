@@ -22,11 +22,12 @@ function* setClientServiceRequest(action) {
 //get client service request
 function *getClientServiceRequest(action) {
   try {
-    console.log('client service request get saga:::', action.payload.id)
-    const id = action.payload.id;
-    const response = yield axios.get(`/api/request/${id}`);
+    // console.log('client service request get saga:::', action.payload.id)
+    // const id = action.payload.id;
+    const response = yield axios.get(`/api/request/`);
+    console.log('client request response::::::==>', response.data)
     yield put({
-      type: "SET_CLIENT_SERVICE_REQUEST",
+      type: "SET_CLIENT_REQUEST",
       payload: response.data,
     });
     console.log("here is data from client", response.data);

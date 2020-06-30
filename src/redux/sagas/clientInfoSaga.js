@@ -4,7 +4,9 @@ import axios from "axios";
 
 function* clientInfoSaga() {
   yield takeLatest("GET_CLIENT_DATA", getClientInfo);
-  //  yield takeLatest("GET_CLIENT_DATA", getClientInfo);
+   yield takeLatest("UPDATE_CLIENT_DATA", updateClientData);
+   yield takeLatest("UPDATE_CLIENT_PROFILE_PICTURE", updateClientProfilePicture);
+
 }
 
 function *getClientInfo() {
@@ -49,6 +51,38 @@ function* updateClientData(action) {
     } catch (error) {
       console.log("Error with get pet data:", error);
     }
+}
+
+function* updateClientProfilePicture(action) {
+  try {
+
+    const data = new FormData();
+    data.append('file', action.payload.file)
+    
+    console.log('from pet upload picture', action.payload)
+
+
+    console.log('----------->formdata', action.payload.file.type);
+    console.log('send this picture', action.payload);
+    // const response = yield axios.put(`/api/pet/updateProfilePicture`, action.payload);
+    const response = yield axios.put(`/api/client/updateProfilePicture`, data, {
+      headers: {
+        'accept': 'application/json',
+        'Accept-Language': 'en-US,en;q=0.8',
+        'Content-Type': action.payload.file.type,
+      }
+    });
+    console.log('send this clients picture to router', action.payload);
+
+    yield put({
+      type: "GET_CLIENT_DATA",
+      payload: action.payload,
+    });
+
+
+  } catch (error) {
+    console.log("Error with get client picture data:", error);
+  }
 }
 
 

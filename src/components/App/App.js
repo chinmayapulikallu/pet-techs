@@ -24,6 +24,7 @@ import ClientStepper from "../ClientStepper/ClientStepper";
 import ClientProfile from "../ClientProfile/ClientProfile";
 import ClientServiceRequest from "../ClientServiceRequest/ClientServiceRequest";
 import VTStepper from "../VTStepper/VTStepper";
+import SearchPage from "../SearchPage/SearchPage"
 
 import ClientDashBoard from "../ClientDashboard/ClientDashboard";
 import CarePlan from "../CarePlan/CarePlan";
@@ -42,7 +43,7 @@ class App extends Component {
           <Nav />
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-            <Redirect exact from="/" to="/home" />
+            <Redirect exact from="/" to="/landingpg" />
             {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
             <Route exact path="/about" component={AboutPage} />
@@ -69,6 +70,11 @@ class App extends Component {
               exact
               path="/client_service"
               component={ClientServiceRequest}
+            />
+            <Route
+              exact
+              path="/search"
+              component={SearchPage}
             />
             <Route exact path="/clientdashboard" component={ClientDashBoard} />
             <Route exact path="/careplan/:id" component={CarePlan} />

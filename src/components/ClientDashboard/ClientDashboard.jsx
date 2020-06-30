@@ -70,15 +70,33 @@ const useStyles = (theme) => ({
         marginLeft: "auto",
         marginRight: "auto",
     },
-
+    petCard: {
+        width: 400,
+        height: 300,
+        marginRight: 30,
+        marginBottom: 30
+    },
     
 });
 
 class ClientDashboard extends Component {
 
     componentDidMount() {
-        // console.log('CLient DashboaRd', clientInfo)
-        this.props.dispatch({type: 'GET_CLIENT_DASHBOARD'});
+        const currentId = this.props.match.params.id;
+        // console.log('-----> Current client', currentId)
+        this.props.dispatch({
+            type: 'GET_CLIENT_DATA',
+            payload: { id: currentId }
+        })
+        this.props.dispatch({
+            type: 'GET_PET_DATA',
+            payload: { id: currentId }
+        })
+        this.props.dispatch({
+            type: 'GET_CLIENT_SERVICE_REQUEST',
+            payload: { id: currentId }
+        })
+       
     }
 
     //search service provider
@@ -88,7 +106,7 @@ class ClientDashboard extends Component {
     }
 
     render() {
-        const { classes, user, clientInfo, petInfo } = this.props;
+        const { classes, user, clientInfo, petInfo, clientRequest } = this.props;
         return (
           <Container className={classes.root} maxWidth="md">
                 {clientInfo.map((client) =>    
@@ -119,7 +137,7 @@ class ClientDashboard extends Component {
                             <Grid item xs={6}>
                                 <Card className={classes.serviceList}>
                                     <CardContent>
-                                        {/*Map request and services accepted */}
+                                       {JSON.stringify(clientRequest)}
                                         <Typography variant="h6">Scheduled Services</Typography>
                                         <Card variant="outlined" className={classes.childCard}>
                                             <CardHeader
@@ -156,9 +174,11 @@ class ClientDashboard extends Component {
                 <div className={classes.petTitle}>
                     <Typography variant="h6">Your Pets</Typography>
                 </div>
-                <Card className={classes.petList}>
-                    {petInfo.map(pet =>
-                        <span key={pet.id}>
+                <Grid container>
+                 {petInfo.map(pet =>
+                     <Grid item xs={6}>
+                         <Card key={pet.id} className={classes.petCard}>
+                   
                             <Typography variant="h6">{pet.pet_name}</Typography>
                             <CardMedia
                                 component="img"
@@ -169,9 +189,11 @@ class ClientDashboard extends Component {
                                 <Button color="primary" variant="contained"
                                     className={classes.buttonMargin} onClick={this.carePlan}>carePlan</Button>
                             </CardContent>
-                        </span>
+                 </Card>
+                     </Grid>
                     )}
-                </Card>
+                    </Grid>
+               
           </Container>
         )
     }   
@@ -180,6 +202,7 @@ class ClientDashboard extends Component {
 const putReduxStateOnProps = (reduxState) => ({
     clientInfo: reduxState.clientInfo,
     petInfo: reduxState.petInfo,
+    clientService: reduxState.clientRequest,
 
     user: reduxState.user
 

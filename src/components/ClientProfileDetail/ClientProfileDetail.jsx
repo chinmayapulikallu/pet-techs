@@ -237,20 +237,23 @@ class ClientProfileDetail extends Component {
                                 }
 
                             </Grid>
-                            <Grid item xs={3} className={classes.editButton}>
-                                {this.state.editable ?
-                                    <>
-                                        <img src="images/checkmark.png" alt="save_button" height="50" width="50" onClick={this.handleSaveClient} />
-                                        <p>Save</p>
-                                    </>
-                                    :
-                                    <>
-                                        <img src="images/edit.png" alt="edit_button" height="50" width="50" onClick={this.handleEditClient} />
-                                        <p>Edit profile</p>
-                                    </>
-                                }
-                                {/* <img src="images/edit.png" alt="edit_button" height="50" width="50" onClick={this.handleEditClient} /> */}
-                            </Grid>
+                            {this.props.isClient && (
+                                <Grid item xs={3} className={classes.editButton}>
+                                    {this.state.editable ?
+                                        <>
+                                            <img src="images/checkmark.png" alt="save_button" height="50" width="50" onClick={this.handleSaveClient} />
+                                            <p>Save</p>
+                                        </>
+                                        :
+                                        <>
+                                            <img src="images/edit.png" alt="edit_button" height="50" width="50" onClick={this.handleEditClient} />
+                                            <p>Edit profile</p>
+                                        </>
+                                    }
+                                    {/* <img src="images/edit.png" alt="edit_button" height="50" width="50" onClick={this.handleEditClient} /> */}
+                                </Grid>
+                            )}
+
                         </Grid>
                     </div>
                 </div>
@@ -402,6 +405,7 @@ const mapStateToProps = (reduxState) => ({
     clientInfo: reduxState.clientInfo,
     petInfo: reduxState.petInfo,
     user: reduxState.user,
+    isClient: reduxState.user.user_type === 0,
 })
 
 

@@ -74,7 +74,7 @@ class Nav extends Component {
             {/* Show the link to the info page and the logout button if the user is logged in */}
             {user.id && (
               <>
-                <Link className="nav-link" to="/info">
+                <Link className="nav-link" to="/search">
                   Search for services
             </Link>
               </>

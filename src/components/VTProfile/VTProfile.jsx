@@ -217,7 +217,7 @@ class VTProfile extends Component {
                 <img
                   className={classes.profilePic}
                   src={this.state.profile_img}
-                  alt="Profile Picture"
+                  alt="Profile"
                 />
               </div>
 

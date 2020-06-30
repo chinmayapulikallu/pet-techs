@@ -4,7 +4,6 @@ const verbose = true; // turns on and off console.logs
 
 // worker Saga: will be fired on "REGISTER" actions
 function* registerClient(action) {
-    console.log('client registration saga::::----->', action.payload)
     try {
         const data = new FormData();
         data.append('file', action.payload.file)

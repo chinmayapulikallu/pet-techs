@@ -104,6 +104,11 @@ class ClientProfileDetail extends Component {
 
         const currentId = this.props.match.params.id;
         console.log("currentID", currentId)
+
+        this.props.dispatch({
+            type: 'GET_CLIENT_DATA',
+            payload: { id: currentId }
+        })
         
         this.props.dispatch({
             type: 'GET_PET_DATA',
@@ -170,7 +175,7 @@ class ClientProfileDetail extends Component {
         const { classes } = this.props;
         return (
             <div className={classes.root} >
-                {/* <h1>{JSON.stringify(this.props.client.media_url)}</h1> */}
+                {/* <h1>{JSON.stringify(this.props.clientInfo)}</h1> */}
 
                 {/* <Button
                         variant="contained"

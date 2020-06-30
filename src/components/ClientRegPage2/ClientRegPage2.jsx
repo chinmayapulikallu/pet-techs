@@ -215,7 +215,7 @@ class ClientRegPage2 extends Component {
         } else {
             currentMedication[property] = event.target.value
         }
-        currentPet.medications = [...currentPet.medications.filter(med => med.id != medicationId), currentMedication]
+        currentPet.medications = [...currentPet.medications.filter(med => med.id !== medicationId), currentMedication]
         this.setState({
             ...this.state,
             petInfo: {
@@ -231,7 +231,7 @@ class ClientRegPage2 extends Component {
         const currentPet = this.state.petInfo.pets.find(pet => pet.id === petId)
         const currentMedication = currentPet.medications.find(med => med.id === medicationId)
         currentMedication[property] = date
-        currentPet.medications = [...currentPet.medications.filter(med => med.id != medicationId), currentMedication]
+        currentPet.medications = [...currentPet.medications.filter(med => med.id !== medicationId), currentMedication]
         this.setState({
             ...this.state,
             petInfo: {

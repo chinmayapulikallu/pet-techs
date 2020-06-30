@@ -14,7 +14,6 @@ function* addVetTech(action) {
             type: 'SET_VT_DATA',
             payload: action.payload,
         });
-        console.log('-----> receive this data from client', action.payload)
 
     } catch (error) {
         console.log('Error with add vet tech:', error);

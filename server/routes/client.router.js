@@ -15,11 +15,9 @@ const { uploadPost, generateSignedUrls } = require("../modules/imageHandler");
  */
 router.get("/", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * from client where user_id = $1;`;
-  console.log(req.user.id);
   pool
     .query(sqlText, [req.user.id])
     .then(response => {
-      console.log('---->client data:', response.rows);
        generateSignedUrls(res, response.rows);
       })
 

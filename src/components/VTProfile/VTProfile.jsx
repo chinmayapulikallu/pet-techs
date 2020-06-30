@@ -15,6 +15,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { FormControl } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
+import { withRouter } from 'react-router-dom';
 
 const PROFILE_IMG_HEIGHT = 225;
 
@@ -147,6 +148,12 @@ class VTProfile extends Component {
         [property]: event.target.value === "true",
   })
 };
+
+
+  handleServiceRequest = () => {
+    this.props.history.push('/client_service')
+  }
+
 
   handleBack = () => {
     console.log(this.props.vtInfo);
@@ -658,6 +665,7 @@ class VTProfile extends Component {
                   color="primary"
                   className={classes.btnRS}
                   disabled={this.props.isVetTech}
+                  onClick={this.handleServiceRequest}
                 >
                   Request Service
                 </Button>
@@ -815,4 +823,4 @@ const mapStateToProps = (reduxState) => ({
   isVetTech: reduxState.user.user_type === 1,
 });
 
-export default connect(mapStateToProps)(withStyles(styles)(VTProfile));
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(VTProfile)));

@@ -257,16 +257,7 @@ class ClientRegPage2 extends Component {
     uploadPhoto = () => {
         alert('upload photo');
     }
-  //-----------------------------------
-
-    uppy = Uppy({
-        meta: { type: 'profilePicture' },
-        restrictions: { maxNumberOfFiles: 1 },
-        autoProceed: true
-      })
-    
-
-  //-----------------------------------
+ 
 
 
     render() {
@@ -375,9 +366,6 @@ class ClientRegPage2 extends Component {
                                     {/* <Button color="primary" variant="contained"
                                         onClick={this.uploadPhoto}>Upload Photo</Button> */}
 
-                                    <DragDrop
-                                        uppy={this.uppy}
-                                    />
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField

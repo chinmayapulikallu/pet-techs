@@ -9,7 +9,8 @@ import petCarePlan from './petCarePlanReducer';
 import vtInfoPage1 from './vetTechReducerPage1';
 import vtInfoPage2 from './vetTechReducerPage2';
 import vtInfoPage3 from './vetTechReducerPage3';
-import dogVetReducer from './getDogVetReducer'
+import dogVetReducer from './getDogVetReducer';
+import clientRequestReducer from './clientRequestReducer';
 
 
 
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
   vtInfoPage2,
   vtInfoPage3,
   dogVetReducer,
+  clientRequestReducer
 });
 
 export default rootReducer;

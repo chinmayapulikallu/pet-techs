@@ -19,6 +19,20 @@ router.get("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
+// GET SINGLE VT PROFILE FOR VIEWING 
+router.get("/profile/:id", rejectUnauthenticated, (req, res) => {
+  const sqlText = `SELECT * from vet_tech where user_id = $1; `;
+  pool
+    .query(sqlText, [req.params.id])
+    .then((response) => {
+      res.send(response.rows[0]);
+    })
+    .catch((error) => {
+      console.log(`Error getting Pet Tech info ${sqlText}`, error);
+      res.sendStatus(500);
+    });
+});
+
 router.get("/all", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" ORDER BY vet_name ASC; `;
   pool

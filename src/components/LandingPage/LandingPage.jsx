@@ -10,8 +10,6 @@ import CardContent from "@material-ui/core/CardContent"
 import Typography from '@material-ui/core/Typography';
 import CardMedia from "@material-ui/core/CardMedia"
 
-
-
 const styles = theme => ({
     landingPg: {
         borderRadius: 0,
@@ -22,12 +20,12 @@ const styles = theme => ({
     btngroup: {
         position: "absolute",
         top: "70%",
-        left: "75%",
+        left: "79%",
     },
     btngroup2: {
         position: "absolute",
         top: "70%",
-        left: "85%",
+        left: "87%",
     },
     dogText:{
         position: "absolute",
@@ -85,14 +83,14 @@ const styles = theme => ({
         margin: "25px",
         textAlign: 'center',
         justifyContent: "center",
-        marginBottom: 100,
+        marginBottom: 30,
         backgroundColor: "transparent",
         fontSize: 100,
         
     },
     catPaw: {
         position: "absolute",
-        top: "0%",
+        top: "25%",
         left: "65%",
         borderRadius: 40
     },
@@ -171,18 +169,12 @@ class LandingPage extends Component {
     handSignInClick = () => {
         console.log("ClickedSignIn");
         this.props.history.push('/home')
-
     }
 
     serviceProviderClick = () => {
         console.log("clickedSignIn");
-
         this.props.history.push('/register')
     }
-
-
-
-
 
     render() {
         const { classes } = this.props
@@ -195,7 +187,6 @@ class LandingPage extends Component {
                     <Button className={classes.btngroup2}  onClick={this.handleJoinClick} variant="contained" color="primary" >Join</Button>
                     <Button className={classes.btngroup} onClick={this.handSignInClick} variant="contained" color="primary" >Sign In</Button>
                 </Grid>
-
                 <div>
                     <Grid >
                         <Grid container spacing={3} >
@@ -252,8 +243,6 @@ class LandingPage extends Component {
                         </Grid>
                     </Grid>
                 </div>
-
-               
                     <Grid container className={classes.fixResize}>
                         <img className={classes.catImage} src='../images/homeCat.png' />
                         <div className={classes.test}>
@@ -272,8 +261,6 @@ class LandingPage extends Component {
                             </Grid>
                         </div>
                     </Grid>
-                
-
                 <Grid>
                     <div>
                         <img className={classes.servProv} src="/images/service-provider.png" alt="serviceProviderIcon" height="200" width="200" />
@@ -303,10 +290,6 @@ class LandingPage extends Component {
                     </Grid>
                 </Grid>
             </div>
-
-
-
-
         )
     }
 }

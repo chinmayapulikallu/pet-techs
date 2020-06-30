@@ -25,18 +25,16 @@ router.get("/", rejectUnauthenticated, (req, res) => {
 
     // .then((response) => {
     //   console.log('---->client data:', response.rows)
-    //    generateSignedUrls(res, response.rows)
-    //   })
 
     // .then((response) => {
-    //   console.log("---->client data:", response.rows[0]);
-    //   res.send(response.rows[0]);
+    //   console.log('---->client data:', response.rows)
+    //   res.send(response.rows);
+    
     // })
     .catch((error) => {
-      console.log(`Error making database query ${sqlText}`, error);
       res.sendStatus(500);
     });
-});
+  });
 
 router.put("/", rejectUnauthenticated, (req, res) => {
   const {

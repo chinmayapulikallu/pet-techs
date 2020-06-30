@@ -14,7 +14,7 @@ function* getVTData(action) {
     const response = yield axios.get(`/api/vt`);
     yield put({
       type: "GET_VT_DATA_SUCCESSFUL",
-      payload: response.data,
+      payload: response.data[0],
     });
     console.log("here is data from vet_tech", response.data);
   } catch (error) {

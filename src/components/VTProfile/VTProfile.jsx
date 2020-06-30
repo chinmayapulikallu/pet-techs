@@ -102,7 +102,6 @@ class VTProfile extends Component {
   state = {
     ...this.props.vtInfo,
     editable: false,
-    pottyBreaks: "",
   };
 
   handleEdit = () => {
@@ -144,15 +143,15 @@ class VTProfile extends Component {
 };
 
   handleBack = () => {
-    console.log(this.state);
+    console.log(this.props.vtInfo);
   };
 
   componentDidMount() {
+    this.props.dispatch({ type: "GET_VT_DATA" });
     console.log(`HERE!!!!!`, this.props.vtInfo);
   }
   render() {
     const { classes } = this.props;
-
     return (
       <div>
         <div className={classes.mainHeader}>
@@ -790,7 +789,7 @@ class VTProfile extends Component {
                 <Grid item xs={12} sm={5}></Grid>
                 <Grid item xs={12} sm={7}>
                   <div className={classes.botBtn}>
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" color="primary" onClick={this.handleBack}>
                       Back to DashBoard
                     </Button>
                   </div>

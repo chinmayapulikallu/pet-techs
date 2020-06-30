@@ -112,6 +112,7 @@ class Pet extends Component {
 
 
         const { classes } = this.props;
+
         return (
             <div className={classes.root} >
 
@@ -120,7 +121,7 @@ class Pet extends Component {
                         <tbody >
                             <tr className="table_body">
                                 <td className={classes.contentInTable}>
-                                    <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                    {/* <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" /> */}
                                     {/* {this.state.editPicture ?
                                         <>
                                             <img className={classes.img} src={this.props.pet.age} alt="profile" height="150" width="150" />
@@ -132,7 +133,14 @@ class Pet extends Component {
                                     } */}
 
                                     <input type="file" onChange={this.handlePictureChangeFor} />
-                                    <img className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img} height="150" width="150" />
+                                    {this.props.pet.profile_img === 'images/blank-profile-picture.png' ?
+                                        <>
+                                        <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                        </>
+                                        :
+                                        <img className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img} height="150" width="150" />
+                                    }
+                                    {/* <img className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img} height="150" width="150" /> */}
                                     <button onClick={this.handleEditPicture}>Save</button>
 
                                 </td>

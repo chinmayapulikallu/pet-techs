@@ -31,7 +31,7 @@ CREATE TABLE client (
   city varchar (100) NOT NULL,
   state varchar (20) NOT NULL,
   zip_code int NOT NULL,
-  profile_img text DEFAULT 'images/blank-profile-picture.png',
+  profile_img varchar (1000) DEFAULT 'images/blank-profile-picture.png',
   about_client text NOT NULL,
   about_home text NOT NULL,
   about_equipment text NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE vet_tech (
   city varchar (80) NOT NULL,
   state varchar (80) NOT NULL,
   zip_code int NOT NULL,
-  profile_img text DEFAULT 'images/blank-profile-picture.png',
+  profile_img varchar (1000),
   sleep_over boolean DEFAULT FALSE,
   boarding boolean DEFAULT FALSE,
   dropin_care boolean DEFAULT FALSE,
@@ -150,3 +150,28 @@ CREATE TABLE client_request (
 );
 
 
+
+
+-- // const defaultState = {
+-- //   file: {},
+-- //   text: {
+-- //     client_name: "",
+-- //     home_address_house: "",
+-- //     apt_suite: "",
+-- //     city: "",
+-- //     state: "",
+-- //     zip_code: "",
+-- //     about_client: "",
+-- //     about_home: "",
+-- //     about_equipment: "",
+-- //     contact_name_1: "",
+-- //     contact_phone_1: "",
+-- //     contact_email_1: "",
+-- //     vet_clinic: "",
+-- //     clinic_address: "",
+-- //     clinic_phone: "",
+-- //     transport: false,
+-- //   }
+-- // };
+
+-- // const clientInfoReducer = (state = defaultState , action) => {

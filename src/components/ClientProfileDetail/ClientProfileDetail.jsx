@@ -106,7 +106,7 @@ class ClientProfileDetail extends Component {
         console.log("currentID", currentId)
 
 
-        
+
         this.props.dispatch({
             type: 'GET_PET_DATA',
             payload: { id: currentId }

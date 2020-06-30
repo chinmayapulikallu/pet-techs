@@ -31,7 +31,7 @@ CREATE TABLE client (
   city varchar (100) NOT NULL,
   state varchar (20) NOT NULL,
   zip_code int NOT NULL,
-  profile_img varchar (1000),
+  profile_img varchar (1000) DEFAULT 'images/blank-profile-picture.png',
   about_client text NOT NULL,
   about_home text NOT NULL,
   about_equipment text NOT NULL,
@@ -106,6 +106,7 @@ CREATE TABLE pet (
   sex varchar NOT NULL,
   breed varchar (50) NOT NULL,
   pet_bio varchar NOT NULL,
+  profile_img text DEFAULT 'images/blank-profile-picture.png',
   food_brand varchar (250) NOT NULL,
   feeding_per_day int NOT NULL,
   amount_per_meal varchar (100) NOT NULL,
@@ -147,4 +148,5 @@ CREATE TABLE client_request (
   add_info text,
   request_status int 
 );
+
 

@@ -104,7 +104,9 @@ class ClientProfileDetail extends Component {
 
         const currentId = this.props.match.params.id;
         console.log("currentID", currentId)
-        
+
+
+
         this.props.dispatch({
             type: 'GET_PET_DATA',
             payload: { id: currentId }
@@ -186,10 +188,17 @@ class ClientProfileDetail extends Component {
                     <div className={classes.userBasicInfo}>
                         <Grid container spacing={1}>
                             <Grid item xs={5} className={classes.items}>
-                    
+
                                 {/* <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" /> */}
-                                <img className={classes.img} src={this.props.client.media_url} alt="profile" height="150" width="150" />
-                                                                
+                                {/* <img className={classes.img} src={this.props.client.media_url} alt="profile" height="150" width="150" /> */}
+                                {this.props.client.profile_img === 'images/blank-profile-picture.png' ?
+                                    <>
+                                        <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                    </>
+                                    :
+                                    <img className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} height="150" width="150" />
+                                }
+
 
                             </Grid>
 
@@ -228,20 +237,23 @@ class ClientProfileDetail extends Component {
                                 }
 
                             </Grid>
-                            <Grid item xs={3} className={classes.editButton}>
-                                {this.state.editable ?
-                                    <>
-                                        <img src="images/checkmark.png" alt="save_button" height="50" width="50" onClick={this.handleSaveClient} />
-                                        <p>Save</p>
-                                    </>
-                                    :
-                                    <>
-                                        <img src="images/edit.png" alt="edit_button" height="50" width="50" onClick={this.handleEditClient} />
-                                        <p>Edit profile</p>
-                                    </>
-                                }
-                                {/* <img src="images/edit.png" alt="edit_button" height="50" width="50" onClick={this.handleEditClient} /> */}
-                            </Grid>
+                            {this.props.isClient && (
+                                <Grid item xs={3} className={classes.editButton}>
+                                    {this.state.editable ?
+                                        <>
+                                            <img src="images/checkmark.png" alt="save_button" height="50" width="50" onClick={this.handleSaveClient} />
+                                            <p>Save</p>
+                                        </>
+                                        :
+                                        <>
+                                            <img src="images/edit.png" alt="edit_button" height="50" width="50" onClick={this.handleEditClient} />
+                                            <p>Edit profile</p>
+                                        </>
+                                    }
+                                    {/* <img src="images/edit.png" alt="edit_button" height="50" width="50" onClick={this.handleEditClient} /> */}
+                                </Grid>
+                            )}
+
                         </Grid>
                     </div>
                 </div>
@@ -393,6 +405,7 @@ const mapStateToProps = (reduxState) => ({
     clientInfo: reduxState.clientInfo,
     petInfo: reduxState.petInfo,
     user: reduxState.user,
+    isClient: reduxState.user.user_type === 0,
 })
 
 

@@ -28,9 +28,9 @@ const useStyles = (theme) => ({
     profileCenter: {
         height: 200,
         width: 200,
-       marginLeft: 400
+        marginLeft: 400
     },
-     profileImage: {
+    profileImage: {
         display: "block",
         marginLeft: "auto",
         marginRight: "auto",
@@ -76,7 +76,7 @@ const useStyles = (theme) => ({
         marginRight: 30,
         marginBottom: 30
     },
-    
+
 });
 
 class ClientDashboard extends Component {
@@ -96,7 +96,7 @@ class ClientDashboard extends Component {
             type: 'GET_CLIENT_SERVICE_REQUEST',
             payload: { id: currentId }
         })
-       
+
     }
 
     //search service provider
@@ -108,20 +108,27 @@ class ClientDashboard extends Component {
     render() {
         const { classes, user, clientInfo, petInfo, clientRequest } = this.props;
         return (
-          <Container className={classes.root} maxWidth="md">
-                {clientInfo.map((client) =>    
+            <Container className={classes.root} maxWidth="md">
+                {clientInfo.map((client) =>
                     <span key={client.user_id}>
                         <Grid item xs={12} className={classes.profileCenter}>
-                          <Card>
-                             <CardContent>
-                               <div>
-                                <Typography variant="h6"><b>{client.client_name}</b></Typography>
-                                 {/* <img className={classes.profileImage} src="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png" alt="name" height="75" width="75" />      */}
-                                 <img className={classes.img} src={client.media_url} alt={client.profile_img} height="150" width="150" />
+                            <Card>
+                                <CardContent>
+                                    <div>
+                                        <Typography variant="h6"><b>{client.client_name}</b></Typography>
+                                        {/* <img className={classes.profileImage} src="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png" alt="name" height="75" width="75" />      */}
+                                        {/* <img className={classes.img} src={client.media_url} alt={client.profile_img} height="150" width="150" /> */}
 
-                                </div>
-                            </CardContent>
-                         </Card>
+                                        {client.profile_img === 'images/blank-profile-picture.png' ?
+                                            <>
+                                                <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                            </>
+                                            :
+                                            <img className={classes.img} src={client.media_url} alt={client.profile_img} height="150" width="150" />
+                                        }
+                                    </div>
+                                </CardContent>
+                            </Card>
                         </Grid>
                         <Grid container>
                             <Grid item xs={6}>
@@ -139,7 +146,7 @@ class ClientDashboard extends Component {
                             <Grid item xs={6}>
                                 <Card className={classes.serviceList}>
                                     <CardContent>
-                                       {JSON.stringify(clientRequest)}
+                                        {JSON.stringify(clientRequest)}
                                         <Typography variant="h6">Scheduled Services</Typography>
                                         <Card variant="outlined" className={classes.childCard}>
                                             <CardHeader
@@ -170,35 +177,35 @@ class ClientDashboard extends Component {
                                     </CardContent>
                                 </Card>
                             </Grid>
-                        </Grid>                          
-                    </span>                   
+                        </Grid>
+                    </span>
                 )}
                 <div className={classes.petTitle}>
                     <Typography variant="h6">Your Pets</Typography>
                 </div>
                 <Grid container>
-                 {petInfo.map(pet =>
-                     <Grid item xs={6}>
-                         <Card key={pet.id} className={classes.petCard}>
-                   
-                            <Typography variant="h6">{pet.pet_name}</Typography>
-                            <CardMedia
-                                component="img"
-                                className={classes.media}
-                                image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
-                            />
-                            <CardContent>
-                                <Button color="primary" variant="contained"
-                                    className={classes.buttonMargin} onClick={this.carePlan}>carePlan</Button>
-                            </CardContent>
-                 </Card>
-                     </Grid>
+                    {petInfo.map(pet =>
+                        <Grid item xs={6}>
+                            <Card key={pet.id} className={classes.petCard}>
+
+                                <Typography variant="h6">{pet.pet_name}</Typography>
+                                <CardMedia
+                                    component="img"
+                                    className={classes.media}
+                                    image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
+                                />
+                                <CardContent>
+                                    <Button color="primary" variant="contained"
+                                        className={classes.buttonMargin} onClick={this.carePlan}>carePlan</Button>
+                                </CardContent>
+                            </Card>
+                        </Grid>
                     )}
-                    </Grid>
-               
-          </Container>
+                </Grid>
+
+            </Container>
         )
-    }   
+    }
 }
 
 const putReduxStateOnProps = (reduxState) => ({

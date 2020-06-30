@@ -5,15 +5,13 @@ import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from "react-router"
 import { Typography, CardHeader } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid"
-import { MenuItem } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
-import Select from "@material-ui/core/Select"
 import FormGroup from "@material-ui/core/FormGroup"
 import Checkbox from "@material-ui/core/Checkbox"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Paper from "@material-ui/core/Paper"
 import { fade } from "@material-ui/core/styles/colorManipulator";
-import Input from "@material-ui/core/Input"
+
 
 const styles = theme => ({
     root: {
@@ -92,11 +90,10 @@ const styles = theme => ({
 class SearchPage extends Component {
 
 
-
-
     state = {
+       
         ...this.props.serviceProvider,
-        searchedValue: ''
+       
     };
 
     componentDidMount = () => {
@@ -115,6 +112,14 @@ class SearchPage extends Component {
         })
     }
 
+    viewProfileClick = (id) => {
+        console.log("CLICKED VIEW PROFILE", id)
+        this.props.dispatch({ type: "GET_SINGLE_VT_DATA", payload: id})
+        this.props.history.push(`/vt-profile`)
+    }
+
+
+    
 
     //HANDLE SERVICE CHANGES
     handleServiceChange = (event, property) => {
@@ -200,6 +205,9 @@ class SearchPage extends Component {
         return (
             <div className={classes.root}>
                 <div>
+                    {/* <div>
+                        {JSON.stringify(this.props.vtInfo)}
+                    </div> */}
                     <Grid className={classes.title}>
                         <FormControl onSubmit={this.registerUser}>
                             <div>
@@ -209,19 +217,7 @@ class SearchPage extends Component {
                         </FormControl>
                         <Typography variant="subtitle1">Filter</Typography>
                         <Grid container direction={"row"} className={classes.serviceType}>
-                            {/* <Select
-                                color="secondary"
-                                label="Service"
-                                variant="outlined"
-                                onChange={(event) => this.handleChange(event, "service_filter")}
-                            >
-                                <MenuItem value="Select">Select Service Type</MenuItem>
-                                <MenuItem value="Sleepover">Pet Sleepover</MenuItem>
-                                <MenuItem value="Boarding">Pet Boarding</MenuItem>
-                                <MenuItem value="Drop-In">Drop-In</MenuItem>
-                                <MenuItem value="Hospice">Hospice</MenuItem>
-                            </Select> */}
-                            <FormGroup className={classes.groupCheck} row={true}>
+                            <FormGroup className={classes.groupCheck} row={true} >
                                 <FormControlLabel
                                     control={<Checkbox name="dog" />}
                                     onChange={(event) => this.handleCheckChange(event, "dogFilter")}
@@ -231,6 +227,7 @@ class SearchPage extends Component {
                                 />
                                 <FormControlLabel
                                     control={<Checkbox name="cat" />}
+                                    onChange={this.onChange}
                                     onChange={(event) => this.handleCheckChange(event, "catFilter")}
                                     onChange={(event) => this.catCheck(event)}
                                     value={this.state.catFilter}
@@ -294,7 +291,7 @@ class SearchPage extends Component {
                                                     {vet.bioyourself}
                                                 </Typography>
                                             </div>
-                                            <Button className={classes.btn} variant="contained" color="primary" >View Profile</Button>
+                                            <Button className={classes.btn} onClick={() => this.viewProfileClick(vet.user_id)} variant="contained" color="primary" >View Profile</Button>
                                         </div>
                                     </Paper>
                                 </Grid>
@@ -319,9 +316,6 @@ const mapStateToProps = (state) => ({
         petBoarding: false,
         dropIn: false,
         hospice: false
-
-
-
     }
 });
 

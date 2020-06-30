@@ -109,6 +109,12 @@ class VTProfile extends Component {
     this.setState((prevState) => ({
       editable: !prevState.editable,
     }));
+    this.props.dispatch({
+      type: "UPDATE_VT_DATA",
+      payload: {
+        ...this.state
+      }
+    })
   };
 
   handleChange = (property) => (event) => {
@@ -147,7 +153,7 @@ class VTProfile extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch({ type: "GET_VT_DATA" });
+    // this.props.dispatch({ type: "GET_VT_DATA" });
     console.log(`HERE!!!!!`, this.props.vtInfo);
   }
   render() {

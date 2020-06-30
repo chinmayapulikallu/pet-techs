@@ -4,7 +4,7 @@ import axios from "axios";
 function* vtInfoSaga() {
   yield takeLatest("GET_VT_DATA", getVTData);
   yield takeLatest("GET_ALL_VT_DATA", getAllVtData);
-  
+  yield takeLatest("UPDATE_VT_DATA", updateVTData); 
 }
 
 
@@ -32,6 +32,19 @@ function* getAllVtData(action) {
     console.log("ALL VT DATA", response.data);
   } catch (error) {
     console.log("Error with GET_ALL_VT_DATA:", error);
+  }
+}
+
+function* updateVTData(action) {
+  try {
+    console.log("from in updateVTtData", action.payload);
+    yield axios.put(`/api/vt`, action.payload);
+    yield put({
+      type: "GET_VT_DATA",
+      payload: action.payload,
+    });
+  } catch (error) {
+    console.log("Error with updating vt info:", error);
   }
 }
 

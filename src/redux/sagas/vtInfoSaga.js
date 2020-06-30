@@ -29,8 +29,8 @@ function* getSingleVTData(action) {
     const id = action.payload;
     const response = yield axios.get(`/api/vt/profile/${id}`);
     yield put({
-      type: "GET_VT_DATA_SUCCESSFUL",
-      payload: response.data,
+      type: "GET_VT_DATA",
+      // payload: response.data,
     });
     console.log("!!!!!!!!!!!!!!!", response.data);
   } catch (error) {

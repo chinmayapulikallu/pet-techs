@@ -57,35 +57,56 @@ class Nav extends Component {
 
     return (
       <HideOnScroll {...this.props}>
-
         <div className={classes.root}>
-          <Link to="/home">
-            <img className={classes.logo} src="images/VetTechlogo.png" alt="profile" height="130" width="130"
+          <Link to="/landingpg">
+            <img
+              className={classes.logo}
+              src="images/VetTechlogo.png"
+              alt="profile"
+              height="130"
+              width="130"
             />
           </Link>
           <div className="nav-right">
-            <Link className="nav-link" to="/home">
-              {/* Show this link if they are logged in or not,
-          but call this link 'Home' if they are logged in,
-          and call this link 'Login / Register' if they are not */}
-              {user.id ? 'Home' : 'Login / Register'}
-            </Link>
+            
 
             {/* Show the link to the info page and the logout button if the user is logged in */}
             {user.id && (
               <>
+              <Link
+              className="nav-link"
+              to={
+                this.props.isVetTech
+                  ? `/vtdashboard`
+                  : `/clientdashboard`
+              }
+            >
+              {/* Show this link if they are logged in or not,
+          but call this link 'Home' if they are logged in,
+          and call this link 'Login / Register' if they are not */}
+              Dashboard
+            </Link>
+            
+            
                 <Link className="nav-link" to="/search">
                   Search for services
-            </Link>
+                </Link>
               </>
             )}
             <Link className="nav-link" to="/about">
               About
-        </Link>
+            </Link>
             {user.id && (
               <>
                 <div className="nav-link">
-                  <Link className="profile" to={this.props.isVetTech ? `/vt-profile` : `/client-profile/${user.id}`}>
+                  <Link
+                    className="profile"
+                    to={
+                      this.props.isVetTech
+                        ? `/vt-profile`
+                        : `/client-profile/${user.id}`
+                    }
+                  >
                     {user.username}
                   </Link>
                 </div>
@@ -107,20 +128,16 @@ class Nav extends Component {
                       }
                     })} */}
                     {/* <p>here{JSON.stringify(client.media_url)}</p> */}
-
-                   
                   </Link>
                 </div>
                 <LogOutButton className="nav-link" />
               </>
             )}
             {/* Always show this link since the about page is not protected */}
-
           </div>
         </div>
       </HideOnScroll>
-
-    )
+    );
   }
 
 };

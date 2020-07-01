@@ -10,6 +10,12 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Switch from "@material-ui/core/Switch";
 
+
+import Uppy from '@uppy/core';
+import DragDrop from '@uppy/react/lib/DragDrop';
+import '@uppy/core/dist/style.css'
+import '@uppy/drag-drop/dist/style.css'
+
 const styles = {
   root: {
     marginTop: 20,
@@ -74,10 +80,12 @@ const styles = {
 
 class VTPage1 extends Component {
   state = {
-    ...this.props.vtInfoPage1,
+    file: this.props.vtInfoPage1.file,
+    ...this.props.vtInfoPage1.text,
   };
 
   handleInputChange = (property) => (event) => {
+    console.log('changing', property, event.target.value)
     this.setState({
       [property]: event.target.value,
     });
@@ -97,10 +105,76 @@ class VTPage1 extends Component {
     this.props.onNext();
     this.props.dispatch({
       type: 'SET_VT_DATA_PAGE_1',
-      payload: { ...this.state },
+      payload: {
+        file: this.state.file,
+        text: {
+          vet_name: this.state.vet_name,
+          home_address_house: this.state.home_address_house,
+          apt_suite: this.state.apt_suite,
+          city: this.state.city,
+          state: this.state.state,
+          zip_code: this.state.zip_code,
+          profile_img: this.state.profile_img,
+          sleep_over: this.state.sleep_over,
+          boarding: this.state.boarding,
+          dropin_care: this.state.dropin_care,
+          hospice: this.state.hospice,
+          about_vet: this.state.about_vet,
+        }
+      },
     })
     console.log('Vet reg data page 1:', this.state)
   };
+
+  //-----------------------------------
+
+
+  uppy = Uppy({
+    meta: { type: 'profilePicture' },
+    restrictions: { maxNumberOfFiles: 1 },
+    autoProceed: true
+  })
+
+  reader = new FileReader()
+
+  componentDidMount = () => {
+    console.log('data in vt state 1:', this.state)
+
+    this.uppy.on('upload', file => {
+      let fileKey = Object.keys(this.uppy.state.files)[0];
+      let fileFromUppy = this.uppy.state.files[fileKey].data;
+      this.setImage(fileFromUppy);
+    })
+
+    this.reader.onloadend = () => {
+      this.setState({
+        text: {
+          ...this.state,
+
+        },
+        profile_img: this.reader.result,
+
+
+      })
+    }
+    console.log('data from client reg page 1', this.state)
+
+  }
+
+  setImage = file => {
+    //reads the file into a local data url
+    this.reader.readAsDataURL(file);
+    this.setState({
+      ...this.state,
+
+      file: file,
+    })
+  }
+  //-----------------------------------
+
+
+
+
   render() {
     const { classes } = this.props;
     console.log('----page1-------->', this.props.vtInfoPage1)
@@ -108,7 +182,7 @@ class VTPage1 extends Component {
     return (
       <Container className={classes.root} maxWidth="sm">
         <Typography variant="h3" className={classes.title}>
-          Hi NAME! Let's set up your profile!
+          Hi {this.props.user.username}! Let's set up your profile!
         </Typography>
         <div className={classes.inputs}>
           <TextField
@@ -175,14 +249,24 @@ class VTPage1 extends Component {
           <Typography variant="h5">
             You look purr-fect! Let's add a photo for your profile!
           </Typography>
-          <Button
+
+
+          {/* <Button
             className={classes.btn}
             onClick={this.handleUploadPhoto}
             variant="contained"
             color="primary"
           >
             Select Photo to Upload
-          </Button>
+          </Button> */}
+          {/* //--------------------------------------------------------- */}
+          <DragDrop
+            uppy={this.uppy}
+          />
+          <img className={classes.img} src={this.state.profile_img} alt="profilePictureUrl" width="50%" height="50%" />
+
+          {/* //--------------------------------------------------------- */}
+
         </div>
         <div>
           <Typography variant="h5">
@@ -357,23 +441,25 @@ class VTPage1 extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  vtInfoPage1: {
-    vet_name: '',
-    home_address_house: "",
-    apt_suite: "",
-    city: "",
-    state: "",
-    zip_code: "",
-    profile_img: "",
-    sleep_over: false,
-    boarding: false,
-    dropin_care: false,
-    hospice: false,
-    about_vet: "",
-    
-    ...state.vtInfoPage1, // overrides default with any existing vt values
-  },
-  errors: state.errors,
+  // vtInfoPage1: {
+  //   vet_name: '',
+  //   home_address_house: "",
+  //   apt_suite: "",
+  //   city: "",
+  //   state: "",
+  //   zip_code: "",
+  //   profile_img: "",
+  //   sleep_over: false,
+  //   boarding: false,
+  //   dropin_care: false,
+  //   hospice: false,
+  //   about_vet: "",
+
+  //   ...state.vtInfoPage1, // overrides default with any existing vt values
+  // },
+  // errors: state.errors,
+  vtInfoPage1: state.vtInfoPage1,
+  user: state.user
 });
 
 export default connect(mapStateToProps)(withStyles(styles)(VTPage1));

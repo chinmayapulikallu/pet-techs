@@ -65,7 +65,7 @@ CREATE TABLE vet_tech (
   cats boolean DEFAULT FALSE,
   other boolean DEFAULT FALSE,
 --  type_pet_provide varchar (50) NOT NULL,
-  vet_available boolean NOT NULL,
+  vet_available boolean DEFAULT FALSE,
   zero_two boolean DEFAULT FALSE,
   two_four boolean DEFAULT FALSE,
   four_eight boolean DEFAULT FALSE,

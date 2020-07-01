@@ -1,4 +1,4 @@
-const petCarePlanReducer = (state = {}, action) => {
+const petCarePlanReducer = (state = [], action) => {
     switch (action.type) {
         case "GET_PET_CAREPLAN_SUCCESSFUL":
             console.log("PAYLOAD", action.payload);

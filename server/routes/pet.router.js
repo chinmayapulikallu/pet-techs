@@ -43,10 +43,15 @@ router.get("/careplan/:id", (req, res) => {
   const sqlText = `SELECT * from pet where pet.id = $1; `;
   pool
     .query(sqlText, [req.params.id])
+    // .then((response) => {
+    //   console.log("pet careplan data:", response.rows[0]);
+    //   //Since we only need the first, and only row, we are setting the index to 0.
+    //   res.send(response.rows[0]);
+    // })
+
     .then((response) => {
-      console.log("pet careplan data:", response.rows[0]);
-      //Since we only need the first, and only row, we are setting the index to 0.
-      res.send(response.rows[0]);
+      console.log("pet data:", response.rows);
+    generateSignedUrls(res, response.rows);
     })
     .catch((error) => {
       console.log(`Error making get pet by id request. ${sqlText}`, error);

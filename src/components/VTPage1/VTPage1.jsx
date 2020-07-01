@@ -81,63 +81,8 @@ const styles = {
 class VTPage1 extends Component {
   state = {
     file: this.props.vtInfoPage1.file,
-    // text: {
-    vet_name: this.props.vtInfoPage1.vet_name,
-    home_address_house: this.props.vtInfoPage1.home_address_house,
-    apt_suite: this.props.vtInfoPage1.apt_suite,
-    city: this.props.vtInfoPage1.city,
-    state: this.props.vtInfoPage1.state,
-    zip_code: this.props.vtInfoPage1.zip_code,
-    profile_img: this.props.vtInfoPage1.profile_img,
-    sleep_over: this.props.vtInfoPage1.sleep_over,
-    boarding: this.props.vtInfoPage1.boarding,
-    dropin_care: this.props.vtInfoPage1.dropin_care,
-    hospice: this.props.vtInfoPage1.hospice,
-    about_vet: this.props.vtInfoPage1.about_vet,
-    // }
+    ...this.props.vtInfoPage1.text,
   };
-
-  uppy = Uppy({
-    meta: { type: 'profilePicture' },
-    restrictions: { maxNumberOfFiles: 1 },
-    autoProceed: true
-  })
-
-  reader = new FileReader()
-
-  componentDidMount = () => {
-    console.log('data in vt state 1:', this.state)
-
-    this.uppy.on('upload', file => {
-      let fileKey = Object.keys(this.uppy.state.files)[0];
-      let fileFromUppy = this.uppy.state.files[fileKey].data;
-      this.setImage(fileFromUppy);
-    })
-
-    this.reader.onloadend = () => {
-      this.setState({
-        // text: {
-          profile_img: this.reader.result,
-          ...this.state,
-        // }
-      })
-    }
-    console.log('data from client reg page 1', this.state)
-
-  }
-
-  setImage = file => {
-    //reads the file into a local data url
-    this.reader.readAsDataURL(file);
-    //sets the file into state and opens the walkthrough
-    this.setState({
-      ...this.state,
-      file: file,
-    })
-  }
-
-
-  //-----------------------------------
 
   handleInputChange = (property) => (event) => {
     console.log('changing', property, event.target.value)
@@ -163,12 +108,71 @@ class VTPage1 extends Component {
       payload: {
         file: this.state.file,
         text: {
-          ...this.state.text,
+          vet_name: this.state.vet_name,
+          home_address_house: this.state.home_address_house,
+          apt_suite: this.state.apt_suite,
+          city: this.state.city,
+          state: this.state.state,
+          zip_code: this.state.zip_code,
+          profile_img: this.state.profile_img,
+          sleep_over: this.state.sleep_over,
+          boarding: this.state.boarding,
+          dropin_care: this.state.dropin_care,
+          hospice: this.state.hospice,
+          about_vet: this.state.about_vet,
         }
       },
     })
     console.log('Vet reg data page 1:', this.state)
   };
+
+  //-----------------------------------
+
+
+  uppy = Uppy({
+    meta: { type: 'profilePicture' },
+    restrictions: { maxNumberOfFiles: 1 },
+    autoProceed: true
+  })
+
+  reader = new FileReader()
+
+  componentDidMount = () => {
+    console.log('data in vt state 1:', this.state)
+
+    this.uppy.on('upload', file => {
+      let fileKey = Object.keys(this.uppy.state.files)[0];
+      let fileFromUppy = this.uppy.state.files[fileKey].data;
+      this.setImage(fileFromUppy);
+    })
+
+    this.reader.onloadend = () => {
+      this.setState({
+        text: {
+          ...this.state,
+
+        },
+        profile_img: this.reader.result,
+
+
+      })
+    }
+    console.log('data from client reg page 1', this.state)
+
+  }
+
+  setImage = file => {
+    //reads the file into a local data url
+    this.reader.readAsDataURL(file);
+    this.setState({
+      ...this.state,
+
+      file: file,
+    })
+  }
+  //-----------------------------------
+
+
 
 
   render() {
@@ -259,6 +263,8 @@ class VTPage1 extends Component {
           <DragDrop
             uppy={this.uppy}
           />
+          <img className={classes.img} src={this.state.profile_img} alt="profilePictureUrl" width="50%" height="50%" />
+
           {/* //--------------------------------------------------------- */}
 
         </div>

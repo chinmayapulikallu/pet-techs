@@ -78,7 +78,6 @@ const styles = {
 class ClientRegPage1 extends Component {
   state = {
     file: this.props.clientInfo.file,
-    // text:this.props.clientInfo.text,
     ...this.props.clientInfo.text,
 
   };
@@ -155,13 +154,6 @@ class ClientRegPage1 extends Component {
     this.props.onNext();
   };
   //-----------------------------------
-  // handlePictureChangeFor = (event) => {
-  //   console.log('changing', event.target.files[0])
-
-  //   this.setState({
-  //     file: event.target.files[0]
-  //   });
-  // }
 
   uppy = Uppy({
     meta: { type: 'profilePicture' },
@@ -193,7 +185,6 @@ class ClientRegPage1 extends Component {
   setImage = file => {
     //reads the file into a local data url
     this.reader.readAsDataURL(file);
-    //sets the file into state and opens the walkthrough
     this.setState({
       ...this.state,
       file: file,
@@ -286,11 +277,6 @@ class ClientRegPage1 extends Component {
           />
 
           {/* //--------------------------------------------------------- */}
-
-
-
-
-          {/* <input type="file" onChange={this.handlePictureChangeFor} /> */}
 
           <img className={classes.img} src={this.state.profile_img} alt="profilePictureUrl" width="50%" height="50%" />
 

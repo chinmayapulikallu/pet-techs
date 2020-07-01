@@ -59,9 +59,24 @@ class VTReviewPage extends Component {
       type: "VT_REGISTER",
       payload:
       {
-        ...this.props.vtInfoPage1,
-        ...this.props.vtInfoPage2,
-        ...this.props.vtInfoPage3
+        file: this.props.vtInfoPage1.file,
+        text: {
+          vet_name:this.props.vtInfoPage1.text.vet_name,
+          home_address_house:this.props.vtInfoPage1.text.home_address_house,
+          apt_suite:this.props.vtInfoPage1.text.apt_suite,
+          city:this.props.vtInfoPage1.text.city,
+          state:this.props.vtInfoPage1.text.state,
+          zip_code:this.props.vtInfoPage1.text.zip_code,
+          profile_img:this.props.vtInfoPage1.text.profile_img,
+          sleep_over:this.props.vtInfoPage1.text.sleep_over,
+          boarding:this.props.vtInfoPage1.text.boarding,
+          dropin_care:this.props.vtInfoPage1.text.dropin_care,
+          hospice:this.props.vtInfoPage1.text.hospice,
+          about_vet:this.props.vtInfoPage1.text.about_vet,
+          ...this.props.vtInfoPage2,
+          ...this.props.vtInfoPage3
+        }
+
 
       }
     })
@@ -97,44 +112,44 @@ class VTReviewPage extends Component {
     return (
       <Container className={classes.root} maxWidth="sm">
         <h1>{JSON.stringify(vtInfoPage1)}</h1>
-        <h1>{JSON.stringify(vtInfoPage2)}</h1>
+        {/* <h1>{JSON.stringify(vtInfoPage2)}</h1> */}
         {/* <h1>{JSON.stringify(vtInfoPage3)}</h1> */}
 
 
         <h1 className={classes.title}>Vet tech review</h1>
         <p>
-          Your name: <spand>{vtInfoPage1.vet_name}</spand>
+          Your name: <spand>{vtInfoPage1.text.vet_name}</spand>
         </p>
         <p>
-          Home address: <spand>{vtInfoPage1.home_address_house}</spand>
+          Home address: <spand>{vtInfoPage1.text.home_address_house}</spand>
         </p>
         <p>
-          Apartment or Suite #: <span>{vtInfoPage1.apt_suite}</span>
+          Apartment or Suite #: <span>{vtInfoPage1.text.apt_suite}</span>
         </p>
         <p>
-          City: <span>{vtInfoPage1.city}</span>
+          City: <span>{vtInfoPage1.text.city}</span>
         </p>
         <p>
-          State: <span>{vtInfoPage1.state}</span>
+          State: <span>{vtInfoPage1.text.state}</span>
         </p>
         <p>
-          Zip Code: <span>{vtInfoPage1.zipcode}</span>
+          Zip Code: <span>{vtInfoPage1.text.zip_code}</span>
         </p>
         <p>
-          Bio: <span>{vtInfoPage1.about_vet}</span>
+          Bio: <span>{vtInfoPage1.text.about_vet}</span>
         </p>
 
         <p>
-          Pet Sleepover: <span>{vtInfoPage1.sleep_over}</span>
+          Pet Sleepover: <span>{vtInfoPage1.text.sleep_over}</span>
         </p>
         <p>
-          Pet Boarding: <span>{vtInfoPage1.boarding}</span>
+          Pet Boarding: <span>{vtInfoPage1.text.boarding}</span>
         </p>
         <p>
-          Drop In Care: <span>{vtInfoPage1.dropin_care}</span>
+          Drop In Care: <span>{vtInfoPage1.text.dropin_care}</span>
         </p>
         <p>
-          Hospice Care: <span>{vtInfoPage1.hospice}</span>
+          Hospice Care: <span>{vtInfoPage1.text.hospice}</span>
         </p>
         <Grid className={classes.itemCenter}>
           <Button

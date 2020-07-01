@@ -73,7 +73,7 @@ class App extends Component {
             <Route exact path="/vt-profile/:id" component={VTProfile} />
             <Route
               exact
-              path="/client_service"
+              path="/client_service/:id"
               component={ClientServiceRequest}
             />
             <Route exact path="/search" component={SearchPage} />

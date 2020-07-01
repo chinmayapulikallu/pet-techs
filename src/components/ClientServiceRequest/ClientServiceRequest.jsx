@@ -249,16 +249,10 @@ const mapStateToProps = (reduxState, ownProps) => {
 
     },
     petInfo: reduxState.petInfo,
-<<<<<<< HEAD
-    user: reduxState.user,
-    clientName: reduxState.clientInfo.name
-});
-=======
   };
 };
 
 
->>>>>>> c16cbec8a2e42e147f79605e958abb558ce8b469
 
 export default withRouter(
     connect(mapStateToProps)(withStyles(styles)(ClientServiceRequest))

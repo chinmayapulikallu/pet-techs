@@ -13,24 +13,6 @@ function* getVTData(action) {
     const response = yield axios.get(`/api/vt`);
     yield put({
       type: "GET_VT_DATA_SUCCESSFUL",
-<<<<<<< HEAD
-      payload: response.data[0],
-    });
-    console.log("here is data from vet_tech", response.data);
-  } catch (error) {
-    console.log("Error with get vet_tech data:", error);
-  }
-}
-//GET VET INFO FOR PROFILE ON CLICK OF VIEW PROFILE FROM SERVICE PAGE 
-function* getSingleVTData(action) {
-  try {
-    console.log("$$$$$$$$$$$$$", action.payload)
-    const id = action.payload;
-    const response = yield axios.get(`/api/vt/profile/${id}`);
-    yield put({
-      type: "GET_VT_DATA_SUCCESSFUL",
-=======
->>>>>>> 5b04c5c933293aba3e94f7c5507bb7a70ee9a5ec
       payload: response.data,
     });
   } catch (error) {

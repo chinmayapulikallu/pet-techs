@@ -83,12 +83,13 @@ class ClientDashboard extends Component {
 
     componentDidMount() {
         // const currentId = this.props.match.params.id;
-       const currentId = this.props.clientInfo.user_id
-        console.log('-----> Current client', currentId)
         this.props.dispatch({
             type: 'GET_CLIENT_DATA'
-            // payload: { id: currentId }
         })
+        const currentId = this.props.clientInfo.user_id
+        // console.log("this.props :: ", this.props)
+        console.log('-----> GET_PET_DATA Current client', currentId)
+
         this.props.dispatch({
             type: 'GET_PET_DATA',
             payload: { id: currentId }

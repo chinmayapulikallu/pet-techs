@@ -54,6 +54,9 @@ class ClientServiceRequest extends Component {
         ...this.props.clientRequest,
     };
 
+    componentDidMount() {
+        console.log("clientservicerequest mount :: ", this.props)
+    }
 
     handleDateChange = (event, property) => {
         this.setState({
@@ -226,7 +229,8 @@ const mapStateToProps = (reduxState) => ({
         // pet3: false
 
     },
-    petInfo: reduxState.petInfo
+    petInfo: reduxState.petInfo,
+    vtInfo: reduxState.vtInfo,
 });
 
 export default withRouter(

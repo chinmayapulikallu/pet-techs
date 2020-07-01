@@ -149,7 +149,9 @@ CREATE TABLE client_request (
   request_status int 
 );
 
-
+ALTER TABLE client_request
+  ALTER COLUMN "request_status" SET DEFAULT '0',
+  ALTER COLUMN "request_status" SET NOT NULL;
 
 
 

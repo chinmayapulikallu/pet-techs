@@ -32,21 +32,51 @@ const useStyles = (theme) => ({
     marginRight: "auto",
     borderRadius: 0,
     paddingTop: 25,
-    width: 100,
-    height: 100,
+    // width: 100,
+    // height: 100,
   },
+  container: {
+    marginTop: 50,
+  }
 });
 
 class CarePlan extends Component {
   state = {
     isEditing: false,
+    ...this.props.petCarePlan
   };
+  componentDidMount() {
+    // const currentPet = this.props.careplan.find(client => client.user_id === parseInt(this.props.match.params.id))
+
+    this.setState({
+
+      // id: this.props.careplan.id,
+      // pet_name: this.props.careplan.pet_name,
+      // feeding_per_day: this.props.careplan.feeding_per_day,
+      // food_brand: this.props.careplan.food_brand,
+      // amount_per_meal: this.props.careplan.amount_per_meal,
+      // pet_behavior: this.props.careplan.pet_behavior,
+      // care_equipment: this.props.careplan.care_equipment,
+      // sex: this.props.careplan.sex,
+      // breed: this.props.careplan.breed,
+      // weight: this.props.careplan.weight,
+      // age: this.props.petCarePlan.age,
+    })
+    console.log('------------>state:', this.state)
+    console.log('------------>reducer:', this.props.careplan)
+
+    this.props.dispatch({
+      type: 'GET_PET_CARE_PLAN',
+      payload: { id: this.props.match.params.id }
+    })
+  }
 
   backToProfile = () => {
     this.props.history.goBack();
   };
 
   handleEditToggle = () => {
+
     console.log(
       "In edit/save toggle",
       this.state,
@@ -55,7 +85,7 @@ class CarePlan extends Component {
     );
     this.props.dispatch({
       type: "SAVE_PET_DETAILS",
-      payload: this.props.petCarePlan,
+      payload: { ...this.state },
     });
     this.setState({
       isEditing: !this.state.isEditing,
@@ -63,224 +93,242 @@ class CarePlan extends Component {
   };
 
   handleInputChange = (property) => (event) => {
-    console.log("in handleinputchange", event.target.value, this.state);
-    this.props.dispatch({
-      type: "UPDATE_PET_CARE_PLAN",
-      payload: {
-        [property]: event.target.value,
-      },
-    });
+    console.log("in handleinputchange", event.target.value, property);
+    this.setState({
+      [property]: event.target.value
+    })
   };
 
   render() {
+    const { classes, } = this.props;
+
     return (
-      <Container>
-        {/* <p>{JSON.stringify(this.props.petCarePlan)}</p> */}
-        {this.props.petCarePlan.map((carePlan) => {
-          return (
-            <div key={carePlan}>
-              <img
-          className={this.props.classes.profileImage}
-          src={carePlan.profile_img}
-          alt={carePlan.profile_img}
-          height="150" width="150"
-        />
+      <Container className={classes.container}>
         <br />
-        <Typography variant="h2" className={this.props.classes.profileCenter}>
-          Care plan for {carePlan.pet_name}!
+        <br />
+        <br />
+        {/* <p>{JSON.stringify(this.props.petCarePlan)}</p> */}
+        {/* {this.props.petCarePlan.map((carePlan) => {
+          return ( */}
+        <div>
+          <img
+            className={this.props.classes.profileImage}
+            src={this.props.petCarePlan.profile_img}
+            alt={this.props.petCarePlan.profile_img}
+            height="150" width="150"
+          />
+          <br />
+          <Typography variant="h2" className={this.props.classes.profileCenter}>
+            Care plan for {this.props.petCarePlan.pet_name}!
         </Typography>
-        <Card>
-          <CardContent>
-            <div>
+          <Card>
+            <CardContent>
+              <div>
+                <Typography>
+                  General Info:
+                {this.state.isEditing ? (
+                    <TextField
+                      id="outlined-basic"
+                      variant="outlined"
+                      color="secondary"
+                      label="Pet info"
+                      size="small"
+                      value={this.state.pet_bio}
+                      onChange={this.handleInputChange("pet_bio")}
+                    />
+                  ) : (
+                      this.state.pet_bio
+                    )}
+                </Typography>
+              </div>
+              <br />
               <Typography>
-                General Info:
+                Pet Feeding Info: I like to eat{" "}
                 {this.state.isEditing ? (
                   <TextField
                     id="outlined-basic"
                     variant="outlined"
                     color="secondary"
-                    label="Pet Info"
+                    label="Feedings Per Day"
                     size="small"
-                    value={carePlan.pet_bio}
-                    onChange={this.handleInputChange("pet_bio")}
+                    value={this.state.feeding_per_day}
+                    onChange={this.handleInputChange("feeding_per_day")}
                   />
                 ) : (
-                    carePlan.pet_bio
-                  )}
-              </Typography>
-            </div>
-            <br />
-            <Typography>
-              Pet Feeding Info: I like to eat{" "}
-              {this.state.isEditing ? (
-                <TextField
-                  id="outlined-basic"
-                  variant="outlined"
-                  color="secondary"
-                  label="Feedings Per Day"
-                  size="small"
-                  value={carePlan.feeding_per_day}
-                  onChange={this.handleInputChange("feeding_per_day")}
-                />
-              ) : (
-                  carePlan.feeding_per_day
-                )}{" "}
+                    this.state.feeding_per_day
+                  )}{" "}
               meals per day, and my favorite food is{" "}
-              {this.state.isEditing ? (
-                <TextField
-                  id="outlined-basic"
-                  variant="outlined"
-                  color="secondary"
-                  label="Pet Food Brand"
-                  size="small"
-                  value={carePlan.food_brand}
-                  onChange={this.handleInputChange("food_brand")}
-                />
-              ) : (
-                  carePlan.food_brand
-                )}
+                {this.state.isEditing ? (
+                  <TextField
+                    id="outlined-basic"
+                    variant="outlined"
+                    color="secondary"
+                    label="Pet Food Brand"
+                    size="small"
+                    value={this.state.food_brand}
+                    onChange={this.handleInputChange("food_brand")}
+                  />
+                ) : (
+                    this.state.food_brand
+                  )}
               .
             </Typography>
-            <br />
-            <Typography>
-              Please feed me{" "}
-              {this.state.isEditing ? (
-                <TextField
-                  id="outlined-basic"
-                  variant="outlined"
-                  color="secondary"
-                  label="Amount of food per meal"
-                  size="small"
-                  value={carePlan.amount_per_meal}
-                  onChange={this.handleInputChange("amount_per_meal")}
-                />
-              ) : (
-                  carePlan.amount_per_meal
-                )}{" "}
+              <br />
+              <Typography>
+                Please feed me{" "}
+                {this.state.isEditing ? (
+                  <TextField
+                    id="outlined-basic"
+                    variant="outlined"
+                    color="secondary"
+                    label="Amount of food per meal"
+                    size="small"
+                    value={this.state.amount_per_meal}
+                    onChange={this.handleInputChange("amount_per_meal")}
+                  />
+                ) : (
+                    this.state.amount_per_meal
+                  )}{" "}
               for each meal!
             </Typography>
-            <br />
-            <Typography>
-              Pet Behavior Info:{" "}
-              {this.state.isEditing ? (
-                <TextField
-                  id="outlined-basic"
-                  variant="outlined"
-                  color="secondary"
-                  label="General Pet Behavior"
-                  size="small"
-                  value={carePlan.pet_behavior}
-                  onChange={this.handleInputChange("pet_behavior")}
-                />
-              ) : (
-                  carePlan.pet_behavior
-                )}
+              <br />
+              <Typography>
+                Pet Behavior Info:{" "}
+                {this.state.isEditing ? (
+                  <TextField
+                    id="outlined-basic"
+                    variant="outlined"
+                    color="secondary"
+                    label="General Pet Behavior"
+                    size="small"
+                    value={this.state.pet_behavior}
+                    onChange={this.handleInputChange("pet_behavior")}
+                  />
+                ) : (
+                    this.state.pet_behavior
+                  )}
               .
             </Typography>
-            <br />
-            <Typography>
-              Pet Equipment Info:{" "}
-              {this.state.isEditing ? (
-                <TextField
-                  id="outlined-basic"
-                  variant="outlined"
-                  color="secondary"
-                  label="Special Care Equipment"
-                  size="small"
-                  value={carePlan.care_equipment}
-                  onChange={this.handleInputChange("care_equipment")}
-                />
-              ) : (
-                  carePlan.care_equipment
-                )}
+              <br />
+              <Typography>
+                Pet Equipment Info:{" "}
+                {this.state.isEditing ? (
+                  <TextField
+                    id="outlined-basic"
+                    variant="outlined"
+                    color="secondary"
+                    label="Special Care Equipment"
+                    size="small"
+                    value={this.state.care_equipment}
+                    onChange={this.handleInputChange("care_equipment")}
+                  />
+                ) : (
+                    this.state.care_equipment
+                  )}
               .
             </Typography>
-            <br />
-            <Typography>
-              Pet Stats: I am a{" "}
-              {this.state.isEditing ? (
-                <TextField
-                  id="outlined-basic"
-                  variant="outlined"
-                  color="secondary"
-                  label="Gender"
-                  size="small"
-                  value={carePlan.sex}
-                  onChange={this.handleInputChange("sex")}
-                />
-              ) : (
-                  carePlan.sex
-                )}{" "}
-              {this.state.isEditing ? (
-                <TextField
-                  id="outlined-basic"
-                  variant="outlined"
-                  color="secondary"
-                  label="Breed"
-                  size="small"
-                  value={carePlan.breed}
-                  onChange={this.handleInputChange("breed")}
-                />
-              ) : (
-                  carePlan.breed
-                )}
+              <br />
+              <Typography>
+                Pet Stats: I am a{" "}
+                {this.state.isEditing ? (
+                  <TextField
+                    id="outlined-basic"
+                    variant="outlined"
+                    color="secondary"
+                    label="Gender"
+                    size="small"
+                    value={this.state.sex}
+                    onChange={this.handleInputChange("sex")}
+                  />
+                ) : (
+                    this.state.sex
+                  )}{" "}
+                {this.state.isEditing ? (
+                  <TextField
+                    id="outlined-basic"
+                    variant="outlined"
+                    color="secondary"
+                    label="Breed"
+                    size="small"
+                    value={this.state.breed}
+                    onChange={this.handleInputChange("breed")}
+                  />
+                ) : (
+                    this.state.breed
+                  )}
               . I weight{" "}
-              {this.state.isEditing ? (
-                <TextField
-                  id="outlined-basic"
-                  variant="outlined"
-                  color="secondary"
-                  label="Weight"
-                  size="small"
-                  value={carePlan.weight}
-                  onChange={this.handleInputChange("weight")}
-                />
-              ) : (
-                  carePlan.weight
-                )}{" "}
+                {this.state.isEditing ? (
+                  <TextField
+                    id="outlined-basic"
+                    variant="outlined"
+                    color="secondary"
+                    label="Weight"
+                    size="small"
+                    value={this.state.weight}
+                    onChange={this.handleInputChange("weight")}
+                  />
+                ) : (
+                    this.state.weight
+                  )}{" "}
               pounds and I am{" "}
-              {this.state.isEditing ? (
-                <TextField
-                  id="outlined-basic"
-                  variant="outlined"
-                  color="secondary"
-                  label="Age"
-                  size="small"
-                  value={carePlan.age}
-                  onChange={this.handleInputChange("age")}
-                />
-              ) : (
-                  carePlan.age
-                )}{" "}
+                {this.state.isEditing ? (
+                  <TextField
+                    id="outlined-basic"
+                    variant="outlined"
+                    color="secondary"
+                    label="Age"
+                    size="small"
+                    value={this.state.age}
+                    onChange={this.handleInputChange("age")}
+                  />
+                ) : (
+                    this.state.age
+                  )}{" "}
               years old.{" "}
-            </Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.backToProfile}
-            >
-              Back to Profile
+              </Typography>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.backToProfile}
+              >
+                Back to Profile
             </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.handleEditToggle}
-            >
-              {this.state.isEditing ? "Save" : "Edit"}
-            </Button>
-          </CardContent>
-        </Card>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.handleEditToggle}
+              >
+                {this.state.isEditing ? "Save" : "Edit"}
+              </Button>
+            </CardContent>
+          </Card>
 
-            </div>
-          )
-        })}
-       
+        </div>
+        
+         
+
       </Container>
     );
   }
 }
-const mapStateToProps = (reduxState) => ({
-  petCarePlan: reduxState.petCarePlan,
+const mapStateToProps = (state) => ({
+  careplan: state.petCarePlan[0],
+  petCarePlan: {
+    id: '',
+    pet_name: '',
+    feeding_per_day: '',
+    food_brand: '',
+    amount_per_meal: '',
+    pet_behavior: '',
+    care_equipment: '',
+    sex: '',
+    breed: '',
+    weight: '',
+    age: '',
+    ...state.petCarePlan[0], // overrides default with any existing vt values
+  },
+  errors: state.errors,
+
 });
 export default withStyles(useStyles)(
   withRouter(connect(mapStateToProps)(CarePlan))

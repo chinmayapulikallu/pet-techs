@@ -52,20 +52,12 @@ class ClientServiceRequest extends Component {
 
     state = {
         ...this.props.clientRequest,
-        clientName: this.props.clientName
+        vet_id: this.props.vetProfile.user_id
     };
 
-    componentDidMount = () => {
-        console.log("Mounted");
-        const currentId = this.props.match.params.id;
-        this.props.dispatch({ type: "GET_PET_DATA", payload: {id: currentId}  })
+    componentDidMount() {
+        console.log("clientservicerequest mount :: ", this.state)
     }
-
-    // getPetData = () => {
-    //     const currentId = this.props.match.params.id
-    //     this.props.dispatch({type: "GET_PET_DATA", payload: {id: currentId}})
-    // }
-
 
     handleDateChange = (event, property) => {
         this.setState({
@@ -234,12 +226,22 @@ class ClientServiceRequest extends Component {
     }
 }
 
-const mapStateToProps = (reduxState) => ({
-    clientRequest: {
+
+const mapStateToProps = (reduxState, ownProps) => {
+  const vetId = Number(ownProps.match.params.id);
+  const vetProfile = reduxState.vtInfo.filter(
+    (vet) => vet.user_id === vetId
+  )[0];
+
+  return {
+    vetProfile,
+    user: reduxState.user,
+
+     clientRequest: {
         start_date_time: new Date(),
         end_date_time: new Date(),
         service_select: '',
-        input_info: '',
+        input_ino: '',
         add_info: '',
         pet_id: [],
         // pet2: false,
@@ -247,9 +249,16 @@ const mapStateToProps = (reduxState) => ({
 
     },
     petInfo: reduxState.petInfo,
+<<<<<<< HEAD
     user: reduxState.user,
     clientName: reduxState.clientInfo.name
 });
+=======
+  };
+};
+
+
+>>>>>>> c16cbec8a2e42e147f79605e958abb558ce8b469
 
 export default withRouter(
     connect(mapStateToProps)(withStyles(styles)(ClientServiceRequest))

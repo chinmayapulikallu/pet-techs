@@ -21,6 +21,7 @@ router.get("/:id", (req, res) => {
   //                     FROM pet 
   //                   JOIN pet_picture ON pet.id = pet_picture.pet_id WHERE pet.user_id = $1 GROUP BY pet.id ;`;
   const sqlText = `SELECT * from pet where user_id = $1;`;
+  console.log("pet data req.user.id :: ", req.user.id)
   pool
     .query(sqlText, [req.user.id])
     // .then((response) => {
@@ -37,17 +38,12 @@ router.get("/:id", (req, res) => {
     res.sendStatus(500);
   });
 });
+
 // GET route for careplan - specific pet by ID
 router.get("/careplan/:id", (req, res) => {
   const sqlText = `SELECT * from pet where pet.id = $1; `;
   pool
     .query(sqlText, [req.params.id])
-    // .then((response) => {
-    //   console.log("pet careplan data:", response.rows[0]);
-    //   //Since we only need the first, and only row, we are setting the index to 0.
-    //   res.send(response.rows[0]);
-    // })
-
     .then((response) => {
       console.log("pet data:", response.rows);
     generateSignedUrls(res, response.rows);
@@ -61,7 +57,7 @@ router.get("/careplan/:id", (req, res) => {
  * POST route for PET INFO
  */
 router.post("/", async (req, res) => {
-  console.log("In pet router post", req.body);
+  // console.log("In pet router post", req.body);
   try {
     for (let i = 0; i < req.body.pets.length; i++) {
       let queryPet = `INSERT INTO "pet" 
@@ -86,9 +82,9 @@ router.post("/", async (req, res) => {
         req.body.pets[i].pet_behavior,
         req.body.pets[i].care_equipment,
       ];
-      console.log("pet info::::", valuesPet);
+      // console.log("pet info::::", valuesPet);
       let result = await pool.query(queryPet, valuesPet);
-      console.log("results for ID", result.rows);
+      // console.log("results for ID", result.rows);
       for (let j = 0; j < req.body.pets[i].medications.length; j++) {
         let queryMedication = `INSERT INTO "medication" 
                                ("pet_id", "medication_name", "dosage", "dosage_time")
@@ -99,7 +95,7 @@ router.post("/", async (req, res) => {
           req.body.pets[i].medications[j].dosage,
           req.body.pets[i].medications[j].dosage_time,
         ];
-        console.log("medication info::::", valuesMedication);
+        // console.log("medication info::::", valuesMedication);
         let medicationResult = await pool.query(
           queryMedication,
           valuesMedication

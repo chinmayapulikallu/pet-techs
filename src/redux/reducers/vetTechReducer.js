@@ -1,13 +1,10 @@
-// TODO: remove mock data
-
-
 const vtInfo = (state = [], action) => {
   switch (action.type) {
-    case 'SET_VT_DATA':
+    case "SET_VT_DATA":
       return action.payload;
-    case 'GET_VT_DATA_SUCCESSFUL':
+    case "GET_VT_DATA_SUCCESSFUL":
       return action.payload;
-      case "UNSET_VT":
+    case "UNSET_VT":
       return [];
     default:
       return state;

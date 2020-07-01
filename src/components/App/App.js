@@ -25,7 +25,7 @@ import ClientStepper from "../ClientStepper/ClientStepper";
 import ClientProfile from "../ClientProfile/ClientProfile";
 import ClientServiceRequest from "../ClientServiceRequest/ClientServiceRequest";
 import VTStepper from "../VTStepper/VTStepper";
-import SearchPage from "../SearchPage/SearchPage"
+import SearchPage from "../SearchPage/SearchPage";
 
 import ClientDashBoard from "../ClientDashboard/ClientDashboard";
 import CarePlan from "../CarePlan/CarePlan";
@@ -70,7 +70,7 @@ class App extends Component {
               path="/client-profile/:id"
               component={ClientProfile}
             />
-            <Route exact path="/vt-profile" component={VTProfile} />
+            <Route exact path="/vt-profile/:id" component={VTProfile} />
             <Route
               exact
               path="/client_service"

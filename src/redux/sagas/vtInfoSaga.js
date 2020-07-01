@@ -3,11 +3,9 @@ import axios from "axios";
 
 function* vtInfoSaga() {
   yield takeLatest("GET_VT_DATA", getVTData);
-  yield takeLatest("GET_SINGLE_VT_DATA", getSingleVTData)
   yield takeLatest("GET_ALL_VT_DATA", getAllVtData);
-  yield takeLatest("UPDATE_VT_DATA", updateVTData); 
+  yield takeLatest("UPDATE_VT_DATA", updateVTData);
 }
-
 
 function* getVTData(action) {
   try {
@@ -15,28 +13,13 @@ function* getVTData(action) {
     const response = yield axios.get(`/api/vt`);
     yield put({
       type: "GET_VT_DATA_SUCCESSFUL",
-      payload: response.data[0],
+      payload: response.data,
     });
+  } catch (error) {
+    console.log("Error with get vet_tech data:", error);
+  }
+}
 
-  } catch (error) {
-    console.log("Error with get vet_tech data:", error);
-  }
-}
-//GET VET INFO FOR PROFILE ON CLICK OF VIEW PROFILE FROM SERVICE PAGE 
-function* getSingleVTData(action) {
-  try {
-    console.log("$$$$$$$$$$$$$", action.payload)
-    const id = action.payload;
-    const response = yield axios.get(`/api/vt/profile/${id}`);
-    yield put({
-      type: "GET_VT_DATA",
-      // payload: response.data,
-    });
-    console.log("!!!!!!!!!!!!!!!", response.data);
-  } catch (error) {
-    console.log("Error with get vet_tech data:", error);
-  }
-}
 
 function* getAllVtData(action) {
   try {
@@ -61,10 +44,5 @@ function* updateVTData(action) {
     console.log("Error with updating vt info:", error);
   }
 }
-
-
-
-
-
 
 export default vtInfoSaga;

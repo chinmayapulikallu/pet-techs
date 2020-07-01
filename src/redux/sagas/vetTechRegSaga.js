@@ -30,7 +30,7 @@ function* addVetTech(action) {
         
         yield put({
             type: 'SET_VT_DATA',
-            payload: action.payload,
+            // payload: action.payload,
         });
 
     } catch (error) {

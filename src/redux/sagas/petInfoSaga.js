@@ -38,6 +38,7 @@ function* getPetCarePlan(action) {
 
 function* savePetDetails(action) {
   try {
+    console.log('send this data to router', action.payload)
     const response = yield axios.put(`/api/pet`, action.payload);
     yield put({
       type: "GET_PET_CARE_PLAN",

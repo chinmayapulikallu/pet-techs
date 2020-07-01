@@ -47,28 +47,31 @@ class CarePlan extends Component {
     };
     componentDidMount() {
         // const currentPet = this.props.careplan.find(client => client.user_id === parseInt(this.props.match.params.id))
-
-        this.setState({
-
-            // id: this.props.careplan.id,
-            // pet_name: this.props.careplan.pet_name,
-            // feeding_per_day: this.props.careplan.feeding_per_day,
-            // food_brand: this.props.careplan.food_brand,
-            // amount_per_meal: this.props.careplan.amount_per_meal,
-            // pet_behavior: this.props.careplan.pet_behavior,
-            // care_equipment: this.props.careplan.care_equipment,
-            // sex: this.props.careplan.sex,
-            // breed: this.props.careplan.breed,
-            // weight: this.props.careplan.weight,
-            // age: this.props.petCarePlan.age,
-        })
-        console.log('------------>state:', this.state)
-        console.log('------------>reducer:', this.props.careplan)
-
         this.props.dispatch({
             type: 'GET_PET_CARE_PLAN',
             payload: { id: this.props.match.params.id }
         })
+        this.setState({
+
+            // id: this.props.petCarePlan.id,
+            pet_name: this.props.petCarePlan.pet_name,
+            feeding_per_day: this.props.petCarePlan.feeding_per_day,
+            food_brand: this.props.petCarePlan.food_brand,
+            amount_per_meal: this.props.petCarePlan.amount_per_meal,
+            pet_behavior: this.props.petCarePlan.pet_behavior,
+            care_equipment: this.props.petCarePlan.care_equipment,
+            sex: this.props.petCarePlan.sex,
+            breed: this.props.petCarePlan.breed,
+            weight: this.props.petCarePlan.weight,
+            age: this.props.petCarePlan.age,
+        })
+        console.log('------------>state:', this.state)
+        console.log('------------>reducer:', this.props.careplan)
+
+        // this.props.dispatch({
+        //     type: 'GET_PET_CARE_PLAN',
+        //     payload: { id: this.props.match.params.id }
+        // })
     }
 
     backToProfile = () => {
@@ -91,6 +94,11 @@ class CarePlan extends Component {
             isEditing: !this.state.isEditing,
         });
     };
+    handleEditButton =() =>{
+        this.setState({
+            isEditing: !this.state.isEditing,
+        });
+    }
 
     handleInputChange = (property) => (event) => {
         console.log("in handleinputchange", event.target.value, property);
@@ -117,7 +125,7 @@ class CarePlan extends Component {
                         height="150" width="150"
                     />
                     <br />
-                    <p>{JSON.stringify(this.props.carePlan)}</p>
+                    {/* <p>{JSON.stringify(this.props.petCarePlan)}</p> */}
 
                     <Typography variant="h2" className={this.props.classes.profileCenter}>
                         Care plan for {this.props.petCarePlan.pet_name}!
@@ -140,7 +148,6 @@ class CarePlan extends Component {
                                     ) : (
                                             this.props.petCarePlan.pet_bio
                                         )}
-                                    {this.props.petCarePlan.pet_name}
                                 </Typography>
                             </div>
                             <br />
@@ -295,13 +302,31 @@ class CarePlan extends Component {
                             >
                                 Back to Profile
             </Button>
-                            <Button
+                            {/* <Button
                                 variant="contained"
                                 color="primary"
                                 onClick={this.handleEditToggle}
                             >
                                 {this.state.isEditing ? "Save" : "Edit"}
-                            </Button>
+                            </Button> */}
+
+
+
+                            {this.state.isEditing ?
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={this.handleEditToggle}
+                                >Save </Button>
+
+                                :
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick = {this.handleEditButton}
+                                >Edit </Button>
+
+                            }
                         </CardContent>
                     </Card>
 
@@ -316,7 +341,6 @@ class CarePlan extends Component {
 const mapStateToProps = (state) => ({
     careplan: state.petCarePlan[0],
     petCarePlan: {
-        id: '',
         pet_name: '',
         feeding_per_day: '',
         food_brand: '',

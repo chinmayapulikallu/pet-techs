@@ -274,6 +274,7 @@ class ClientRegPage1 extends Component {
           {/* //--------------------------------------------------------- */}
           <DragDrop
             uppy={this.uppy}
+            class="uppy-DragDrop--isDragDropSupported"
 
           />
 

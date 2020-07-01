@@ -52,10 +52,11 @@ class ClientServiceRequest extends Component {
 
     state = {
         ...this.props.clientRequest,
+        vet_id: this.props.vetProfile.user_id
     };
 
     componentDidMount() {
-        console.log("clientservicerequest mount :: ", this.props)
+        console.log("clientservicerequest mount :: ", this.state)
     }
 
     handleDateChange = (event, property) => {
@@ -217,12 +218,22 @@ class ClientServiceRequest extends Component {
     }
 }
 
-const mapStateToProps = (reduxState) => ({
-    clientRequest: {
+
+const mapStateToProps = (reduxState, ownProps) => {
+  const vetId = Number(ownProps.match.params.id);
+  const vetProfile = reduxState.vtInfo.filter(
+    (vet) => vet.user_id === vetId
+  )[0];
+
+  return {
+    vetProfile,
+    user: reduxState.user,
+
+     clientRequest: {
         start_date_time: new Date(),
         end_date_time: new Date(),
         service_select: '',
-        input_info: '',
+        input_ino: '',
         add_info: '',
         pet_id: [],
         // pet2: false,
@@ -230,8 +241,10 @@ const mapStateToProps = (reduxState) => ({
 
     },
     petInfo: reduxState.petInfo,
-    vtInfo: reduxState.vtInfo,
-});
+  };
+};
+
+
 
 export default withRouter(
     connect(mapStateToProps)(withStyles(styles)(ClientServiceRequest))

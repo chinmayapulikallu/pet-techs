@@ -14,6 +14,7 @@ import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+const moment = require('moment');
 
 const useStyles = (theme) => ({
     root: {
@@ -51,6 +52,10 @@ const useStyles = (theme) => ({
     childCard: {
         width: 200,
         height: 320,
+        // width: 400,
+        // height: 300,
+        marginRight: 30,
+        marginBottom: 30,
     },
     petTitle: {
         textAlign: "center"
@@ -98,6 +103,7 @@ class ClientDashboard extends Component {
             type: 'GET_CLIENT_SERVICE_REQUEST'
             // payload: { id: currentId }
         })
+        this.props.dispatch({ type: "GET_ALL_VT_DATA" });
 
     }
 
@@ -114,6 +120,12 @@ class ClientDashboard extends Component {
             type: 'GET_PET_CARE_PLAN',
             payload: { id: petId }
         })
+    }
+
+    // redirect to vet tech profile
+    vetProfile = (vetId) => {
+        console.log("Dashboard to client:::::", vetId)
+        this.props.history.push(`/vt-profile/${vetId}`);
     }
 
     render() {
@@ -154,12 +166,12 @@ class ClientDashboard extends Component {
                                     </CardContent>
                                 </Card>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={6}>                          
                                 <Card className={classes.serviceList}>
                                     <CardContent>
-                                        {JSON.stringify(clientRequest)}
-                                        <Typography variant="h6">Scheduled Services</Typography>
-                                        <Card variant="outlined" className={classes.childCard}>
+                                        <Typography variant="h6">Pending Services</Typography>
+                                             {clientRequest.map(request =>
+                                            <Card variant="outlined" className={classes.childCard} key={request.id}>
                                             <CardHeader
                                                 avatar={
                                                     <Avatar aria-label="recipe" className={classes.avatar}>
@@ -170,7 +182,7 @@ class ClientDashboard extends Component {
                                                     <IconButton aria-label="settings">
                                                     </IconButton>
                                                 }
-                                                title="Vet Tech Name"
+                                                title={request.vet_name}
                                             />
                                             <CardMedia
                                                 component="img"
@@ -178,15 +190,18 @@ class ClientDashboard extends Component {
                                                 image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
                                             />
                                             <CardContent className="align-center">
-                                                <Typography variant="h6">Service Date</Typography>
+                                            <Typography variant="body1">{moment(request.start_date_time).format("MMM Do YYYY")}</Typography>
                                                 <Button color="primary" variant="contained"
-                                                    className={classes.buttonMargin} onClick={this.vtProfile}>VT Profile</Button>
+                                                    className={classes.buttonMargin} onClick={() => this.vetProfile(request.vet_id)}>VET Profile</Button>
                                             </CardContent>
                                             <CardActions>
-                                            </CardActions>
+                                            </CardActions>    
                                         </Card>
+                                         )} 
                                     </CardContent>
+                                    
                                 </Card>
+                               
                             </Grid>
                         </Grid>
                     </span>
@@ -222,7 +237,7 @@ class ClientDashboard extends Component {
 const putReduxStateOnProps = (reduxState) => ({
     clientInfo: reduxState.clientInfo,
     petInfo: reduxState.petInfo,
-    clientService: reduxState.clientRequest,
+    clientRequest: reduxState.clientRequestReducer,
 
     user: reduxState.user
 

@@ -151,7 +151,8 @@ class VTProfile extends Component {
   };
 
   handleServiceRequest = () => {
-    this.props.history.push("/client_service");
+    console.log("service user id:::::", this.props.vetProfile.user_id)
+    this.props.history.push(`/client_service/${this.props.vetProfile.user_id}`);
   };
 
   handleBack = () => {
@@ -160,7 +161,7 @@ class VTProfile extends Component {
 
   componentDidMount() {
     // this.props.dispatch({ type: "GET_VT_DATA" });
-    console.log(`HERE!!!!!`, this.props.vtInfo);
+    console.log(`HERE!!!!!`, this.props.vetProfile, this.state, this.ownProps);
   }
   render() {
     const { classes } = this.props;
@@ -822,6 +823,7 @@ class VTProfile extends Component {
 
 const mapStateToProps = (reduxState, ownProps) => {
   const vetId = Number(ownProps.match.params.id);
+  console.log("ownProps::::", ownProps)
   const vetProfile = reduxState.vtInfo.filter(
     (vet) => vet.user_id === vetId
   )[0];

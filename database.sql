@@ -146,7 +146,9 @@ CREATE TABLE client_request (
   start_date_time timestamp with time zone ,
   end_date_time timestamp with time zone,
   add_info text,
-  request_status int 
+  request_status int,
+  service_select text,
+  input_info text
 );
 
 ALTER TABLE client_request

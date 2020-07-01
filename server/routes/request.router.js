@@ -105,16 +105,18 @@ router.post("/", (req, res) => {
   //   });
 
     const petIds = req.body.pet_id;
-    const vet_id = req.user.id;
+    const vet_id = req.body.vet_id;
     const start_date_time = req.body.start_date_time;
     const end_date_time = req.body.end_date_time;
     const add_info = req.body.add_info;
+    const input_info = req.body.input_info;
+    const service_select = req.body.service_select;
   
     // log.info("post client_request :: ", pet_id)
     // const request_status = req.body.request_status;
   const queryText =
-    `INSERT INTO "client_request" ( pet_id, vet_id, start_date_time, end_date_time, add_info) 
-      VALUES ($1, $2, $3, $4, $5)`;
+    `INSERT INTO "client_request" ( pet_id, vet_id, start_date_time, end_date_time, add_info, input_info, service_select) 
+      VALUES ($1, $2, $3, $4, $5, $6, $7)`;
     petIds.map(async petId => {
       await pool
     .query(queryText, [
@@ -123,7 +125,8 @@ router.post("/", (req, res) => {
       start_date_time,
       end_date_time,
       add_info,
-      // request_status
+      input_info,
+      service_select
     ])
     .then(() => res.sendStatus(201))
 

@@ -14,9 +14,6 @@ import Container from "@material-ui/core/Container";
 
 const styles = theme => ({
   root: {
-    // flexGrow: 1,
-    // marginLeft: theme.spacing(45),
-    // marginRight: theme.spacing(45),
     marginTop: '100px',
   },
   title: {

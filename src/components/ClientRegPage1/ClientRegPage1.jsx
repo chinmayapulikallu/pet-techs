@@ -173,9 +173,10 @@ class ClientRegPage1 extends Component {
     this.reader.onloadend = () => {
       this.setState({
         text: {
-          profile_img: this.reader.result,
           ...this.state,
-        }
+
+        },
+        profile_img: this.reader.result,
       })
     }
     console.log('data from client reg page 1', this.state)

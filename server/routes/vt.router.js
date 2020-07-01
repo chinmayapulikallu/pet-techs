@@ -17,9 +17,7 @@ router.get("/", rejectUnauthenticated, (req, res) => {
     .then(response => {
       generateSignedUrls(res, response.rows);
      })
-    // .then((response) => {
-    //   res.send(response.rows);
-    // })
+   
     .catch((error) => {
       console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);

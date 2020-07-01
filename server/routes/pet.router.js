@@ -37,17 +37,12 @@ router.get("/:id", (req, res) => {
     res.sendStatus(500);
   });
 });
+
 // GET route for careplan - specific pet by ID
 router.get("/careplan/:id", (req, res) => {
   const sqlText = `SELECT * from pet where pet.id = $1; `;
   pool
     .query(sqlText, [req.params.id])
-    // .then((response) => {
-    //   console.log("pet careplan data:", response.rows[0]);
-    //   //Since we only need the first, and only row, we are setting the index to 0.
-    //   res.send(response.rows[0]);
-    // })
-
     .then((response) => {
       console.log("pet data:", response.rows);
     generateSignedUrls(res, response.rows);

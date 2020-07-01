@@ -47,7 +47,6 @@ const styles = theme => ({
         // backgroundColor: '#FFC2B4',
         backgroundColor: 'rgb(250, 250, 250)',
 
-
     },
     paper: {
         marginTop: 20,
@@ -93,10 +92,7 @@ class Pet extends Component {
     }
     handleCarePlanButton = () => {
         this.props.history.push(`/careplan/${this.props.pet.id}`);
-        this.props.dispatch({
-            type: 'GET_PET_CARE_PLAN',
-            payload: { id: this.props.pet.id }
-        })
+        
     }
     handlePictureChangeFor = (event) => {
         console.log('changing', event.target.files[0])

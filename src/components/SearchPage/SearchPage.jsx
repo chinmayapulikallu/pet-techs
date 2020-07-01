@@ -111,11 +111,11 @@ class SearchPage extends Component {
         })
     }
 
-    // viewProfileClick = (id) => {
-    //     console.log("CLICKED VIEW PROFILE", id)
-    //     this.props.dispatch({ type: "GET_SINGLE_VT_DATA", payload: id})
-    //     this.props.history.push(`/vt-profile`)
-    // }
+    viewProfileClick = (id) => {
+        console.log("CLICKED VIEW PROFILE", id)
+        this.props.dispatch({ type: "GET_SINGLE_VT_DATA", payload: id})
+        this.props.history.push(`/vt-profile`)
+    }
 
 
     

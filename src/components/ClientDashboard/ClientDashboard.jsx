@@ -88,6 +88,7 @@ class ClientDashboard extends Component {
 
     componentDidMount() {
         // const currentId = this.props.match.params.id;
+        console.log('-----> client dashboard :: ', this.props)
         this.props.dispatch({
             type: 'GET_CLIENT_DATA'
         })
@@ -132,7 +133,7 @@ class ClientDashboard extends Component {
         const { classes, user, clientInfo, petInfo, clientRequest } = this.props;
         return (
             <Container className={classes.root} maxWidth="md">
-                {clientInfo.map((client) =>
+                {clientInfo && clientInfo.length > 0 && clientInfo.map((client) =>
                     <span key={client.user_id}>
                         <Grid item xs={12} className={classes.profileCenter}>
                             <Card>
@@ -170,7 +171,7 @@ class ClientDashboard extends Component {
                                 <Card className={classes.serviceList}>
                                     <CardContent>
                                         <Typography variant="h6">Pending Services</Typography>
-                                             {clientRequest.map(request =>
+                                        {clientRequest && clientRequest.length > 0 && clientRequest.map(request =>
                                             <Card variant="outlined" className={classes.childCard} key={request.id}>
                                             <CardHeader
                                                 avatar={
@@ -210,7 +211,7 @@ class ClientDashboard extends Component {
                     <Typography variant="h6">Your Pets</Typography>
                 </div>
                 <Grid container>
-                 {petInfo.map(pet =>
+                    {petInfo && petInfo.length > 0 && petInfo.map(pet =>
                      <Grid item xs={6}>
                          <Card key={pet.id} className={classes.petCard}>
                    

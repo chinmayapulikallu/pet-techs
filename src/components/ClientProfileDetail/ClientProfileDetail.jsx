@@ -143,6 +143,8 @@ class ClientProfileDetail extends Component {
             open: false,
         });
     };
+    
+    //-----------------------------------
 
     uppy = Uppy({
         meta: { type: 'profilePicture' },
@@ -151,17 +153,7 @@ class ClientProfileDetail extends Component {
     })
     reader = new FileReader()
 
-    setImage = file => {
-        //reads the file into a local data url
-        this.reader.readAsDataURL(file);
-        //sets the file into state and opens the walkthrough
-        this.setState({
-            ...this.state,
-            file: file,
-        })
-    }
-    //-----------------------------------
-
+   
 
     componentDidMount() {
         const currentClient = this.props.clientInfo.find(client => client.user_id === parseInt(this.props.match.params.id))
@@ -194,14 +186,24 @@ class ClientProfileDetail extends Component {
             this.setImage(fileFromUppy);
         })
 
-        // this.reader.onloadend = () => {
-        //     this.setState({
-        //         profile_img: this.reader.result,
-        //         ...this.state,
-        //     })
-        // }
+        this.reader.onloadend = () => {
+            this.setState({
+                profile_img: this.reader.result,
+            })
+        }
         console.log('data from client profile', this.state)
     }
+
+    setImage = file => {
+        //reads the file into a local data url
+        this.reader.readAsDataURL(file);
+        //sets the file into state and opens the walkthrough
+        this.setState({
+            ...this.state,
+            file: file,
+        })
+    }
+
     //-----------------------------------
 
    
@@ -290,10 +292,11 @@ class ClientProfileDetail extends Component {
                                             <DialogTitle id="alert-dialog-title">{"Edit Your Profile Picture"}</DialogTitle>
                                             <DialogContent>
                                                 {/* <DialogContentText id="alert-dialog-description"> */}
+                                                
                                                 <DragDrop
                                                     uppy={this.uppy}
                                                 />
-                                                <img className={classes.img} src={this.state.profile_img} alt='profile_picture' height="50%" width="50%" />
+                                                <img src={this.state.profile_img} alt='profile_picture' height="50%" width="50%" />
 
                                                 {/* </DialogContentText> */}
 
@@ -358,7 +361,6 @@ class ClientProfileDetail extends Component {
                                         <Button variant="contained" color="primary" > <a href={`mailto:${this.props.user.user_email}`} target="_blank" className='link'> Contact {this.state.client_name}</a></Button>
                                     </>
                                 }
-
                             </Grid>
                             {this.props.isClient && (
                                 <Grid item xs={3} className={classes.editButton}>
@@ -533,4 +535,3 @@ const mapStateToProps = (reduxState) => ({
 
 
 export default withRouter(connect(mapStateToProps)(withStyles(styles, { withTheme: true })(ClientProfileDetail)));
-

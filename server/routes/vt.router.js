@@ -32,6 +32,9 @@ router.get("/profile/:id", rejectUnauthenticated, (req, res) => {
     .then((response) => {
       res.send(response.rows[0]);
     })
+    // .then(response => {
+    //   generateSignedUrls(res, response.rows);
+    //  })
     .catch((error) => {
       console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
@@ -42,9 +45,12 @@ router.get("/all", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    .then((response) => {
-      res.send(response.rows);
-    })
+    // .then((response) => {
+    //   res.send(response.rows);
+    // })
+    .then(response => {
+      generateSignedUrls(res, response.rows);
+     })
     .catch((error) => {
       console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
@@ -234,6 +240,11 @@ router.put("/", rejectUnauthenticated, (req, res) => {
       console.log(`Error updating vt by id request.`, error);
       res.sendStatus(500);
     });
+});
+
+router.put("/updateProfilePicture", upload.single("file"), (req, res) => {
+  uploadVTProfile(req, res);
+  console.log("-----> VT data from put route",req.user.id);
 });
 
 module.exports = router;

@@ -121,9 +121,30 @@ class Pet extends Component {
                         <tbody >
                             <tr className="table_body">
                                 <td className={classes.contentInTable}>
-                                    {this.state.editPicture ?
+                                    {/* <p>{JSON.stringify(this.props.editable)}</p> */}
+                                    {this.props.editable ?
                                         <>
-                                            <button onClick={this.handleEditPicture}>Edit</button>
+                                            {this.state.editPicture ?
+                                                <>
+                                                    <button onClick={this.handleEditPicture}>Edit</button>
+                                                    {this.props.pet.profile_img === 'images/blank-profile-picture.png' ?
+                                                        <>
+                                                            <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                                        </>
+                                                        :
+                                                        <img className={classes.img} src={this.props.pet.profile_img} alt={this.props.pet.profile_img} height="150" width="150" />
+                                                    }
+
+                                                </>
+                                                :
+                                                <>
+                                                    <input type="file" onChange={this.handlePictureChangeFor} />
+                                                    <button onClick={this.handleEditPicture}>Save</button>
+                                                </>
+                                            }
+                                        </>
+                                        :
+                                        <>
                                             {this.props.pet.profile_img === 'images/blank-profile-picture.png' ?
                                                 <>
                                                     <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
@@ -131,14 +152,9 @@ class Pet extends Component {
                                                 :
                                                 <img className={classes.img} src={this.props.pet.profile_img} alt={this.props.pet.profile_img} height="150" width="150" />
                                             }
-
-                                        </>
-                                        :
-                                        <>
-                                            <input type="file" onChange={this.handlePictureChangeFor} />
-                                            <button onClick={this.handleEditPicture}>Save</button>
                                         </>
                                     }
+
 
                                     {/* <input type="file" onChange={this.handlePictureChangeFor} />
                                     {this.props.pet.profile_img === 'images/blank-profile-picture.png' ?

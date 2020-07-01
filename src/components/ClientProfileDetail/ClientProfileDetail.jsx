@@ -229,7 +229,6 @@ class ClientProfileDetail extends Component {
     setImage = file => {
         //reads the file into a local data url
         this.reader.readAsDataURL(file);
-        //sets the file into state and opens the walkthrough
         this.setState({
             ...this.state,
             file: file,
@@ -288,17 +287,6 @@ class ClientProfileDetail extends Component {
         return (
             <div className={classes.root} >
                 {/* <h1>{JSON.stringify(this.props.clientInfo)}</h1> */}
-
-                {/* <Button
-                        variant="contained"
-                        component="label"
-                    >
-                        Upload pet's picture
-                        <input
-                            type="file"
-                            style={{ display: "none" }}
-                        />
-                    </Button> */}
                 <div className={classes.title}>
                     <div className={classes.userBasicInfo}>
                         <Grid container spacing={1}>
@@ -309,10 +297,10 @@ class ClientProfileDetail extends Component {
                                         <button onClick={this.handleClickOpen}>Edit</button>
                                         {this.props.client.profile_img === 'images/blank-profile-picture.png' ?
                                             <>
-                                                <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                                <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="200" width="200" />
                                             </>
                                             :
-                                            <img className={classes.img} src={this.props.client.profile_img} alt={this.props.client.profile_img} height="150" width="150" />
+                                            <img className={classes.img} src={this.props.client.profile_img} alt={this.props.client.profile_img} height="200" width="200" />
                                         }
 
                                         <Dialog
@@ -328,7 +316,7 @@ class ClientProfileDetail extends Component {
                                                 <DragDrop
                                                     uppy={this.uppy}
                                                 />
-                                                <img src={this.state.profile_img} alt='profile_picture' height="50%" width="50%" />
+                                                <img src={this.state.profile_img} alt='profile_picture' height="100%" width="100%" />
 
                                                 {/* </DialogContentText> */}
 
@@ -348,10 +336,10 @@ class ClientProfileDetail extends Component {
                                     <>
                                         {this.props.client.profile_img === 'images/blank-profile-picture.png' ?
                                             <>
-                                                <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                                <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="200" width="200" />
                                             </>
                                             :
-                                            <img className={classes.img} src={this.props.client.profile_img} alt={this.props.client.profile_img} height="150" width="150" />
+                                            <img className={classes.img} src={this.props.client.profile_img} alt={this.props.client.profile_img} height="200" width="200" />
                                         }
                                     </>
                                 }
@@ -461,6 +449,7 @@ class ClientProfileDetail extends Component {
                                 <Grid container spacing={3}>
                                     <Pet
                                         pet={pet}
+                                        editable = {this.state.editable}
                                     />
                                 </Grid>
 

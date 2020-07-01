@@ -68,7 +68,7 @@ router.post("/", upload.single("file"), (req, res) => {
 
 router.put("/updateProfilePicture", upload.single("file"), (req, res) => {
   uploadClientProfile(req, res);
-  console.log("client data from post route",  req.user.id);
+  console.log("client data from put route",  req.user.id);
 });
 
 module.exports = router;

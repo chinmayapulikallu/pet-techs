@@ -15,7 +15,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { FormControl } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
+import vtInfo from "../../redux/reducers/vetTechReducer";
 
 const PROFILE_IMG_HEIGHT = 225;
 
@@ -95,13 +96,13 @@ const styles = (theme) => ({
     marginRight: 10,
   },
   botBtn: {
-    marginTop: 25
-  }
+    marginTop: 25,
+  },
 });
 
 class VTProfile extends Component {
   state = {
-    ...this.props.vtInfo,
+    ...this.props.vetProfile,
     editable: false,
   };
 
@@ -113,9 +114,9 @@ class VTProfile extends Component {
     this.props.dispatch({
       type: "UPDATE_VT_DATA",
       payload: {
-        ...this.state
-      }
-    })
+        ...this.state,
+      },
+    });
   };
 
   handleChange = (property) => (event) => {
@@ -144,16 +145,14 @@ class VTProfile extends Component {
   };
 
   handleRadio = (event, property) => {
-   this.setState({
-        [property]: event.target.value === "true",
-  })
-};
-
+    this.setState({
+      [property]: event.target.value === "true",
+    });
+  };
 
   handleServiceRequest = () => {
-    this.props.history.push('/client_service')
-  }
-
+    this.props.history.push("/client_service");
+  };
 
   handleBack = () => {
     console.log(this.props.vtInfo);
@@ -803,7 +802,11 @@ class VTProfile extends Component {
                 <Grid item xs={12} sm={5}></Grid>
                 <Grid item xs={12} sm={7}>
                   <div className={classes.botBtn}>
-                    <Button variant="contained" color="primary" onClick={this.handleBack}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={this.handleBack}
+                    >
                       Back to DashBoard
                     </Button>
                   </div>
@@ -817,10 +820,19 @@ class VTProfile extends Component {
   }
 }
 
-const mapStateToProps = (reduxState) => ({
-  vtInfo: reduxState.vtInfo,
-  user: reduxState.user,
-  isVetTech: reduxState.user.user_type === 1,
-});
+const mapStateToProps = (reduxState, ownProps) => {
+  const vetId = Number(ownProps.match.params.id);
+  const vetProfile = reduxState.vtInfo.filter(
+    (vet) => vet.user_id === vetId
+  )[0];
 
-export default withRouter(connect(mapStateToProps)(withStyles(styles)(VTProfile)));
+  return {
+    vetProfile,
+    user: reduxState.user,
+    isVetTech: reduxState.user.user_type === 1,
+  };
+};
+
+export default withRouter(
+  connect(mapStateToProps)(withStyles(styles)(VTProfile))
+);

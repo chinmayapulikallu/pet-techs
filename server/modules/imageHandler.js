@@ -40,8 +40,8 @@ const generateSignedUrls = async (res, rows) => {
 const addSignedUrls = async rows => {
     const newRows = [];
     for (const row of rows) {
-        const media_url = await generateSignedUrl(row.profile_img);
-        row.media_url = media_url;
+        const profile_img = await generateSignedUrl(row.profile_img);
+        row.profile_img = profile_img;
         newRows.push(row);
     }
     return new Promise(resolve => {

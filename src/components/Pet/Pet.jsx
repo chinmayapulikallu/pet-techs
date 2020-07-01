@@ -129,7 +129,7 @@ class Pet extends Component {
                                                     <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
                                                 </>
                                                 :
-                                                <img className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img} height="150" width="150" />
+                                                <img className={classes.img} src={this.props.pet.profile_img} alt={this.props.pet.profile_img} height="150" width="150" />
                                             }
 
                                         </>
@@ -146,7 +146,7 @@ class Pet extends Component {
                                             <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
                                         </>
                                         :
-                                        <img className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img} height="150" width="150" />
+                                        <img className={classes.img} src={this.props.pet.profile_img} alt={this.props.pet.profile_img} height="150" width="150" />
                                     }
                                     <button onClick={this.handleEditPicture}>Save</button> */}
 

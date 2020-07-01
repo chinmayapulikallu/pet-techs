@@ -312,7 +312,7 @@ class ClientProfileDetail extends Component {
                                                 <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
                                             </>
                                             :
-                                            <img className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} height="150" width="150" />
+                                            <img className={classes.img} src={this.props.client.profile_img} alt={this.props.client.profile_img} height="150" width="150" />
                                         }
 
                                         <Dialog
@@ -351,7 +351,7 @@ class ClientProfileDetail extends Component {
                                                 <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
                                             </>
                                             :
-                                            <img className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} height="150" width="150" />
+                                            <img className={classes.img} src={this.props.client.profile_img} alt={this.props.client.profile_img} height="150" width="150" />
                                         }
                                     </>
                                 }

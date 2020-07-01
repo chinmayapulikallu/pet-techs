@@ -127,14 +127,14 @@ class ClientDashboard extends Component {
                                     <div>
                                         <Typography variant="h6"><b>{client.client_name}</b></Typography>
                                         {/* <img className={classes.profileImage} src="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png" alt="name" height="75" width="75" />      */}
-                                        {/* <img className={classes.img} src={client.media_url} alt={client.profile_img} height="150" width="150" /> */}
+                                        {/* <img className={classes.img} src={client.profile_img} alt={client.profile_img} height="150" width="150" /> */}
 
                                         {client.profile_img === 'images/blank-profile-picture.png' ?
                                             <>
                                                 <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
                                             </>
                                             :
-                                            <img className={classes.img} src={client.media_url} alt={client.profile_img} height="150" width="150" />
+                                            <img className={classes.img} src={client.profile_img} alt={client.profile_img} height="150" width="150" />
                                         }
                                     </div>
                                 </CardContent>
@@ -202,7 +202,7 @@ class ClientDashboard extends Component {
                             <CardMedia
                                 component="img"
                                 className={classes.media}
-                                image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
+                                image={pet.profile_img}
                             />
                             <CardContent>
                                 <Button color="primary" variant="contained"

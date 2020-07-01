@@ -222,7 +222,7 @@ class VTProfile extends Component {
               <div className={classes.profilePicContainer}>
                 <img
                   className={classes.profilePic}
-                  src={this.state.media_url}
+                  src={this.state.profile_img}
                   alt="Profile"
                 />
               </div>

@@ -1,26 +1,32 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
+import React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
 // and then instead of `props.user.username` you could use `user.username`
-const UserPage = (props) => (
-  <div>
-    <h1 id="welcome">
-      Welcome, { props.user.username }!
-    </h1>
-    <p>Your ID is: {props.user.id}</p>
-    <LogOutButton className="log-in" />
-  </div>
-);
+const UserPage = (props) => {
+  // navigate user to correct homepage based on type
+  if (props.user) {
+    switch (props.user.user_type) {
+      case 0:
+        props.history.push(`/clientdashboard`);
+        break;
+      case 1:
+        props.history.push(`/vtdashboard`);
+        break;
+    }
+  }
+
+  return <></>;
+};
 
 // Instead of taking everything from state, we just want the user info.
 // if you wanted you could write this code like this:
 // const mapStateToProps = ({user}) => ({ user });
-const mapStateToProps = reduxState => ({
+const mapStateToProps = (reduxState) => ({
   user: reduxState.user,
 });
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(UserPage);
+export default withRouter(connect(mapStateToProps)(UserPage));

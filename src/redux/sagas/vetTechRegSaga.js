@@ -2,42 +2,41 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* vetTechRegSaga() {
-    yield takeLatest('ADD_VT', addVetTech);
-    yield takeLatest('ADD_VT_INFO_PAGE_3', addVetTechPage3);
+    yield takeLatest('VT_REGISTER', addVetTech);
 
 }
 
-
-// worker Saga: will be fired on "ADD_VT_INFO_PAGE_3" actions
-function* addVetTechPage3(action) {
-    try {
-        // yield axios.post('/api/vt', action.payload);
-        yield put({
-            type: 'SET_VT_DATA',
-            payload: action.payload,
-        });
-        console.log('-----> receip this data from client', action.payload)
-    } catch (error) {
-        console.log('Error with add info of reg vet tech page 3:', error);
-    }
-}
-
-
-// worker Saga: will be fired on "ADD_VT" actions
+// worker Saga: will be fired on "VT_REGISTER" actions
 function* addVetTech(action) {
     try {
-        // yield axios.post('/api/vt', action.payload);
+        const data = new FormData();
+        data.append('file', action.payload.file)
+
+        for (const [key, value] of Object.entries(action.payload.text)) {
+            data.append(key, value);
+        }
+        console.log('----------->data', action.payload.file);
+        console.log('----------->formdata', action.payload.file.type);
+        console.log('send this client data to server', action.payload);
+
+
+        let response = yield axios.post(`/api/vt`, data, action.payload, {
+            headers: {
+                'accept': 'application/json',
+                'Accept-Language': 'en-US,en;q=0.8',
+                'Content-Type': action.payload.file.type,
+            }
+        });
+        
         yield put({
             type: 'SET_VT_DATA',
-            payload: action.payload,
+            // payload: action.payload,
         });
-        console.log('-----> receip this data from client', action.payload)
 
     } catch (error) {
         console.log('Error with add vet tech:', error);
     }
 }
-
 
 
 export default vetTechRegSaga;

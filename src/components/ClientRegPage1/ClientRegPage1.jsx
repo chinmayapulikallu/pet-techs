@@ -10,6 +10,10 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 // import { withRouter } from 'react-router-dom';
+import Uppy from '@uppy/core';
+import DragDrop from '@uppy/react/lib/DragDrop';
+import '@uppy/core/dist/style.css'
+import '@uppy/drag-drop/dist/style.css'
 
 const styles = {
   root: {
@@ -65,13 +69,42 @@ const styles = {
   subTitle: {
     marginTop: 10,
     marginBottom: 40
-  }
+  },
+  img: {
+    borderRadius: '50%',
+  },
 };
 
 class ClientRegPage1 extends Component {
   state = {
-    ...this.props.clientInfo,
+    file: this.props.clientInfo.file,
+    ...this.props.clientInfo.text,
+
   };
+
+  //autofill form
+  autoFillForm = () => {
+    this.setState({
+      // text: {
+      client_name: "Sam",
+      home_address_house: "8901 Portland Ave",
+      apt_suite: "",
+      city: "Bloomington",
+      state: "MN",
+      zip_code: "55420",
+      about_client: "Loves Dogs and cats",
+      about_home: "Single family home",
+      about_equipment: "toys",
+      contact_name_1: "Sam",
+      contact_phone_1: "9999999",
+      contact_email_1: "sam@in",
+      vet_clinic: "Pet clinic",
+      clinic_address: "60 E Broadway",
+      clinic_phone: "88989",
+      transport: false,
+      // }
+    })
+  }
 
   handleChange = (event, property) => {
     console.log("in handleChange", event.target.value, property);
@@ -92,21 +125,84 @@ class ClientRegPage1 extends Component {
 
   handleNext = () => {
     this.props.dispatch({
-      type: "SET_CLIENT",
-      payload: { ...this.state },
+      type: "SET_CLIENT_DATA",
+      payload: {
+        file: this.state.file,
+        // text: this.state.text,
+        text: {
+          client_name: this.state.client_name,
+          home_address_house: this.state.home_address_house,
+          apt_suite: this.state.apt_suite,
+          city: this.state.city,
+          state: this.state.state,
+          zip_code: this.state.zip_code,
+          profile_img: this.state.profile_img,
+          about_client: this.state.about_client,
+          about_home: this.state.about_home,
+          about_equipment: this.state.about_equipment,
+          contact_name_1: this.state.contact_name_1,
+          contact_phone_1: this.state.contact_phone_1,
+          contact_email_1: this.state.contact_email_1,
+          vet_clinic: this.state.vet_clinic,
+          clinic_address: this.state.clinic_address,
+          clinic_phone: this.state.clinic_phone,
+          transport: this.state.transport,
+        }
+
+      },
     });
     this.props.onNext();
   };
+  //-----------------------------------
 
-  // handleBack = () => {
-  //   this.props.history.push("/register");
-  // };
+  uppy = Uppy({
+    meta: { type: 'profilePicture' },
+    restrictions: { maxNumberOfFiles: 1 },
+    autoProceed: true
+  })
+
+  reader = new FileReader()
+
+  componentDidMount = () => {
+    this.uppy.on('upload', file => {
+      let fileKey = Object.keys(this.uppy.state.files)[0];
+      let fileFromUppy = this.uppy.state.files[fileKey].data;
+      this.setImage(fileFromUppy);
+    })
+
+    this.reader.onloadend = () => {
+      this.setState({
+        text: {
+          ...this.state,
+
+        },
+        profile_img: this.reader.result,
+      })
+    }
+    console.log('data from client reg page 1', this.state)
+
+  }
+
+  setImage = file => {
+    //reads the file into a local data url
+    this.reader.readAsDataURL(file);
+    this.setState({
+      ...this.state,
+      file: file,
+    })
+  }
+
+
+  //-----------------------------------
+
+
   render() {
-    const { classes } = this.props;
+    const { classes, user } = this.props;
     return (
       <Container className={classes.root} maxWidth="sm">
         <Typography variant="h4" className={classes.title}>
-          Hi NAME! Let's set up your profile
+          Hi {user.username}! Let's set up your profile
+          <Button onClick={this.autoFillForm}></Button>
         </Typography>
         <Typography variant="subtitle1" className={classes.subTitle}>
           This information will be displayed on your profile
@@ -114,18 +210,26 @@ class ClientRegPage1 extends Component {
         <img src="/images/house-icon.png" alt="House" height="70" />
         <div className={classes.inputs}>
           <TextField
-            id="outlined-basic"
+            label={"Name"}
+            fullWidth
+            color="secondary"
+            variant="outlined"
+            value={this.state.client_name}
+            onChange={(event) => this.handleChange(event, "client_name")}
+          />
+        </div>
+        <div className={classes.inputs}>
+          <TextField
             label={"Home Address"}
             fullWidth
             color="secondary"
             variant="outlined"
-            value={this.state.home_adress_house}
+            value={this.state.home_address_house}
             onChange={(event) => this.handleChange(event, "home_address_house")}
           />
         </div>
         <div className={classes.inputs}>
           <TextField
-            id="outlined-basic"
             label={"Apartment or Suite #"}
             fullWidth
             color="secondary"
@@ -136,7 +240,6 @@ class ClientRegPage1 extends Component {
         </div>
         <div className={classes.inputs}>
           <TextField
-            id="outlined-basic"
             label={"City"}
             variant="outlined"
             value={this.state.city}
@@ -145,7 +248,6 @@ class ClientRegPage1 extends Component {
             className={classes.city}
           />
           <TextField
-            id="outlined-basic"
             label={"State"}
             variant="outlined"
             value={this.state.state}
@@ -154,7 +256,6 @@ class ClientRegPage1 extends Component {
             className={classes.flex}
           />
           <TextField
-            id="outlined-basic"
             label={"Zipcode"}
             variant="outlined"
             color="secondary"
@@ -166,14 +267,21 @@ class ClientRegPage1 extends Component {
           <Typography variant="h6" className={classes.section}>
             You look purr-fect! Let's add a photo for your profile!
           </Typography>
-          <Button
-            className={classes.btn}
-            onClick={this.handleUploadPhoto}
-            variant="contained"
-            color="primary"
-          >
-            Select Photo to Upload
-          </Button>
+
+
+
+
+          {/* //--------------------------------------------------------- */}
+          <DragDrop
+            uppy={this.uppy}
+
+          />
+
+          {/* //--------------------------------------------------------- */}
+
+          <img className={classes.img} src={this.state.profile_img} alt="profilePictureUrl" width="50%" height="50%" />
+
+
         </div>
         <div>
           <Typography variant="subtitle1" className={classes.labels}>
@@ -190,6 +298,22 @@ class ClientRegPage1 extends Component {
             multiline
             rows={5}
             onChange={(event) => this.handleChange(event, "about_client")}
+          />
+        </div>
+        <div>
+          <Typography variant="subtitle1" className={classes.labels}>
+            Describe a bit about your pet toys for providers
+            to get a sense of what equipment your pet uses.
+          </Typography>
+          <TextField
+            value={this.state.about_equipment}
+            variant="outlined"
+            className={classes.inputs}
+            fullWidth
+            color="secondary"
+            multiline
+            rows={5}
+            onChange={(event) => this.handleChange(event, "about_equipment")}
           />
         </div>
         <div>
@@ -224,7 +348,6 @@ class ClientRegPage1 extends Component {
         </Typography>
         <div className={classes.inputs}>
           <TextField
-            id="outlined-basic"
             fullWidth
             label={"Emergency Contact Name"}
             color="secondary"
@@ -235,7 +358,6 @@ class ClientRegPage1 extends Component {
         </div>
         <div className={classes.inputs}>
           <TextField
-            id="outlined-basic"
             label={"Emergency Contact Phone"}
             variant="outlined"
             value={this.state.contact_phone_1}
@@ -244,7 +366,6 @@ class ClientRegPage1 extends Component {
             className={classes.em_phone}
           />
           <TextField
-            id="outlined-basic"
             label={"Emergency Contact Email"}
             variant="outlined"
             color="secondary"
@@ -264,7 +385,6 @@ class ClientRegPage1 extends Component {
         </Typography>
         <div className={classes.inputs}>
           <TextField
-            id="outlined-basic"
             label={"Vet Clinic Name"}
             variant="outlined"
             value={this.state.vet_clinic}
@@ -275,7 +395,6 @@ class ClientRegPage1 extends Component {
         </div>
         <div className={classes.inputs}>
           <TextField
-            id="outlined-basic"
             label={"Vet Clinic Phone"}
             variant="outlined"
             value={this.state.clinic_phone}
@@ -284,7 +403,6 @@ class ClientRegPage1 extends Component {
             className={classes.em_phone}
           />
           <TextField
-            id="outlined-basic"
             label={"Vet Clinic Address (street & city)"}
             variant="outlined"
             color="secondary"
@@ -332,23 +450,30 @@ class ClientRegPage1 extends Component {
   }
 }
 const mapStateToProps = (state) => ({
-  clientInfo: {
-    home_address_house: "",
-    apt_suite: "",
-    city: "",
-    state: "",
-    zip_code: "",
-    about_client: "",
-    about_home: "",
-    contact_name_1: "",
-    contact_phone_1: "",
-    contact_email_1: "",
-    vet_clinic: "",
-    clinic_address: "",
-    clinic_phone: "",
-    transport: false,
-    ...state.clientInfo,
-  },
+  // clientInfo: {
+  //   // client_name: "",
+  //   // // home_address_house: "",
+  //   // // apt_suite: "",
+  //   // // city: "",
+  //   // // state: "",
+  //   // // zip_code: "",
+  //   // // profile_img: "",
+  //   // // about_client: "",
+  //   // // about_home: "",
+  //   // // about_equipment: "",
+  //   // // contact_name_1: "",
+  //   // // contact_phone_1: "",
+  //   // // contact_email_1: "",
+  //   // // vet_clinic: "",
+  //   // // clinic_address: "",
+  //   // // clinic_phone: "",
+  //   // // transport: false,
+  //   // ...state.clientInfo,
+  // },
+  clientInfo: state.clientInfo,
+
+  user: state.user
+
 });
 
 export default connect(mapStateToProps)(

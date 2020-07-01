@@ -21,7 +21,7 @@ CREATE TABLE "user" (
 
 
 CREATE TABLE client (
-  id SERIAL PRIMARY KEY,
+  
   user_id INT NOT NULL
         REFERENCES "user" (id)
         ON DELETE CASCADE ,
@@ -31,9 +31,10 @@ CREATE TABLE client (
   city varchar (100) NOT NULL,
   state varchar (20) NOT NULL,
   zip_code int NOT NULL,
-  profile_img varchar (1000),
+  profile_img varchar (1000) DEFAULT 'images/blank-profile-picture.png',
   about_client text NOT NULL,
   about_home text NOT NULL,
+  about_equipment text NOT NULL,
   contact_name_1 varchar (80),
   contact_phone_1 varchar (20),
   contact_email_1 varchar (100),
@@ -44,7 +45,7 @@ CREATE TABLE client (
 );
 
 CREATE TABLE vet_tech (
-  id SERIAL PRIMARY KEY,
+  
   user_id INT NOT NULL
         REFERENCES "user" (id)
         ON DELETE CASCADE ,
@@ -64,7 +65,7 @@ CREATE TABLE vet_tech (
   cats boolean DEFAULT FALSE,
   other boolean DEFAULT FALSE,
 --  type_pet_provide varchar (50) NOT NULL,
-  vet_available boolean NOT NULL,
+  vet_available boolean DEFAULT FALSE,
   zero_two boolean DEFAULT FALSE,
   two_four boolean DEFAULT FALSE,
   four_eight boolean DEFAULT FALSE,
@@ -82,20 +83,20 @@ CREATE TABLE vet_tech (
   current_job_title text,
   expertise text,
   bioYourself text,
-  CPR_first_aid boolean DEFAULT FALSE NOT NULL ,
-  oral_medication boolean DEFAULT FALSE NOT NULL,
-  injectable_medication boolean DEFAULT FALSE NOT NULL,
-  exp_older_pet boolean DEFAULT FALSE NOT NULL,
-  exp_special_pet boolean DEFAULT FALSE NOT NULL,
-  daily_exercise boolean DEFAULT FALSE NOT NULL,
-  pet_longer_than_a_week boolean DEFAULT FALSE NOT NULL,
-  diabetic_insulin_care boolean DEFAULT FALSE NOT NULL
+  CPR_first_aid boolean DEFAULT FALSE  ,
+  oral_medication boolean DEFAULT FALSE ,
+  injectable_medication boolean DEFAULT FALSE ,
+  exp_older_pet boolean DEFAULT FALSE ,
+  exp_special_pet boolean DEFAULT FALSE  ,
+  daily_exercise boolean DEFAULT FALSE  ,
+  pet_longer_than_a_week boolean DEFAULT FALSE  ,
+  diabetic_insulin_care boolean DEFAULT FALSE  
 );
 
 CREATE TABLE pet (
   id SERIAL PRIMARY KEY,
-  client_id INT NOT NULL
-            REFERENCES client (id)
+  user_id INT NOT NULL
+            REFERENCES "user" (id)
             ON DELETE CASCADE ,
   pet_type varchar (50) NOT NULL,
   other_pet varchar (50) ,
@@ -104,8 +105,8 @@ CREATE TABLE pet (
   age int NOT NULL,
   sex varchar NOT NULL,
   breed varchar (50) NOT NULL,
-  pet_img varchar (1000),
   pet_bio varchar NOT NULL,
+  profile_img text DEFAULT 'images/blank-profile-picture.png',
   food_brand varchar (250) NOT NULL,
   feeding_per_day int NOT NULL,
   amount_per_meal varchar (100) NOT NULL,
@@ -120,9 +121,9 @@ CREATE TABLE medication (
   pet_id INT NOT NULL
          REFERENCES pet (id)
          ON DELETE CASCADE ,
-  medication_name varchar (500) NOT NULL,
-  dosage varchar (500) NOT NULL,
-  dosage_time time NOT NULL
+  medication_name varchar (500) ,
+  dosage varchar (500) ,
+  dosage_time timestamp with time zone
 );
 
 CREATE TABLE pet_picture (
@@ -130,6 +131,7 @@ CREATE TABLE pet_picture (
   pet_id INT NOT NULL
          REFERENCES pet (id)
          ON DELETE CASCADE ,
+  pet_profile_img varchar (1000),
   pet_img varchar (1000)
 );
 
@@ -139,11 +141,15 @@ CREATE TABLE client_request (
          REFERENCES pet (id)
          ON DELETE CASCADE ,
   vet_id INT NOT NULL
-         REFERENCES vet_tech (id)
+         REFERENCES "user" (id)
          ON DELETE CASCADE ,
-  start_date_time date,
-  end_date_time date,
+  start_date_time timestamp with time zone ,
+  end_date_time timestamp with time zone,
   add_info text,
   request_status int 
 );
+
+
+
+
 

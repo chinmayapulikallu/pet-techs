@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import TextField from "@material-ui/core/TextField"
-import FormControl from "@material-ui/core/FormControl"
+import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
 import { withStyles } from '@material-ui/core/styles';
-import { withRouter } from "react-router"
+import { withRouter } from "react-router";
 import { Typography } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid"
-import FormGroup from "@material-ui/core/FormGroup"
-import FormControlLabel from "@material-ui/core/FormControlLabel"
-import Radio from "@material-ui/core/Radio"
-import Button from "@material-ui/core/Button"
+import Grid from "@material-ui/core/Grid";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from "@material-ui/core/Radio";
+import Button from "@material-ui/core/Button";
+import RadioGroup from "@material-ui/core/RadioGroup";
 
 
 const styles = theme => ({
@@ -34,6 +34,10 @@ const styles = theme => ({
     width: 180,
     borderRadius: 12,
   },
+  radioAlignment: {
+        display: "block",
+        margin: "10px"
+  },
 })
 
 
@@ -51,7 +55,12 @@ class RegisterPage extends Component {
   registerUser = (event) => {
     event.preventDefault();
 
-    if (this.state.username && this.state.password) {
+    if (this.state.user_email
+          && this.state.username 
+          && this.state.phone_number 
+          && this.state.password 
+          && this.state.hear_about 
+          && this.state.user_type) {
       this.props.dispatch({
         type: "REGISTER",
         payload: {
@@ -63,15 +72,24 @@ class RegisterPage extends Component {
           user_type: this.state.user_type,
         },
       });
+      const redirectPage = this.state.user_type === '0' ? '/client-registration' : '/vet-tech-registration'
+      this.props.history.push(redirectPage)
     } else {
       this.props.dispatch({ type: "REGISTRATION_INPUT_ERROR" });
     }
   }; // end registerUser
 
-  handleInputChangeFor = (propertyName) => (event) => {
-    this.setState({
-      [propertyName]: event.target.value,
-    });
+  handleInputChangeFor = (property) => (event) => {
+    console.log("in handleChange", event.target.value, property);
+    if (event.target.value === "true" || event.target.value === "false") {
+      this.setState({
+        [property]: event.target.value === "true",
+      });
+    } else {
+      this.setState({
+        [property]: event.target.value,
+      });
+    }
   };
 
   render() {
@@ -88,7 +106,6 @@ class RegisterPage extends Component {
             <FormControl onSubmit={this.registerUser}>
               <Typography className={classes.title} variant="h3">Sign up with email!</Typography>
               <Typography className={classes.title} variant="h6">*All fields required</Typography>
-
               <div className={classes.boxes}>
                 <TextField id="outlined-basic"
                   label="Email"
@@ -144,7 +161,39 @@ class RegisterPage extends Component {
                 />
               </div>
 
-              <FormGroup row={true}>
+              <FormControl component="fieldset">
+                  <RadioGroup defaultValue="male" aria-label="gender" className={classes.radioAlignment}
+                            name="customized-radios" onChange={this.handleInputChangeFor("user_type")}>
+                                <FormControlLabel value="0" control={<Radio />} label="I want to sign up as a pet owner" />
+                                <FormControlLabel value="1" control={<Radio />} label="I want to sign up as a Vet Tech" />
+                  </RadioGroup>
+              </FormControl>
+
+             
+              <div>
+                <Button className={classes.button} type="submit" name="submit" value="Register" onClick={this.registerUser} variant="contained" color="primary" >Register</Button>
+              
+              </div>
+            </FormControl>
+          </Grid>
+        </div>
+       
+      </div>
+    );
+  }
+}
+
+// Instead of taking everything from state, we just want the error messages.
+// if you wanted you could write this code like this:
+// const mapStateToProps = ({errors}) => ({ errors });
+const mapStateToProps = (state) => ({
+  errors: state.errors,
+});
+
+// export default connect(mapStateToProps)(RegisterPage);
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(RegisterPage)));
+
+{/* <FormGroup row={true}>
                 <FormControlLabel
                   control={<Radio name="owner" />}
                   value="0"
@@ -161,8 +210,8 @@ class RegisterPage extends Component {
                   name="noAgeRadio"
                   label="I want to sign up as a Vet Tech"
                 />
-              </FormGroup>
-              {/* <div>
+              </FormGroup> */}
+{/* <div>
                 <input
                   type="radio"
                   id="client"
@@ -181,19 +230,15 @@ class RegisterPage extends Component {
                 />
                 <label>I want to sign up at a Vet Tech.</label>
               </div> */}
-              <div>
-                <Button className={classes.button} type="submit" name="submit" value="Register" onClick={this.registerUser} variant="contained" color="primary" >Register</Button>
-                {/* <input
+
+{/* <input
                   className="register"
                   type="submit"
                   name="submit"
                   value="Register"
                 /> */}
-              </div>
-            </FormControl>
-          </Grid>
-        </div>
-        {/* <br />
+
+{/* <br />
         <button
           type="button"
           className="link-button"
@@ -203,17 +248,3 @@ class RegisterPage extends Component {
         >
           Login
           </button> */}
-      </div>
-    );
-  }
-}
-
-// Instead of taking everything from state, we just want the error messages.
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({errors}) => ({ errors });
-const mapStateToProps = (state) => ({
-  errors: state.errors,
-});
-
-// export default connect(mapStateToProps)(RegisterPage);
-export default withRouter(connect(mapStateToProps)(withStyles(styles)(RegisterPage)));

@@ -17,6 +17,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Checkbox from "@material-ui/core/Checkbox"
 
 
+
 const styles = theme => ({
     root: {
         marginLeft: theme.spacing(20),
@@ -42,6 +43,9 @@ const styles = theme => ({
     services: {
         marginTop: 20
     },
+    formControl: {
+        width: 150
+    }
 })
 
 class ClientServiceRequest extends Component {
@@ -63,7 +67,6 @@ class ClientServiceRequest extends Component {
 
 
     handleDateChange = (event, property) => {
-        // console.log(event.target.value, "#######")
         this.setState({
             [property]: event,
         })
@@ -83,9 +86,9 @@ class ClientServiceRequest extends Component {
                 [property]: event.target.value === "true",
             });
         } else {
-            // console.log(event.target.value)
+            console.log(":::::",event.target.value)
             this.setState({
-                [property]: event.target.checked === true,
+                [property]: [...this.state.pet_id, event.target.value],
             });
         }
     };
@@ -96,7 +99,8 @@ class ClientServiceRequest extends Component {
 
     handleSendRequest = () => {
         console.log("Clicked Send Request", this.state)
-        // this.props.history.push("/path")
+        this.props.dispatch({type: 'SET_CLIENT_SERVICE_REQUEST', payload:this.state})
+        // this.props.history.push("/clientDashboard")
     }
 
 
@@ -117,11 +121,11 @@ class ClientServiceRequest extends Component {
                             <div>
                                 <Typography className={classes.services} variant="h6">Please select service:</Typography>
                                 <br />
-                                <FormControl variant="outlined">
+                                <FormControl variant="outlined" className={classes.formControl}>
                                     <InputLabel>Service:</InputLabel>
                                     <Select
                                         onChange={(event) => this.handleChange(event, "service_select")}
-                                        value={"Sleepover"}
+                                        value={this.props.service_select}
                                         color="secondary"
                                         label="Service"
                                     >
@@ -136,7 +140,15 @@ class ClientServiceRequest extends Component {
                                 <Typography className={classes.services} variant="h6">Please indicate which pet:</Typography>
                                 <FormControl>
                                     <FormGroup row={true}>
-                                        <FormControlLabel
+                                        {this.props.petInfo.map(pet => 
+                                            <FormControlLabel
+                                            control={<Checkbox name={pet.pet_name} />}
+                                            value={pet.id}
+                                            onChange={(event) => this.handleChecks(event, "pet_id")}
+                                            label={pet.pet_name}
+                                        />
+                                        )}
+                                        {/* <FormControlLabel
                                             control={<Checkbox name="pet1" />}
                                             //value={this.state.pet1}
                                             onChange={(event) => this.handleChecks(event, "pet1")}
@@ -153,7 +165,7 @@ class ClientServiceRequest extends Component {
                                             //value={this.state.pet2}
                                             onChange={(event) => this.handleChecks(event, "pet3")}
                                             label="pet3"
-                                        />
+                                        /> */}
                                     </FormGroup>
                                 </FormControl>
                             </div>
@@ -166,15 +178,15 @@ class ClientServiceRequest extends Component {
                                 <div>
                                     <Typography variant="subtitle1">Start Date</Typography>
                                     <DatePicker
-
-                                        selected={this.state.start_date}
-                                        onChange={(event) => this.handleDateChange(event, "start_date")}
+                                       
+                                        selected={this.state.start_date_time}
+                                        onChange={(event) => this.handleDateChange(event, "start_date_time")}
                                     />
                                     <Typography variant="subtitle1">End Date</Typography>
                                     <DatePicker
-
-                                        selected={this.state.end_date}
-                                        onChange={(event) => this.handleDateChange(event, "end_date")}
+                                       
+                                        selected={this.state.end_date_time}
+                                        onChange={(event) => this.handleDateChange(event, "end_date_time")}
                                     />
                                 </div>
                                 <div>
@@ -192,7 +204,7 @@ class ClientServiceRequest extends Component {
                                 </div>
                                 <div>
                                     <TextField className={classes.info}
-                                        onChange={(event) => this.handleChange(event, "addt_info")}
+                                        onChange={(event) => this.handleChange(event, "add_info")}
                                         fullWidth
                                         multiline
                                         type="text"
@@ -221,18 +233,19 @@ class ClientServiceRequest extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (reduxState) => ({
     clientRequest: {
-        start_date: new Date(),
-        end_date: new Date(),
+        start_date_time: new Date(),
+        end_date_time: new Date(),
         service_select: '',
         input_info: '',
-        addt_info: '',
-        pet1: false,
-        pet2: false,
-        pet3: false
+        add_info: '',
+        pet_id: [],
+        // pet2: false,
+        // pet3: false
 
-    }
+    },
+    petInfo: reduxState.petInfo
 });
 
 export default withRouter(

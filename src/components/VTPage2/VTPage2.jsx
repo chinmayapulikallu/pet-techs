@@ -36,8 +36,10 @@ const styles = (theme) => ({
 });
 
 class VTPage2 extends Component {
+    
   state = {
-    ...this.props.vtInfo2,
+    ...this.props.vtInfoPage2,
+
   };
 
   //THIS WILL HANDLE ALL THE INPUTS FROM THE VET TECH PREFERENCES
@@ -64,11 +66,13 @@ class VTPage2 extends Component {
   //AND DISPATCH THE STATE
   handleContClick = () => {
     console.log("CLICKED CONTINUE", this.state);
-    // this.props.dispatch({
-    //     type: '' ,
-    //     payload: this.state.vtInfo2
-    // })
+    this.props.dispatch({
+      type: 'SET_VT_DATA_PAGE_2',
+      payload: { ...this.state },
+    })
     this.props.onNext();
+    console.log('Vet reg data page 2:', this.state)
+
   };
 
   handleInputChange = (event, property)=>{
@@ -87,6 +91,8 @@ class VTPage2 extends Component {
 
   render() {
     const { classes } = this.props;
+    console.log('----page 2-------->', this.props.vtInfoPage2)
+
     return (
       <div className={classes.root}>
         <div className={classes.title}>
@@ -298,7 +304,7 @@ class VTPage2 extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  vtInfo2: {
+  vtInfoPage2: {
     dogs: false,
     cats: false,
     other: false,
@@ -314,7 +320,8 @@ const mapStateToProps = (state) => ({
     pet_younger_than_one: false,
     pet_more_than_one_family: false,
     equipment_list: "",
-    ...state.vtInfo,
+    
+    ...state.vtInfoPage2,
   },
   errors: state.errors,
 });

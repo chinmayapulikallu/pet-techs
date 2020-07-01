@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
+
+import { withStyles } from '@material-ui/core/styles';
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import Table from "@material-ui/core/Table";
@@ -10,13 +13,22 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableContainer from "@material-ui/core/TableContainer";
 
+const styles = theme => ({
+  img: {
+    borderRadius: '50%',
+    // position: 'absolute',
+    top: 170,
+    left: 100,
+  },
+})
+
 class VTDashboard extends Component {
   componentDidMount = () => {
     // get dashboard info for Vet Tech, get request
-    const currentId = this.props.match.params.id
+    // const currentId = this.props.match.params.id
     this.props.dispatch({
-        type: "GET_VT_DATA",
-        payload: currentId,
+      type: "GET_VT_DATA",
+      // payload: currentId,
     })
     console.log('component mounted', this.props.match.params.id)
   };
@@ -37,74 +49,85 @@ class VTDashboard extends Component {
     this.props.history.push("/careplan");
   };
   render() {
+    const { classes } = this.props;
+
     return (
       <div>
-        <Container>
-          <h1>Photo will go here</h1>
-          <h1>Photo will go here</h1>
-          <h2>Pending Requests</h2>
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Date</TableCell>
-                  <TableCell>Client Name</TableCell>
-                  <TableCell>Details</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Date</TableCell>
-                  <TableCell>Client Name</TableCell>
-                  <TableCell>
-                    <Button
-                      size="small"
-                      variant="contained"
-                      // will need to add a value, (id) for event to capture.
-                      onClick={this.detailsButton}
-                    >
-                      Details
+        {JSON.stringify(this.props.vtInfo)}
+        {this.props.vtInfo.map((vt) => {
+          return (
+            <div key={vt.id}>
+
+              <Container>
+                <img className={classes.img} src={vt.profile_img} alt={vt.profile_img} height="150" width="150" />
+                <h1>Photo will go here</h1>
+                <h2>Pending Requests</h2>
+                <TableContainer component={Paper}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Name</TableCell>
+
+                        <TableCell>Date</TableCell>
+                        <TableCell>Client Name</TableCell>
+                        <TableCell>Details</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell>Name</TableCell>
+                        <TableCell>Date</TableCell>
+                        <TableCell>Client Name</TableCell>
+                        <TableCell>
+                          <Button
+                            size="small"
+                            variant="contained"
+                            // will need to add a value, (id) for event to capture.
+                            onClick={this.detailsButton}
+                          >
+                            Details
                     </Button>
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Container>
-        <Container>
-          <h2>Upcoming Commitments</h2>
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Pet Name</TableCell>
-                  <TableCell>Date</TableCell>
-                  <TableCell>Species Name</TableCell>
-                  <TableCell>Action</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Date</TableCell>
-                  <TableCell>Species</TableCell>
-                  <TableCell>
-                    <Button
-                      size="small"
-                      variant="contained"
-                      // will need to add a value, (id) for event to capture.
-                      onClick={this.viewButton}
-                    >
-                      View
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Container>
+              <Container>
+                <h2>Upcoming Commitments</h2>
+                <TableContainer component={Paper}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Pet Name</TableCell>
+                        <TableCell>Date</TableCell>
+                        <TableCell>Species Name</TableCell>
+                        <TableCell>Action</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell>Name</TableCell>
+                        <TableCell>Date</TableCell>
+                        <TableCell>Species</TableCell>
+                        <TableCell>
+                          <Button
+                            size="small"
+                            variant="contained"
+                            // will need to add a value, (id) for event to capture.
+                            onClick={this.viewButton}
+                          >
+                            View
                     </Button>
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Container>
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Container>
+            </div>
+          )
+        })}
       </div>
     );
   }
@@ -116,4 +139,5 @@ const mapStateToProps = (state) => ({
 
 });
 
-export default connect(mapStateToProps)(VTDashboard);
+// export default connect(mapStateToProps)(VTDashboard);
+export default withRouter(connect(mapStateToProps)(withStyles(styles, { withTheme: true })(VTDashboard)));

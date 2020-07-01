@@ -5,6 +5,14 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Container from "@material-ui/core/Container";
+import Paper from "@material-ui/core/Paper";
+import { Typography } from "@material-ui/core";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 import { withRouter } from 'react-router-dom';
 import '../ClientProfile/ClientProfile.css';
@@ -33,17 +41,25 @@ const styles = theme => ({
     },
     contentInTable: {
         padding: '0px 10px',
+    },
+    table: {
+        width: "100%",
+        // backgroundColor: '#FFC2B4',
+        backgroundColor: 'rgb(250, 250, 250)',
+
+
+    },
+    paper: {
+        marginTop: 20,
+        borderRadius: "5px",
+        // width: "75%",
+        border: "2px solid #195C60",
+    },
+    bgImg: {
+        backgroundColor: '#faefec',
     }
 
-    // block:{
-    //     display: 'block',
-    //     border: '2px solid #195C60',
-    //     borderRadius: '10px',
-    //     // border-collapse: collapse;
-    //     // text-align: left;
-    //     // padding-left: 5px;
-    //     overflowWrap: 'break-word'   
-    //  }
+
 });
 
 const ColorButton = withStyles((theme) => ({
@@ -117,68 +133,51 @@ class Pet extends Component {
             <div className={classes.root} >
 
                 <Grid item xs={6} className={classes.items}>
-                    <table className="pet_table" width="100%" height="150px">
-                        <tbody >
-                            <tr className="table_body">
-                                <td className={classes.contentInTable}>
-                                    {/* <p>{JSON.stringify(this.props.editable)}</p> */}
-                                    {this.props.editable ?
-                                        <>
-                                            {this.state.editPicture ?
-                                                <>
-                                                    <button onClick={this.handleEditPicture}>Edit</button>
-                                                    {this.props.pet.profile_img === 'images/blank-profile-picture.png' ?
-                                                        <>
-                                                            <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
-                                                        </>
-                                                        :
-                                                        <img className={classes.img} src={this.props.pet.profile_img} alt={this.props.pet.profile_img} height="150" width="150" />
-                                                    }
+                    <TableContainer component={Paper} className={classes.paper}>
+                        <Table className={classes.table} aria-label="simple table">
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell scope="row" className={classes.bgImg}>
+                                        {this.props.editable ?
+                                            <>
+                                                {this.state.editPicture ?
+                                                    <>
+                                                        <button onClick={this.handleEditPicture}>Edit</button>
+                                                        {this.props.pet.profile_img === 'images/blank-profile-picture.png' ?
+                                                            <>
+                                                                <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                                            </>
+                                                            :
+                                                            <img className={classes.img} src={this.props.pet.profile_img} alt={this.props.pet.profile_img} height="150" width="150" />
+                                                        }
+                                                    </>
+                                                    :
+                                                    <>
+                                                        <input type="file" onChange={this.handlePictureChangeFor} />
+                                                        <button onClick={this.handleEditPicture}>Save</button>
+                                                    </>
+                                                }
+                                            </>
+                                            :
+                                            <>
+                                                {this.props.pet.profile_img === 'images/blank-profile-picture.png' ?
+                                                    <>
+                                                        <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                                    </>
+                                                    :
+                                                    <img className={classes.img} src={this.props.pet.profile_img} alt={this.props.pet.profile_img} height="150" width="150" />
+                                                }
+                                            </>
+                                        }
+                                    </TableCell>
+                                    <TableCell align="left"> <h4>{this.props.pet.pet_name}</h4><p>{this.props.pet.age} years old</p> <p>{this.props.pet.breed}</p><p>{this.props.pet.pet_behavior}</p></TableCell>
+                                    <TableCell align="left"><ColorButton variant="contained" color="info" onClick={this.handleCarePlanButton}>Care Plan</ColorButton></TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
 
-                                                </>
-                                                :
-                                                <>
-                                                    <input type="file" onChange={this.handlePictureChangeFor} />
-                                                    <button onClick={this.handleEditPicture}>Save</button>
-                                                </>
-                                            }
-                                        </>
-                                        :
-                                        <>
-                                            {this.props.pet.profile_img === 'images/blank-profile-picture.png' ?
-                                                <>
-                                                    <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
-                                                </>
-                                                :
-                                                <img className={classes.img} src={this.props.pet.profile_img} alt={this.props.pet.profile_img} height="150" width="150" />
-                                            }
-                                        </>
-                                    }
 
-
-                                    {/* <input type="file" onChange={this.handlePictureChangeFor} />
-                                    {this.props.pet.profile_img === 'images/blank-profile-picture.png' ?
-                                        <>
-                                            <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
-                                        </>
-                                        :
-                                        <img className={classes.img} src={this.props.pet.profile_img} alt={this.props.pet.profile_img} height="150" width="150" />
-                                    }
-                                    <button onClick={this.handleEditPicture}>Save</button> */}
-
-                                </td>
-                                <td className={classes.contentInTable}>
-                                    <h4>{this.props.pet.pet_name}</h4>
-                                    <p>{this.props.pet.age} years old</p>
-                                    <p>{this.props.pet.breed}</p>
-                                    <p>{this.props.pet.pet_behavior}</p>
-                                </td>
-                                <td className={classes.contentInTable}>
-                                    <ColorButton variant="contained" color="info" onClick={this.handleCarePlanButton}>Care Plan</ColorButton>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
 
                 </Grid>
                 {/* ---------Content inside pet picture array when mapping------------ */}

@@ -52,6 +52,7 @@ class ClientServiceRequest extends Component {
 
     state = {
         ...this.props.clientRequest,
+        clientName: this.props.clientName
     };
 
     componentDidMount = () => {
@@ -98,8 +99,8 @@ class ClientServiceRequest extends Component {
     }
 
     handleSendRequest = () => {
-        console.log("Clicked Send Request", this.state)
-        this.props.dispatch({type: 'SET_CLIENT_SERVICE_REQUEST', payload:this.state})
+        console.log("Clicked Send Request", this.props.user)
+        // this.props.dispatch({type: 'SET_CLIENT_SERVICE_REQUEST', payload: this.state})
         // this.props.history.push("/clientDashboard")
     }
 
@@ -116,7 +117,7 @@ class ClientServiceRequest extends Component {
                         <FormControl>
                             <Typography className={classes.title} variant="h3">Request Service</Typography>
                                 <div>
-                                    <p>{JSON.stringify()}</p>
+                                    <p>{JSON.stringify(this.props.petInfo)}</p>
                                 </div>
                             <div>
                                 <Typography className={classes.services} variant="h6">Please select service:</Typography>
@@ -245,7 +246,9 @@ const mapStateToProps = (reduxState) => ({
         // pet3: false
 
     },
-    petInfo: reduxState.petInfo
+    petInfo: reduxState.petInfo,
+    user: reduxState.user,
+    clientName: reduxState.clientInfo.name
 });
 
 export default withRouter(

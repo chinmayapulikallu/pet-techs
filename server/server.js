@@ -19,7 +19,7 @@ const petPictureRouter = require('./routes/petPicture.router');
 const clientDashboardRouter = require('./routes/clientDashboard.router');
 
 // Body parser middleware
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Passport Session Configuration //

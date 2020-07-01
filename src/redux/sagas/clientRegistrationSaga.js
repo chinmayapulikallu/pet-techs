@@ -4,7 +4,6 @@ const verbose = true; // turns on and off console.logs
 
 // worker Saga: will be fired on "REGISTER" actions
 function* registerClient(action) {
-    console.log('client registration saga::::----->', action.payload)
     try {
         const data = new FormData();
         data.append('file', action.payload.file)
@@ -32,13 +31,6 @@ function* registerClient(action) {
 
         yield put({ type: 'GET_CLIENT_DATA' });
         yield put({ type: 'GET_PET_DATA' });
-         
-
-
-        
-        // setTimeout(function () {
-        // }, 1000);
-
 
     }
     catch (error) {

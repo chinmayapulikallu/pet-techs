@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Container from "@material-ui/core/Container";
+
 
 import { withRouter } from 'react-router-dom';
 import './ClientProfile.css';
@@ -65,7 +63,7 @@ class ClientProfile extends Component {
 
     componentDidMount() {
         const currentId = this.props.match.params.id;
-        // console.log('-----> Current client', currentId)
+        console.log('-----> Current client', currentId)
         this.props.dispatch({
             type: 'GET_CLIENT_DATA',
             payload: { id: currentId }
@@ -80,7 +78,7 @@ class ClientProfile extends Component {
 
         const { classes } = this.props;
         return (
-            // <p>{JSON.stringify(this.props.clientInfo)}</p>
+          
             <div className={classes.root} >
                 {this.props.clientInfo.map((client) => {
                     return (

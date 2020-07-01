@@ -12,6 +12,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Paper from "@material-ui/core/Paper";
+import { Typography, CardHeader } from "@material-ui/core";
+import { fade } from "@material-ui/core/styles/colorManipulator";
 
 import { withRouter } from 'react-router-dom';
 import '../ClientProfile/ClientProfile.css';
@@ -38,10 +41,16 @@ const styles = theme => ({
         width: '100%',
     },
     name: {
+        paddingTop: 30,
         textAlign: 'center',
     },
 
     items: {
+        padding: 15,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    itemImg: {
         padding: 15,
         textAlign: 'center',
         justifyContent: "center",
@@ -90,6 +99,29 @@ const styles = theme => ({
     formControlLabel: {
         marginTop: theme.spacing(1),
     },
+    header: {
+        backgroundColor: fade("#195C60", 0.5),
+        paddingTop: 2.5,
+        paddingBottom: 2.5,
+    },
+    paperAbout: {
+        marginTop: 20,
+        borderRadius: "5px",
+        width: "75%",
+        border: "2px solid #195C60",
+    },
+    paperOther:{
+        marginTop: 20,
+        borderRadius: "5px",
+        width: "100%",
+        border: "2px solid #195C60",
+    },
+    contentInTable: {
+        paddingLeft: 10,
+        paddingTop: 10,
+        paddingBottom: 20,
+
+    }
 });
 
 
@@ -144,6 +176,8 @@ class ClientProfileDetail extends Component {
         });
     };
 
+    //-----------------------------------
+
     uppy = Uppy({
         meta: { type: 'profilePicture' },
         restrictions: { maxNumberOfFiles: 1 },
@@ -151,16 +185,6 @@ class ClientProfileDetail extends Component {
     })
     reader = new FileReader()
 
-    setImage = file => {
-        //reads the file into a local data url
-        this.reader.readAsDataURL(file);
-        //sets the file into state and opens the walkthrough
-        this.setState({
-            ...this.state,
-            file: file,
-        })
-    }
-    //-----------------------------------
 
 
     componentDidMount() {
@@ -194,17 +218,27 @@ class ClientProfileDetail extends Component {
             this.setImage(fileFromUppy);
         })
 
-        // this.reader.onloadend = () => {
-        //     this.setState({
-        //         profile_img: this.reader.result,
-        //         ...this.state,
-        //     })
-        // }
+        this.reader.onloadend = () => {
+            this.setState({
+                profile_img: this.reader.result,
+            })
+        }
         console.log('data from client profile', this.state)
     }
+
+    setImage = file => {
+        //reads the file into a local data url
+        this.reader.readAsDataURL(file);
+        //sets the file into state and opens the walkthrough
+        this.setState({
+            ...this.state,
+            file: file,
+        })
+    }
+
     //-----------------------------------
 
-   
+
 
 
 
@@ -253,7 +287,7 @@ class ClientProfileDetail extends Component {
         const { classes } = this.props;
         return (
             <div className={classes.root} >
-                {/* <h1>{JSON.stringify(this.props.client.media_url)}</h1> */}
+                {/* <h1>{JSON.stringify(this.props.clientInfo)}</h1> */}
 
                 {/* <Button
                         variant="contained"
@@ -290,10 +324,11 @@ class ClientProfileDetail extends Component {
                                             <DialogTitle id="alert-dialog-title">{"Edit Your Profile Picture"}</DialogTitle>
                                             <DialogContent>
                                                 {/* <DialogContentText id="alert-dialog-description"> */}
+
                                                 <DragDrop
                                                     uppy={this.uppy}
                                                 />
-                                                <img className={classes.img} src={this.state.profile_img} alt='profile_picture' height="50%" width="50%" />
+                                                <img src={this.state.profile_img} alt='profile_picture' height="50%" width="50%" />
 
                                                 {/* </DialogContentText> */}
 
@@ -320,11 +355,6 @@ class ClientProfileDetail extends Component {
                                         }
                                     </>
                                 }
-
-
-
-
-
                             </Grid>
 
                             <Grid item xs={3} className={classes.clientInfo}>
@@ -353,12 +383,11 @@ class ClientProfileDetail extends Component {
                                     </>
                                     :
                                     <>
-                                        <h3>{this.state.client_name}</h3>
+                                        <h1>{this.state.client_name}</h1>
                                         <p>{this.state.city}, {this.state.state}</p>
                                         <Button variant="contained" color="primary" > <a href={`mailto:${this.props.user.user_email}`} target="_blank" className='link'> Contact {this.state.client_name}</a></Button>
                                     </>
                                 }
-
                             </Grid>
                             {this.props.isClient && (
                                 <Grid item xs={3} className={classes.editButton}>
@@ -401,29 +430,28 @@ class ClientProfileDetail extends Component {
                                 </>
                                 :
                                 <>
-                                    <table className="about_table" width="100%" height="150px">
-                                        <thead >
-                                            <tr>
-                                                <th className="table_head">About {this.state.client_name}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td className={classes.contentInTable}>{this.state.about_client}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <Grid>
+                                        <Paper elevation={5} className={classes.paperAbout}>
+                                            <div>
+                                                <CardHeader
+                                                    title={`About ${this.state.client_name}`}
+                                                    className={classes.header}
+                                                />
+                                            </div>
+                                            <div >
+                                                <Typography variant="subtitle1" className={classes.contentInTable}>
+                                                    {this.state.about_client}
+                                                </Typography>
+                                            </div>
+                                        </Paper>
+                                    </Grid>
                                 </>
                             }
-                            {/* <tr><td>ksfdnjksdnfjknsjkfsndkjfnsdkjfnskdjnfkjsdnfjkdsnfkjsdnfkjdsnfkjdsnkfndskjfnksdnfksdnfkjsdnfjknsdkjfnsjkdnfjksdnfksjdnfjksdnfjksdfn</td></tr> */}
-
                         </Grid>
-
-
                     </Grid>
 
                     <Grid item xs={12} className={classes.name}>
-                        <h3>{this.state.client_name}'s Pets</h3>
+                        <h2>{this.state.client_name}'s Pets</h2>
                     </Grid>
                     {/* <h1>{JSON.stringify(this.props.petInfo)}</h1> */}
 
@@ -440,15 +468,14 @@ class ClientProfileDetail extends Component {
                         )
                     })}
                     <Grid container spacing={3} className={classes.paddingTop}>
-                        <Grid item xs={6} className={classes.items}>
+                        <Grid item xs={6} className={classes.itemImg}>
                             <img src="images/belt.png" alt="profile" height="80" width="130" />
                         </Grid>
-                        <Grid item xs={6} className={classes.items}>
+                        <Grid item xs={6} className={classes.itemImg}>
                             <img src="images/house-icon.png" alt="profile" height="80" width="90" />
                         </Grid>
+
                         <Grid item xs={6} className={classes.items}>
-
-
                             {this.state.editable ?
                                 <>
                                     <TextField
@@ -464,19 +491,22 @@ class ClientProfileDetail extends Component {
                                 </>
                                 :
                                 <>
-                                    {/* <td className={classes.contentInTable}>I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...I have a kennel for both animals, as well as extra medical equipment for my preecious...</td> */}
-                                    <table className="about_table" width="100%" height="150px">
-                                        <thead >
-                                            <tr>
-                                                <th className="table_head">{this.state.client_name}'s Pet Equipment</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td className={classes.contentInTable}>{this.state.about_equipment}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                   
+                                    <Grid>
+                                        <Paper elevation={5} className={classes.paperOther}>
+                                            <div>
+                                                <CardHeader
+                                                    title={`${this.state.client_name}'s Pet Equipment`}
+                                                    className={classes.header}
+                                                />
+                                            </div>
+                                            <div >
+                                                <Typography variant="subtitle1" className = {classes.contentInTable}>
+                                                {this.state.about_equipment}
+                                                </Typography>
+                                            </div>
+                                        </Paper>
+                                    </Grid>
                                 </>
                             }
 
@@ -498,23 +528,27 @@ class ClientProfileDetail extends Component {
                                 </>
                                 :
                                 <>
-                                    <table className="about_table" width="100%" height="150px">
-                                        <thead >
-                                            <tr>
-                                                <th className="table_head">{this.state.client_name}'s Home Environment</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td className={classes.contentInTable}>{this.state.about_home}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                   
+                                    <Grid>
+                                        <Paper elevation={5} className={classes.paperOther}>
+                                            <div>
+                                                <CardHeader
+                                                    title={`${this.state.client_name}'s Home Environment`}
+                                                    className={classes.header}
+                                                />
+                                            </div>
+                                            <div >
+                                                <Typography variant="subtitle1" className = {classes.contentInTable}>
+                                                {this.state.about_home}
+                                                </Typography>
+                                            </div>
+                                        </Paper>
+                                    </Grid>
                                 </>
                             }
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} className={classes.items}>
+                    <Grid item xs={12} className={classes.itemImg}>
                         <Button variant="contained" color="primary" onClick={this.handleBackButton}>Back to Dashboard</Button>
                     </Grid>
                 </Container>
@@ -533,4 +567,3 @@ const mapStateToProps = (reduxState) => ({
 
 
 export default withRouter(connect(mapStateToProps)(withStyles(styles, { withTheme: true })(ClientProfileDetail)));
-

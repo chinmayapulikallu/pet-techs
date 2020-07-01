@@ -16,7 +16,6 @@ function *getClientInfo() {
       type: "SET_CLIENT_DATA",
       payload: response.data,
     });
-    console.log("here is data from client", response.data);
   } catch (error) {
     console.log("Error with get client info:", error);
   }
@@ -47,7 +46,6 @@ function* updateClientData(action) {
         payload: action.payload,
       });
 
-      console.log("here is data from pet update", response.data);
     } catch (error) {
       console.log("Error with get pet data:", error);
     }

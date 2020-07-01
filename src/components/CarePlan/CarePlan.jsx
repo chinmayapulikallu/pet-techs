@@ -75,16 +75,19 @@ class CarePlan extends Component {
   render() {
     return (
       <Container>
-        <img
+        {/* <p>{JSON.stringify(this.props.petCarePlan)}</p> */}
+        {this.props.petCarePlan.map((carePlan) => {
+          return (
+            <div key={carePlan}>
+              <img
           className={this.props.classes.profileImage}
-          src="images/blank-profile-picture.png"
-          alt="profile"
-          height="150"
-          width="150"
+          src={carePlan.media_url}
+          alt={carePlan.profile_img}
+          height="150" width="150"
         />
         <br />
         <Typography variant="h2" className={this.props.classes.profileCenter}>
-          Care plan for {this.props.petCarePlan.pet_name}!
+          Care plan for {carePlan.pet_name}!
         </Typography>
         <Card>
           <CardContent>
@@ -98,12 +101,12 @@ class CarePlan extends Component {
                     color="secondary"
                     label="Pet Info"
                     size="small"
-                    value={this.props.petCarePlan.pet_bio}
+                    value={carePlan.pet_bio}
                     onChange={this.handleInputChange("pet_bio")}
                   />
                 ) : (
-                  this.props.petCarePlan.pet_bio
-                )}
+                    carePlan.pet_bio
+                  )}
               </Typography>
             </div>
             <br />
@@ -116,12 +119,12 @@ class CarePlan extends Component {
                   color="secondary"
                   label="Feedings Per Day"
                   size="small"
-                  value={this.props.petCarePlan.feeding_per_day}
+                  value={carePlan.feeding_per_day}
                   onChange={this.handleInputChange("feeding_per_day")}
                 />
               ) : (
-                this.props.petCarePlan.feeding_per_day
-              )}{" "}
+                  carePlan.feeding_per_day
+                )}{" "}
               meals per day, and my favorite food is{" "}
               {this.state.isEditing ? (
                 <TextField
@@ -130,12 +133,12 @@ class CarePlan extends Component {
                   color="secondary"
                   label="Pet Food Brand"
                   size="small"
-                  value={this.props.petCarePlan.food_brand}
+                  value={carePlan.food_brand}
                   onChange={this.handleInputChange("food_brand")}
                 />
               ) : (
-                this.props.petCarePlan.food_brand
-              )}
+                  carePlan.food_brand
+                )}
               .
             </Typography>
             <br />
@@ -148,12 +151,12 @@ class CarePlan extends Component {
                   color="secondary"
                   label="Amount of food per meal"
                   size="small"
-                  value={this.props.petCarePlan.amount_per_meal}
+                  value={carePlan.amount_per_meal}
                   onChange={this.handleInputChange("amount_per_meal")}
                 />
               ) : (
-                this.props.petCarePlan.amount_per_meal
-              )}{" "}
+                  carePlan.amount_per_meal
+                )}{" "}
               for each meal!
             </Typography>
             <br />
@@ -166,12 +169,12 @@ class CarePlan extends Component {
                   color="secondary"
                   label="General Pet Behavior"
                   size="small"
-                  value={this.props.petCarePlan.pet_behavior}
+                  value={carePlan.pet_behavior}
                   onChange={this.handleInputChange("pet_behavior")}
                 />
               ) : (
-                this.props.petCarePlan.pet_behavior
-              )}
+                  carePlan.pet_behavior
+                )}
               .
             </Typography>
             <br />
@@ -184,12 +187,12 @@ class CarePlan extends Component {
                   color="secondary"
                   label="Special Care Equipment"
                   size="small"
-                  value={this.props.petCarePlan.care_equipment}
+                  value={carePlan.care_equipment}
                   onChange={this.handleInputChange("care_equipment")}
                 />
               ) : (
-                this.props.petCarePlan.care_equipment
-              )}
+                  carePlan.care_equipment
+                )}
               .
             </Typography>
             <br />
@@ -202,12 +205,12 @@ class CarePlan extends Component {
                   color="secondary"
                   label="Gender"
                   size="small"
-                  value={this.props.petCarePlan.sex}
+                  value={carePlan.sex}
                   onChange={this.handleInputChange("sex")}
                 />
               ) : (
-                this.props.petCarePlan.sex
-              )}{" "}
+                  carePlan.sex
+                )}{" "}
               {this.state.isEditing ? (
                 <TextField
                   id="outlined-basic"
@@ -215,12 +218,12 @@ class CarePlan extends Component {
                   color="secondary"
                   label="Breed"
                   size="small"
-                  value={this.props.petCarePlan.breed}
+                  value={carePlan.breed}
                   onChange={this.handleInputChange("breed")}
                 />
               ) : (
-                this.props.petCarePlan.breed
-              )}
+                  carePlan.breed
+                )}
               . I weight{" "}
               {this.state.isEditing ? (
                 <TextField
@@ -229,12 +232,12 @@ class CarePlan extends Component {
                   color="secondary"
                   label="Weight"
                   size="small"
-                  value={this.props.petCarePlan.weight}
+                  value={carePlan.weight}
                   onChange={this.handleInputChange("weight")}
                 />
               ) : (
-                this.props.petCarePlan.weight
-              )}{" "}
+                  carePlan.weight
+                )}{" "}
               pounds and I am{" "}
               {this.state.isEditing ? (
                 <TextField
@@ -243,12 +246,12 @@ class CarePlan extends Component {
                   color="secondary"
                   label="Age"
                   size="small"
-                  value={this.props.petCarePlan.age}
+                  value={carePlan.age}
                   onChange={this.handleInputChange("age")}
                 />
               ) : (
-                this.props.petCarePlan.age
-              )}{" "}
+                  carePlan.age
+                )}{" "}
               years old.{" "}
             </Typography>
             <Button
@@ -267,6 +270,11 @@ class CarePlan extends Component {
             </Button>
           </CardContent>
         </Card>
+
+            </div>
+          )
+        })}
+       
       </Container>
     );
   }

@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import TextField from "@material-ui/core/TextField"
 import Grid from "@material-ui/core/Grid"
 import FormControl from "@material-ui/core/FormControl"
-import {Typography} from "@material-ui/core"
+import { Typography } from "@material-ui/core"
 import Button from "@material-ui/core/Button"
+import Link from "@material-ui/core/Link"
+
 import { withRouter } from "react-router";
 import { withStyles } from '@material-ui/core/styles';
 
@@ -40,7 +42,7 @@ const styles = theme => ({
   loginImage: {
     marginTop: 20,
     marginBottom: 20,
-    
+
     border: "2px",
     borderRadius: "200px"
   }
@@ -74,6 +76,10 @@ class LoginPage extends Component {
       [propertyName]: event.target.value,
     });
   }
+  handleJoinClick = () => {
+    console.log("ClickedJoin");
+    this.props.history.push("/register");
+  };
 
   render() {
     const { classes } = this.props
@@ -113,8 +119,10 @@ class LoginPage extends Component {
                 <img className={classes.loginImage} src="/images/careTakerDog.png" alt="searchIcon" height="150" width="150" />
               </div>
               <div>
-                <Button className={classes.button} onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }} variant="contained" color="primary" >Register</Button>
                 <Button className={classes.button} onClick={this.login} variant="contained" color="primary" >Log In</Button>
+              </div>
+              <div>
+                <Link className={classes.button} onClick={this.handleJoinClick} variant="contained" color='secondary' >Register</Link>
               </div>
             </FormControl>
           </Grid>

@@ -45,9 +45,9 @@ router.get("/all", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    .then((response) => {
-      res.send(response.rows);
-    })
+    // .then((response) => {
+    //   res.send(response.rows);
+    // })
     .then(response => {
       generateSignedUrls(res, response.rows);
      })

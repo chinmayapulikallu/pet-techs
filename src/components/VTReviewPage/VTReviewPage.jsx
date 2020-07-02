@@ -108,9 +108,9 @@ class VTReviewPage extends Component {
 
     return (
       <Container className={classes.root} maxWidth="sm">
-        {/* <h1>{JSON.stringify(vtInfoPage1)}</h1> */}
-        {/* <h1>{JSON.stringify(vtInfoPage2)}</h1> */}
-        {/* <h1>{JSON.stringify(vtInfoPage3)}</h1> */}
+        {/* <h1>{JSON.stringify(vtInfoPage1)}</h1>
+        <h1>{JSON.stringify(vtInfoPage2)}</h1> */}
+       
 
 
         <h1 className={classes.title}>Vet tech review</h1>

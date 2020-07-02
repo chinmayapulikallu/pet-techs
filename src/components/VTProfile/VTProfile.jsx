@@ -15,8 +15,21 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { FormControl } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 import { withRouter } from "react-router-dom";
 import vtInfo from "../../redux/reducers/vetTechReducer";
+
+
+
+import Uppy from '@uppy/core';
+import DragDrop from '@uppy/react/lib/DragDrop';
+import '@uppy/core/dist/style.css'
+import '@uppy/drag-drop/dist/style.css'
 
 const PROFILE_IMG_HEIGHT = 225;
 
@@ -98,12 +111,54 @@ const styles = (theme) => ({
   botBtn: {
     marginTop: 25,
   },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    margin: 'auto',
+    width: 'fit-content',
+  },
+  formControl: {
+    marginTop: theme.spacing(2),
+    minWidth: 120,
+  },
+  formControlLabel: {
+    marginTop: theme.spacing(1),
+  },
 });
 
 class VTProfile extends Component {
   state = {
     ...this.props.vetProfile,
     editable: false,
+    open: false,
+
+  };
+
+  handleClickOpen = () => {
+    this.setState({
+      ...this.state,
+      open: true,
+    })
+  }
+
+  handleCancel = () => {
+    this.setState({
+      ...this.state,
+      open: false,
+    });
+  };
+
+  handleSubmitImg = () => {
+    this.props.dispatch({
+      type: 'UPDATE_VT_PROFILE_PICTURE',
+      payload: {
+        file: this.state.file
+      }
+    })
+    this.setState({
+      ...this.state,
+      open: false,
+    });
   };
 
   handleEdit = () => {
@@ -151,7 +206,8 @@ class VTProfile extends Component {
   };
 
   handleServiceRequest = () => {
-    this.props.history.push("/client_service");
+    console.log("service user id:::::", this.props.vetProfile.user_id)
+    this.props.history.push(`/client_service/${this.props.vetProfile.user_id}`);
   };
 
   handleBack = () => {
@@ -159,10 +215,46 @@ class VTProfile extends Component {
     console.log(this.props.vtInfo);
   };
 
+  //-----------------------------------
+
+  uppy = Uppy({
+    meta: { type: 'profilePicture' },
+    restrictions: { maxNumberOfFiles: 1 },
+    autoProceed: true
+  })
+  reader = new FileReader()
+
+
   componentDidMount() {
     // this.props.dispatch({ type: "GET_VT_DATA" });
     console.log(`HERE!!!!!`, this.props.vtInfo);
+
+    this.uppy.on('upload', file => {
+      let fileKey = Object.keys(this.uppy.state.files)[0];
+      let fileFromUppy = this.uppy.state.files[fileKey].data;
+      this.setImage(fileFromUppy);
+    })
+
+    this.reader.onloadend = () => {
+      this.setState({
+        profile_img: this.reader.result,
+      })
+    }
+    console.log('data from client profile', this.state)
   }
+
+  setImage = file => {
+    //reads the file into a local data url
+    this.reader.readAsDataURL(file);
+    this.setState({
+      ...this.state,
+      file: file,
+    })
+  }
+
+  //-----------------------------------
+
+
   render() {
     const { classes } = this.props;
     return (
@@ -210,8 +302,8 @@ class VTProfile extends Component {
                       onChange={this.handleChange("vet_name")}
                     />
                   ) : (
-                    this.state.vet_name
-                  )}
+                      this.state.vet_name
+                    )}
                 </Typography>
               </Grid>
             </Grid>
@@ -220,13 +312,67 @@ class VTProfile extends Component {
         <Container maxWidth="md" classesName={classes.root}>
           <Grid container spacing={10}>
             <Grid item xs={12} sm={5}>
+
+
               <div className={classes.profilePicContainer}>
-                <img
-                  className={classes.profilePic}
-                  src={this.state.media_url}
-                  alt="Profile"
-                />
+
+
+                {this.state.editable ?
+                  <>
+                    <button onClick={this.handleClickOpen}>Edit</button>
+                    {this.state.profile_img === 'images/blank-profile-picture.png' ?
+                      <>
+                        <img className={classes.profilePic}
+                          src="images/blank-profile-picture.png" alt="profile"  />
+                      </>
+                      :
+                      <img className={classes.profilePic}
+                        src={this.state.profile_img} alt={this.state.profile_img}  />
+                    }
+
+                    <Dialog
+                      open={this.state.open}
+                      onClose={this.handleClose}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                    >
+                      <DialogTitle id="alert-dialog-title">{"Edit Your Profile Picture"}</DialogTitle>
+                      <DialogContent>
+
+                        <DragDrop
+                          uppy={this.uppy}
+                        />
+                        <img src={this.state.profile_img} alt='profile_picture' height="100%" width="100%" />
+
+
+                      </DialogContent>
+
+                      <DialogActions>
+                        <Button onClick={this.handleCancel} color="primary">
+                          Cancel
+                                                  </Button>
+                        <Button onClick={this.handleSubmitImg} color="primary" autoFocus>
+                          Upload
+                                                </Button>
+                      </DialogActions>
+                    </Dialog>
+                  </>
+                  :
+                  <>
+                    {this.state.profile_img === 'images/blank-profile-picture.png' ?
+                      <>
+                        <img className={classes.profilePic}
+                          src="images/blank-profile-picture.png" alt="profile"  />
+                      </>
+                      :
+                      <img className={classes.profilePic}
+                        src={this.state.profile_img} alt={this.state.profile_img}  />
+                    }
+                  </>
+                }
               </div>
+
+
 
               <Paper variant="outlined" className={classes.paper}>
                 <header className={classes.header}>
@@ -291,29 +437,29 @@ class VTProfile extends Component {
                       </div>
                     </>
                   ) : (
-                    <>
-                      {this.state.sleep_over ? (
-                        <div className={classes.listItem}>Pet Sleepovers</div>
-                      ) : (
-                        ""
-                      )}
-                      {this.state.boarding ? (
-                        <div className={classes.listItem}>Boarding</div>
-                      ) : (
-                        ""
-                      )}
-                      {this.state.dropin_care ? (
-                        <div className={classes.listItem}>Drop In Care</div>
-                      ) : (
-                        ""
-                      )}
-                      {this.state.hospice ? (
-                        <div className={classes.listItem}>Hospice Care</div>
-                      ) : (
-                        ""
-                      )}
-                    </>
-                  )}
+                      <>
+                        {this.state.sleep_over ? (
+                          <div className={classes.listItem}>Pet Sleepovers</div>
+                        ) : (
+                            ""
+                          )}
+                        {this.state.boarding ? (
+                          <div className={classes.listItem}>Boarding</div>
+                        ) : (
+                            ""
+                          )}
+                        {this.state.dropin_care ? (
+                          <div className={classes.listItem}>Drop In Care</div>
+                        ) : (
+                            ""
+                          )}
+                        {this.state.hospice ? (
+                          <div className={classes.listItem}>Hospice Care</div>
+                        ) : (
+                            ""
+                          )}
+                      </>
+                    )}
                 </Typography>
               </Paper>
               <Paper variant="outlined" className={classes.paper}>
@@ -337,10 +483,10 @@ class VTProfile extends Component {
                       onChange={this.handleChange("equipment_list")}
                     />
                   ) : (
-                    <div className={classes.equipment}>
-                      {this.state.equipment_list}
-                    </div>
-                  )}
+                      <div className={classes.equipment}>
+                        {this.state.equipment_list}
+                      </div>
+                    )}
                 </Typography>
               </Paper>
               <Paper variant="outlined" className={classes.paper}>
@@ -560,64 +706,64 @@ class VTProfile extends Component {
                       </div>
                     </>
                   ) : (
-                    <>
-                      <div className={classes.equipment}>
-                        Provides services for {this.state.dogs ? "dogs" : ""}{" "}
-                        {this.state.cats ? " cats" : ""}{" "}
-                        {this.state.other ? " and other types of animals" : ""}
-                      </div>
-                      <div className={classes.equipment}>
-                        Bathroom Breaks every{" "}
-                        {this.state.zero_two ? "0-2 hours" : ""}{" "}
-                        {this.state.two_four ? "2-4 hours" : ""}{" "}
-                        {this.state.four_eight ? "4-8 hours" : ""}{" "}
-                        {this.state.not_available ? "Not Applicable" : ""}
-                      </div>
-                      <div className={classes.equipment}>
-                        {this.state.pet_more_than_one_family
-                          ? "Hosts animals from multiple families"
-                          : "Will only host animals from one family"}
-                      </div>
-                      <div className={classes.equipment}>
-                        {this.state.pet_younger_than_one
-                          ? "Hosts pets younger than one years old"
-                          : "Will only host pets older than one"}
-                      </div>
-                      <div className={classes.equipment}>
-                        Animal Size Preferences:
+                      <>
+                        <div className={classes.equipment}>
+                          Provides services for {this.state.dogs ? "dogs" : ""}{" "}
+                          {this.state.cats ? " cats" : ""}{" "}
+                          {this.state.other ? " and other types of animals" : ""}
+                        </div>
+                        <div className={classes.equipment}>
+                          Bathroom Breaks every{" "}
+                          {this.state.zero_two ? "0-2 hours" : ""}{" "}
+                          {this.state.two_four ? "2-4 hours" : ""}{" "}
+                          {this.state.four_eight ? "4-8 hours" : ""}{" "}
+                          {this.state.not_available ? "Not Applicable" : ""}
+                        </div>
+                        <div className={classes.equipment}>
+                          {this.state.pet_more_than_one_family
+                            ? "Hosts animals from multiple families"
+                            : "Will only host animals from one family"}
+                        </div>
+                        <div className={classes.equipment}>
+                          {this.state.pet_younger_than_one
+                            ? "Hosts pets younger than one years old"
+                            : "Will only host pets older than one"}
+                        </div>
+                        <div className={classes.equipment}>
+                          Animal Size Preferences:
                         <Grid container>
-                          {this.state.small_dog ? (
-                            <Grid item xs={12} sm={3}>
-                              <Paper className={classes.size}>Small</Paper>
-                            </Grid>
-                          ) : (
-                            ""
-                          )}
-                          {this.state.medium_dog ? (
-                            <Grid item xs={12} sm={3}>
-                              <Paper className={classes.size}>Medium</Paper>
-                            </Grid>
-                          ) : (
-                            ""
-                          )}
-                          {this.state.large_dog ? (
-                            <Grid item xs={12} sm={3}>
-                              <Paper className={classes.size}>Large</Paper>
-                            </Grid>
-                          ) : (
-                            ""
-                          )}
-                          {this.state.giant_dog ? (
-                            <Grid item xs={12} sm={3}>
-                              <Paper className={classes.size}>Giant</Paper>
-                            </Grid>
-                          ) : (
-                            ""
-                          )}
-                        </Grid>
-                      </div>
-                    </>
-                  )}
+                            {this.state.small_dog ? (
+                              <Grid item xs={12} sm={3}>
+                                <Paper className={classes.size}>Small</Paper>
+                              </Grid>
+                            ) : (
+                                ""
+                              )}
+                            {this.state.medium_dog ? (
+                              <Grid item xs={12} sm={3}>
+                                <Paper className={classes.size}>Medium</Paper>
+                              </Grid>
+                            ) : (
+                                ""
+                              )}
+                            {this.state.large_dog ? (
+                              <Grid item xs={12} sm={3}>
+                                <Paper className={classes.size}>Large</Paper>
+                              </Grid>
+                            ) : (
+                                ""
+                              )}
+                            {this.state.giant_dog ? (
+                              <Grid item xs={12} sm={3}>
+                                <Paper className={classes.size}>Giant</Paper>
+                              </Grid>
+                            ) : (
+                                ""
+                              )}
+                          </Grid>
+                        </div>
+                      </>
+                    )}
                 </Typography>
               </Paper>
             </Grid>
@@ -645,10 +791,10 @@ class VTProfile extends Component {
                     />
                   </>
                 ) : (
-                  <>
-                    {this.state.city}, {this.state.state}
-                  </>
-                )}
+                    <>
+                      {this.state.city}, {this.state.state}
+                    </>
+                  )}
               </Typography>
               <div>
                 <Button
@@ -711,22 +857,22 @@ class VTProfile extends Component {
                       />
                     </>
                   ) : (
-                    <>
-                      <div className={classes.equipment}>
-                        Professional pet experiences: {this.state.experience}{" "}
+                      <>
+                        <div className={classes.equipment}>
+                          Professional pet experiences: {this.state.experience}{" "}
                         years
                       </div>
-                      <div className={classes.equipment}>
-                        Education/Degree/Cerifications:
+                        <div className={classes.equipment}>
+                          Education/Degree/Cerifications:
                         <div className={classes.listItem}>
-                          {this.state.certifications}
+                            {this.state.certifications}
+                          </div>
                         </div>
-                      </div>
-                      <div className={classes.equipment}>
-                        Current Job Title: {this.state.current_job_title}
-                      </div>
-                    </>
-                  )}
+                        <div className={classes.equipment}>
+                          Current Job Title: {this.state.current_job_title}
+                        </div>
+                      </>
+                    )}
                 </Typography>
               </Paper>
               <Paper variant="outlined" className={classes.paper}>
@@ -750,10 +896,10 @@ class VTProfile extends Component {
                       onChange={this.handleChange("bioYourself")}
                     />
                   ) : (
-                    <div className={classes.equipment}>
-                      {this.state.bioYourself}
-                    </div>
-                  )}
+                      <div className={classes.equipment}>
+                        {this.state.bioYourself}
+                      </div>
+                    )}
                 </Typography>
               </Paper>
               <Grid container spacing={5}>
@@ -779,10 +925,10 @@ class VTProfile extends Component {
                           onChange={this.handleChange("expertise")}
                         />
                       ) : (
-                        <div className={classes.equipment}>
-                          {this.state.expertise}
-                        </div>
-                      )}
+                          <div className={classes.equipment}>
+                            {this.state.expertise}
+                          </div>
+                        )}
                     </Typography>
                   </Paper>
                 </Grid>
@@ -823,6 +969,7 @@ class VTProfile extends Component {
 
 const mapStateToProps = (reduxState, ownProps) => {
   const vetId = Number(ownProps.match.params.id);
+  console.log("ownProps::::", ownProps)
   const vetProfile = reduxState.vtInfo.filter(
     (vet) => vet.user_id === vetId
   )[0];

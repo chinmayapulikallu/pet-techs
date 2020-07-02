@@ -101,7 +101,7 @@ class Nav extends Component {
                 <div className="profile_icon">
                   <Link to={`/client-profile/${user.id}`}>
                     {/* {clientInfo.map((client) => {
-                      if (client.media_url === null || client.media_url === '') {
+                      if (client.profile_img === null || client.profile_img === '') {
                         return (
                           <div key={client.user_id}>
                             <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="30" width="30" />
@@ -110,12 +110,12 @@ class Nav extends Component {
                       } else {
                         return (
                           <div key={client.user_id}>
-                            <img className={classes.img} src={client.media_url} alt="profile" height="30" width="30" />
+                            <img className={classes.img} src={client.profile_img} alt="profile" height="30" width="30" />
                           </div>
                         )
                       }
                     })} */}
-                    {/* <p>here{JSON.stringify(client.media_url)}</p> */}
+                    {/* <p>here{JSON.stringify(client.profile_img)}</p> */}
                   </Link>
                 </div>
                 <LogOutButton className="nav-link" />

@@ -53,14 +53,19 @@ class VTDashboard extends Component {
 
     return (
       <div>
-        {JSON.stringify(this.props.vtInfo)}
+        {/* {JSON.stringify(this.props.vtInfo)} */}
         {this.props.vtInfo.map((vt) => {
           return (
             <div key={vt.id}>
 
               <Container>
+              <br />
+                <br />
+                <br />
                 <img className={classes.img} src={vt.profile_img} alt={vt.profile_img} height="150" width="150" />
-                <h1>Photo will go here</h1>
+                {/* <h1>Photo will go here</h1> */}
+              
+
                 <h2>Pending Requests</h2>
                 <TableContainer component={Paper}>
                   <Table>

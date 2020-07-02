@@ -8,12 +8,12 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import CardHeader from '@material-ui/core/CardHeader';
+// import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+// import Avatar from '@material-ui/core/Avatar';
+// import IconButton from '@material-ui/core/IconButton';
+// import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 const moment = require('moment');
 
 const useStyles = (theme) => ({
@@ -51,7 +51,7 @@ const useStyles = (theme) => ({
     },
     childCard: {
         width: 200,
-        height: 320,
+        height: 200,
         // width: 400,
         // height: 300,
         marginRight: 30,
@@ -92,13 +92,13 @@ class ClientDashboard extends Component {
         this.props.dispatch({
             type: 'GET_CLIENT_DATA'
         })
-        const currentId = this.props.clientInfo.user_id
+        // const currentId = this.props.clientInfo.user_id
         // console.log("this.props :: ", this.props)
-        console.log('-----> GET_PET_DATA Current client', currentId)
+        // console.log('-----> GET_PET_DATA Current client', currentId)
 
         this.props.dispatch({
             type: 'GET_PET_DATA',
-            payload: { id: currentId }
+            // payload: { id: currentId }
         })
         this.props.dispatch({
             type: 'GET_CLIENT_SERVICE_REQUEST'
@@ -167,43 +167,100 @@ class ClientDashboard extends Component {
                                     </CardContent>
                                 </Card>
                             </Grid>
-                            <Grid item xs={6}>                          
-                                <Card className={classes.serviceList}>
-                                    <CardContent>
-                                        <Typography variant="h6">Pending Services</Typography>
-                                        {clientRequest && clientRequest.length > 0 && clientRequest.map(request =>
-                                            <Card variant="outlined" className={classes.childCard} key={request.id}>
-                                            <CardHeader
-                                                avatar={
-                                                    <Avatar aria-label="recipe" className={classes.avatar}>
-                                                        <CheckCircleIcon />
-                                                    </Avatar>
-                                                }
-                                                action={
-                                                    <IconButton aria-label="settings">
-                                                    </IconButton>
-                                                }
-                                                title={request.vet_name}
-                                            />
-                                            <CardMedia
-                                                component="img"
-                                                className={classes.media}
-                                                image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
-                                            />
-                                            <CardContent className="align-center">
-                                            <Typography variant="body1">{moment(request.start_date_time).format("MMM Do YYYY")}</Typography>
-                                                <Button color="primary" variant="contained"
-                                                    className={classes.buttonMargin} onClick={() => this.vetProfile(request.vet_id)}>VET Profile</Button>
-                                            </CardContent>
-                                            <CardActions>
-                                            </CardActions>    
-                                        </Card>
-                                         )} 
-                                    </CardContent>
-                                    
-                                </Card>
-                               
-                            </Grid>
+                            {clientRequest && clientRequest.length > 0 &&
+                                <Grid item xs={6}>                          
+                                    <Card className={classes.serviceList}>
+                                        <CardContent>
+                                            <Typography variant="h6">Pending Services</Typography>
+                                            
+                                            {clientRequest.map(request =>
+                                                <div key={request.id}>
+                                                    {request.request_status === 0 &&
+                                                        <Card variant="outlined" className={classes.childCard}>
+                                                        {/* <CardHeader
+                                                            avatar={
+                                                                <Avatar aria-label="recipe" className={classes.avatar}>
+                                                                    <CheckCircleIcon />
+                                                                </Avatar>
+                                                            }
+                                                            action={
+                                                                <IconButton aria-label="settings">
+                                                                </IconButton>
+                                                            }
+                                                            title={request.vet_name}
+                                                        /> */}
+                                                        {/* <CardMedia
+                                                            component="img"
+                                                            className={classes.media}
+                                                            image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
+                                                        /> */}
+                                                        <CardContent className="align-center">
+                                                                <Typography variant="body1">VET NAME:{request.vet_name}</Typography>  
+                                                                <Typography variant="body1">PET NAME:{request.pet_name}</Typography>   
+                                                        <Typography variant="body1">{moment(request.start_date_time).format("MMM Do YYYY")}</Typography>
+                                                            <Button color="primary" variant="contained"
+                                                                className={classes.buttonMargin} onClick={() => this.vetProfile(request.vet_id)}>VET Profile</Button>
+                                                        </CardContent>
+                                                        <CardActions>
+                                                        </CardActions>    
+                                                        </Card>
+                                                    }
+                                                </div>
+                                            )} 
+                                        </CardContent>
+                                        
+                                    </Card>
+                                
+                                </Grid>
+                            }
+                        </Grid>
+                        <Grid Container>
+                            {clientRequest && clientRequest.length > 0 &&
+                                <Grid item xs={6}>
+                                    <Card className={classes.serviceList}>
+                                        <CardContent>
+                                            <Typography variant="h6">Accepted Services</Typography>
+
+                                            {clientRequest.map(request =>
+                                                <div key={request.id}>
+                                                    {request.request_status === 1 &&
+                                                        <Card variant="outlined" className={classes.childCard}>
+                                                            {/* <CardHeader
+                                                                avatar={
+                                                                    <Avatar aria-label="recipe" className={classes.avatar}>
+                                                                        <CheckCircleIcon />
+                                                                    </Avatar>
+                                                                }
+                                                                action={
+                                                                    <IconButton aria-label="settings">
+                                                                    </IconButton>
+                                                                }
+                                                                title={request.vet_name}
+                                                            /> */}
+                                                            {/* <CardMedia
+                                                            component="img"
+                                                            className={classes.media}
+                                                            image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
+                                                        /> */}
+                                                            <CardContent className="align-center">
+                                                            <Typography variant="body1">VET NAME:{request.vet_name}</Typography>
+                                                                <Typography variant="body1">PET NAME:{request.pet_name}</Typography>
+                                                                <Typography variant="body1">{moment(request.start_date_time).format("MMM Do YYYY")}</Typography>
+                                                                <Button color="primary" variant="contained"
+                                                                    className={classes.buttonMargin} onClick={() => this.vetProfile(request.vet_id)}>VET Profile</Button>
+                                                            </CardContent>
+                                                            <CardActions>
+                                                            </CardActions>
+                                                        </Card>
+                                                    }
+                                                </div>
+                                            )}
+                                        </CardContent>
+
+                                    </Card>
+
+                                </Grid>
+                            }
                         </Grid>
                     </span>
                 )}

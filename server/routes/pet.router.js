@@ -14,7 +14,7 @@ const { uploadPetProfile, generateSignedUrls } = require("../modules/imageHandle
  * GET route for Pets by client ID
  */
 
-router.get("/:id", (req, res) => {
+router.get("/", (req, res) => {
   //   const sqlText = `SELECT  pet.id, "user_id", "pet_type", "pet_name","weight", "age", 
   //                    "sex", "breed", "pet_bio", "food_brand", "feeding_per_day",
   //                    "amount_per_meal", "other_food", "pet_behavior", "care_equipment", array_agg(pet_picture.pet_profile_img), array_agg(pet_picture.pet_img)

@@ -31,14 +31,22 @@ const router = express.Router();
  * Gets client_request and vet name for the current user's pets
  */
 router.get('/', (req, res) => {
+  const requestStatus = req.params.request_status
   const getPetIdsForGivenUser = `select pet.id from pet where user_id = $1`
   pool.query(getPetIdsForGivenUser, [req.user.id])
     .then((response) => {
       let petIdsForGivenUser = [...response.rows.map(pet => pet.id)]
         console.log(" PetIdsForGivenUser :: ", petIdsForGivenUser);
         
-        const sqlText = `select client_request.*, vet_tech.vet_name from client_request, vet_tech where client_request.vet_id = vet_tech.user_id
-           and client_request.pet_id = ANY($1::int[])`
+      let sqlText = `select client_request.*, vet_tech.vet_name, pet.pet_name 
+        from client_request, vet_tech, pet 
+        where client_request.vet_id = vet_tech.user_id 
+          and client_request.pet_id = pet.id 
+          and client_request.pet_id = ANY($1::int[])`
+      if (requestStatus) {
+        sqlText += ` and client_request.request_status = $2`
+      }
+      let sqlQueryParams = [petIdsForGivenUser]
         pool
           .query(sqlText, [petIdsForGivenUser])
           .then((response) => {

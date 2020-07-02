@@ -92,6 +92,8 @@ function* getDropInVets(action) {
 }
 function* getHospiceVets(action) {
     try {
+        console.log('IN HOSPICE VETS OF FILTERSAGA ------->>');
+        
         const response = yield axios.get(`/api/vt/hospice`);
         yield put({
             type: "GET_VT_DATA_SUCCESSFUL",

@@ -29,12 +29,12 @@ router.get("/profile/:id", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * from vet_tech where user_id = $1; `;
   pool
     .query(sqlText, [req.params.id])
-    .then((response) => {
-      res.send(response.rows[0]);
-    })
-    // .then(response => {
-    //   generateSignedUrls(res, response.rows);
-    //  })
+    // .then((response) => {
+    //   res.send(response.rows[0]);
+    // })
+    .then(response => {
+      generateSignedUrls(res, response.rows);
+     })
     .catch((error) => {
       console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
@@ -45,9 +45,9 @@ router.get("/all", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    .then((response) => {
-      res.send(response.rows);
-    })
+    // .then((response) => {
+    //   res.send(response.rows);
+    // })
     .then(response => {
       generateSignedUrls(res, response.rows);
      })
@@ -62,9 +62,12 @@ router.get("/dog", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" WHERE dogs=true ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    .then((response) => {
-      res.send(response.rows);
-    })
+    // .then((response) => {
+    //   res.send(response.rows);
+    // })
+    .then(response => {
+      generateSignedUrls(res, response.rows);
+     })
     .catch((error) => {
       console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
@@ -75,9 +78,12 @@ router.get("/cat", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" WHERE cats=true ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    .then((response) => {
-      res.send(response.rows);
-    })
+    // .then((response) => {
+    //   res.send(response.rows);
+    // })
+    .then(response => {
+      generateSignedUrls(res, response.rows);
+     })
     .catch((error) => {
       console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
@@ -89,9 +95,12 @@ router.get("/other", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" WHERE other=true ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    .then((response) => {
-      res.send(response.rows);
-    })
+    // .then((response) => {
+    //   res.send(response.rows);
+    // })
+    .then(response => {
+      generateSignedUrls(res, response.rows);
+     })
     .catch((error) => {
       console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
@@ -103,9 +112,12 @@ router.get("/sleepover", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" WHERE sleep_over=true ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    .then((response) => {
-      res.send(response.rows);
-    })
+    // .then((response) => {
+    //   res.send(response.rows);
+    // })
+    .then(response => {
+      generateSignedUrls(res, response.rows);
+     })
     .catch((error) => {
       console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
@@ -117,9 +129,12 @@ router.get("/boarding", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" WHERE boarding=true ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    .then((response) => {
-      res.send(response.rows);
-    })
+    // .then((response) => {
+    //   res.send(response.rows);
+    // })
+    .then(response => {
+      generateSignedUrls(res, response.rows);
+     })
     .catch((error) => {
       console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
@@ -131,9 +146,12 @@ router.get("/dropin", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" WHERE dropin_care=true ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    .then((response) => {
-      res.send(response.rows);
-    })
+    // .then((response) => {
+    //   res.send(response.rows);
+    // })
+    .then(response => {
+      generateSignedUrls(res, response.rows);
+     })
     .catch((error) => {
       console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
@@ -145,9 +163,12 @@ router.get("/hospice", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" WHERE hospice=true ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    .then((response) => {
-      res.send(response.rows);
-    })
+    // .then((response) => {
+    //   res.send(response.rows);
+    // })
+    .then(response => {
+      generateSignedUrls(res, response.rows);
+     })
     .catch((error) => {
       console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);

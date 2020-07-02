@@ -136,7 +136,7 @@ class CarePlan extends Component {
                 <div>
                     <img
                         className={this.props.classes.profileImage}
-                        src={this.props.petCarePlan.profile_img}
+                        src={this.props.petCarePlan.media_url}
                         alt={this.props.petCarePlan.profile_img}
                         height="150" width="150"
                     />

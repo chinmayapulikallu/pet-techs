@@ -143,12 +143,10 @@ class ClientDashboard extends Component {
                                         {/* <img className={classes.profileImage} src="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png" alt="name" height="75" width="75" />      */}
                                         {/* <img className={classes.img} src={client.profile_img} alt={client.profile_img} height="150" width="150" /> */}
 
-                                        {client.profile_img === 'images/blank-profile-picture.png' ?
-                                            <>
-                                                <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
-                                            </>
+                                        {client.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
+                                            <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="200" width="200" />
                                             :
-                                            <img className={classes.img} src={client.profile_img} alt={client.profile_img} height="150" width="150" />
+                                            <img className={classes.img} src={client.media_url} alt={client.profile_img} height="200" width="200" />
                                         }
                                     </div>
                                 </CardContent>
@@ -159,7 +157,7 @@ class ClientDashboard extends Component {
                                 <Card className={classes.cardSearch}>
                                     <CardContent>
                                         <div>
-                                            <img className={classes.profileImage} src="/images/service-provider.png" alt="serviceProviderIcon"
+                                            <img className={classes.profileImage} src={"/images/service-provider.png"} alt="serviceProviderIcon"
                                                 height="100" width="100" />
                                         </div>
                                         <Button color="primary" variant="contained"
@@ -168,16 +166,16 @@ class ClientDashboard extends Component {
                                 </Card>
                             </Grid>
                             {clientRequest && clientRequest.length > 0 &&
-                                <Grid item xs={6}>                          
+                                <Grid item xs={6}>
                                     <Card className={classes.serviceList}>
                                         <CardContent>
                                             <Typography variant="h6">Pending Services</Typography>
-                                            
+
                                             {clientRequest.map(request =>
                                                 <div key={request.id}>
                                                     {request.request_status === 0 &&
                                                         <Card variant="outlined" className={classes.childCard}>
-                                                        {/* <CardHeader
+                                                            {/* <CardHeader
                                                             avatar={
                                                                 <Avatar aria-label="recipe" className={classes.avatar}>
                                                                     <CheckCircleIcon />
@@ -189,28 +187,28 @@ class ClientDashboard extends Component {
                                                             }
                                                             title={request.vet_name}
                                                         /> */}
-                                                        {/* <CardMedia
+                                                            {/* <CardMedia
                                                             component="img"
                                                             className={classes.media}
                                                             image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
                                                         /> */}
-                                                        <CardContent className="align-center">
-                                                                <Typography variant="body1">VET NAME:{request.vet_name}</Typography>  
-                                                                <Typography variant="body1">PET NAME:{request.pet_name}</Typography>   
-                                                        <Typography variant="body1">{moment(request.start_date_time).format("MMM Do YYYY")}</Typography>
-                                                            <Button color="primary" variant="contained"
-                                                                className={classes.buttonMargin} onClick={() => this.vetProfile(request.vet_id)}>VET Profile</Button>
-                                                        </CardContent>
-                                                        <CardActions>
-                                                        </CardActions>    
+                                                            <CardContent className="align-center">
+                                                                <Typography variant="body1">VET NAME:{request.vet_name}</Typography>
+                                                                <Typography variant="body1">PET NAME:{request.pet_name}</Typography>
+                                                                <Typography variant="body1">{moment(request.start_date_time).format("MMM Do YYYY")}</Typography>
+                                                                <Button color="primary" variant="contained"
+                                                                    className={classes.buttonMargin} onClick={() => this.vetProfile(request.vet_id)}>VET Profile</Button>
+                                                            </CardContent>
+                                                            <CardActions>
+                                                            </CardActions>
                                                         </Card>
                                                     }
                                                 </div>
-                                            )} 
+                                            )}
                                         </CardContent>
-                                        
+
                                     </Card>
-                                
+
                                 </Grid>
                             }
                         </Grid>
@@ -243,7 +241,7 @@ class ClientDashboard extends Component {
                                                             image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
                                                         /> */}
                                                             <CardContent className="align-center">
-                                                            <Typography variant="body1">VET NAME:{request.vet_name}</Typography>
+                                                                <Typography variant="body1">VET NAME:{request.vet_name}</Typography>
                                                                 <Typography variant="body1">PET NAME:{request.pet_name}</Typography>
                                                                 <Typography variant="body1">{moment(request.start_date_time).format("MMM Do YYYY")}</Typography>
                                                                 <Button color="primary" variant="contained"
@@ -269,21 +267,21 @@ class ClientDashboard extends Component {
                 </div>
                 <Grid container>
                     {petInfo && petInfo.length > 0 && petInfo.map(pet =>
-                     <Grid item xs={6}>
-                         <Card key={pet.id} className={classes.petCard}>
-                   
-                            <Typography variant="h6">{pet.pet_name}</Typography>
-                            <CardMedia
-                                component="img"
-                                className={classes.media}
-                                image={pet.profile_img}
-                            />
-                            <CardContent>
-                                <Button color="primary" variant="contained"
-                                    className={classes.buttonMargin} onClick={() => this.carePlan(pet.id)}>carePlan</Button>
-                            </CardContent>
-                 </Card>
-                     </Grid>
+                        <Grid item xs={6}>
+                            <Card key={pet.id} className={classes.petCard}>
+
+                                <Typography variant="h6">{pet.pet_name}</Typography>
+                                <CardMedia
+                                    component="img"
+                                    className={classes.media}
+                                    image={pet.media_url}
+                                />
+                                <CardContent>
+                                    <Button color="primary" variant="contained"
+                                        className={classes.buttonMargin} onClick={() => this.carePlan(pet.id)}>carePlan</Button>
+                                </CardContent>
+                            </Card>
+                        </Grid>
                     )}
                 </Grid>
 

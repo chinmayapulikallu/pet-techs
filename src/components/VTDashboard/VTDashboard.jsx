@@ -59,7 +59,18 @@ class VTDashboard extends Component {
             <div key={vt.id}>
 
               <Container>
-                <img className={classes.img} src={vt.profile_img} alt={vt.profile_img} height="150" width="150" />
+
+                {vt.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
+                  <>
+                    <img className={classes.img}
+                      src="images/blank-profile-picture.png" alt="profile" height='200' width='200'/>
+                  </>
+                  :
+                  <img className={classes.img}
+                    src={vt.media_url} alt={vt.profile_img} height='200' width='200'/>
+                }
+
+                {/* <img className={classes.img} src={vt.media_url} alt={vt.profile_img} height="150" width="150" /> */}
                 <h1>Photo will go here</h1>
                 <h2>Pending Requests</h2>
                 <TableContainer component={Paper}>

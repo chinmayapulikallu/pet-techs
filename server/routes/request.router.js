@@ -3,6 +3,9 @@ const pool = require('../modules/pool');
 const router = express.Router();
 // const sgMail = require("@sendgrid/mail");
 // const { getMaxListeners } = require('../modules/pool');
+const {
+  rejectUnauthenticated,
+} = require("../modules/authentication-middleware");
 
 /**
  * GET route template

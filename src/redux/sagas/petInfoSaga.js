@@ -73,7 +73,7 @@ function* updateProfilePicture(action) {
     console.log('send this pets data to router', action.payload.id);
 
     yield put({
-      type: "GET_PET_CARE_PLAN",
+      type: "GET_PET_DATA",
       payload: action.payload,
     });
 

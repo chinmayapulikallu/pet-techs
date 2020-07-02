@@ -107,6 +107,13 @@ class Pet extends Component {
         this.setState({
             editPicture: !this.state.editPicture
         })
+    }
+
+    handleSavePicture = () => {
+        console.log('handleEditPicture clicked', this.state.file)
+        this.setState({
+            editPicture: !this.state.editPicture
+        })
         this.props.dispatch({
             type: 'UPDATE_PROFILE_PICTURE',
             payload: {
@@ -115,7 +122,6 @@ class Pet extends Component {
             }
         })
     }
-
 
 
 
@@ -139,7 +145,7 @@ class Pet extends Component {
                                                 {this.state.editPicture ?
                                                     <>
                                                         <button onClick={this.handleEditPicture}>Edit</button>
-                                                        {this.props.pet.profile_img === 'images/blank-profile-picture.png' ?
+                                                        {this.props.pet.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                                                             <>
                                                                 <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
                                                             </>
@@ -150,7 +156,7 @@ class Pet extends Component {
                                                     :
                                                     <>
                                                         <input type="file" onChange={this.handlePictureChangeFor} />
-                                                        <button onClick={this.handleEditPicture}>Save</button>
+                                                        <button onClick={this.handleSavePicture}>Save</button>
                                                     </>
                                                 }
                                             </>

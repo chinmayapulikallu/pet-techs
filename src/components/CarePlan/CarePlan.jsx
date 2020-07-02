@@ -9,6 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import Grid from '@material-ui/core/Grid';
+
 
 const useStyles = (theme) => ({
     root: {
@@ -37,7 +39,12 @@ const useStyles = (theme) => ({
     },
     container: {
         marginTop: 50,
-    }
+    },
+    itemCenter: {
+        textAlign: 'center',
+        justifyContent: "center",
+        marginTop: "20px",
+    },
 });
 
 class CarePlan extends Component {
@@ -52,8 +59,6 @@ class CarePlan extends Component {
             payload: { id: this.props.match.params.id }
         })
         this.setState({
-
-            // id: this.props.petCarePlan.id,
             pet_name: this.props.petCarePlan.pet_name,
             feeding_per_day: this.props.petCarePlan.feeding_per_day,
             food_brand: this.props.petCarePlan.food_brand,
@@ -66,12 +71,9 @@ class CarePlan extends Component {
             age: this.props.petCarePlan.age,
         })
         console.log('------------>state:', this.state)
-        console.log('------------>reducer:', this.props.careplan)
+        console.log('------------>reducer:', this.props.match.params.id)
 
-        // this.props.dispatch({
-        //     type: 'GET_PET_CARE_PLAN',
-        //     payload: { id: this.props.match.params.id }
-        // })
+       
     }
 
     backToProfile = () => {
@@ -88,13 +90,26 @@ class CarePlan extends Component {
         );
         this.props.dispatch({
             type: "SAVE_PET_DETAILS",
-            payload: { ...this.state },
+            payload: {
+                id: this.props.match.params.id,
+                ...this.state
+            },
         });
         this.setState({
             isEditing: !this.state.isEditing,
+            pet_bio:'',
+            feeding_per_day: '',
+            food_brand: '',
+            amount_per_meal: '',
+            pet_behavior: '',
+            care_equipment: '',
+            sex: '',
+            breed: '',
+            weight: '',
+            age: '',
         });
     };
-    handleEditButton =() =>{
+    handleEditButton = () => {
         this.setState({
             isEditing: !this.state.isEditing,
         });
@@ -106,6 +121,7 @@ class CarePlan extends Component {
             [property]: event.target.value
         })
     };
+    
 
     render() {
         const { classes, } = this.props;
@@ -133,9 +149,18 @@ class CarePlan extends Component {
                     <Card>
                         <CardContent>
                             <div>
+                                <Grid className={classes.itemCenter}>
+                                    <Button
+                                        variant="contained"
+                                        onClick={this.backToProfile}
+                                    >
+                                        Back to Profile
+                                </Button>
+                                </Grid>
+
                                 <Typography>
                                     General Info:
-                {this.state.isEditing ? (
+                                {this.state.isEditing ? (
                                         <TextField
                                             id="outlined-basic"
                                             variant="outlined"
@@ -295,38 +320,32 @@ class CarePlan extends Component {
                                     )}{" "}
               years old.{" "}
                             </Typography>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={this.backToProfile}
-                            >
-                                Back to Profile
-            </Button>
-                            {/* <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={this.handleEditToggle}
-                            >
-                                {this.state.isEditing ? "Save" : "Edit"}
-                            </Button> */}
 
 
 
-                            {this.state.isEditing ?
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={this.handleEditToggle}
-                                >Save </Button>
+                            <Grid className={classes.itemCenter}>
+                                {this.state.isEditing ?
+                                    <>
+                                        <Button
+                                            variant="contained"
+                                            onClick={this.handleEditButton}
+                                        >Cancel </Button>
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={this.handleEditToggle}
+                                        >Save </Button>
+                                    </>
 
-                                :
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick = {this.handleEditButton}
-                                >Edit </Button>
+                                    :
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={this.handleEditButton}
+                                    >Edit </Button>
 
-                            }
+                                }
+                            </Grid>
                         </CardContent>
                     </Card>
 
@@ -339,7 +358,6 @@ class CarePlan extends Component {
     }
 }
 const mapStateToProps = (state) => ({
-    careplan: state.petCarePlan[0],
     petCarePlan: {
         pet_name: '',
         feeding_per_day: '',

@@ -91,20 +91,26 @@ class ClientServiceRequest extends Component {
     }
 
     handleSendRequest = () => {
-        console.log("Clicked Send Request", this.state)
-        this.props.dispatch({type: 'SET_CLIENT_SERVICE_REQUEST', payload:this.state})
-        this.props.history.push("/clientDashboard")
+        console.log("Clicked Send Request", this.props.user)
+        // this.props.dispatch({type: 'SET_CLIENT_SERVICE_REQUEST', payload: this.state})
+        // this.props.history.push("/clientDashboard")
     }
 
 
     render() {
         const { classes } = this.props
         return (
+            <>
+           
+            
             <div className={classes.root}>
                 <div>
                     <Grid className={classes.title}>
                         <FormControl>
                             <Typography className={classes.title} variant="h3">Request Service</Typography>
+                                <div>
+                                    <p>{JSON.stringify(this.props.petInfo)}</p>
+                                </div>
                             <div>
                                 <Typography className={classes.services} variant="h6">Please select service:</Typography>
                                 <br />
@@ -204,6 +210,7 @@ class ClientServiceRequest extends Component {
                                 <div>
                                     <Button className={classes.button} onClick={this.handleCancel} variant="contained" color="primary" >Cancel</Button>
                                     <Button className={classes.button} onClick={this.handleSendRequest} variant="contained" color="primary" >Send Request</Button>
+                                    {/* <Button className={classes.button} onClick={this.getPetData} variant="contained" color="primary" >Get Pet Data</Button> */}
                                 </div>
 
                             </div>
@@ -212,8 +219,9 @@ class ClientServiceRequest extends Component {
                         </FormControl>
                     </Grid>
                 </div>
-
+              
             </div>
+            </>
         );
     }
 }

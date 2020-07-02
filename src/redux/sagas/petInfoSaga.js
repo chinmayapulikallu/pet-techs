@@ -38,6 +38,7 @@ function* getPetCarePlan(action) {
 
 function* savePetDetails(action) {
   try {
+    console.log('send this data to router', action.payload)
     const response = yield axios.put(`/api/pet`, action.payload);
     yield put({
       type: "GET_PET_CARE_PLAN",
@@ -72,7 +73,7 @@ function* updateProfilePicture(action) {
     console.log('send this pets data to router', action.payload.id);
 
     yield put({
-      type: "GET_PET_CARE_PLAN",
+      type: "GET_PET_DATA",
       payload: action.payload,
     });
 

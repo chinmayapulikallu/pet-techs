@@ -1,14 +1,14 @@
 const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
-// const {
-//     rejectUnauthenticated,
-//   } = require("../modules/authentication-middleware");
+const {
+    rejectUnauthenticated,
+  } = require("../modules/authentication-middleware");
 
 /**
  * GET route template
  */
-router.get("/",  (req, res) => {
+router.get("/", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT "client".*, "pet".* from "client" LEFT outer JOIN "pet" ON  "client".user_id = "pet".user_id where client.user_id=4;
 `;
     console.log(req.user.id);

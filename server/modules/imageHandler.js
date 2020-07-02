@@ -29,7 +29,7 @@ const uploadVTPost = async (req, res) => {
 
 const uploadVTProfile = async (req, res) => {
     let profile_img = await uploadToS3(req.file, res);
-    uploadVTProfileToSQL(req, profile_img, res);
+    uploadVTImgProfileToSQL(req, profile_img, res);
 }
 
 
@@ -362,7 +362,7 @@ function uploadVTProfileToSQL(req, profile_img, res) {
     })
 }
 
-function uploadVTProfileToSQL(req, profile_img, res) {
+function uploadVTImgProfileToSQL(req, profile_img, res) {
     return new Promise(resolve => {
         const id = req.user.id;
         console.log('client data from imageHandler', profile_img)

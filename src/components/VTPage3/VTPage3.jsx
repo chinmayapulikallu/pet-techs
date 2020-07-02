@@ -99,13 +99,13 @@ class VTReg3 extends Component {
           <h3 className={classes.title}>
             Tell us about your certifications and expertise:
               </h3>
-          <img
+          {/* <img
             className={classes.img}
             src="images/blank-profile-picture.png"
             alt="profile"
             height="150"
             width="150"
-          />
+          /> */}
           <h5>
             Your expertise as a veterinary professional what makes you stand
             apart and what helps pet owners get to know you.

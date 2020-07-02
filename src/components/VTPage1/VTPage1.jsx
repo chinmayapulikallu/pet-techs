@@ -148,10 +148,7 @@ class VTPage1 extends Component {
 
     this.reader.onloadend = () => {
       this.setState({
-        text: {
           ...this.state,
-
-        },
         profile_img: this.reader.result,
 
 
@@ -441,25 +438,27 @@ class VTPage1 extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  // vtInfoPage1: {
-  //   vet_name: '',
-  //   home_address_house: "",
-  //   apt_suite: "",
-  //   city: "",
-  //   state: "",
-  //   zip_code: "",
-  //   profile_img: "",
-  //   sleep_over: false,
-  //   boarding: false,
-  //   dropin_care: false,
-  //   hospice: false,
-  //   about_vet: "",
-
-  //   ...state.vtInfoPage1, // overrides default with any existing vt values
-  // },
-  // errors: state.errors,
-  vtInfoPage1: state.vtInfoPage1,
-  user: state.user
+  vtInfoPage1: {
+    ...state.vtInfoPage1, // overrides default with any existing vt values
+    text: {
+      vet_name: "",
+      home_address_house: "",
+      apt_suite: "",
+      city: "",
+      state: "",
+      zip_code: "",
+      profile_img: "",
+      sleep_over: false,
+      boarding: false,
+      dropin_care: false,
+      hospice: false,
+      about_vet: "",
+      ...state.vtInfoPage1.text, // overrides default text with any existing vt values
+    },
+  },
+  errors: state.errors,
+  // vtInfoPage1: state.vtInfoPage1,
+  user: state.user,
 });
 
 export default connect(mapStateToProps)(withStyles(styles)(VTPage1));

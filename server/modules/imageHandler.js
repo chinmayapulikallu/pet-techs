@@ -27,6 +27,11 @@ const uploadVTPost = async (req, res) => {
     uploadVTProfileToSQL(req, profile_img, res);
 }
 
+const uploadVTProfile = async (req, res) => {
+    let profile_img = await uploadToS3(req.file, res);
+    uploadVTImgProfileToSQL(req, profile_img, res);
+}
+
 
 
 const generateSignedUrls = async (res, rows) => {
@@ -40,8 +45,8 @@ const generateSignedUrls = async (res, rows) => {
 const addSignedUrls = async rows => {
     const newRows = [];
     for (const row of rows) {
-        const media_url = await generateSignedUrl(row.profile_img);
-        row.media_url = media_url;
+        const profile_img = await generateSignedUrl(row.profile_img);
+        row.profile_img = profile_img;
         newRows.push(row);
     }
     return new Promise(resolve => {
@@ -357,6 +362,24 @@ function uploadVTProfileToSQL(req, profile_img, res) {
     })
 }
 
+function uploadVTImgProfileToSQL(req, profile_img, res) {
+    return new Promise(resolve => {
+        const id = req.user.id;
+        console.log('client data from imageHandler', profile_img)
+
+        const queryText = `UPDATE vet_tech SET profile_img = $2 where vet_tech.user_id = $1;`;
+
+        pool.query(queryText, [id, profile_img])
+            .then((result) => {
+                verbose && console.log('back from db vet_tech table with:', result);
+                res.sendStatus(200);
+            })
+            .catch((error) => {
+                console.log(`Error updating VT by id request.`, error);
+                res.sendStatus(500);
+            })
+    })
+}
 
 
-module.exports = { uploadPost, generateSignedUrls, uploadPetProfile, uploadClientProfile, uploadVTPost };
+module.exports = { uploadPost, generateSignedUrls, uploadPetProfile, uploadClientProfile, uploadVTPost, uploadVTProfile };

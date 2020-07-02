@@ -28,7 +28,7 @@ import VTStepper from "../VTStepper/VTStepper";
 import SearchPage from "../SearchPage/SearchPage";
 
 import ClientDashBoard from "../ClientDashboard/ClientDashboard";
-import CarePlan from "../CarePlan/carePlan";
+import CarePlan from "../CarePlan/CarePlan";
 
 import "./App.css";
 

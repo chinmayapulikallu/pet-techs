@@ -13,8 +13,8 @@ function* petInfoSaga() {
 
 function* getPetData(action) {
   try {
-    const id = action.payload.id
-    const response = yield axios.get(`/api/pet/${id}`);
+    // const id = action.payload.id
+    const response = yield axios.get(`/api/pet/`);
     yield put({
       type: "GET_PET_DATA_SUCCESSFUL",
       payload: response.data,
@@ -38,6 +38,7 @@ function* getPetCarePlan(action) {
 
 function* savePetDetails(action) {
   try {
+    console.log('send this data to router', action.payload)
     const response = yield axios.put(`/api/pet`, action.payload);
     yield put({
       type: "GET_PET_CARE_PLAN",

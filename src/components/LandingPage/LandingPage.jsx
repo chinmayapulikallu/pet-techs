@@ -158,7 +158,7 @@ class LandingPage extends Component {
 
   handSignInClick = () => {
     console.log("ClickedSignIn");
-    this.props.history.push("/home");
+    this.props.history.push("/login");
   };
 
   serviceProviderClick = () => {

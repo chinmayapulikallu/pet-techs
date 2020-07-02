@@ -9,6 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import Button from "@material-ui/core/Button";
+import Link from "@material-ui/core/Link";
 import RadioGroup from "@material-ui/core/RadioGroup";
 
 
@@ -91,6 +92,10 @@ class RegisterPage extends Component {
       });
     }
   };
+  handSignInClick = () => {
+    console.log("ClickedSignIn");
+    this.props.history.push("/login");
+  };
 
   render() {
     const { classes } = this.props
@@ -172,8 +177,11 @@ class RegisterPage extends Component {
              
               <div>
                 <Button className={classes.button} type="submit" name="submit" value="Register" onClick={this.registerUser} variant="contained" color="primary" >Register</Button>
-              
               </div>
+              <div>
+                <Link className={classes.button} onClick={this.handleSignInClick} variant="contained" color='secondary' >Already have an account?</Link>
+              </div>
+
             </FormControl>
           </Grid>
         </div>

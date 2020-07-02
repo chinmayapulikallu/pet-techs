@@ -14,13 +14,14 @@ const { uploadPetProfile, generateSignedUrls } = require("../modules/imageHandle
  * GET route for Pets by client ID
  */
 
-router.get("/:id", (req, res) => {
+router.get("/", (req, res) => {
   //   const sqlText = `SELECT  pet.id, "user_id", "pet_type", "pet_name","weight", "age", 
   //                    "sex", "breed", "pet_bio", "food_brand", "feeding_per_day",
   //                    "amount_per_meal", "other_food", "pet_behavior", "care_equipment", array_agg(pet_picture.pet_profile_img), array_agg(pet_picture.pet_img)
   //                     FROM pet 
   //                   JOIN pet_picture ON pet.id = pet_picture.pet_id WHERE pet.user_id = $1 GROUP BY pet.id ;`;
   const sqlText = `SELECT * from pet where user_id = $1;`;
+  console.log("pet data req.user.id :: ", req.user.id)
   pool
     .query(sqlText, [req.user.id])
     // .then((response) => {
@@ -37,17 +38,12 @@ router.get("/:id", (req, res) => {
     res.sendStatus(500);
   });
 });
+
 // GET route for careplan - specific pet by ID
-router.get("/careplan/:id", (req, res) => {
+router.get("/careplan/:id",rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * from pet where pet.id = $1; `;
   pool
     .query(sqlText, [req.params.id])
-    // .then((response) => {
-    //   console.log("pet careplan data:", response.rows[0]);
-    //   //Since we only need the first, and only row, we are setting the index to 0.
-    //   res.send(response.rows[0]);
-    // })
-
     .then((response) => {
       console.log("pet data:", response.rows);
     generateSignedUrls(res, response.rows);
@@ -61,7 +57,7 @@ router.get("/careplan/:id", (req, res) => {
  * POST route for PET INFO
  */
 router.post("/", async (req, res) => {
-  console.log("In pet router post", req.body);
+  // console.log("In pet router post", req.body);
   try {
     for (let i = 0; i < req.body.pets.length; i++) {
       let queryPet = `INSERT INTO "pet" 
@@ -86,9 +82,9 @@ router.post("/", async (req, res) => {
         req.body.pets[i].pet_behavior,
         req.body.pets[i].care_equipment,
       ];
-      console.log("pet info::::", valuesPet);
+      // console.log("pet info::::", valuesPet);
       let result = await pool.query(queryPet, valuesPet);
-      console.log("results for ID", result.rows);
+      // console.log("results for ID", result.rows);
       for (let j = 0; j < req.body.pets[i].medications.length; j++) {
         let queryMedication = `INSERT INTO "medication" 
                                ("pet_id", "medication_name", "dosage", "dosage_time")
@@ -99,7 +95,7 @@ router.post("/", async (req, res) => {
           req.body.pets[i].medications[j].dosage,
           req.body.pets[i].medications[j].dosage_time,
         ];
-        console.log("medication info::::", valuesMedication);
+        // console.log("medication info::::", valuesMedication);
         let medicationResult = await pool.query(
           queryMedication,
           valuesMedication
@@ -115,7 +111,7 @@ router.post("/", async (req, res) => {
 
 });
 
-router.put("/", rejectUnauthenticated, (req, res) => {
+router.put("/", (req, res) => {
   const { id, pet_bio, care_equipment, age, weight, pet_behavior, feeding_per_day, food_brand, amount_per_meal } = req.body;
   const sqlText = `UPDATE pet SET pet_bio = $2, care_equipment = $3, age = $4, weight = $5, 
     pet_behavior = $6, feeding_per_day = $7, food_brand = $8, amount_per_meal = $9 where pet.id = $1; `;

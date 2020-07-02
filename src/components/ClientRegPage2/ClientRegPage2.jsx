@@ -106,6 +106,7 @@ class ClientRegPage2 extends Component {
         console.log('changing', event.target.files[0])
 
         this.setState({
+            ...this.state,
             file: event.target.files[0]
         });
     }

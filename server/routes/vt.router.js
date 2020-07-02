@@ -160,7 +160,7 @@ router.get("/hospice", rejectUnauthenticated, (req, res) => {
 /**
  * POST route template
  */
-router.post("/",rejectUnauthenticated, upload.single("file"), (req, res) => {
+router.post("/", upload.single("file"), (req, res) => {
   uploadVTPost(req, res);
   console.log("---->VT id from post route", req.body);
 });

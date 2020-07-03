@@ -212,6 +212,7 @@ class VTProfile extends Component {
 
   handleBack = () => {
     console.log(this.props.vtInfo);
+    this.props.history.push('/search');
   };
 
   //-----------------------------------

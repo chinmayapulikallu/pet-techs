@@ -67,41 +67,46 @@ class ClientRegPage2 extends Component {
         ...this.props,
     }
 
-    // autoFillForm = () => {
-    //     this.setState({
-    //         pets: [
-    //             {
-    //                 id: 1,
-    //                 pet_type: 'Cat',
-    //                 other_pet: '',
-    //                 pet_name: 'Sampson',
-    //                 weight: '15',
-    //                 age: '5',
-    //                 breed: 'f',
-    //                 pet_bio: 'I love food',
-    //                 sex: 'male',
-    //                 food_brand: 'Control weight',
-    //                 feeding_per_day: '2',
-    //                 amount_per_meal: '1 cup',
-    //                 optional_food: 'nope',
-    //                 care_equipment: 'cope',
-    //                 pet_behavior: 'Good boy',
-    //                 medications: [
-    //                     {
-    //                         id: 1,
-    //                         pet_id: '',
-    //                         medication_name: 'Nope',
-    //                         medication_dosage: 'nope',
-    //                         dosage_time: new Date()
-    //                     }
-    //                 ],
-    //             }
-    //         ]
-    //     })
-    // }
+    //autofill form
+    autoFillForm = () => {
+        this.setState({
+            petInfo: {
+                pets: [
+                    {
+                        id: 1,
+                        pet_type: 'cat',
+                        other_pet: '',
+                        pet_name: 'Chase',
+                        weight: '2',
+                        age: 3,
+                        breed: 'pug',
+                        pet_bio: 'healthy',
+                        sex: 'male',
+                        food_brand: 'Pedigree',
+                        feeding_per_day: 2,
+                        amount_per_meal: 'cup',
+                        optional_food: 'snack',
+                        care_equipment: 'none needed',
+                        pet_behavior: 'cool',
+                        medications: [
+                            {
+                             id: 1,
+                             pet_id: '1',
+                             medication_name: 'medication',
+                             dosage: 1,
+                             dosage_time: new Date()
+                            }
+                        ],
+                    }
+                ],
+            }
+        })
+    }
+
     componentDidMount() {
         console.log('componentDidMount :: ', this.state)
     }
+
     handlePictureChangeFor = (event) => {
         console.log('changing', event.target.files[0])
 
@@ -110,6 +115,7 @@ class ClientRegPage2 extends Component {
             file: event.target.files[0]
         });
     }
+
     handleSavePicture = (event) => {
         this.props.dispatch({
             type: 'UPLOAD_PICTURE_CLIENT',
@@ -149,15 +155,13 @@ class ClientRegPage2 extends Component {
                             {
                                 id: 1,
                                 medication_name: '',
-                                medication_dosage: '',
+                                dosage: '',
                                 dosage_time: new Date()
                             }
                         ]
                     }]
             }
         })
-
-
     }
 
     //add Medication
@@ -168,9 +172,9 @@ class ClientRegPage2 extends Component {
         currentPet.medications.push(
             {
                 id: nextMedicationId,
-                pet_id: '',
+                pet_id: petId,
                 medication_name: '',
-                medication_dosage: '',
+                dosage: '',
                 dosage_time: new Date()
             }
         )
@@ -189,15 +193,26 @@ class ClientRegPage2 extends Component {
         this.props.onBack();
     }
 
-
     handleChange = (petId, property) => (event) => {
         console.log(petId, property, event.target, this.state.petInfo);
         const currentPet = this.state.petInfo.pets.find(pet => pet.id === petId)
+
         if (event.target.value === "true" || event.target.value === "false") {
             currentPet[property] = (event.target.value === "true")
         } else {
             currentPet[property] = event.target.value
         }
+
+        //enable/disable other pet type text field
+        if(property === 'pet_type') {
+            if(event.target.value === 'other') {
+                document.getElementById("otherPet" + petId).removeAttribute('disabled')
+            } else {
+                document.getElementById("otherPet" + petId).setAttribute('disabled', 'true')
+                currentPet['other_pet'] = ''
+            }  
+        }
+
         this.setState({
             ...this.state,
             petInfo: {
@@ -259,15 +274,14 @@ class ClientRegPage2 extends Component {
         alert('upload photo');
     }
  
-
-
     render() {
         const { classes } = this.props;
 
         return (
             <Container className={classes.root} maxWidth="md">
                 <Typography variant="h4" className={classes.title}>
-                    Pet Infomation
+                    Pet Information
+                    <Button onClick={this.autoFillForm}></Button>
           {/* <Button onClick={this.autoFillForm}></Button> */}
                 </Typography>
 
@@ -282,7 +296,7 @@ class ClientRegPage2 extends Component {
                                         <InputLabel id="demo-simple-select-outlined-label">Pet Type</InputLabel>
                                         <Select native
                                             labelId="demo-simple-select-outlined-label"
-                                            id="demo-simple-select-outlined"
+                                            id={"petType" + pet.id}
                                             color="secondary"
                                             value={pet.pet_type}
                                             onChange={this.handleChange(pet.id, 'pet_type')}
@@ -306,6 +320,7 @@ class ClientRegPage2 extends Component {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
+                                        id={"otherPet" + pet.id}
                                         label="If others, please specify"
                                         type="text"
                                         value={pet.other_pet}
@@ -336,10 +351,11 @@ class ClientRegPage2 extends Component {
                                 <Grid item xs={12}>
                                     <FormControl component="fieldset">
                                         <RadioGroup defaultValue="male" aria-label="gender" className={classes.radioAlignment}
-                                            name="customized-radios" onChange={this.handleChange(pet.id, 'sex')}>
+                                            name="customized-radios" onChange={this.handleChange(pet.id, 'sex')} 
+                                            value={pet.sex}>
                                             <FormControlLabel value="male" control={<Radio />} label="Male" />
                                             <FormControlLabel value="female" control={<Radio />} label="Female" />
-                                        </RadioGroup>
+                                        </RadioGroup>   
                                     </FormControl>
                                     <TextField
                                         label="Breed"
@@ -424,9 +440,9 @@ class ClientRegPage2 extends Component {
                                                 label="Optional *dosage "
                                                 type="text"
                                                 variant="outlined"
-                                                value={medication.medication_dosage}
+                                                value={medication.dosage}
                                                 className={classes.inputField}
-                                                onChange={this.handleMedicationChange(pet.id, medication.id, 'medication_dosage')}
+                                                onChange={this.handleMedicationChange(pet.id, medication.id, 'dosage')}
                                             />
                                             <DatePicker
                                                 selected={medication.dosage_time}
@@ -437,13 +453,6 @@ class ClientRegPage2 extends Component {
                                                 timeCaption="Time"
                                                 dateFormat="h:mm aa"
                                             />
-                                            {/* <TextField
-                                label="Time Of Day"
-                                type="text"
-                                variant="outlined"
-                                className={classes.inputField} 
-                                onChange={this.handleChange('dosage_time')}
-                            /> */}
                                             <br />
                                         </div>
                                     )}
@@ -523,15 +532,7 @@ const mapStateToProps = (state) => ({
                 optional_food: '',
                 care_equipment: '',
                 pet_behavior: '',
-                medications: [
-                    {
-                        id: 1,
-                        pet_id: '',
-                        medication_name: '',
-                        medication_dosage: '',
-                        dosage_time: new Date()
-                    }
-                ],
+                medications: [],
             }
         ],
         ...state.petInfo

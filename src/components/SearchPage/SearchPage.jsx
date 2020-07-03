@@ -319,7 +319,7 @@ class SearchPage extends Component {
                       </div>
                       <div className={classes.outlined}>
                         <Typography variant="subtitle1">
-                          {vet.bioyourself}
+                          {vet.bioYourself}
                         </Typography>
                       </div>
                       <Button

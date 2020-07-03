@@ -92,7 +92,7 @@ class Pet extends Component {
     }
     handleCarePlanButton = () => {
         this.props.history.push(`/careplan/${this.props.pet.id}`);
-        
+
     }
     handlePictureChangeFor = (event) => {
         console.log('changing', event.target.files[0])
@@ -147,10 +147,10 @@ class Pet extends Component {
                                                         <button onClick={this.handleEditPicture}>Edit</button>
                                                         {this.props.pet.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                                                             <>
-                                                                <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                                                <img className={classes.img} src="images/paw-gress-icon.png" alt="profile" height="150" width="150" />
                                                             </>
                                                             :
-                                                            <img className={classes.img} src={this.props.pet.profile_img} alt={this.props.pet.profile_img} height="150" width="150" />
+                                                            <img className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img} height="150" width="150" />
                                                         }
                                                     </>
                                                     :
@@ -162,12 +162,12 @@ class Pet extends Component {
                                             </>
                                             :
                                             <>
-                                                {this.props.pet.profile_img === 'images/blank-profile-picture.png' ?
+                                                {this.props.pet.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                                                     <>
-                                                        <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                                        <img className={classes.img} src="images/paw-gress-icon.png" alt="profile" height="150" width="150" />
                                                     </>
                                                     :
-                                                    <img className={classes.img} src={this.props.pet.profile_img} alt={this.props.pet.profile_img} height="150" width="150" />
+                                                    <img className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img} height="150" width="150" />
                                                 }
                                             </>
                                         }

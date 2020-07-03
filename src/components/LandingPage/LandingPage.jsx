@@ -41,7 +41,7 @@ const styles = (theme) => ({
   },
   test: {
     position: "absolute",
-    top: "1850px",
+    top: "2000px",
     left: "70px",
   },
   description: {
@@ -78,13 +78,13 @@ const styles = (theme) => ({
     margin: "25px",
     textAlign: "center",
     justifyContent: "center",
-    marginBottom: 30,
+    marginBottom: 50,
     backgroundColor: "transparent",
     fontSize: 100,
   },
   catPaw: {
     position: "absolute",
-    top: "25%",
+    top: "35%",
     left: "65%",
     borderRadius: 40,
   },

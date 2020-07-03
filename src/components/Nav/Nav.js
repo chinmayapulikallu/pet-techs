@@ -77,10 +77,12 @@ class Nav extends Component {
                 </Link>
 
                 <Link className="nav-link" to="/search">
-                  Search for services
+                  Search for Services
                 </Link>
               </>
+              
             )}
+            
             <Link className="nav-link" to="/about">
               About
             </Link>
@@ -118,6 +120,7 @@ class Nav extends Component {
                     {/* <p>here{JSON.stringify(client.profile_img)}</p> */}
                   </Link>
                 </div>
+                
                 <LogOutButton className="nav-link" />
               </>
             )}

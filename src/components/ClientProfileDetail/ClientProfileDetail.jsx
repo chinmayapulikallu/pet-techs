@@ -110,7 +110,7 @@ const styles = theme => ({
         width: "75%",
         border: "2px solid #195C60",
     },
-    paperOther:{
+    paperOther: {
         marginTop: 20,
         borderRadius: "5px",
         width: "100%",
@@ -295,12 +295,10 @@ class ClientProfileDetail extends Component {
                                 {this.state.editable ?
                                     <>
                                         <button onClick={this.handleClickOpen}>Edit</button>
-                                        {this.props.client.profile_img === 'images/blank-profile-picture.png' ?
-                                            <>
-                                                <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="200" width="200" />
-                                            </>
+                                        {this.props.client.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
+                                            <img className={classes.img} src="images/blank-profile-picture.png" alt="blank-profile" height="200" width="200" />
                                             :
-                                            <img className={classes.img} src={this.props.client.profile_img} alt={this.props.client.profile_img} height="200" width="200" />
+                                            <img className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} height="200" width="200" />
                                         }
 
                                         <Dialog
@@ -334,12 +332,10 @@ class ClientProfileDetail extends Component {
                                     </>
                                     :
                                     <>
-                                        {this.props.client.profile_img === 'images/blank-profile-picture.png' ?
-                                            <>
-                                                <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="200" width="200" />
-                                            </>
+                                        {this.props.client.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
+                                            <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="200" width="200" />
                                             :
-                                            <img className={classes.img} src={this.props.client.profile_img} alt={this.props.client.profile_img} height="200" width="200" />
+                                            <img className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} height="200" width="200" />
                                         }
                                     </>
                                 }
@@ -449,7 +445,7 @@ class ClientProfileDetail extends Component {
                                 <Grid container spacing={3}>
                                     <Pet
                                         pet={pet}
-                                        editable = {this.state.editable}
+                                        editable={this.state.editable}
                                     />
                                 </Grid>
 
@@ -480,7 +476,7 @@ class ClientProfileDetail extends Component {
                                 </>
                                 :
                                 <>
-                                   
+
                                     <Grid>
                                         <Paper elevation={5} className={classes.paperOther}>
                                             <div>
@@ -490,8 +486,8 @@ class ClientProfileDetail extends Component {
                                                 />
                                             </div>
                                             <div >
-                                                <Typography variant="subtitle1" className = {classes.contentInTable}>
-                                                {this.state.about_equipment}
+                                                <Typography variant="subtitle1" className={classes.contentInTable}>
+                                                    {this.state.about_equipment}
                                                 </Typography>
                                             </div>
                                         </Paper>
@@ -517,7 +513,7 @@ class ClientProfileDetail extends Component {
                                 </>
                                 :
                                 <>
-                                   
+
                                     <Grid>
                                         <Paper elevation={5} className={classes.paperOther}>
                                             <div>
@@ -527,8 +523,8 @@ class ClientProfileDetail extends Component {
                                                 />
                                             </div>
                                             <div >
-                                                <Typography variant="subtitle1" className = {classes.contentInTable}>
-                                                {this.state.about_home}
+                                                <Typography variant="subtitle1" className={classes.contentInTable}>
+                                                    {this.state.about_home}
                                                 </Typography>
                                             </div>
                                         </Paper>

@@ -213,6 +213,7 @@ class VTProfile extends Component {
   handleBack = () => {
     this.props.history.goBack();
     console.log(this.props.vtInfo);
+    this.props.history.push('/search');
   };
 
   //-----------------------------------
@@ -259,6 +260,7 @@ class VTProfile extends Component {
     const { classes } = this.props;
     return (
       <div>
+        {JSON.stringify(this.props.vetProfile)}
         <div className={classes.mainHeader}>
           <Container maxWidth="md" className={classes.root}>
             <Grid container spacing={10} className={classes.editContainer}>
@@ -320,14 +322,14 @@ class VTProfile extends Component {
                 {this.state.editable ?
                   <>
                     <button onClick={this.handleClickOpen}>Edit</button>
-                    {this.state.profile_img === 'images/blank-profile-picture.png' ?
+                    {this.state.profile_img === "3e541de1f0419c15034e45c05eb3becd'::text" ?
                       <>
                         <img className={classes.profilePic}
-                          src="images/blank-profile-picture.png" alt="profile"  />
+                          src="images/blank-profile-picture.png" alt="profile" />
                       </>
                       :
                       <img className={classes.profilePic}
-                        src={this.state.profile_img} alt={this.state.profile_img}  />
+                        src={this.state.media_url} alt={this.state.profile_img} />
                     }
 
                     <Dialog
@@ -359,14 +361,14 @@ class VTProfile extends Component {
                   </>
                   :
                   <>
-                    {this.state.profile_img === 'images/blank-profile-picture.png' ?
+                    {this.state.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                       <>
                         <img className={classes.profilePic}
-                          src="images/blank-profile-picture.png" alt="profile"  />
+                          src="images/blank-profile-picture.png" alt="profile" height='200' width='200' />
                       </>
                       :
                       <img className={classes.profilePic}
-                        src={this.state.profile_img} alt={this.state.profile_img}  />
+                        src={this.state.media_url} alt={this.state.profile_img} height='200' width='200' />
                     }
                   </>
                 }
@@ -892,12 +894,12 @@ class VTProfile extends Component {
                       fullWidth
                       rows={7}
                       variant="outlined"
-                      defaultValue={this.state.bioYourself}
-                      onChange={this.handleChange("bioYourself")}
+                      defaultValue={this.state.bioyourself}
+                      onChange={this.handleChange("bioyourself")}
                     />
                   ) : (
                       <div className={classes.equipment}>
-                        {this.state.bioYourself}
+                        {this.state.bioyourself}
                       </div>
                     )}
                 </Typography>

@@ -288,13 +288,21 @@ class SearchPage extends Component {
                         title={vet.vet_name}
                         className={classes.header}
                       />
-                      <img
-                        className={classes.profPic}
-                        src={vet.profile_img}
-                        alt="profilePic"
-                        height="100"
-                        width="100"
-                      />
+                      
+                      {vet.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
+                        <>
+                          <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                        </>
+                        :
+                        <img
+                          className={classes.profPic}
+                          src={vet.media_url}
+                          alt="profilePic"
+                          height="100"
+                          width="100"
+                        />
+                      }
+
                       <Typography
                         className={classes.certifications}
                         variant="h6"
@@ -319,7 +327,7 @@ class SearchPage extends Component {
                       </div>
                       <div className={classes.outlined}>
                         <Typography variant="subtitle1">
-                          {vet.bioyourself}
+                          {vet.bioYourself}
                         </Typography>
                       </div>
                       <Button

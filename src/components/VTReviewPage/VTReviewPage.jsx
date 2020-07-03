@@ -108,17 +108,17 @@ class VTReviewPage extends Component {
 
     return (
       <Container className={classes.root} maxWidth="sm">
-        {/* <h1>{JSON.stringify(vtInfoPage1)}</h1> */}
-        {/* <h1>{JSON.stringify(vtInfoPage2)}</h1> */}
-        {/* <h1>{JSON.stringify(vtInfoPage3)}</h1> */}
+        {/* <h1>{JSON.stringify(vtInfoPage1)}</h1>
+        <h1>{JSON.stringify(vtInfoPage2)}</h1> */}
+       
 
 
         <h1 className={classes.title}>Vet tech review</h1>
         <p>
-          Your name: <spand>{vtInfoPage1.text.vet_name}</spand>
+          Your name: <span>{vtInfoPage1.text.vet_name}</span>
         </p>
         <p>
-          Home address: <spand>{vtInfoPage1.text.home_address_house}</spand>
+          Home address: <span>{vtInfoPage1.text.home_address_house}</span>
         </p>
         <p>
           Apartment or Suite #: <span>{vtInfoPage1.text.apt_suite}</span>
@@ -143,7 +143,7 @@ class VTReviewPage extends Component {
           Pet Boarding: <span>{vtInfoPage1.text.boarding}</span>
         </p>
         <p>
-          Drop In Care: <span>{vtInfoPage1.text.dropin_care}</span>
+          Drop In Care: <span>{vtInfoPage1.text.dropin_care ? "True" : "False"}</span>
         </p>
         <p>
           Hospice Care: <span>{vtInfoPage1.text.hospice}</span>

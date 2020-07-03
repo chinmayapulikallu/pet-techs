@@ -532,7 +532,12 @@ const mapStateToProps = (state) => ({
                 optional_food: '',
                 care_equipment: '',
                 pet_behavior: '',
-                medications: [],
+                medications: [
+                    {
+                        medication_name: '',
+                        dosage_time: new Date()
+                    }
+                ],
             }
         ],
         ...state.petInfo

@@ -109,7 +109,7 @@ class ClientServiceRequest extends Component {
                         <FormControl>
                             <Typography className={classes.title} variant="h3">Request Service</Typography>
                                 <div>
-                                    {/* <p>{JSON.stringify(this.props.petInfo)}</p> */}
+                                
                                 </div>
                             <div>
                                 <Typography className={classes.services} variant="h6">Please select service:</Typography>

@@ -15,6 +15,9 @@ const UserPage = (props) => {
       case 1:
         props.history.push(`/vtdashboard`);
         break;
+      default:
+        props.history.push(`/clientdashboard`);
+        break;
     }
   }
 

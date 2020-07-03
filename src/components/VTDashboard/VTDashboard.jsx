@@ -12,6 +12,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableContainer from "@material-ui/core/TableContainer";
+const moment = require('moment');
 
 const styles = theme => ({
   img: {
@@ -26,34 +27,42 @@ class VTDashboard extends Component {
   componentDidMount = () => {
     // get dashboard info for Vet Tech, get request
     // const currentId = this.props.match.params.id
+     console.log('component mounted Vt dashboard:::::', this.props.clientRequest)
     this.props.dispatch({
       type: "GET_VT_DATA",
       // payload: currentId,
     })
-    console.log('component mounted', this.props.match.params.id)
+    this.props.dispatch({
+      type: 'GET_VT_SERVICE_REQUEST'
+      // payload: { id: currentId }
+    })
+   
   };
   // not sure if these will be the exact paths, or types, placeholders for now.
-  detailsButton = (event) => {
-    this.props.dispatch({
-      type: "GET_VT_SERVICE_REQUEST_BY_ID",
-      payload: event.currentTarget.value,
-    });
-    this.props.history.push("/vtservicerequest");
+  detailsButton = (vetID) => {
+    // this.props.dispatch({
+    //   type: "GET_VT_SERVICE_REQUEST_BY_ID",
+    //   payload: event.currentTarget.value,
+    // });
+    this.props.history.push(`/vt-service/${vetID}`);
   };
   // not sure if these will be the exact paths, or types, placeholders for now.
-  viewButton = (event) => {
+  viewButton = (petID) => {
+    // this.props.dispatch({
+    //   type: "GET_CARE_PLAN__BY_ID",
+    //   payload: event.currentTarget.value,
+    // });
+    this.props.history.push(`/careplan/${petID}`);
     this.props.dispatch({
-      type: "GET_CARE_PLAN__BY_ID",
-      payload: event.currentTarget.value,
-    });
-    this.props.history.push("/careplan");
+      type: 'GET_PET_CARE_PLAN',
+      payload: { id: petID }
+    })
   };
   render() {
-    const { classes } = this.props;
+    const { classes, clientRequest, petInfo } = this.props;
 
     return (
       <div>
-        {JSON.stringify(this.props.vtInfo)}
         {this.props.vtInfo.map((vt) => {
           return (
             <div key={vt.id}>
@@ -78,28 +87,29 @@ class VTDashboard extends Component {
                     <TableHead>
                       <TableRow>
                         <TableCell>Name</TableCell>
-
                         <TableCell>Date</TableCell>
                         <TableCell>Client Name</TableCell>
                         <TableCell>Details</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Date</TableCell>
-                        <TableCell>Client Name</TableCell>
+                      {clientRequest.map(request => 
+                      <TableRow key={request.id}>
+                        <TableCell>{request.pet_name}</TableCell>
+                          <TableCell>{moment(request.start_date_time).format("MMM Do YYYY")}</TableCell>
+                      <TableCell>{request.client_name}</TableCell>
                         <TableCell>
                           <Button
                             size="small"
                             variant="contained"
                             // will need to add a value, (id) for event to capture.
-                            onClick={this.detailsButton}
+                              onClick={() => this.detailsButton(request.vet_id)}
                           >
                             Details
                     </Button>
                         </TableCell>
                       </TableRow>
+                      )}
                     </TableBody>
                   </Table>
                 </TableContainer>
@@ -117,21 +127,23 @@ class VTDashboard extends Component {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Date</TableCell>
-                        <TableCell>Species</TableCell>
+                      {clientRequest.map(petRequest => 
+                      <TableRow key={petRequest.id}>
+                        <TableCell>{petRequest.pet_name}</TableCell>
+                          <TableCell>{moment(petRequest.start_date_time).format("MMM Do YYYY")}</TableCell>
+                        <TableCell>{petRequest.pet_type}</TableCell>
                         <TableCell>
                           <Button
                             size="small"
                             variant="contained"
                             // will need to add a value, (id) for event to capture.
-                            onClick={this.viewButton}
+                            onClick={() => this.viewButton(petRequest.id)}
                           >
                             View
                     </Button>
                         </TableCell>
                       </TableRow>
+                      )}
                     </TableBody>
                   </Table>
                 </TableContainer>
@@ -143,10 +155,12 @@ class VTDashboard extends Component {
     );
   }
 }
-const mapStateToProps = (state) => ({
+const mapStateToProps = (reduxState) => ({
   // not sure about the reducer names yet
-  clientInfo: state.clientInfo,
-  vtInfo: state.vtInfo,
+  // clientInfo: state.clientInfo,
+  vtInfo: reduxState.vtInfo,
+  petInfo: reduxState.petInfo,
+  clientRequest: reduxState.clientRequestReducer,
 
 });
 

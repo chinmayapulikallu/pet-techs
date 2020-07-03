@@ -33,25 +33,21 @@ const {
  * 
  * Gets client_request and vet name for the current user's pets
  */
-router.get('/', (req, res) => {
-  const requestStatus = req.params.request_status
+router.get('/client', (req, res) => {
   const getPetIdsForGivenUser = `select pet.id from pet where user_id = $1`
   pool.query(getPetIdsForGivenUser, [req.user.id])
     .then((response) => {
       let petIdsForGivenUser = [...response.rows.map(pet => pet.id)]
-        console.log(" PetIdsForGivenUser :: ", petIdsForGivenUser);
+      console.log(" PetIdsForGivenUser :: ", petIdsForGivenUser, req.user.id);
         
-      let sqlText = `select client_request.*, vet_tech.vet_name, pet.pet_name 
+      let sqlText = `select client_request.*, vet_tech.vet_name, pet.pet_name,
+       (select client_name from client where client.user_id = $2) 
         from client_request, vet_tech, pet 
         where client_request.vet_id = vet_tech.user_id 
           and client_request.pet_id = pet.id 
           and client_request.pet_id = ANY($1::int[])`
-      if (requestStatus) {
-        sqlText += ` and client_request.request_status = $2`
-      }
-      let sqlQueryParams = [petIdsForGivenUser]
         pool
-          .query(sqlText, [petIdsForGivenUser])
+          .query(sqlText, [petIdsForGivenUser, req.user.id])
           .then((response) => {
             console.log(" client service request:", response.rows);
             //Since we only need the first, and only row, we are setting the index to 0.
@@ -71,7 +67,7 @@ router.get('/', (req, res) => {
 /**
  * POST route template
  */
-router.post("/", (req, res) => {
+router.post("/client", (req, res) => {
     console.log("client request post::::", req.body, req.user.id, req.user.user_email);
     const hasEnvVariables =
     process.env.SENDGRID_API_KEY && process.env.SENDGRID_FROM_EMAIL;
@@ -183,5 +179,29 @@ router.post("/", (req, res) => {
   
 
 // });
+
+
+
+/***
+ * GET Service request for the Vet Tech
+ */
+
+router.get("/vt", (req, res) => {
+  console.log("in vt :::: ", req.user.id)
+  const sqlText = `select client_request.start_date_time, pet.pet_name, client_request.vet_id,pet.id, 
+                  client.client_name, pet.pet_type from client_request, pet, client where
+                  client_request.pet_id = pet.id and pet.user_id = client.user_id and 
+                  client_request.vet_id = $1;`;
+  pool
+    .query(sqlText, [req.user.id])
+    .then((response) => {
+      // console.log(" client service request:", response.rows);
+      res.send(response.rows);
+    })
+    .catch((error) => {
+      console.log(`Error getting service request for vet tech.`, error);
+      res.sendStatus(500);
+    });
+});
 
 module.exports = router;

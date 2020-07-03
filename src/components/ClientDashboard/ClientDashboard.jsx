@@ -274,7 +274,7 @@ class ClientDashboard extends Component {
                             </CardContent>
                  </Card>
                      </Grid>
-                    )}
+                    )} 
                 </Grid>
             </Container>
         )

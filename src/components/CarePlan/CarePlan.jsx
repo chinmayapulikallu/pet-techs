@@ -552,7 +552,7 @@ class CarePlan extends Component {
               </Grid>
             </CardContent>
           </Card>
-        </div>
+        {/* </div> */}
       </Container>
     );
   }

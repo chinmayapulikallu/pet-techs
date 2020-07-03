@@ -31,7 +31,7 @@ CREATE TABLE client (
   city varchar (100) NOT NULL,
   state varchar (20) NOT NULL,
   zip_code int NOT NULL,
-  profile_img varchar (1000) DEFAULT '3e541de1f0419c15034e45c05eb3becd',
+  profile_img text DEFAULT '3e541de1f0419c15034e45c05eb3becd',
   about_client text NOT NULL,
   about_home text NOT NULL,
   about_equipment text NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE vet_tech (
   city varchar (80) NOT NULL,
   state varchar (80) NOT NULL,
   zip_code int NOT NULL,
-  profile_img varchar (1000) DEFAULT '3e541de1f0419c15034e45c05eb3becd',
+  profile_img text DEFAULT '3e541de1f0419c15034e45c05eb3becd',
   sleep_over boolean DEFAULT FALSE,
   boarding boolean DEFAULT FALSE,
   dropin_care boolean DEFAULT FALSE,
@@ -121,9 +121,9 @@ CREATE TABLE medication (
   pet_id INT NOT NULL
          REFERENCES pet (id)
          ON DELETE CASCADE ,
-  medication_name varchar (500) ,
-  dosage varchar (500) ,
-  dosage_time timestamp with time zone
+  medication_name varchar (500) DEFAULT NULL,
+  dosage varchar (500)  DEFAULT NULL,
+  dosage_time timestamp with time zone  DEFAULT NULL
 );
 
 CREATE TABLE pet_picture (

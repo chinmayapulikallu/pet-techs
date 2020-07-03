@@ -5,6 +5,8 @@ const clientRequestReducer = (state = [], action) => {
       return action.payload;
     case "SET_VT_REQUEST":
       return action.payload;
+      case "UNSET_REQUEST":
+          return [];
     default:
       return state;
   }

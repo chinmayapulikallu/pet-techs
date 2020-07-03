@@ -41,7 +41,7 @@ router.get("/", (req, res) => {
 
 // GET route for careplan - specific pet by ID
 router.get("/careplan/:id",rejectUnauthenticated, (req, res) => {
-  const sqlText = `SELECT * from pet where pet.id = $1; `;
+  const sqlText = `select * from pet join medication on medication.pet_id = pet.id where pet.id = $1;`;
   pool
     .query(sqlText, [req.params.id])
     .then((response) => {
@@ -112,9 +112,11 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/", (req, res) => {
+  console.log("ROUTER PUT FOR CARE PLAN")
   const { id, pet_bio, care_equipment, age, weight, pet_behavior, feeding_per_day, food_brand, amount_per_meal } = req.body;
   const sqlText = `UPDATE pet SET pet_bio = $2, care_equipment = $3, age = $4, weight = $5, 
     pet_behavior = $6, feeding_per_day = $7, food_brand = $8, amount_per_meal = $9 where pet.id = $1; `;
+    console.log("ROUTER PUT FOR CARE PLAN")
   pool
     .query(sqlText, [id, pet_bio, care_equipment, age, weight, pet_behavior, feeding_per_day, food_brand, amount_per_meal])
     .then((response) => {

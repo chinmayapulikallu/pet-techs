@@ -65,7 +65,7 @@ class Footer extends Component {
                 F.A.Q.
               </Link>
               <Link className="nav-link" to="/">
-                Leanring & Resources
+                Learning & Resources
               </Link>
 
             </div>

@@ -220,7 +220,12 @@ class VTProfile extends Component {
 
   uppy = Uppy({
     meta: { type: 'profilePicture' },
-    restrictions: { maxNumberOfFiles: 1 },
+    restrictions: {
+      maxNumberOfFiles: 1,
+      maxFileSize: 5000000,
+      allowedFileTypes: ['image/*'],
+      // dimensions: { width: 1200, height: 800 },
+    },
     autoProceed: true
   })
   reader = new FileReader()
@@ -322,14 +327,14 @@ class VTProfile extends Component {
                 {this.state.editable ?
                   <>
                     <button onClick={this.handleClickOpen}>Edit</button>
-                    {this.state.profile_img === "3e541de1f0419c15034e45c05eb3becd'::text" ?
+                    {this.state.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                       <>
                         <img className={classes.profilePic}
                           src="images/blank-profile-picture.png" alt="profile" />
                       </>
                       :
                       <img className={classes.profilePic}
-                        src={this.state.media_url} alt={this.state.profile_img} />
+                        src={this.state.media_url} alt={this.state.profile_img} height = '200' width = '200' />
                     }
 
                     <Dialog

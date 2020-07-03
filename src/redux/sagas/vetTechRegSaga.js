@@ -14,7 +14,7 @@ function* addVetTech(action) {
   } else {
       const data = new FormData();
       data.append("file", action.payload.file);
-
+      delete action.payload.text.profile_img
       for (const [key, value] of Object.entries(action.payload.text)) {
         data.append(key, value);
       }
@@ -22,7 +22,7 @@ function* addVetTech(action) {
       console.log("----------->formdata", action.payload.file.type);
       console.log("send this client data to server", action.payload);
 
-      let response = yield axios.post(`/api/vt`, data, action.payload, {
+      let response = yield axios.post(`/api/vt`, data, {
         headers: {
           accept: "application/json",
           "Accept-Language": "en-US,en;q=0.8",

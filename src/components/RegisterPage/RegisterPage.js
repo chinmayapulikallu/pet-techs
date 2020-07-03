@@ -97,6 +97,7 @@ class RegisterPage extends Component {
     this.props.history.push("/login");
   };
 
+
   render() {
     const { classes } = this.props
     return (
@@ -179,7 +180,7 @@ class RegisterPage extends Component {
                 <Button className={classes.button} type="submit" name="submit" value="Register" onClick={this.registerUser} variant="contained" color="primary" >Register</Button>
               </div>
               <div>
-                <Link className={classes.button} onClick={this.handleSignInClick} variant="contained" color='secondary' >Already have an account?</Link>
+                <Link className={classes.button} onClick={this.handSignInClick} variant="contained" color='secondary' >Already have an account?</Link>
               </div>
 
             </FormControl>

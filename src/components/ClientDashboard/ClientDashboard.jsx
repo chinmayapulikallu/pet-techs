@@ -139,12 +139,12 @@ class ClientDashboard extends Component {
                         <Grid item xs={12} className={classes.profileCenter}>
                              <div>
                                 <Typography variant="h6"><b>{client.client_name}</b></Typography>
-                                     {client.profile_img === 'images/blank-profile-picture.png' ?
+                                     {client.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                                         <>
-                                          <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                                          <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="200" width="200" />
                                         </>
                                             :
-                                        <img className={classes.img} src={client.profile_img} alt={client.profile_img} height="150" width="150" />
+                                        <img className={classes.img} src={client.media_url} alt={client.profile_img} height="200" width="200" />
                                         }
                              </div>                             
                         </Grid>
@@ -169,7 +169,7 @@ class ClientDashboard extends Component {
                                                     <Grid item xs={12} sm={2}>
                                                     {request.request_status === 0 &&
                                                         <Card variant="outlined" className={classes.childCard}>
-                                                        {/* <CardHeader
+                                                            {/* <CardHeader
                                                             avatar={
                                                                 <Avatar aria-label="recipe" className={classes.avatar}>
                                                                     <CheckCircleIcon />
@@ -181,7 +181,7 @@ class ClientDashboard extends Component {
                                                             }
                                                             title={request.vet_name}
                                                         /> */}
-                                                        {/* <CardMedia
+                                                            {/* <CardMedia
                                                             component="img"
                                                             className={classes.media}
                                                             image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
@@ -235,7 +235,7 @@ class ClientDashboard extends Component {
                                                             image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
                                                         /> */}
                                                             <CardContent className="align-center">
-                                                            <Typography variant="body1">VET NAME:{request.vet_name}</Typography>
+                                                                <Typography variant="body1">VET NAME:{request.vet_name}</Typography>
                                                                 <Typography variant="body1">PET NAME:{request.pet_name}</Typography>
                                                                 <Typography variant="body1">{moment(request.start_date_time).format("MMM Do YYYY")}</Typography>
                                                             <Button color="primary" variant="contained" size="small"
@@ -266,7 +266,7 @@ class ClientDashboard extends Component {
                             <CardMedia
                                 component="img"
                                 className={classes.media}
-                                image={pet.profile_img}
+                                image={pet.media_url}
                             />
                             <CardContent>
                                 <Button color="primary" variant="contained"

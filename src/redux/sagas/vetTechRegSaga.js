@@ -8,8 +8,10 @@ function* vetTechRegSaga() {
 // worker Saga: will be fired on "VT_REGISTER" actions
 function* addVetTech(action) {
   try {
-
-    
+    if (action.payload.file === undefined) {
+      yield axios.post('/api/vt/withoutImg', action.payload.text)
+      console.log('------------->send this vt data to server', action.payload);
+  } else {
       const data = new FormData();
       data.append("file", action.payload.file);
 
@@ -27,7 +29,9 @@ function* addVetTech(action) {
           "Content-Type": action.payload.file.type,
         },
       });
-    
+    }
+  
+
     yield put({
       type: "GET_VT_DATA",
     });

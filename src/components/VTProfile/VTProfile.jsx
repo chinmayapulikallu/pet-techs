@@ -320,7 +320,7 @@ class VTProfile extends Component {
                 {this.state.editable ?
                   <>
                     <button onClick={this.handleClickOpen}>Edit</button>
-                    {this.state.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
+                    {this.state.profile_img === "3e541de1f0419c15034e45c05eb3becd'::text" ?
                       <>
                         <img className={classes.profilePic}
                           src="images/blank-profile-picture.png" alt="profile" />

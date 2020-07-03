@@ -259,6 +259,7 @@ class VTProfile extends Component {
     const { classes } = this.props;
     return (
       <div>
+        {JSON.stringify(this.props.vetProfile)}
         <div className={classes.mainHeader}>
           <Container maxWidth="md" className={classes.root}>
             <Grid container spacing={10} className={classes.editContainer}>
@@ -897,7 +898,7 @@ class VTProfile extends Component {
                     />
                   ) : (
                       <div className={classes.equipment}>
-                        {this.state.bioYourself}
+                        {this.state.bioyourself}
                       </div>
                     )}
                 </Typography>

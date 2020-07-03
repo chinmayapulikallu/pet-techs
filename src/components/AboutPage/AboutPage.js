@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-
+import Button from "@material-ui/core/Button"
 
 const styles = (theme) => ({
   landingPg: {
@@ -43,9 +43,26 @@ const styles = (theme) => ({
     paddingTop: 100,
     paddingBottom: 20,
   },
+  btn: {
+    height: 50,
+    width: 200,
+    borderRadius: 12,
+    display: "flex",
+    flexDirection: "row",
+    marginLeft: "auto",
+    marginRight: "auto",
+    alignItems: "center",
+    marginTop: 25,
+  },
 });
 
 class About extends Component {
+  handleJoinClick = () => {
+    console.log("ClickedJoin");
+    this.props.history.push("/register");
+  };
+
+  
   render() {
     const { classes } = this.props;
     return (
@@ -70,6 +87,14 @@ class About extends Component {
               know your precious animals are in great hands. We are commited to
               giving quality and professional care and to give you ease of mind.{" "}
             </Typography>
+          <Button
+            className={classes.btn}
+            onClick={this.handleJoinClick}
+            variant="contained"
+            color="primary"
+          >
+            Join
+              </Button>
           </div>
           <Grid>
           </Grid>

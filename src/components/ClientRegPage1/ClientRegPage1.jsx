@@ -128,7 +128,6 @@ class ClientRegPage1 extends Component {
       type: "SET_CLIENT_DATA",
       payload: {
         file: this.state.file,
-        // text: this.state.text,
         text: {
           client_name: this.state.client_name,
           home_address_house: this.state.home_address_house,
@@ -210,6 +209,8 @@ class ClientRegPage1 extends Component {
         <img src="/images/house-icon.png" alt="House" height="70" />
         <div className={classes.inputs}>
           <TextField
+            // error= { this.state.client_name === ''}
+            // helperText = 'This field is required'
             label={"Name"}
             fullWidth
             color="secondary"
@@ -220,6 +221,7 @@ class ClientRegPage1 extends Component {
         </div>
         <div className={classes.inputs}>
           <TextField
+
             label={"Home Address"}
             fullWidth
             color="secondary"

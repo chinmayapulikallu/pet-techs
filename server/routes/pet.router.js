@@ -41,7 +41,7 @@ router.get("/", (req, res) => {
 
 // GET route for careplan - specific pet by ID
 router.get("/careplan/:id",rejectUnauthenticated, (req, res) => {
-  const sqlText = `SELECT * from pet where pet.id = $1; `;
+  const sqlText = `select * from pet join medication on medication.pet_id = pet.id where pet.id = $1;`;
   pool
     .query(sqlText, [req.params.id])
     .then((response) => {

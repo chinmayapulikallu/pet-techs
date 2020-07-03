@@ -3,6 +3,8 @@ const petCarePlanReducer = (state = [], action) => {
         case "GET_PET_CAREPLAN_SUCCESSFUL":
             console.log("PAYLOAD", action.payload);
             return action.payload; 
+            case "PET_CAREPLAN":
+                return [];
         // case "UPDATE_PET_CARE_PLAN":
         //     return {...state, ...action.payload};         
         default:

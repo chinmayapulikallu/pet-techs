@@ -44,18 +44,21 @@ const useStyles = (theme) => ({
         margin: "10px"
     },
     serviceList: {
-        width: 600,
-        height: 400,
+        width: 800,
+        height: 500,
         // marginLeft: 700,
-        marginBottom: 50
+        marginBottom: 50,
+        border: "2px solid #195C60"
     },
     childCard: {
-        width: 200,
-        height: 200,
+        width: 160,
+        height: 150,
         // width: 400,
         // height: 300,
         marginRight: 30,
         marginBottom: 30,
+        border: "2px solid #195C60",
+        alignItems: 'left'
     },
     petTitle: {
         textAlign: "center"
@@ -79,23 +82,22 @@ const useStyles = (theme) => ({
         width: 400,
         height: 300,
         marginRight: 30,
-        marginBottom: 30
+        marginBottom: 30,
+        border: "2px solid #195C60"
     },
+    alignServices: {
+        alignItems: "left"
+    }
 
 });
 
 class ClientDashboard extends Component {
 
     componentDidMount() {
-        // const currentId = this.props.match.params.id;
         console.log('-----> client dashboard :: ', this.props)
         this.props.dispatch({
             type: 'GET_CLIENT_DATA'
         })
-        // const currentId = this.props.clientInfo.user_id
-        // console.log("this.props :: ", this.props)
-        // console.log('-----> GET_PET_DATA Current client', currentId)
-
         this.props.dispatch({
             type: 'GET_PET_DATA',
             // payload: { id: currentId }
@@ -105,10 +107,9 @@ class ClientDashboard extends Component {
             // payload: { id: currentId }
         })
         this.props.dispatch({ type: "GET_ALL_VT_DATA" });
-
     }
 
-    //search service provider
+    //search for service provider
     searchProvider = () => {
         this.props.history.push('/search')
     }
@@ -130,54 +131,45 @@ class ClientDashboard extends Component {
     }
 
     render() {
-        const { classes, user, clientInfo, petInfo, clientRequest } = this.props;
+        const { classes, clientInfo, petInfo, clientRequest } = this.props;
         return (
             <Container className={classes.root} maxWidth="md">
                 {clientInfo && clientInfo.length > 0 && clientInfo.map((client) =>
                     <span key={client.user_id}>
                         <Grid item xs={12} className={classes.profileCenter}>
-                            <Card>
-                                <CardContent>
-                                    <div>
-                                        <Typography variant="h6"><b>{client.client_name}</b></Typography>
-                                        {/* <img className={classes.profileImage} src="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png" alt="name" height="75" width="75" />      */}
-                                        {/* <img className={classes.img} src={client.profile_img} alt={client.profile_img} height="150" width="150" /> */}
-
-                                        {client.profile_img === 'images/blank-profile-picture.png' ?
-                                            <>
-                                                <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
-                                            </>
+                             <div>
+                                <Typography variant="h6"><b>{client.client_name}</b></Typography>
+                                     {client.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
+                                        <>
+                                          <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="200" width="200" />
+                                        </>
                                             :
-                                            <img className={classes.img} src={client.profile_img} alt={client.profile_img} height="150" width="150" />
+                                        <img className={classes.img} src={client.media_url} alt={client.profile_img} height="200" width="200" />
                                         }
-                                    </div>
-                                </CardContent>
-                            </Card>
+                             </div>                             
                         </Grid>
                         <Grid container>
-                            <Grid item xs={6}>
-                                <Card className={classes.cardSearch}>
-                                    <CardContent>
-                                        <div>
-                                            <img className={classes.profileImage} src="/images/service-provider.png" alt="serviceProviderIcon"
-                                                height="100" width="100" />
-                                        </div>
-                                        <Button color="primary" variant="contained"
-                                            className={classes.buttonMargin} onClick={this.searchProvider}>Find Service Provider</Button>
-                                    </CardContent>
-                                </Card>
+                            <Grid item xs={3}>
+                                <div>
+                                    <img className={classes.profileImage} src="/images/service-provider.png" alt="serviceProviderIcon"
+                                        height="100" width="100" />
+                                </div>
+                                <Button color="primary" variant="contained"
+                                    className={classes.buttonMargin} onClick={this.searchProvider}>Find Service Provider</Button>
+                                   
                             </Grid>
                             {clientRequest && clientRequest.length > 0 &&
-                                <Grid item xs={6}>                          
+                                <Grid item xs={6} >                          
                                     <Card className={classes.serviceList}>
                                         <CardContent>
-                                            <Typography variant="h6">Pending Services</Typography>
-                                            
+                                        <Typography variant="h6">Pending Services ({clientRequest.filter(cr => cr.request_status === 0).length})</Typography>
+                                            <Grid container direction="row">
                                             {clientRequest.map(request =>
                                                 <div key={request.id}>
+                                                    <Grid item xs={12} sm={2}>
                                                     {request.request_status === 0 &&
                                                         <Card variant="outlined" className={classes.childCard}>
-                                                        {/* <CardHeader
+                                                            {/* <CardHeader
                                                             avatar={
                                                                 <Avatar aria-label="recipe" className={classes.avatar}>
                                                                     <CheckCircleIcon />
@@ -189,37 +181,37 @@ class ClientDashboard extends Component {
                                                             }
                                                             title={request.vet_name}
                                                         /> */}
-                                                        {/* <CardMedia
+                                                            {/* <CardMedia
                                                             component="img"
                                                             className={classes.media}
                                                             image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
                                                         /> */}
                                                         <CardContent className="align-center">
-                                                                <Typography variant="body1">VET NAME:{request.vet_name}</Typography>  
-                                                                <Typography variant="body1">PET NAME:{request.pet_name}</Typography>   
+                                                                <Typography variant="body1">VET:{request.vet_name}</Typography>  
+                                                                <Typography variant="body1">PET:{request.pet_name}</Typography>   
                                                         <Typography variant="body1">{moment(request.start_date_time).format("MMM Do YYYY")}</Typography>
-                                                            <Button color="primary" variant="contained"
+                                                                <Button color="primary" variant="contained" size="small"
                                                                 className={classes.buttonMargin} onClick={() => this.vetProfile(request.vet_id)}>VET Profile</Button>
                                                         </CardContent>
                                                         <CardActions>
                                                         </CardActions>    
                                                         </Card>
                                                     }
+                                                    </Grid>
                                                 </div>
                                             )} 
-                                        </CardContent>
-                                        
-                                    </Card>
-                                
+                                        </Grid>
+                                        </CardContent>        
+                                    </Card>                              
                                 </Grid>
                             }
                         </Grid>
-                        <Grid Container>
+                        <Grid container>
                             {clientRequest && clientRequest.length > 0 &&
                                 <Grid item xs={6}>
                                     <Card className={classes.serviceList}>
                                         <CardContent>
-                                            <Typography variant="h6">Accepted Services</Typography>
+                                        <Typography variant="h6">Accepted Services ({clientRequest.filter(cr => cr.request_status === 1).length})</Typography>
 
                                             {clientRequest.map(request =>
                                                 <div key={request.id}>
@@ -243,10 +235,10 @@ class ClientDashboard extends Component {
                                                             image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
                                                         /> */}
                                                             <CardContent className="align-center">
-                                                            <Typography variant="body1">VET NAME:{request.vet_name}</Typography>
+                                                                <Typography variant="body1">VET NAME:{request.vet_name}</Typography>
                                                                 <Typography variant="body1">PET NAME:{request.pet_name}</Typography>
                                                                 <Typography variant="body1">{moment(request.start_date_time).format("MMM Do YYYY")}</Typography>
-                                                                <Button color="primary" variant="contained"
+                                                            <Button color="primary" variant="contained" size="small"
                                                                     className={classes.buttonMargin} onClick={() => this.vetProfile(request.vet_id)}>VET Profile</Button>
                                                             </CardContent>
                                                             <CardActions>
@@ -256,10 +248,8 @@ class ClientDashboard extends Component {
                                                 </div>
                                             )}
                                         </CardContent>
-
                                     </Card>
-
-                                </Grid>
+                             </Grid>
                             }
                         </Grid>
                     </span>
@@ -269,14 +259,14 @@ class ClientDashboard extends Component {
                 </div>
                 <Grid container>
                     {petInfo && petInfo.length > 0 && petInfo.map(pet =>
-                     <Grid item xs={6}>
-                         <Card key={pet.id} className={classes.petCard}>
+                        <Grid item xs={6} key={pet.id}>
+                         <Card className={classes.petCard}>
                    
                             <Typography variant="h6">{pet.pet_name}</Typography>
                             <CardMedia
                                 component="img"
                                 className={classes.media}
-                                image={pet.profile_img}
+                                image={pet.media_url}
                             />
                             <CardContent>
                                 <Button color="primary" variant="contained"
@@ -286,7 +276,6 @@ class ClientDashboard extends Component {
                      </Grid>
                     )}
                 </Grid>
-
             </Container>
         )
     }
@@ -296,7 +285,6 @@ const putReduxStateOnProps = (reduxState) => ({
     clientInfo: reduxState.clientInfo,
     petInfo: reduxState.petInfo,
     clientRequest: reduxState.clientRequestReducer,
-
     user: reduxState.user
 
 })

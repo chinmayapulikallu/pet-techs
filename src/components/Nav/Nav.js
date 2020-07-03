@@ -76,16 +76,23 @@ class Nav extends Component {
                   Dashboard
                 </Link>
 
+                
+                {! this.props.isVetTech && (
                 <Link className="nav-link" to="/search">
                   Search for Services
                 </Link>
-              </>
               
             )}
-            
+              </>
+            )}
+
+           
+        
             <Link className="nav-link" to="/about">
               About
             </Link>
+
+
             {user.id && (
               <>
                 <div className="nav-link">
@@ -100,9 +107,16 @@ class Nav extends Component {
                     {user.username}
                   </Link>
                 </div>
-                <div className="profile_icon">
-                  <Link to={`/client-profile/${user.id}`}>
-                    {/* {clientInfo.map((client) => {
+              
+              
+
+
+               
+               
+          
+              <div className="profile_icon">
+                <Link to={`/client-profile/${user.id}`}>
+                  {/* {clientInfo.map((client) => {
                       if (client.profile_img === null || client.profile_img === '') {
                         return (
                           <div key={client.user_id}>
@@ -117,17 +131,17 @@ class Nav extends Component {
                         )
                       }
                     })} */}
-                    {/* <p>here{JSON.stringify(client.profile_img)}</p> */}
-                  </Link>
-                </div>
-                
-                <LogOutButton className="nav-link" />
+                  {/* <p>here{JSON.stringify(client.profile_img)}</p> */}
+                </Link>
+              </div>
+
+              <LogOutButton className="nav-link" />
               </>
             )}
             {/* Always show this link since the about page is not protected */}
-          </div>
         </div>
-      </HideOnScroll>
+        </div>
+      </HideOnScroll >
     );
   }
 }

@@ -76,7 +76,7 @@ class App extends Component {
               component={ClientProfile}
             />
             <Route exact path="/vt-profile/:id" component={VTProfile} />
-            <Route exact path="/vt-service" component={VTServiceRequest} />
+            <Route exact path="/vt-service/:id" component={VTServiceRequest} />
             <Route
               exact
               path="/client_service/:id"

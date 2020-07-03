@@ -122,10 +122,10 @@ class ClientServiceRequest extends Component {
                                         color="secondary"
                                         label="Service"
                                     >
-                                        <MenuItem value="Sleepover">Pet Sleepover</MenuItem>
-                                        <MenuItem value="Boarding">Pet Boarding</MenuItem>
-                                        <MenuItem value="Drop-In">Drop-In</MenuItem>
-                                        <MenuItem value="Hospice">Hospice</MenuItem>
+                                        <MenuItem value="Pet Sleepover">Pet Sleepover</MenuItem>
+                                        <MenuItem value="Pet Boarding">Pet Boarding</MenuItem>
+                                        <MenuItem value="Drop-In Care">Drop-In</MenuItem>
+                                        <MenuItem value="Hospice Care">Hospice</MenuItem>
                                     </Select>
 
                                 </FormControl>

@@ -66,9 +66,7 @@ class VTDashboard extends Component {
         {this.props.vtInfo.map((vt) => {
           return (
             <div key={vt.id}>
-
               <Container>
-
                 {vt.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                   <>
                     <img className={classes.img}
@@ -78,7 +76,6 @@ class VTDashboard extends Component {
                   <img className={classes.img}
                     src={vt.media_url} alt={vt.profile_img} height='200' width='200'/>
                 }
-
                 {/* <img className={classes.img} src={vt.media_url} alt={vt.profile_img} height="150" width="150" /> */}
                 <Typography variant="h6">Pending Requests ({clientRequest.filter(cr => cr.request_status === 0).length})</Typography>
                 <TableContainer component={Paper}>

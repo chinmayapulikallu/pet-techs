@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
 
 
 
@@ -28,6 +29,10 @@ const styles = theme => ({
     justifyContent: "center",
     marginTop: "20px",
   },
+  answer:{
+    marginLeft: 10,
+    color: '#195C60'
+  }
 
 })
 
@@ -83,71 +88,48 @@ class VTReviewPage extends Component {
 
   render() {
     const { classes, vtInfoPage1, vtInfoPage2, vtInfoPage3 } = this.props;
-
-    // let provideServices;
-    // if (this.state.dog === true) {
-    //   provideServices = this.state.dog;
-    // } else if (this.state.cat === true) {
-    //   provideServices += this.state.cat;
-    // } else if (this.state.other === true) {
-    //   provideServices += this.state.other;
-    // }
-
-    // let workHour;
-    // if (this.state.hourSelectOne === true) {
-    //   workHour = this.state.hourSelectOne;
-    // } else if (this.state.hourSelectTwo === true) {
-    //   workHour += this.state.hourSelectTwo;
-    // } else if (this.state.hourSelectThree === true) {
-    //   workHour += this.state.hourSelectThree;
-    // } else if (this.state.hourSelectFour === true) {
-    //   workHour += this.state.hourSelectFour;
-    // }
-
-
-
     return (
-      <Container className={classes.root} maxWidth="sm">
+      <Container className={classes.root} maxWidth="md">
         {/* <h1>{JSON.stringify(vtInfoPage1)}</h1>
         <h1>{JSON.stringify(vtInfoPage2)}</h1> */}
        
 
 
-        <h1 className={classes.title}>Vet tech review</h1>
-        <p>
-          Your name: <span>{vtInfoPage1.text.vet_name}</span>
-        </p>
-        <p>
-          Home address: <span>{vtInfoPage1.text.home_address_house}</span>
-        </p>
-        <p>
-          Apartment or Suite #: <span>{vtInfoPage1.text.apt_suite}</span>
-        </p>
-        <p>
-          City: <span>{vtInfoPage1.text.city}</span>
-        </p>
-        <p>
-          State: <span>{vtInfoPage1.text.state}</span>
-        </p>
-        <p>
-          Zip Code: <span>{vtInfoPage1.text.zip_code}</span>
-        </p>
-        <p>
-          Bio: <span>{vtInfoPage1.text.about_vet }</span>
-        </p>
+        <Typography variant="h3"className={classes.title}>Vet tech review</Typography>
+        <Typography variant="h6">
+          Your name: < span className = {classes.answer}>{vtInfoPage1.text.vet_name}</span>
+        </Typography>
+        <Typography variant="h6">
+          Home address: < span className = {classes.answer}>{vtInfoPage1.text.home_address_house}</span>
+        </Typography>
+        <Typography variant="h6">
+          Apartment or Suite #: < span className = {classes.answer}>{vtInfoPage1.text.apt_suite}</span>
+        </Typography>
+        <Typography variant="h6">
+          City: < span className = {classes.answer}>{vtInfoPage1.text.city}</span>
+        </Typography>
+        <Typography variant="h6">
+          State: < span className = {classes.answer}>{vtInfoPage1.text.state}</span>
+        </Typography>
+        <Typography variant="h6">
+          Zip Code: < span className = {classes.answer}>{vtInfoPage1.text.zip_code}</span>
+        </Typography>
+        <Typography variant="h6">
+          Bio: < span className = {classes.answer}>{vtInfoPage1.text.about_vet }</span>
+        </Typography>
 
-        <p>
-          Pet Sleepover: <span>{vtInfoPage1.text.sleep_over ? "True" : "False"}</span>
-        </p>
-        <p>
-          Pet Boarding: <span>{vtInfoPage1.text.boarding ? "True" : "False"}</span>
-        </p>
-        <p>
-          Drop In Care: <span>{vtInfoPage1.text.dropin_care ? "True" : "False"}</span>
-        </p>
-        <p>
-          Hospice Care: <span>{vtInfoPage1.text.hospice ? "True" : "False"}</span>
-        </p>
+        <Typography variant="h6">
+          Pet Sleepover: < span className = {classes.answer}>{vtInfoPage1.text.sleep_over ? "Yes" : 'No' }</span>
+        </Typography>
+        <Typography variant="h6">
+          Pet Boarding: < span className = {classes.answer}>{vtInfoPage1.text.boarding ? "Yes" : "No"}</span>
+        </Typography>
+        <Typography variant="h6">
+          Drop In Care: < span className = {classes.answer}>{vtInfoPage1.text.dropin_care ? "Yes" : "No"}</span>
+        </Typography>
+        <Typography variant="h6">
+          Hospice Care: < span className = {classes.answer}>{vtInfoPage1.text.hospice ? "Yes" : "No"}</span>
+        </Typography>
         <Grid className={classes.itemCenter}>
           <Button
             className={classes.buttons}
@@ -159,28 +141,24 @@ class VTReviewPage extends Component {
               </Button>
         </Grid>
 
-        <p>
+        <Typography variant="h6">
           What animals will you provide services for?{" "}
-          <span>{vtInfoPage2.dogs ? "True" : "False"}</span>
-          <span>{vtInfoPage2.cats ? "True" : "False"}</span>
-          <span>{vtInfoPage2.other ? "True" : "False"}</span>
-
-        </p>
-        <p>
-          Are you home full time Monday-Friday? <span>{vtInfoPage2.vet_available ? "True" : "False"}</span>
-        </p>
-        <p>How often can you take the animal(s) outside? </p> <span>{vtInfoPage2.vet_available ? "True" : "False"}</span>
-        <p>How often can you take the animal(s) outside? </p> <span>{vtInfoPage2.zero_two ? "True" : "False"}</span>  <span>{vtInfoPage2.two_four ? "True" : "False"}</span>  <span>{vtInfoPage2.four_eight ? "True" : "False"}</span> <span>{vtInfoPage2.not_available ? "True" : "False"}</span>
-        <p>What size animals are you comfortable hosting? </p> <span>{vtInfoPage2.small_dog ? "True" : "False"}</span>
-        <span>{vtInfoPage2.medium_dog ? "True" : "False"}</span>
-        <span>{vtInfoPage2.large_dog ? "True" : "False"}</span>
-        <span>{vtInfoPage2.giant_dog ? "True" : "False"}</span>
-        <p>Will you host animals younger than 1 years old? </p> <span>{vtInfoPage2.pet_younger_than_one ? "True" : "False"}</span>
-        <p>Will you host animals from multiple families at once?</p> <span>{vtInfoPage2.pet_more_than_one_family ? "True" : "False"}</span>
-        <p>
+          < span className = {classes.answer}>{vtInfoPage2.dogs ? "Dogs" : ""}</span> < span className = {classes.answer}>{vtInfoPage2.cats ? "Cats" : ""}</span> < span className = {classes.answer}>{vtInfoPage2.other ? "Other" : ""}</ span>
+        </Typography>
+        <Typography variant="h6">
+          Are you home full time Monday-Friday? < span className = {classes.answer}>{vtInfoPage2.vet_available ? "Yes" : "No"}</span>
+        </Typography>
+        {/* <Typography variant="h6">How often can you take the animal(s) outside? </Typography> <span>{vtInfoPage2.vet_available ? "Yes" : "No"}</span> */}
+        <Typography variant="h6">How often can you take the animal(s) outside? 
+        {/* <span>{vtInfoPage2.zero_two ? "Yes" : "No"}</span>  <span>{vtInfoPage2.two_four ? "Yes" : "No"}</span>  <span>{vtInfoPage2.four_eight ? "Yes" : "No"}</span> <span>{vtInfoPage2.not_available ? "Yes" : "No"}</span> */}
+        < span className = {classes.answer}>{vtInfoPage2.zero_two ? "0-2 Hours" : ""}</span> < span className = {classes.answer}>{vtInfoPage2.two_four ? "2-4 Hours" : ""}</span>  < span className = {classes.answer}>{vtInfoPage2.four_eight ? "4-8 Hours" : ""}</span> < span className = {classes.answer}>{vtInfoPage2.not_available ? "N/A" : ""}</span> </Typography> 
+        <Typography variant="h6">What size animals are you comfortable hosting? < span className = {classes.answer}>{vtInfoPage2.small_dog ? "Small dog" : ""}</span> < span className = {classes.answer}>{vtInfoPage2.medium_dog ? "Medium dog" : ""}</span> < span className = {classes.answer}>{vtInfoPage2.large_dog ? "Large dog" : ""}</span> < span className = {classes.answer}>{vtInfoPage2.giant_dog ? "Giant dog" : ""}</span> </Typography>
+        <Typography variant="h6">Will you host animals younger than 1 years old?  < span className = {classes.answer}>{vtInfoPage2.pet_younger_than_one ? "Yes" : "No"}</span> </Typography>
+        <Typography variant="h6">Will you host animals from multiple families at once? < span className = {classes.answer}>{vtInfoPage2.pet_more_than_one_family ? "Yes" : "No"}</span> </Typography>
+        <Typography variant="h6">
           Please provide a list of equipment that will be used when caring
-              for pets:{" "} <span>{vtInfoPage2.equipment_list ? "True" : "False"}</span>
-        </p>
+              for pets:{" "} < span className = {classes.answer}>{vtInfoPage2.equipment_list ? "Yes" : "No"}</span>
+        </Typography>
         <Grid className={classes.itemCenter}>
           <Button
             className={classes.buttons}
@@ -192,28 +170,22 @@ class VTReviewPage extends Component {
               </Button>
         </Grid>
 
-        <p>Year of professional experience caring for pets: </p> <span>{vtInfoPage3.experience}</span>
-        <p>Education/Degree/Certifications: </p> <span>{vtInfoPage3.certifications}</span>
-        <p>Current job title:</p><span>{vtInfoPage3.current_job_title}</span>
-        <p>Areas of professional expertise: </p> <span>{vtInfoPage3.expertise}</span>
-        <p>Brief bio about yourself: </p><span>{vtInfoPage3.bioYourself}</span>
-        <h4>Additional Details: </h4>
-        <p>Do you know CPR and/or animal first aid? </p> <span>{vtInfoPage2.CPR_first_aid ? "True" : "False"}</span>
-        <p>Can you administer oral medications to animals? </p> <span>{vtInfoPage2.oral_medication ? "True" : "False"}</span>
-        <p>Can you administer injected medications to animal? </p>  <span>{vtInfoPage2.injectable_medication ? "True" : "False"}</span>
-        <p>
-          Do you have experience with caring for older or senior animals?{" "} <span>{vtInfoPage2.exp_older_pet ? "True" : "False"}</span>
-        </p>
-        <p>Do you have experience caring for special needs animals?</p> <span>{vtInfoPage2.exp_special_pet ? "True" : "False"}</span>
-        <p>
-          Can you provied daily exercise for high energy animals or
-              behavioral needs?{" "} <span>{vtInfoPage2.daily_exercise ? "True" : "False"}</span>
-        </p>
-        <p>
-          Are you willing to accept services that are longer than one week
-              with animals?{" "}  <span>{vtInfoPage2.pet_longer_than_a_week ? "True" : "False"}</span>
-        </p>
-        <p>Do you offer diabetic and insulin care? </p> <span>{vtInfoPage2.diabetic_insulin_care ? "True" : "False"}</span>
+        <Typography variant="h6">Year of professional experience caring for pets: < span className = {classes.answer}>{vtInfoPage3.experience}</span> </Typography> 
+        <Typography variant="h6">Education/Degree/Certifications: < span className = {classes.answer}>{vtInfoPage3.certifications}</span> </Typography> 
+        <Typography variant="h6">Current job title: < span className = {classes.answer}>{vtInfoPage3.current_job_title}</span> </Typography>
+        <Typography variant="h6">Areas of professional expertise: < span className = {classes.answer}>{vtInfoPage3.expertise}</span> </Typography> 
+        <Typography variant="h6">Brief bio about yourself: < span className = {classes.answer}>{vtInfoPage3.bioYourself}</span> </Typography>
+        
+        <Typography variant="h5">Additional Details: </Typography>
+        <Typography variant="h6">Do you know CPR and/or animal first aid?  < span className = {classes.answer} className = {classes.answer}>{vtInfoPage2.CPR_first_aid ? "Yes" : "No"}</span> </Typography>
+        <Typography variant="h6">Can you administer oral medications to animals? < span className = {classes.answer}>{vtInfoPage2.oral_medication ? "Yes" : "No"}</span> </Typography> 
+        <Typography variant="h6">Can you administer injected medications to animal?  < span className = {classes.answer}>{vtInfoPage2.injectable_medication ? "Yes" : "No"}</span> </Typography> 
+        <Typography variant="h6">Do you have experience with caring for older or senior animals?{" "} < span className = {classes.answer}>{vtInfoPage2.exp_older_pet ? "Yes" : "No"}</span></Typography>
+        <Typography variant="h6">Do you have experience caring for special needs animals? < span className = {classes.answer}>{vtInfoPage2.exp_special_pet ? "Yes" : "No"}</span></Typography>
+        <Typography variant="h6">Can you provied daily exercise for high energy animals orbehavioral needs?{" "} < span className = {classes.answer}>{vtInfoPage2.daily_exercise ? "Yes" : "No"}</span></Typography>
+        <Typography variant="h6">Are you willing to accept services that are longer than one week
+              with animals?{" "}  < span className = {classes.answer}>{vtInfoPage2.pet_longer_than_a_week ? "Yes" : "No"}</span></Typography>
+        <Typography variant="h6">Do you offer diabetic and insulin care? < span className = {classes.answer}>{vtInfoPage2.diabetic_insulin_care ? "Yes" : "No"}</span> </Typography> 
         <Grid className={classes.itemCenter}>
           <Button
             className={classes.buttons}

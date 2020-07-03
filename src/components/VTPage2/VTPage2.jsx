@@ -42,6 +42,7 @@ class VTPage2 extends Component {
 
   };
 
+
   //THIS WILL HANDLE ALL THE INPUTS FROM THE VET TECH PREFERENCES
   handleChange = (event, property) => {
     console.log(event.target.value, property);

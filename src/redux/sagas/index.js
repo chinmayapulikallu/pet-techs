@@ -8,7 +8,7 @@ import clientInfoSaga from "./clientInfoSaga";
 import vtInfoSaga from "./vtInfoSaga";
 import petInfoSaga from "./petInfoSaga";
 import clientServiceRequestSaga from "./clientServiceRequestSaga";
-
+import filterSaga from "./filterSaga"
 
 
 // It bundles up all of the other sagas so our project can use them.
@@ -27,5 +27,6 @@ export default function* rootSaga() {
     vtInfoSaga(),
     petInfoSaga(),
     clientServiceRequestSaga(),
+    filterSaga()
   ])
 }

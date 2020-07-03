@@ -144,6 +144,7 @@ class SearchPage extends Component {
   };
 
   hospiceCheck = (event) => {
+    console.log("HOSPICE CHECK -------------->")
     if (event.target.checked === true) {
       this.props.dispatch({ type: "GET_HOSPICE_VETS" });
     } else if (event.target.checked !== "true") {

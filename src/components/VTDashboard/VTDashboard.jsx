@@ -39,12 +39,12 @@ class VTDashboard extends Component {
    
   };
   // not sure if these will be the exact paths, or types, placeholders for now.
-  detailsButton = (vetID) => {
+  detailsButton = (requestID) => {
     // this.props.dispatch({
     //   type: "GET_VT_SERVICE_REQUEST_BY_ID",
     //   payload: event.currentTarget.value,
     // });
-    this.props.history.push(`/vt-service/${vetID}`);
+    this.props.history.push(`/vt-service/${requestID}`);
   };
   // not sure if these will be the exact paths, or types, placeholders for now.
   viewButton = (petID) => {
@@ -106,7 +106,7 @@ class VTDashboard extends Component {
                             size="small"
                             variant="contained"
                             // will need to add a value, (id) for event to capture.
-                              onClick={() => this.detailsButton(request.vet_id)}
+                              onClick={() => this.detailsButton(request.id)}
                           >
                             Details
                          </Button>

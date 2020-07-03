@@ -252,6 +252,52 @@ class ClientDashboard extends Component {
                              </Grid>
                             }
                         </Grid>
+                        <Grid container>
+                            {clientRequest && clientRequest.length > 0 &&
+                                <Grid item xs={6}>
+                                    <Card className={classes.serviceList}>
+                                        <CardContent>
+                                            <Typography variant="h6">Declined Services ({clientRequest.filter(cr => cr.request_status === 2).length})</Typography>
+
+                                            {clientRequest.map(request =>
+                                                <div key={request.id}>
+                                                    {request.request_status === 2 &&
+                                                        <Card variant="outlined" className={classes.childCard}>
+                                                            {/* <CardHeader
+                                                                avatar={
+                                                                    <Avatar aria-label="recipe" className={classes.avatar}>
+                                                                        <CheckCircleIcon />
+                                                                    </Avatar>
+                                                                }
+                                                                action={
+                                                                    <IconButton aria-label="settings">
+                                                                    </IconButton>
+                                                                }
+                                                                title={request.vet_name}
+                                                            /> */}
+                                                            {/* <CardMedia
+                                                            component="img"
+                                                            className={classes.media}
+                                                            image="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"
+                                                        /> */}
+                                                            <CardContent className="align-center">
+                                                                <Typography variant="body1">VET NAME:{request.vet_name}</Typography>
+                                                                <Typography variant="body1">PET NAME:{request.pet_name}</Typography>
+                                                                <Typography variant="body1">{moment(request.start_date_time).format("MMM Do YYYY")}</Typography>
+                                                                <Button color="primary" variant="contained" size="small"
+                                                                    className={classes.buttonMargin} onClick={() => this.vetProfile(request.vet_id)}>VET Profile</Button>
+                                                            </CardContent>
+                                                            <CardActions>
+                                                            </CardActions>
+                                                        </Card>
+                                                    }
+                                                </div>
+                                            )}
+                                        </CardContent>
+                                    </Card>
+                                </Grid>
+                            }
+                        </Grid>
                     </span>
                 )}
                 <div className={classes.petTitle}>
@@ -274,7 +320,7 @@ class ClientDashboard extends Component {
                             </CardContent>
                  </Card>
                      </Grid>
-                    )}
+                    )} 
                 </Grid>
             </Container>
         )

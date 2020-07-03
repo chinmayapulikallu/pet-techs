@@ -131,7 +131,12 @@ class VTPage1 extends Component {
 
   uppy = Uppy({
     meta: { type: 'profilePicture' },
-    restrictions: { maxNumberOfFiles: 1 },
+    restrictions: {
+      maxNumberOfFiles: 1,
+      maxFileSize: 5000000,
+      allowedFileTypes: ['image/*'],
+      // dimensions: { width: 1200, height: 800 },
+    },
     autoProceed: true
   })
 
@@ -148,10 +153,10 @@ class VTPage1 extends Component {
 
     this.reader.onloadend = () => {
       this.setState({
+        text:{
           ...this.state,
+        },
         profile_img: this.reader.result,
-
-
       })
     }
     console.log('data from client reg page 1', this.state)
@@ -163,7 +168,6 @@ class VTPage1 extends Component {
     this.reader.readAsDataURL(file);
     this.setState({
       ...this.state,
-
       file: file,
     })
   }

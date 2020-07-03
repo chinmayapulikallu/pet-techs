@@ -180,7 +180,12 @@ class ClientProfileDetail extends Component {
 
     uppy = Uppy({
         meta: { type: 'profilePicture' },
-        restrictions: { maxNumberOfFiles: 1 },
+        restrictions: {
+            maxNumberOfFiles: 1,
+            maxFileSize: 5000000,
+            allowedFileTypes: ['image/*'],
+            // dimensions: { width: 1200, height: 800 },
+        },
         autoProceed: true
     })
     reader = new FileReader()

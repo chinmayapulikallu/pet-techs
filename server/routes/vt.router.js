@@ -45,12 +45,12 @@ router.get("/all", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    .then((response) => {
-      res.send(response.rows);
-    })
-    // .then(response => {
-    //   generateSignedUrls(res, response.rows);
-    //  })
+    // .then((response) => {
+    //   res.send(response.rows);
+    // })
+    .then(response => {
+      generateSignedUrls(res, response.rows);
+     })
     .catch((error) => {
       console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);

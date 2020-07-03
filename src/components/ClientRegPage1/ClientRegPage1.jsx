@@ -156,7 +156,13 @@ class ClientRegPage1 extends Component {
 
   uppy = Uppy({
     meta: { type: 'profilePicture' },
-    restrictions: { maxNumberOfFiles: 1 },
+    restrictions: {
+      maxNumberOfFiles: 1,
+      maxFileSize: 5000000,
+      allowedFileTypes: ['image/*'],
+      // dimensions: { width: 1200, height: 800 },
+
+    },
     autoProceed: true
   })
 
@@ -173,7 +179,6 @@ class ClientRegPage1 extends Component {
       this.setState({
         text: {
           ...this.state,
-
         },
         profile_img: this.reader.result,
       })

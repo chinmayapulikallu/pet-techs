@@ -130,7 +130,7 @@ function uploadToSQL(req, profile_img, res) {
     const clinic_address = req.body.clinic_address;
     const clinic_phone = req.body.clinic_phone;
     const transport = req.body.transport;
-    console.log('client id from imageHandler', profile_img, user_id, client_name, home_address_house, apt_suite, city, state, zip_code, profile_img, about_client, about_home, about_equipment, contact_name_1, contact_phone_1, contact_email_1, vet_clinic, clinic_address, clinic_phone, transport)
+    console.log('client id from imageHandler', user_id, client_name, home_address_house, apt_suite, city, state, zip_code, profile_img, about_client, about_home, about_equipment, contact_name_1, contact_phone_1, contact_email_1, vet_clinic, clinic_address, clinic_phone, transport)
 
     return new Promise(resolve => {
         const queryText =
@@ -250,7 +250,8 @@ function uploadVTProfileToSQL(req, profile_img, res) {
     const daily_exercise = req.body.daily_exercise;
     const pet_longer_than_a_week = req.body.pet_longer_than_a_week;
     const diabetic_insulin_care = req.body.diabetic_insulin_care;
-    console.log('--->VT id from imageHandler', user_id,
+    console.log('--->VT id from imageHandler',
+        user_id,
         vet_name,
         home_address_house,
         apt_suite,

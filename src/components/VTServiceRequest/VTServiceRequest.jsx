@@ -70,7 +70,7 @@ class VTServiceRequest extends Component {
     return (
       <Container className={classes.root}>
         <Typography variant="h4" className={classes.title}>
-          Service Request for NAME
+          Service Request for {this.props.vtInfo.vet_name}
         </Typography>
         <Typography variant="h5" className={classes.subtitle}>
           NAME is requesting the following services:
@@ -165,7 +165,8 @@ class VTServiceRequest extends Component {
 }
 
 const mapStateToProps = (reduxState) => ({
-  vtRequest: reduxState.vtRequest,
+  vtInfo: reduxState.vtInfo[0],
+  request: reduxState.clientRequestReducer[0],
 });
 
 export default connect(mapStateToProps)(withStyles(styles)(VTServiceRequest));

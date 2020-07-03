@@ -133,20 +133,20 @@ class VTReviewPage extends Component {
           Zip Code: <span>{vtInfoPage1.text.zip_code}</span>
         </p>
         <p>
-          Bio: <span>{vtInfoPage1.text.about_vet}</span>
+          Bio: <span>{vtInfoPage1.text.about_vet }</span>
         </p>
 
         <p>
-          Pet Sleepover: <span>{vtInfoPage1.text.sleep_over}</span>
+          Pet Sleepover: <span>{vtInfoPage1.text.sleep_over ? "True" : "False"}</span>
         </p>
         <p>
-          Pet Boarding: <span>{vtInfoPage1.text.boarding}</span>
+          Pet Boarding: <span>{vtInfoPage1.text.boarding ? "True" : "False"}</span>
         </p>
         <p>
           Drop In Care: <span>{vtInfoPage1.text.dropin_care ? "True" : "False"}</span>
         </p>
         <p>
-          Hospice Care: <span>{vtInfoPage1.text.hospice}</span>
+          Hospice Care: <span>{vtInfoPage1.text.hospice ? "True" : "False"}</span>
         </p>
         <Grid className={classes.itemCenter}>
           <Button

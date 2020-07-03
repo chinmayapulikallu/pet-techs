@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -8,7 +6,6 @@ import Typeography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import CardMedia from "@material-ui/core/CardMedia";
 
 const styles = (theme) => ({
   landingPg: {
@@ -171,7 +168,7 @@ class LandingPage extends Component {
     return (
       <div className={classes.root}>
         <Grid container spacing={3}>
-          <img className={classes.landingPg} src="../images/homeDog.png" />
+          <img className={classes.landingPg} src="../images/homeDog.png" alt="dog"/>
           <Typography variant="h3" className={classes.dogText}>
             Welcome to Pet Techs!
           </Typography>
@@ -308,7 +305,7 @@ class LandingPage extends Component {
           </Grid>
         </div>
         <Grid container className={classes.fixResize}>
-          <img className={classes.catImage} src="../images/homeCat.png" />
+          <img className={classes.catImage} src="../images/homeCat.png" alt="cat sleeping" />
           <div className={classes.test}>
             <Grid item xs={7}>
               <Card raised={false} className={classes.catText}>
@@ -323,7 +320,7 @@ class LandingPage extends Component {
               </Card>
             </Grid>
             <Grid item>
-              <img src="../images/catPaw.png" className={classes.catPaw} />
+              <img src="../images/catPaw.png" alt="cat high five" className={classes.catPaw} />
             </Grid>
           </div>
         </Grid>

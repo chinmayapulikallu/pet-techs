@@ -10,10 +10,10 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 // import { withRouter } from 'react-router-dom';
-import Uppy from '@uppy/core';
-import DragDrop from '@uppy/react/lib/DragDrop';
-import '@uppy/core/dist/style.css'
-import '@uppy/drag-drop/dist/style.css'
+import Uppy from "@uppy/core";
+import DragDrop from "@uppy/react/lib/DragDrop";
+import "@uppy/core/dist/style.css";
+import "@uppy/drag-drop/dist/style.css";
 
 const styles = {
   root: {
@@ -55,23 +55,23 @@ const styles = {
     width: "40%",
   },
   em_email: {
-    width: "58%"
+    width: "58%",
   },
   labels: {
     textAlign: "left",
     marginTop: 20,
-    marginBottom: -5
+    marginBottom: -5,
   },
   section: {
     marginTop: 50,
-    marginBottom: 10
+    marginBottom: 10,
   },
   subTitle: {
     marginTop: 10,
-    marginBottom: 40
+    marginBottom: 40,
   },
   img: {
-    borderRadius: '50%',
+    borderRadius: "50%",
   },
 };
 
@@ -79,7 +79,6 @@ class ClientRegPage1 extends Component {
   state = {
     file: this.props.clientInfo.file,
     ...this.props.clientInfo.text,
-
   };
 
   //autofill form
@@ -103,8 +102,8 @@ class ClientRegPage1 extends Component {
       clinic_phone: "88989",
       transport: false,
       // }
-    })
-  }
+    });
+  };
 
   handleChange = (event, property) => {
     console.log("in handleChange", event.target.value, property);
@@ -146,8 +145,7 @@ class ClientRegPage1 extends Component {
           clinic_address: this.state.clinic_address,
           clinic_phone: this.state.clinic_phone,
           transport: this.state.transport,
-        }
-
+        },
       },
     });
     this.props.onNext();
@@ -155,25 +153,24 @@ class ClientRegPage1 extends Component {
   //-----------------------------------
 
   uppy = Uppy({
-    meta: { type: 'profilePicture' },
+    meta: { type: "profilePicture" },
     restrictions: {
       maxNumberOfFiles: 1,
       maxFileSize: 5000000,
-      allowedFileTypes: ['image/*'],
+      allowedFileTypes: ["image/*"],
       // dimensions: { width: 1200, height: 800 },
-
     },
-    autoProceed: true
-  })
+    autoProceed: true,
+  });
 
-  reader = new FileReader()
+  reader = new FileReader();
 
   componentDidMount = () => {
-    this.uppy.on('upload', file => {
+    this.uppy.on("upload", (file) => {
       let fileKey = Object.keys(this.uppy.state.files)[0];
       let fileFromUppy = this.uppy.state.files[fileKey].data;
       this.setImage(fileFromUppy);
-    })
+    });
 
     this.reader.onloadend = () => {
       this.setState({
@@ -181,24 +178,21 @@ class ClientRegPage1 extends Component {
           ...this.state,
         },
         profile_img: this.reader.result,
-      })
-    }
-    console.log('data from client reg page 1', this.state)
+      });
+    };
+    console.log("data from client reg page 1", this.state);
+  };
 
-  }
-
-  setImage = file => {
+  setImage = (file) => {
     //reads the file into a local data url
     this.reader.readAsDataURL(file);
     this.setState({
       ...this.state,
       file: file,
-    })
-  }
-
+    });
+  };
 
   //-----------------------------------
-
 
   render() {
     const { classes, user } = this.props;
@@ -226,7 +220,6 @@ class ClientRegPage1 extends Component {
         </div>
         <div className={classes.inputs}>
           <TextField
-
             label={"Home Address"}
             fullWidth
             color="secondary"
@@ -275,21 +268,21 @@ class ClientRegPage1 extends Component {
             You look purr-fect! Let's add a photo for your profile!
           </Typography>
 
-
-
-
           {/* //--------------------------------------------------------- */}
           <DragDrop
             uppy={this.uppy}
             class="uppy-DragDrop--isDragDropSupported"
-
           />
 
           {/* //--------------------------------------------------------- */}
 
-          <img className={classes.img} src={this.state.profile_img} alt="profilePictureUrl" width="50%" height="50%" />
-
-
+          <img
+            className={classes.img}
+            src={this.state.profile_img}
+            alt="profilePictureUrl"
+            width="50%"
+            height="50%"
+          />
         </div>
         <div>
           <Typography variant="subtitle1" className={classes.labels}>
@@ -310,8 +303,8 @@ class ClientRegPage1 extends Component {
         </div>
         <div>
           <Typography variant="subtitle1" className={classes.labels}>
-            Describe a bit about your pet toys for providers
-            to get a sense of what equipment your pet uses.
+            Describe a bit about your pet toys for providers to get a sense of
+            what equipment your pet uses.
           </Typography>
           <TextField
             value={this.state.about_equipment}
@@ -480,9 +473,7 @@ const mapStateToProps = (state) => ({
   // },
   clientInfo: state.clientInfo,
 
-  user: state.user
-
+  user: state.user,
 });
 
-export default connect(mapStateToProps)(
-  withStyles(styles)(ClientRegPage1));
+export default connect(mapStateToProps)(withStyles(styles)(ClientRegPage1));

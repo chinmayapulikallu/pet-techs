@@ -144,7 +144,7 @@ class SearchPage extends Component {
   };
 
   hospiceCheck = (event) => {
-    console.log("HOSPICE CHECK -------------->")
+    console.log("HOSPICE CHECK -------------->");
     if (event.target.checked === true) {
       this.props.dispatch({ type: "GET_HOSPICE_VETS" });
     } else if (event.target.checked !== "true") {
@@ -192,9 +192,6 @@ class SearchPage extends Component {
     return (
       <div className={classes.root}>
         <div>
-          {/* <div>
-                        {JSON.stringify(this.props.vtInfo)}
-                    </div> */}
           <Grid className={classes.title}>
             <FormControl onSubmit={this.registerUser}>
               <div>
@@ -288,12 +285,19 @@ class SearchPage extends Component {
                         title={vet.vet_name}
                         className={classes.header}
                       />
-                      
-                      {vet.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
+
+                      {vet.profile_img ===
+                      "3e541de1f0419c15034e45c05eb3becd" ? (
                         <>
-                          <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                          <img
+                            className={classes.img}
+                            src="images/blank-profile-picture.png"
+                            alt="profile"
+                            height="150"
+                            width="150"
+                          />
                         </>
-                        :
+                      ) : (
                         <img
                           className={classes.profPic}
                           src={vet.media_url}
@@ -301,7 +305,7 @@ class SearchPage extends Component {
                           height="100"
                           width="100"
                         />
-                      }
+                      )}
 
                       <Typography
                         className={classes.certifications}

@@ -58,6 +58,7 @@ function* logoutUser(action) {
     yield put({ type: "UNSET_PET"});
     yield put({ type: "UNSET_REQUEST"});
     yield put({ type: "PET_CAREPLAN"});
+    yield put({ type: "UNSET_VT_INFO"});
 
   } catch (error) {
     console.log('Error with user logout:', error);

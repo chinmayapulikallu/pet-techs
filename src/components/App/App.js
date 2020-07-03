@@ -33,6 +33,7 @@ import ClientDashBoard from "../ClientDashboard/ClientDashboard";
 import CarePlan from "../CarePlan/CarePlan";
 
 import "./App.css";
+import VTServiceRequest from "../VTServiceRequest/VTServiceRequest";
 
 class App extends Component {
   componentDidMount() {
@@ -75,6 +76,7 @@ class App extends Component {
               component={ClientProfile}
             />
             <Route exact path="/vt-profile/:id" component={VTProfile} />
+            <Route exact path="/vt-service" component={VTServiceRequest} />
             <Route
               exact
               path="/client_service/:id"

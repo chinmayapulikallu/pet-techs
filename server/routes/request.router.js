@@ -189,7 +189,7 @@ router.post("/client", (req, res) => {
 router.get("/vt", (req, res) => {
   console.log("in vt :::: ", req.user.id)
   const sqlText = `select client_request.start_date_time, pet.pet_name, client_request.vet_id,pet.id, 
-                  client.client_name, pet.pet_type from client_request, pet, client where
+                  client_request.request_status,client.client_name, client_request.service_select, pet.pet_type from client_request, pet, client where
                   client_request.pet_id = pet.id and pet.user_id = client.user_id and 
                   client_request.vet_id = $1;`;
   pool

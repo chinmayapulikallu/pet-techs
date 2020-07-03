@@ -898,7 +898,7 @@ class VTProfile extends Component {
                     />
                   ) : (
                       <div className={classes.equipment}>
-                        {this.state.bioyourself}
+                        {this.state.bioYourself}
                       </div>
                     )}
                 </Typography>

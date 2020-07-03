@@ -73,23 +73,20 @@ class VTServiceRequest extends Component {
           Service Request for {this.props.vtInfo.vet_name}
         </Typography>
         <Typography variant="h5" className={classes.subtitle}>
-          NAME is requesting the following services:
+          {this.props.request.client_name} is requesting the following services:
         </Typography>
         <div className={classes.req}>
           <Paper className={classes.typeOfReq}>
             <Typography variant="h6" className={classes.titleOfReq}>
-              TYPE OF REQUEST
+              {this.props.request.service_select}
             </Typography>
           </Paper>
         </div>
         <Typography variant="h6">For</Typography>
         <div className={classes.req}>
-          <Paper className={classes.typeOfReq} onClick={this.handleCarePlan}>
+          <Paper className={classes.typeOfReq}>
             <Typography variant="h6" className={classes.titleOfReq}>
-              LOOP for PET NAMES
-            </Typography>
-            <Typography variant="subtitle1" className={classes.titleOfReq}>
-              Care plan
+              {this.props.request.pet_name}
             </Typography>
           </Paper>
         </div>
@@ -106,7 +103,7 @@ class VTServiceRequest extends Component {
             <div className={classes.req}>
               <Paper className={classes.dateOfReq}>
                 <Typography variant="h6" className={classes.date}>
-                  START DATE
+                  {this.props.request.sart_date_time}
                 </Typography>
               </Paper>
             </div>
@@ -164,9 +161,15 @@ class VTServiceRequest extends Component {
   }
 }
 
-const mapStateToProps = (reduxState) => ({
+const mapStateToProps = (reduxState, ownProps) => {
+  const requestId = Number(ownProps.match.params.id);
+  const request = reduxState.clientRequestReducer.filter(
+    (request) => request.id === requestId
+  )[0];
+  return{
+    request,
   vtInfo: reduxState.vtInfo[0],
-  request: reduxState.clientRequestReducer[0],
-});
+  }
+};
 
 export default connect(mapStateToProps)(withStyles(styles)(VTServiceRequest));

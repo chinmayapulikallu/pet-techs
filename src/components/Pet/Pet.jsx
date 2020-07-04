@@ -190,7 +190,6 @@ class Pet extends Component {
                                     <TableCell scope="row" className={classes.bgImg}>
                                         {this.props.editable ?
                                             <>
-                                                {/* {this.state.editPicture ? */}
                                                 <>
                                                     {this.props.pet.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                                                         <>
@@ -201,9 +200,7 @@ class Pet extends Component {
                                                         <img className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img} height="150" width="150" />
                                                     }
                                                     <img src="images/edit.png" alt="edit_button" height="30" width="30" className={classes.editButton} onClick={this.handleClickOpen} />
-
                                                 </>
-                                                {/* : */}
                                                 <>
                                                     <Dialog
                                                         open={this.state.open}
@@ -224,7 +221,6 @@ class Pet extends Component {
                                                                 :
                                                                 ''
                                                             }
-                                                            {/* <img src={this.state.profile_img} alt='profile_picture' height="100%" width="100%" /> */}
                                                         </DialogContent>
 
                                                         <DialogActions>
@@ -237,7 +233,6 @@ class Pet extends Component {
                                                         </DialogActions>
                                                     </Dialog>
                                                 </>
-                                                {/* } */}
                                             </>
                                             :
                                             <>
@@ -252,11 +247,11 @@ class Pet extends Component {
                                         }
                                     </TableCell>
                                     <TableCell align="left"> <h4>{this.props.pet.pet_name}</h4><p>{this.props.pet.age} years old</p> <p>{this.props.pet.breed}</p><p>{this.props.pet.pet_behavior}</p></TableCell>
-                                    <TableCell align="left" className={classes.items}><ColorButton variant="contained" color="info" onClick={this.handleCarePlanButton}>Care Plan</ColorButton> 
-                                    <p>{" "}</p>  
-                                  
-                                   
-                                    <img src="images/Heart.png" alt="profile" height="30" width="30" />
+                                    <TableCell align="left" className={classes.items}><ColorButton variant="contained" color="info" onClick={this.handleCarePlanButton}>Care Plan</ColorButton>
+                                        <p>{" "}</p>
+
+
+                                        <img src="images/Heart.png" alt="profile" height="30" width="30" />
 
                                     </TableCell>
                                 </TableRow>

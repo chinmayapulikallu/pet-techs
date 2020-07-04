@@ -1,32 +1,4 @@
-.about_table{
-    border: 2px solid #195C60;
-    border-radius: 5px;
-    text-align: left;
-    padding-left: 0px;
-    overflow-wrap: break-word;
-    table-layout: fixed;
-}
-th{
-    padding-left: 0px;
-    background-color: rgb(179, 206, 206);
-    border-bottom: 2px solid #195C60;
-    margin-left: 0px;
-    padding-left: 10px;
-}
 
-.pet_table{
-    
-    border: 2px solid #195C60;
-    border-radius: 10px;
-    text-align: left;
-    border-collapse: collapse;
-    overflow-wrap: break-word;
-}
-.table_body{
-    background-color: #fcd1c7;
-    padding: 10px;
-    /* display: block; */
-}
 .link{
     color: #000000;
     text-decoration: none;

@@ -75,14 +75,11 @@ class CarePlan extends Component {
                 {this.props.petCarePlan.map((careplan) => {
                     return (
                         <div key={careplan.id}>
-                            <div>
-                                <CarePlanDetail
-                                    careplan={careplan}
-                                    isEditing={this.state.isEditing}
-                                />
-                            </div>
+                            <CarePlanDetail
+                                careplan={careplan}
+                                isEditing={this.state.isEditing}
+                            />
                         </div>
-
                     )
                 })}
             </Container>

@@ -346,6 +346,7 @@ class ClientRegPage1 extends Component {
           height="70"
           className={classes.section}
         />
+
         <Typography variant="h6">
           Please enter emergency contact information
         </Typography>
@@ -388,6 +389,7 @@ class ClientRegPage1 extends Component {
           height="70"
           className={classes.section}
         />
+
         <Typography variant="h6">
           Please enter your preferred vet clinic information
         </Typography>

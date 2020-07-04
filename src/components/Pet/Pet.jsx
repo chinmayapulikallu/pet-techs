@@ -40,6 +40,7 @@ const styles = theme => ({
         textAlign: 'center',
         justifyContent: "center",
         alignItems: "center",
+        marginTop: 20,
     },
     img: {
         borderRadius: '50%',
@@ -251,7 +252,13 @@ class Pet extends Component {
                                         }
                                     </TableCell>
                                     <TableCell align="left"> <h4>{this.props.pet.pet_name}</h4><p>{this.props.pet.age} years old</p> <p>{this.props.pet.breed}</p><p>{this.props.pet.pet_behavior}</p></TableCell>
-                                    <TableCell align="left"><ColorButton variant="contained" color="info" onClick={this.handleCarePlanButton}>Care Plan</ColorButton></TableCell>
+                                    <TableCell align="left" className={classes.items}><ColorButton variant="contained" color="info" onClick={this.handleCarePlanButton}>Care Plan</ColorButton> 
+                                    <p>{" "}</p>  
+                                  
+                                   
+                                    <img src="images/Heart.png" alt="profile" height="30" width="30" />
+
+                                    </TableCell>
                                 </TableRow>
                             </TableBody>
                         </Table>

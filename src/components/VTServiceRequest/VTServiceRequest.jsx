@@ -75,15 +75,15 @@ const styles = {
 class VTServiceRequest extends Component {
   handleAccept = () => {
     this.props.dispatch({
-      type: "ACCEPT_REQ",
-      payload: 1 
+      type: "ACCEPT/DECLINE_REQ",
+      payload: { id: this.props.request.id, request_status: 1 },
     });
   };
 
   handleDecline = () => {
     this.props.dispatch({
-      type: "DECLINE_REQ",
-      payload: 2,
+      type: "ACCEPT/DECLINE_REQ",
+      payload: {id: this.props.request.id, request_status: 2},
     });
   };
 

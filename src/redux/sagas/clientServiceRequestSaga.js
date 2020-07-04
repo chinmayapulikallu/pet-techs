@@ -6,23 +6,15 @@ function* clientServiceRequestSaga() {
   yield takeLatest("SET_CLIENT_SERVICE_REQUEST", setClientServiceRequest);
   yield takeLatest("GET_CLIENT_SERVICE_REQUEST", getClientServiceRequest); 
   yield takeLatest("GET_VT_SERVICE_REQUEST", getVTServiceRequest);
-  yield takeLatest("ACCEPT_REQ", acceptServiceRequest);  
-  yield takeLatest("DECLINE_REQ", declineServiceRequest);
+  yield takeLatest("ACCEPT/DECLINE_REQ", acceptDeclineServiceRequest);  
 }
 
-function* acceptServiceRequest(action) {
+//PUT for accepting or declining service request
+function* acceptDeclineServiceRequest(action) {
   try {
     yield axios.put(`/api/request`, action.payload);
   } catch (error) {
     console.log("Error accepting service request", error);
-  }
-}
-
-function* declineServiceRequest(action) {
-  try {
-    yield axios.put(`/api/request`, action.payload);
-  } catch (error) {
-    console.log("Error declining service request", error);
   }
 }
 

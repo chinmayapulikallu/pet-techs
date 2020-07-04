@@ -43,7 +43,7 @@ const styles = theme => ({
         flexGrow: 1,
     },
     paddingTop: {
-        paddingTop: 50,
+        paddingTop: 100,
     },
     title: {
         backgroundColor: '#faefec',
@@ -62,7 +62,7 @@ const styles = theme => ({
         alignItems: "center",
     },
     itemImg: {
-        padding: 15,
+        // padding: 15,
         textAlign: 'center',
         justifyContent: "center",
         alignItems: "center",
@@ -133,6 +133,7 @@ const styles = theme => ({
         borderRadius: "5px",
         width: "100%",
         border: "2px solid #195C60",
+        height: 200
     },
     contentInTable: {
         paddingLeft: 10,
@@ -461,7 +462,7 @@ class ClientProfileDetail extends Component {
                 </div>
                 {/* </Container> */}
 
-                <Container className={classes.client_content} maxWidth="lg">
+                <Container className={classes.client_content} maxWidth="md">
                     <Grid container spacing={3} >
                         <Grid item xs={9}>
 
@@ -502,22 +503,18 @@ class ClientProfileDetail extends Component {
 
                     <Grid item xs={12} className={classes.name}>
                         <h2>{this.state.client_name}'s Pets</h2>
-                    </Grid>
-                    {/* <h1>{JSON.stringify(this.props.petInfo)}</h1> */}
-
-                    {this.props.petInfo.map((pet) => {
-                        return (
-                            <div key={pet.id}>
-                                <Grid container spacing={3}>
+                        {this.props.petInfo.map((pet) => {
+                            return (
+                                <div key={pet.id}>
                                     <Pet
                                         pet={pet}
                                         editable={this.state.editable}
                                     />
-                                </Grid>
-
-                            </div>
-                        )
-                    })}
+                                </div>
+                            )
+                        })}
+                    </Grid>
+                    {/* <h1>{JSON.stringify(this.props.petInfo)}</h1> */}
                     <Grid container spacing={3} className={classes.paddingTop}>
                         <Grid item xs={6} className={classes.itemImg}>
                             <img src="images/belt.png" alt="profile" height="80" width="130" />
@@ -527,6 +524,7 @@ class ClientProfileDetail extends Component {
                         </Grid>
 
                         <Grid item xs={6} className={classes.items}>
+                            
                             {this.state.editable ?
                                 <>
                                     <TextField
@@ -543,27 +541,24 @@ class ClientProfileDetail extends Component {
                                 :
                                 <>
 
-                                    <Grid>
-                                        <Paper elevation={5} className={classes.paperOther}>
-                                            <div>
-                                                <CardHeader
-                                                    title={`${this.state.client_name}'s Pet Equipment`}
-                                                    className={classes.header}
-                                                />
-                                            </div>
-                                            <div >
-                                                <Typography variant="subtitle1" className={classes.contentInTable}>
-                                                    {this.state.about_equipment}
-                                                </Typography>
-                                            </div>
-                                        </Paper>
+                                    <Grid className={classes.paperOther}>
+                                        <div>
+                                            <CardHeader
+                                                title={`${this.state.client_name}'s Pet Equipment`}
+                                                className={classes.header}
+                                            />
+                                        </div>
+                                        <div >
+                                            <Typography variant="subtitle1" className={classes.contentInTable}>
+                                                {this.state.about_equipment}
+                                            </Typography>
+                                        </div>
                                     </Grid>
                                 </>
                             }
 
                         </Grid>
-                        <Grid item xs={6} className={classes.items}>
-
+                        <Grid item xs={6}>
                             {this.state.editable ?
                                 <>
                                     <TextField
@@ -580,26 +575,24 @@ class ClientProfileDetail extends Component {
                                 :
                                 <>
 
-                                    <Grid>
-                                        <Paper elevation={5} className={classes.paperOther}>
-                                            <div>
-                                                <CardHeader
-                                                    title={`${this.state.client_name}'s Home Environment`}
-                                                    className={classes.header}
-                                                />
-                                            </div>
-                                            <div >
-                                                <Typography variant="subtitle1" className={classes.contentInTable}>
-                                                    {this.state.about_home}
-                                                </Typography>
-                                            </div>
-                                        </Paper>
+                                    <Grid className={classes.paperOther}>
+                                        <div>
+                                            <CardHeader
+                                                title={`${this.state.client_name}'s Home Environment`}
+                                                className={classes.header}
+                                            />
+                                        </div>
+                                        <div >
+                                            <Typography variant="subtitle1" className={classes.contentInTable}>
+                                                {this.state.about_home}
+                                            </Typography>
+                                        </div>
                                     </Grid>
                                 </>
                             }
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} className={classes.itemImg}>
+                    <Grid item xs={12} className={classes.name}>
                         <Button variant="contained" color="primary" onClick={this.handleBackButton}>Back to Dashboard</Button>
                     </Grid>
                 </Container>

@@ -5,7 +5,25 @@ import axios from "axios";
 function* clientServiceRequestSaga() {
   yield takeLatest("SET_CLIENT_SERVICE_REQUEST", setClientServiceRequest);
   yield takeLatest("GET_CLIENT_SERVICE_REQUEST", getClientServiceRequest); 
-  yield takeLatest("GET_VT_SERVICE_REQUEST", getVTServiceRequest);  
+  yield takeLatest("GET_VT_SERVICE_REQUEST", getVTServiceRequest);
+  yield takeLatest("ACCEPT_REQ", acceptServiceRequest);  
+  yield takeLatest("DECLINE_REQ", declineServiceRequest);
+}
+
+function* acceptServiceRequest(action) {
+  try {
+    yield axios.put(`/api/request`, action.payload);
+  } catch (error) {
+    console.log("Error accepting service request", error);
+  }
+}
+
+function* declineServiceRequest(action) {
+  try {
+    yield axios.put(`/api/request`, action.payload);
+  } catch (error) {
+    console.log("Error declining service request", error);
+  }
 }
 
 //post service request Information

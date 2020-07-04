@@ -68,11 +68,27 @@ const styles = {
   },
   for: {
     marginTop: 10,
-    marginBottom: 10
-  }
+    marginBottom: 10,
+  },
 };
 
 class VTServiceRequest extends Component {
+  handleAccept = () => {
+    this.props.dispatch({
+      type: "ACCEPT_REQ",
+      payload: 1 
+    });
+  };
+
+  handleDecline = () => {
+    this.props.dispatch({
+      type: "DECLINE_REQ",
+      payload: 2,
+    });
+  };
+
+  handleBack = () => {};
+
   render() {
     const { classes } = this.props;
     return (
@@ -90,7 +106,9 @@ class VTServiceRequest extends Component {
             </Typography>
           </Paper>
         </div>
-        <Typography variant="h6" className={classes.for}>For</Typography>
+        <Typography variant="h6" className={classes.for}>
+          For
+        </Typography>
         <div className={classes.req}>
           <Paper className={classes.typeOfReq}>
             <Typography variant="h6" className={classes.pet}>

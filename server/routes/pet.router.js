@@ -20,7 +20,7 @@ router.get("/", (req, res) => {
   //                    "amount_per_meal", "other_food", "pet_behavior", "care_equipment", array_agg(pet_picture.pet_profile_img), array_agg(pet_picture.pet_img)
   //                     FROM pet 
   //                   JOIN pet_picture ON pet.id = pet_picture.pet_id WHERE pet.user_id = $1 GROUP BY pet.id ;`;
-  const sqlText = `SELECT * from pet where user_id = $1;`;
+  const sqlText = `SELECT * from pet where user_id = $1 ORDER BY id;`;
   console.log("pet data req.user.id :: ", req.user.id)
   pool
     .query(sqlText, [req.user.id])

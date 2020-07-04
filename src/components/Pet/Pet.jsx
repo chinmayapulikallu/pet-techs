@@ -13,6 +13,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { withRouter } from 'react-router-dom';
 import '../ClientProfile/ClientProfile.css';
@@ -56,6 +62,15 @@ const styles = theme => ({
     },
     bgImg: {
         backgroundColor: '#faefec',
+    },
+    editButton: {
+        paddingBottom: '60%',
+    },
+    progressLoad: {
+        position: 'absolute',
+        justifyContent: "center",
+        // marginLeft: '50%',
+        // background: 'rgba(0, 0, 0, 0.5)',
     }
 
 
@@ -78,8 +93,35 @@ const ColorButton = withStyles((theme) => ({
 class Pet extends Component {
     state = {
         file: '',
-        editPicture: true,
+        // editPicture: true,
+        open: false,
+        setLoading: true,
+
+
     }
+    componentWillReceiveProps = () => {
+        this.setState({
+            ...this.state,
+            open: this.props.open,
+        })
+    }
+
+    handleClickOpen = () => {
+        this.setState({
+            ...this.state,
+            open: true,
+            setLoading: false,
+            editPicture: !this.state.editPicture,
+
+
+        })
+    }
+    handleCancel = () => {
+        this.setState({
+            ...this.state,
+            open: false,
+        });
+    };
 
     componentDidMount() {
 
@@ -105,15 +147,20 @@ class Pet extends Component {
     handleEditPicture = () => {
         console.log('handleEditPicture clicked', this.state.file)
         this.setState({
-            editPicture: !this.state.editPicture
+            // editPicture: !this.state.editPicture,
+            setLoading: false,
         })
     }
 
     handleSavePicture = () => {
         console.log('handleEditPicture clicked', this.state.file)
         this.setState({
-            editPicture: !this.state.editPicture
+            // editPicture: !this.state.editPicture,
+            setLoading: true,
+
         })
+        console.log('set loading', this.state.setLoading)
+
         this.props.dispatch({
             type: 'UPDATE_PROFILE_PICTURE',
             payload: {
@@ -142,23 +189,54 @@ class Pet extends Component {
                                     <TableCell scope="row" className={classes.bgImg}>
                                         {this.props.editable ?
                                             <>
-                                                {this.state.editPicture ?
-                                                    <>
-                                                        <button onClick={this.handleEditPicture}>Edit</button>
-                                                        {this.props.pet.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
-                                                            <>
-                                                                <img className={classes.img} src="images/paw-gress-icon.png" alt="profile" height="150" width="150" />
-                                                            </>
-                                                            :
-                                                            <img className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img} height="150" width="150" />
-                                                        }
-                                                    </>
-                                                    :
-                                                    <>
-                                                        <input type="file" onChange={this.handlePictureChangeFor} />
-                                                        <button onClick={this.handleSavePicture}>Save</button>
-                                                    </>
-                                                }
+                                                {/* {this.state.editPicture ? */}
+                                                <>
+                                                    {this.props.pet.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
+                                                        <>
+                                                            <img className={classes.img} src="images/paw-gress-icon.png" alt="profile" height="150" width="150" />
+                                                        </>
+                                                        :
+
+                                                        <img className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img} height="150" width="150" />
+                                                    }
+                                                    <img src="images/edit.png" alt="edit_button" height="30" width="30" className={classes.editButton} onClick={this.handleClickOpen} />
+
+                                                </>
+                                                {/* : */}
+                                                <>
+                                                    <Dialog
+                                                        open={this.state.open}
+                                                        onClose={this.handleClose}
+                                                        aria-labelledby="alert-dialog-title"
+                                                        aria-describedby="alert-dialog-description"
+                                                    >
+                                                        <DialogTitle id="alert-dialog-title">{"Edit Your Pet Profile Picture"}</DialogTitle>
+                                                        <DialogContent>
+
+                                                            <input type="file" onChange={this.handlePictureChangeFor} />
+                                                            {/* <CircularProgress className={classes.progressLoad} /> */}
+                                                            <br />
+                                                            {this.state.setLoading ?
+                                                                <>
+                                                                    <CircularProgress className={classes.progressLoad} />
+                                                                </>
+                                                                :
+                                                                ''
+                                                            }
+                                                            {/* <img src={this.state.profile_img} alt='profile_picture' height="100%" width="100%" /> */}
+                                                        </DialogContent>
+
+                                                        <DialogActions>
+                                                            <Button onClick={this.handleCancel} color="primary">
+                                                                Cancel
+                                                  </Button>
+                                                            <Button onClick={this.handleSavePicture} color="primary" autoFocus>
+                                                                Upload
+                                                </Button>
+                                                        </DialogActions>
+                                                    </Dialog>
+                                                </>
+                                                {/* } */}
                                             </>
                                             :
                                             <>

@@ -68,7 +68,8 @@ router.get('/client', (req, res) => {
  * POST route template
  */
 router.post("/client", (req, res) => {
-    console.log("client request post::::", req.body, req.user.id, req.user.user_email);
+    // console.log("client request post::::", req.body, req.user.id, req.user.user_email);
+    console.log("SENT---------------------%%%%%%%%%%%%%%%%%%%%%%%%%%%$$$$$$$$$$$$$$$$$$$")
     const hasEnvVariables =
     process.env.SENDGRID_API_KEY && process.env.SENDGRID_FROM_EMAIL;
    if (req.user.id && req.user.user_email && hasEnvVariables) {

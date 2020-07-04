@@ -66,9 +66,7 @@ class VTDashboard extends Component {
         {this.props.vtInfo.map((vt) => {
           return (
             <div key={vt.id}>
-
               <Container>
-
                 {vt.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                   <>
                     <img className={classes.img}
@@ -78,7 +76,6 @@ class VTDashboard extends Component {
                   <img className={classes.img}
                     src={vt.media_url} alt={vt.profile_img} height='200' width='200'/>
                 }
-
                 {/* <img className={classes.img} src={vt.media_url} alt={vt.profile_img} height="150" width="150" /> */}
                 <Typography variant="h6">Pending Requests ({clientRequest.filter(cr => cr.request_status === 0).length})</Typography>
                 <TableContainer component={Paper}>
@@ -86,8 +83,10 @@ class VTDashboard extends Component {
                     <TableHead>
                       <TableRow>
                         <TableCell>Name</TableCell>
-                        <TableCell>Date</TableCell>
+                        <TableCell>Service Start Date</TableCell>
+                        <TableCell>Service End Date</TableCell>
                         <TableCell>Client Name</TableCell>
+                         <TableCell>Client Email</TableCell>
                          <TableCell>Service Type</TableCell>
                         <TableCell>Details</TableCell>
                       </TableRow>
@@ -99,7 +98,9 @@ class VTDashboard extends Component {
                          <>
                         <TableCell>{request.pet_name}</TableCell>
                         <TableCell>{moment(request.start_date_time).format("MMM Do YYYY")}</TableCell>
+                        <TableCell>{moment(request.end_date_time).format("MMM Do YYYY")}</TableCell>
                         <TableCell>{request.client_name}</TableCell>
+                        <TableCell>{request.user_email}</TableCell>
                          <TableCell>{request.service_select}</TableCell>
                         <TableCell>
                           <Button
@@ -129,6 +130,8 @@ class VTDashboard extends Component {
                         <TableCell>Pet Name</TableCell>
                         <TableCell>Date</TableCell>
                         <TableCell>Species Name</TableCell>
+                        <TableCell>Client Name</TableCell>
+                        <TableCell>Client Email</TableCell>
                         <TableCell>Service Type</TableCell>
                         <TableCell>Action</TableCell>
                       </TableRow>
@@ -141,6 +144,8 @@ class VTDashboard extends Component {
                         <TableCell>{petRequest.pet_name}</TableCell>
                           <TableCell>{moment(petRequest.start_date_time).format("MMM Do YYYY")}</TableCell>
                         <TableCell>{petRequest.pet_type}</TableCell>
+                        <TableCell>{petRequest.client_name}</TableCell>
+                        <TableCell>{petRequest.user_email}</TableCell>
                         <TableCell>{petRequest.service_select}</TableCell>
                         <TableCell>
                           <Button

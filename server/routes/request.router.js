@@ -189,9 +189,13 @@ router.post("/client", (req, res) => {
 
 router.get("/vt", (req, res) => {
   console.log("in vt :::: ", req.user.id)
-  const sqlText = `select client_request.start_date_time, pet.pet_name, client_request.vet_id,pet.id, 
-                  client_request.request_status,client.client_name, client_request.service_select, pet.pet_type from client_request, pet, client where
-                  client_request.pet_id = pet.id and pet.user_id = client.user_id and 
+  const sqlText = `select client_request.start_date_time, client_request.end_date_time, client_request.add_info,
+                   pet.pet_name, client_request.vet_id,pet.id, 
+                  client_request.request_status,client.client_name, client_request.service_select, 
+                  pet.pet_type, "user".user_email from client_request, pet, client, "user" where
+                  client_request.pet_id = pet.id and 
+                  pet.user_id = client.user_id and 
+                  client.user_id = "user".id and
                   client_request.vet_id = $1;`;
   pool
     .query(sqlText, [req.user.id])
@@ -201,6 +205,22 @@ router.get("/vt", (req, res) => {
     })
     .catch((error) => {
       console.log(`Error getting service request for vet tech.`, error);
+      res.sendStatus(500);
+    });
+});
+
+router.put("/", (req, res) => {
+  console.log("!!!!!!!!!!", req.body)
+  const {
+    id,
+    request_status,
+  } = req.body;
+  const sqlText = `UPDATE client_request SET request_status = $2 where pet_id = $1; `;
+  pool
+    .query(sqlText, [id, request_status])
+    .then(() => res.sendStatus(200))
+    .catch((error) => {
+      console.log(`Error updating service request_status. ${sqlText}`, error);
       res.sendStatus(500);
     });
 });

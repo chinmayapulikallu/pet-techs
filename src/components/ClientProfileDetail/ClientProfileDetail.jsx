@@ -13,17 +13,27 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from "@material-ui/core/Paper";
+import Box from "@material-ui/core/Paper";
+
 import { Typography, CardHeader } from "@material-ui/core";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 
 import { withRouter } from 'react-router-dom';
 import '../ClientProfile/ClientProfile.css';
 import TextField from '@material-ui/core/TextField';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 import Uppy from '@uppy/core';
 import DragDrop from '@uppy/react/lib/DragDrop';
+// import ProgressBar from '@uppy/react/lib/ProgressBar'
+
 import '@uppy/core/dist/style.css'
 import '@uppy/drag-drop/dist/style.css'
+import '@uppy/progress-bar/dist/style.css'
+
+import Swal from 'sweetalert2'
+
 
 const styles = theme => ({
     root: {
@@ -37,7 +47,8 @@ const styles = theme => ({
     },
     title: {
         backgroundColor: '#faefec',
-        paddingTop: 85,
+        paddingTop: 20,
+        paddingBottom: 50,
         width: '100%',
     },
     name: {
@@ -59,23 +70,30 @@ const styles = theme => ({
     img: {
         borderRadius: '50%',
         position: 'absolute',
-        top: 170,
-        left: 100,
+        top: 200,
+        left: 150,
     },
     clientInfo: {
         marginBottom: 0,
         position: 'absolute',
-        top: 160,
-        left: 330,
+        top: 200,
+        left: 400,
     },
     client_content: {
         marginTop: 200,
 
     },
+    titleHeader: {
+        // display: 'flex',
+        justifyContent: "center",
+        textAlign: 'center',
+        top: 30,
+    },
     editButton: {
         display: 'flex',
         justifyContent: "right",
-        marginLeft: '85%',
+        marginLeft: '70%',
+        // top: 10,
     },
     contentInTable: {
         padding: '0px 10px',
@@ -121,10 +139,19 @@ const styles = theme => ({
         paddingTop: 10,
         paddingBottom: 20,
 
+    },
+    editIcon: {
+        position: 'absolute',
+        top: 170,
+        left: 300,
+    },
+    progressLoad: {
+        position: 'absolute',
+        justifyContent: "center",
+        marginLeft: '50%',
+        background: 'rgba(0, 0, 0, 0.5)',
     }
 });
-
-
 
 
 
@@ -141,7 +168,11 @@ class ClientProfileDetail extends Component {
         state: '',
         file: null,
         open: false,
+        setLoading: false,
     }
+
+
+
     componentWillReceiveProps = () => {
         this.setState({
             ...this.state,
@@ -153,6 +184,8 @@ class ClientProfileDetail extends Component {
         this.setState({
             ...this.state,
             open: true,
+            setLoading: false,
+
         })
     }
 
@@ -170,10 +203,18 @@ class ClientProfileDetail extends Component {
                 file: this.state.file
             }
         })
+        // Swal.fire({
+        //     text: 'Update!',
+        //     width: 150,
+        //     padding: '1em',
+        //     background: '#fff url()',
+        //     showConfirmButton: false,
+        //     timer: 4000,
+        // })
         this.setState({
-            ...this.state,
-            open: false,
-        });
+            setLoading: !this.state.setLoading
+        })
+
     };
 
     //-----------------------------------
@@ -186,8 +227,10 @@ class ClientProfileDetail extends Component {
             allowedFileTypes: ['image/*'],
             // dimensions: { width: 1200, height: 800 },
         },
-        autoProceed: true
+        autoProceed: true,
     })
+
+
     reader = new FileReader()
 
 
@@ -221,7 +264,13 @@ class ClientProfileDetail extends Component {
             let fileKey = Object.keys(this.uppy.state.files)[0];
             let fileFromUppy = this.uppy.state.files[fileKey].data;
             this.setImage(fileFromUppy);
+
         })
+
+        // this.uppy2.on(ProgressBar, {
+        //     target: '.UppyProgressBar',
+        //     hideAfterFinish: false
+        // })
 
         this.reader.onloadend = () => {
             this.setState({
@@ -229,7 +278,11 @@ class ClientProfileDetail extends Component {
             })
         }
         console.log('data from client profile', this.state)
+
+
+
     }
+
 
     setImage = file => {
         //reads the file into a local data url
@@ -299,13 +352,15 @@ class ClientProfileDetail extends Component {
 
                                 {this.state.editable ?
                                     <>
-                                        <button onClick={this.handleClickOpen}>Edit</button>
                                         {this.props.client.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                                             <img className={classes.img} src="images/blank-profile-picture.png" alt="blank-profile" height="200" width="200" />
                                             :
                                             <img className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} height="200" width="200" />
                                         }
-
+                                        <img src="images/edit.png" alt="edit_button" height="30" width="30" className={classes.editIcon} onClick={this.handleClickOpen} />
+                                    </>
+                                    :
+                                    <>
                                         <Dialog
                                             open={this.state.open}
                                             onClose={this.handleClose}
@@ -315,14 +370,15 @@ class ClientProfileDetail extends Component {
                                             <DialogTitle id="alert-dialog-title">{"Edit Your Profile Picture"}</DialogTitle>
                                             <DialogContent>
                                                 {/* <DialogContentText id="alert-dialog-description"> */}
-
-                                                <DragDrop
-                                                    uppy={this.uppy}
-                                                />
+                                                <DragDrop uppy={this.uppy} />
+                                                {this.state.setLoading ?
+                                                    <>
+                                                        <CircularProgress className={classes.progressLoad} />
+                                                    </>
+                                                    :
+                                                    ''
+                                                }
                                                 <img src={this.state.profile_img} alt='profile_picture' height="100%" width="100%" />
-
-                                                {/* </DialogContentText> */}
-
                                             </DialogContent>
 
                                             <DialogActions>
@@ -334,9 +390,6 @@ class ClientProfileDetail extends Component {
                                                 </Button>
                                             </DialogActions>
                                         </Dialog>
-                                    </>
-                                    :
-                                    <>
                                         {this.props.client.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                                             <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="200" width="200" />
                                             :
@@ -379,20 +432,28 @@ class ClientProfileDetail extends Component {
                                 }
                             </Grid>
                             {this.props.isClient && (
-                                <Grid item xs={3} className={classes.editButton}>
-                                    {this.state.editable ?
-                                        <>
-                                            <img src="images/checkmark.png" alt="save_button" height="50" width="50" onClick={this.handleSaveClient} />
-                                            <p>Save</p>
-                                        </>
-                                        :
-                                        <>
-                                            <img src="images/edit.png" alt="edit_button" height="50" width="50" onClick={this.handleEditClient} />
-                                            <p>Edit profile</p>
-                                        </>
-                                    }
-                                    {/* <img src="images/edit.png" alt="edit_button" height="50" width="50" onClick={this.handleEditClient} /> */}
-                                </Grid>
+                                <>
+                                    <Grid container >
+                                        <Grid item xs={10} className={classes.titleHeader} >
+                                            <p>This is how your profile appears to the public.</p>
+                                            <p >If you would like to edit any part of your profile click the edit button.</p>
+                                        </Grid>
+                                        <Grid item xs={3} className={classes.editButton}>
+
+                                            {this.state.editable ?
+                                                <>
+                                                    <Button variant="contained" color="secondary" onClick={this.handleSaveClient}>Save</Button>
+                                                </>
+                                                :
+                                                <>
+                                                    <Button variant="contained" color="secondary" onClick={this.handleEditClient}>Edit my profile</Button>
+                                                </>
+                                            }
+                                        </Grid>
+
+                                    </Grid>
+
+                                </>
                             )}
 
                         </Grid>

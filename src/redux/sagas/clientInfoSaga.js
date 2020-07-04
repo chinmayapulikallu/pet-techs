@@ -62,6 +62,14 @@ function* updateClientProfilePicture(action) {
 
     console.log('----------->formdata', action.payload.file.type);
     console.log('send this picture', action.payload);
+
+  //   const option = {
+  //     onUploadProgress: (progressEvent) =>{
+  //         const {loaded, total} = progressEvent;
+  //         let percent = Math.floor((loaded * 100) / total)
+  //         console.log(`${loaded}kb of ${total} kb | ${percent}%`)
+  //     }
+  // }
     // const response = yield axios.put(`/api/pet/updateProfilePicture`, action.payload);
     const response = yield axios.put(`/api/client/updateProfilePicture`, data, {
       headers: {

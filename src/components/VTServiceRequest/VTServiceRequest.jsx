@@ -6,6 +6,7 @@ import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
+const moment = require("moment");
 
 const styles = {
   root: {
@@ -21,12 +22,15 @@ const styles = {
   },
   typeOfReq: {
     backgroundColor: "#195C60",
-    marginRight: 10,
   },
   titleOfReq: {
     color: "white",
     paddingRight: 10,
     paddingLeft: 10,
+  },
+  pet: {
+    color: "white",
+    padding: 25,
   },
   req: {
     display: "flex",
@@ -62,6 +66,10 @@ const styles = {
     marginRight: 30,
     marginLeft: 30,
   },
+  for: {
+    marginTop: 10,
+    marginBottom: 10
+  }
 };
 
 class VTServiceRequest extends Component {
@@ -82,15 +90,15 @@ class VTServiceRequest extends Component {
             </Typography>
           </Paper>
         </div>
-        <Typography variant="h6">For</Typography>
+        <Typography variant="h6" className={classes.for}>For</Typography>
         <div className={classes.req}>
           <Paper className={classes.typeOfReq}>
-            <Typography variant="h6" className={classes.titleOfReq}>
+            <Typography variant="h6" className={classes.pet}>
               {this.props.request.pet_name}
             </Typography>
           </Paper>
         </div>
-        <Grid container>
+        <Grid container spacing={1}>
           <Grid item xs={12} sm={5}>
             <div className={classes.pic}>
               <img src="images/calendar.png" height="100" alt="profile" />
@@ -103,7 +111,9 @@ class VTServiceRequest extends Component {
             <div className={classes.req}>
               <Paper className={classes.dateOfReq}>
                 <Typography variant="h6" className={classes.date}>
-                  {this.props.request.sart_date_time}
+                  {moment(this.props.request.start_date_time).format(
+                    "MMM Do YYYY"
+                  )}
                 </Typography>
               </Paper>
             </div>
@@ -115,7 +125,9 @@ class VTServiceRequest extends Component {
             <div className={classes.req}>
               <Paper className={classes.dateOfReq}>
                 <Typography variant="h6" className={classes.date}>
-                  END DATE
+                  {moment(this.props.request.end_date_time).format(
+                    "MMM Do YYYY"
+                  )}
                 </Typography>
               </Paper>
             </div>
@@ -128,7 +140,7 @@ class VTServiceRequest extends Component {
           <div className={classes.req}>
             <Paper className={classes.dateOfReq}>
               <Typography variant="h6" className={classes.info}>
-                ADDITIONAL INFORMATION
+                {this.props.request.add_info}
               </Typography>
             </Paper>
           </div>
@@ -166,10 +178,10 @@ const mapStateToProps = (reduxState, ownProps) => {
   const request = reduxState.clientRequestReducer.filter(
     (request) => request.id === requestId
   )[0];
-  return{
+  return {
     request,
-  vtInfo: reduxState.vtInfo[0],
-  }
+    vtInfo: reduxState.vtInfo[0],
+  };
 };
 
 export default connect(mapStateToProps)(withStyles(styles)(VTServiceRequest));

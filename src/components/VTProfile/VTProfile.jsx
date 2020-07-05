@@ -348,7 +348,7 @@ class VTProfile extends Component {
                     <img src="images/edit.png" alt="edit_button" height="30" width="30" onClick={this.handleClickOpen} />
                     {this.state.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                       <>
-                        <img className={classes.profilePic}
+                        <Avatar className={classes.profilePic}
                           src="images/blank-profile-picture.png" alt="profile" />
                       </>
                       :
@@ -391,8 +391,8 @@ class VTProfile extends Component {
                   <>
                     {this.state.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                       <>
-                        <img className={classes.profilePic}
-                          src="images/blank-profile-picture.png" alt="profile" height='200' width='200' />
+                        <Avatar className={classes.profilePic}
+                          src="images/blank-profile-picture.png" alt="profile" />
                       </>
                       :
                       <Avatar className={classes.profilePic} src={this.state.media_url} alt={this.state.profile_img} />

@@ -359,7 +359,7 @@ class ClientProfileDetail extends Component {
                                 {this.state.editable ?
                                     <>
                                         {this.props.client.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
-                                            <img className={classes.img} src="images/blank-profile-picture.png" alt="blank-profile" height="200" width="200" />
+                                            <Avatar className={classes.img} src="images/blank-profile-picture.png" alt="blank-profile"  />
                                             :
                                             <Avatar className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} />
                                         }
@@ -398,7 +398,7 @@ class ClientProfileDetail extends Component {
                                     :
                                     <>
                                         {this.props.client.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
-                                            <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="auto" width="auto" />
+                                            <Avatar className={classes.img} src="images/blank-profile-picture.png" alt="profile" />
                                             :
                                             <Avatar className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} />
                                         }

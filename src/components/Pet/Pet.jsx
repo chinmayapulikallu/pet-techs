@@ -30,10 +30,6 @@ const styles = theme => ({
         marginLeft: 0,
         marginRight: 0,
         marginTop: '30px',
-        // flexGrow: 1,
-        alignItems: "center",
-        // marginLeft: 20,
-        // marginRight: 20,
         textAlign: 'center',
         justifyContent: "center",
         alignItems: "center",
@@ -198,7 +194,7 @@ class Pet extends Component {
                                                     <>
                                                         {this.props.pet.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                                                             <>
-                                                                <img className={classes.img} src="images/paw-gress-icon.png" alt="profile" />
+                                                                <Avatar className={classes.img} src="images/paw-gress-icon.png" alt="profile" />
                                                             </>
                                                             :
 
@@ -243,7 +239,7 @@ class Pet extends Component {
                                                 <>
                                                     {this.props.pet.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                                                         <>
-                                                            <img className={classes.img} src="images/paw-gress-icon.png" alt="profile"  />
+                                                            <Avatar className={classes.img} src="images/paw-gress-icon.png" alt="profile"  />
                                                         </>
                                                         :
                                                         <Avatar className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img}  />

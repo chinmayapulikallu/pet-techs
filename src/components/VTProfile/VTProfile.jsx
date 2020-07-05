@@ -21,6 +21,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Avatar from '@material-ui/core/Avatar';
 
 import { withRouter } from "react-router-dom";
 import vtInfo from "../../redux/reducers/vetTechReducer";
@@ -75,6 +76,8 @@ const styles = (theme) => ({
     marginTop: -(PROFILE_IMG_HEIGHT / 3),
     height: PROFILE_IMG_HEIGHT,
     borderRadius: "50%",
+    width: theme.spacing(25),
+    height: theme.spacing(25),
 
     [theme.breakpoints.down("xs")]: {
       marginTop: 10,
@@ -349,8 +352,7 @@ class VTProfile extends Component {
                           src="images/blank-profile-picture.png" alt="profile" />
                       </>
                       :
-                      <img className={classes.profilePic}
-                        src={this.state.media_url} alt={this.state.profile_img} height='200' width='200' />
+                      <Avatar className={classes.profilePic} src={this.state.media_url} alt={this.state.profile_img}  />
                     }
 
                     <Dialog
@@ -393,8 +395,7 @@ class VTProfile extends Component {
                           src="images/blank-profile-picture.png" alt="profile" height='200' width='200' />
                       </>
                       :
-                      <img className={classes.profilePic}
-                        src={this.state.media_url} alt={this.state.profile_img} height='200' width='200' />
+                      <Avatar className={classes.profilePic} src={this.state.media_url} alt={this.state.profile_img} />
                     }
                   </>
                 }

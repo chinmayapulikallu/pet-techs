@@ -85,22 +85,22 @@ class ClientRegPage1 extends Component {
   autoFillForm = () => {
     this.setState({
       // text: {
-      client_name: "Sam",
-      home_address_house: "8901 Portland Ave",
+      client_name: "Andrew",
+      home_address_house: "2459 Portland Ave",
       apt_suite: "",
-      city: "Bloomington",
+      city: "Minneapolis",
       state: "MN",
       zip_code: "55420",
-      about_client: "Loves Dogs and cats",
-      about_home: "Single family home",
-      about_equipment: "toys",
-      contact_name_1: "Sam",
-      contact_phone_1: "9999999",
-      contact_email_1: "sam@in",
-      vet_clinic: "Pet clinic",
-      clinic_address: "60 E Broadway",
-      clinic_phone: "88989",
-      transport: false,
+      about_client: "I have a 10 year old German Shepherd named CeCe! We are best friends and do everything together. CeCe has been with me since she was a puppy. Some of our favorite activities include going on walks, hanging out at the dog park and doing tricks for treats! ",
+      about_home: "We live in an apartment in Minneapolis. It is just us two, so we don't need a ton of space. CeCe is getting older now, so she doesn't need as much room to run around, we get plenty of exercise going on our daily walks.",
+      about_equipment: "CeCe has a favorite stuffed toy that she likes to carry around. It is very well loved. She also enjoys squeak toys and rawhide chew toys. ",
+      contact_name_1: "Katie",
+      contact_phone_1: "555-983-3827",
+      contact_email_1: "Katie@Katie.com",
+      vet_clinic: "St. Paul Pet Hospital",
+      clinic_address: "54 12th St, St. Paul, MN 55104",
+      clinic_phone: "555-343-8934",
+      transport: true,
       // }
     });
   };

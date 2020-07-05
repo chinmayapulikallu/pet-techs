@@ -208,4 +208,20 @@ router.get("/vt", (req, res) => {
     });
 });
 
+router.put("/", (req, res) => {
+  console.log("!!!!!!!!!!", req.body)
+  const {
+    id,
+    request_status,
+  } = req.body;
+  const sqlText = `UPDATE client_request SET request_status = $2 where pet_id = $1; `;
+  pool
+    .query(sqlText, [id, request_status])
+    .then(() => res.sendStatus(200))
+    .catch((error) => {
+      console.log(`Error updating service request_status. ${sqlText}`, error);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;

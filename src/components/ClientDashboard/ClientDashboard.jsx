@@ -40,7 +40,7 @@ const useStyles = (theme) => ({
     paddingTop: 25,
     width: 100,
     height: 100,
-    
+
   },
   buttonMargin: {
     margin: "10px",
@@ -171,7 +171,6 @@ class ClientDashboard extends Component {
                         className={classes.img}
                         src={client.media_url}
                         alt={client.profile_img}
-
                       />
                     )}
                 </div>
@@ -239,6 +238,11 @@ class ClientDashboard extends Component {
                                       <Typography variant="body1">
                                         VET: {request.vet_name}
                                       </Typography>
+                                      <Avatar
+                                        className={classes.img}
+                                        src={request.media_url}
+                                        alt={request.profile_img}
+                                      />
                                       <Typography variant="body1">
                                         PET: {request.pet_name}
                                       </Typography>

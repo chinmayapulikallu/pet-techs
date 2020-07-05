@@ -149,8 +149,8 @@ const styles = theme => ({
     progressLoad: {
         position: 'absolute',
         justifyContent: "center",
-        marginLeft: '50%',
-        background: 'rgba(0, 0, 0, 0.5)',
+        marginLeft: '45%',
+        // background: 'rgba(0, 0, 0, 0.5)',
     }
 });
 
@@ -359,9 +359,7 @@ class ClientProfileDetail extends Component {
                                             <img className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} height="200" width="200" />
                                         }
                                         <img src="images/edit.png" alt="edit_button" height="30" width="30" className={classes.editIcon} onClick={this.handleClickOpen} />
-                                    </>
-                                    :
-                                    <>
+
                                         <Dialog
                                             open={this.state.open}
                                             onClose={this.handleClose}
@@ -391,6 +389,9 @@ class ClientProfileDetail extends Component {
                                                 </Button>
                                             </DialogActions>
                                         </Dialog>
+                                    </>
+                                    :
+                                    <>
                                         {this.props.client.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                                             <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="200" width="200" />
                                             :
@@ -524,7 +525,7 @@ class ClientProfileDetail extends Component {
                         </Grid>
 
                         <Grid item xs={6} className={classes.items}>
-                            
+
                             {this.state.editable ?
                                 <>
                                     <TextField

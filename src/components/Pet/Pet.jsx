@@ -119,8 +119,6 @@ class Pet extends Component {
             open: true,
             setLoading: false,
             editPicture: !this.state.editPicture,
-
-
         })
     }
     handleCancel = () => {

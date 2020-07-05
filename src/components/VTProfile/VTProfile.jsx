@@ -129,7 +129,7 @@ const styles = (theme) => ({
     position: 'absolute',
     justifyContent: "center",
     marginLeft: '45%',
-    background: 'rgba(0, 0, 0, 0.5)',
+    // background: 'rgba(0, 0, 0, 0.5)',
   }
 });
 
@@ -139,7 +139,6 @@ class VTProfile extends Component {
     editable: false,
     open: false,
     setLoading: false,
-
   };
 
   componentWillReceiveProps = () => {

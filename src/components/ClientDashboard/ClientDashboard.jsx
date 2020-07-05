@@ -11,6 +11,8 @@ import Button from "@material-ui/core/Button";
 // import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
+import Avatar from '@material-ui/core/Avatar';
+
 // import Avatar from '@material-ui/core/Avatar';
 // import IconButton from '@material-ui/core/IconButton';
 // import CheckCircleIcon from '@material-ui/icons/CheckCircle';
@@ -38,6 +40,7 @@ const useStyles = (theme) => ({
     paddingTop: 25,
     width: 100,
     height: 100,
+
   },
   buttonMargin: {
     margin: "10px",
@@ -91,6 +94,8 @@ const useStyles = (theme) => ({
   img: {
     marginTop: 25,
     borderRadius: "50%",
+    width: theme.spacing(25),
+    height: theme.spacing(25),
   },
   searchBtn: {
     margin: "auto",
@@ -154,22 +159,20 @@ class ClientDashboard extends Component {
                   </Typography>
                   {client.profile_img === "3e541de1f0419c15034e45c05eb3becd" ? (
                     <>
-                      <img
+                      <Avatar
                         className={classes.img}
                         src="images/blank-profile-picture.png"
                         alt="profile"
-                        height="200"
+
                       />
                     </>
                   ) : (
-                    <img
-                      className={classes.img}
-                      src={client.media_url}
-                      alt={client.profile_img}
-                      height="200"
-                      width="200"
-                    />
-                  )}
+                      <Avatar
+                        className={classes.img}
+                        src={client.media_url}
+                        alt={client.profile_img}
+                      />
+                    )}
                 </div>
               </Grid>
               <Grid container>
@@ -235,6 +238,11 @@ class ClientDashboard extends Component {
                                       <Typography variant="body1">
                                         VET: {request.vet_name}
                                       </Typography>
+                                      <Avatar
+                                        className={classes.img}
+                                        src={request.media_url}
+                                        alt={request.profile_img}
+                                      />
                                       <Typography variant="body1">
                                         PET: {request.pet_name}
                                       </Typography>

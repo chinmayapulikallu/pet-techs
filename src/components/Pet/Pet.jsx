@@ -4,14 +4,12 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-
 import Paper from "@material-ui/core/Paper";
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-
 import TableRow from '@material-ui/core/TableRow';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Dialog from '@material-ui/core/Dialog';
@@ -19,6 +17,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Avatar from '@material-ui/core/Avatar';
 
 import { withRouter } from 'react-router-dom';
 import '../ClientProfile/ClientProfile.css';
@@ -31,10 +30,6 @@ const styles = theme => ({
         marginLeft: 0,
         marginRight: 0,
         marginTop: '30px',
-        // flexGrow: 1,
-        alignItems: "center",
-        // marginLeft: 20,
-        // marginRight: 20,
         textAlign: 'center',
         justifyContent: "center",
         alignItems: "center",
@@ -50,7 +45,8 @@ const styles = theme => ({
     },
     img: {
         borderRadius: '50%',
-
+        width: theme.spacing(15),
+        height: theme.spacing(15),
     },
     contentInTable: {
         padding: '0px 10px',
@@ -119,8 +115,6 @@ class Pet extends Component {
             open: true,
             setLoading: false,
             editPicture: !this.state.editPicture,
-
-
         })
     }
     handleCancel = () => {
@@ -189,7 +183,7 @@ class Pet extends Component {
 
             <div className={classes.root}>
                 <Grid container spacing={3}>
-                    <Grid item xs={5} className={classes.items}>
+                    <Grid item xs={6} className={classes.items}>
                         <TableContainer component={Paper} className={classes.paper}>
                             <Table className={classes.table} aria-label="simple table">
                                 <TableBody>
@@ -200,11 +194,11 @@ class Pet extends Component {
                                                     <>
                                                         {this.props.pet.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                                                             <>
-                                                                <img className={classes.img} src="images/paw-gress-icon.png" alt="profile" height="130" width="130" />
+                                                                <Avatar className={classes.img} src="images/paw-gress-icon.png" alt="profile" />
                                                             </>
                                                             :
 
-                                                            <img className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img} height="130" width="130" />
+                                                            <Avatar className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img}  />
                                                         }
                                                         <img src="images/edit.png" alt="edit_button" height="30" width="30" className={classes.editButton} onClick={this.handleClickOpen} />
                                                     </>
@@ -245,10 +239,10 @@ class Pet extends Component {
                                                 <>
                                                     {this.props.pet.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                                                         <>
-                                                            <img className={classes.img} src="images/paw-gress-icon.png" alt="profile" height="130" width="130" />
+                                                            <Avatar className={classes.img} src="images/paw-gress-icon.png" alt="profile"  />
                                                         </>
                                                         :
-                                                        <img className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img} height="130" width="130" />
+                                                        <Avatar className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img}  />
                                                     }
                                                 </>
                                             }
@@ -271,10 +265,10 @@ class Pet extends Component {
                     </Grid>
                     {/* ---------Content inside pet picture array when mapping------------ */}
                     <Grid item xs={6} className={classes.items}>
+                        {/* <img src="images/camera.png" alt="pet_img" height="130" width="130" className={classes.items} />
                         <img src="images/camera.png" alt="pet_img" height="130" width="130" className={classes.items} />
                         <img src="images/camera.png" alt="pet_img" height="130" width="130" className={classes.items} />
-                        <img src="images/camera.png" alt="pet_img" height="130" width="130" className={classes.items} />
-                        <Button variant="contained" color="secondary">More Photos</Button>
+                        <Button variant="contained" color="secondary">More Photos</Button> */}
 
 
 

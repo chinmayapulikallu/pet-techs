@@ -12,6 +12,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Paper";
+import Avatar from '@material-ui/core/Avatar';
+import CardMedia from '@material-ui/core/CardMedia';
+
 
 import { Typography, CardHeader } from "@material-ui/core";
 import { fade } from "@material-ui/core/styles/colorManipulator";
@@ -70,6 +73,8 @@ const styles = theme => ({
         position: 'absolute',
         top: 200,
         left: 150,
+        width: theme.spacing(25),
+        height: theme.spacing(25),
     },
     clientInfo: {
         marginBottom: 0,
@@ -147,8 +152,8 @@ const styles = theme => ({
     progressLoad: {
         position: 'absolute',
         justifyContent: "center",
-        marginLeft: '50%',
-        background: 'rgba(0, 0, 0, 0.5)',
+        marginLeft: '45%',
+        // background: 'rgba(0, 0, 0, 0.5)',
     }
 });
 
@@ -352,14 +357,12 @@ class ClientProfileDetail extends Component {
                                 {this.state.editable ?
                                     <>
                                         {this.props.client.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
-                                            <img className={classes.img} src="images/blank-profile-picture.png" alt="blank-profile" height="200" width="200" />
+                                            <Avatar className={classes.img} src="images/blank-profile-picture.png" alt="blank-profile"  />
                                             :
-                                            <img className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} height="200" width="200" />
+                                            <Avatar className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} />
                                         }
                                         <img src="images/edit.png" alt="edit_button" height="30" width="30" className={classes.editIcon} onClick={this.handleClickOpen} />
-                                    </>
-                                    :
-                                    <>
+
                                         <Dialog
                                             open={this.state.open}
                                             onClose={this.handleClose}
@@ -389,10 +392,13 @@ class ClientProfileDetail extends Component {
                                                 </Button>
                                             </DialogActions>
                                         </Dialog>
+                                    </>
+                                    :
+                                    <>
                                         {this.props.client.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
-                                            <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="200" width="200" />
+                                            <Avatar className={classes.img} src="images/blank-profile-picture.png" alt="profile" />
                                             :
-                                            <img className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} height="200" width="200" />
+                                            <Avatar className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} />
                                         }
                                     </>
                                 }
@@ -522,7 +528,7 @@ class ClientProfileDetail extends Component {
                         </Grid>
 
                         <Grid item xs={6} className={classes.items}>
-                            
+
                             {this.state.editable ?
                                 <>
                                     <TextField

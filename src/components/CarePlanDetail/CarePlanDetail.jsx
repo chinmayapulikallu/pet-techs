@@ -404,45 +404,48 @@ meals per day, and my favorite food is{" "}
                                 </Grid>
                             </TableRow>
                             <TableRow variant='footer'>
-                                <Grid className={classes.itemCenter}>
+                                {!this.props.isVetTech && (
+                                < Grid className={classes.itemCenter}>
                                     {this.state.isEditing ?
-                                        <>
-                                            <Button
-                                                variant="contained"
-                                                onClick={this.handleEditButton}
-                                            >Cancel </Button>
-                                            <Button
-                                                variant="contained"
-                                                color="primary"
-                                                onClick={this.handleEditToggle}
-                                            >Save </Button>
-                                        </>
-                                        :
+                                    <>
+                                        <Button
+                                            variant="contained"
+                                            onClick={this.handleEditButton}
+                                        >Cancel </Button>
                                         <Button
                                             variant="contained"
                                             color="primary"
-                                            onClick={this.handleEditButton}
-                                        >Edit </Button>
-                                    }
+                                            onClick={this.handleEditToggle}
+                                        >Save </Button>
+                                    </>
+                                    :
+
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={this.handleEditButton}
+                                    >Edit </Button>
+                                }
                                 </Grid>
+                            )}
                             </TableRow>
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <Grid className={classes.itemCenter}>
-                    <Button
-                        variant="contained"
-                        onClick={this.backToProfile}
-                    >
-                        Back
+            <Grid className={classes.itemCenter}>
+                <Button
+                    variant="contained"
+                    onClick={this.backToProfile}
+                >
+                    Back
                                 </Button>
-                </Grid>
-            </Container>
+            </Grid>
+            </Container >
         )
     }
-
-
 }
+
+
 
 export default withStyles(useStyles)(
     withRouter(connect()(CarePlanDetail))

@@ -11,6 +11,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Paper from "@material-ui/core/Paper";
 import { fade } from "@material-ui/core/styles/colorManipulator";
+import Avatar from '@material-ui/core/Avatar';
+
 
 const styles = (theme) => ({
   root: {
@@ -61,7 +63,9 @@ const styles = (theme) => ({
     marginTop: 20,
     marginBottom: 20,
     border: "2px solid #F8E16C",
-    borderRadius: "50px",
+    borderRadius: "50%",
+    width: theme.spacing(15),
+    height: theme.spacing(15),
   },
   header: {
     backgroundColor: fade("#195C60", 0.5),
@@ -289,21 +293,13 @@ class SearchPage extends Component {
                       {vet.profile_img ===
                       "3e541de1f0419c15034e45c05eb3becd" ? (
                         <>
-                          <img
-                            className={classes.img}
-                            src="images/blank-profile-picture.png"
-                            alt="profile"
-                            height="150"
-                            width="150"
-                          />
+                          <img className={classes.profPic} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
                         </>
                       ) : (
                         <img
                           className={classes.profPic}
                           src={vet.media_url}
                           alt="profilePic"
-                          height="100"
-                          width="100"
                         />
                       )}
 

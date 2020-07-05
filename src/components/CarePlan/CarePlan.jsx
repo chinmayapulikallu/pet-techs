@@ -54,34 +54,37 @@ class CarePlan extends Component {
       payload: { id: this.props.match.params.id },
     });
 
-    console.log("------------>reducer:", this.props.match.params.id);
-  }
-  render() {
-    const { classes } = this.props;
-    console.log("-------: ", this.state);
-    return (
-      <Container className={classes.container}>
-        <br />
-        <br />
-        <br />
-        {this.props.petCarePlan.map((careplan) => {
-          return (
-            <div key={careplan.id}>
-              <div>
-                <CarePlanDetail
-                  careplan={careplan}
-                  isEditing={this.state.isEditing}
-                />
-              </div>
-            </div>
-          );
-        })}
-      </Container>
-    );
-  }
+        console.log("------------>reducer:", this.props.match.params.id);
+    }
+    render() {
+        const { classes } = this.props;
+        console.log('-------: ', this.state)
+        return (
+            <Container className={classes.container}>
+                <br />
+                <br />
+                <br />
+
+                {/* {JSON.stringify(this.props.petCarePlan)} */}
+                {this.props.petCarePlan.map((careplan) => {
+                    return (
+                        <div key={careplan.id}>
+                            <CarePlanDetail
+                                careplan={careplan}
+                                isEditing={this.state.isEditing}
+                                isVetTech={this.props.isVetTech}
+                            />
+                        </div>
+                    )
+                })}
+            </Container>
+        );
+    }
 }
 const mapStateToProps = (state) => ({
-  petCarePlan: state.petCarePlan,
+    petCarePlan: state.petCarePlan,
+    isVetTech: state.user.user_type === 1,
+
 });
 export default withStyles(useStyles)(
   withRouter(connect(mapStateToProps)(CarePlan))

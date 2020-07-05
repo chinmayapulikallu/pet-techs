@@ -27,9 +27,8 @@ const useStyles = (theme) => ({
     height: 200,
   },
   profileCenter: {
-    height: 200,
-    width: 200,
-    marginLeft: 400,
+    textAlign: "center",
+    marginBottom: 75,
   },
   profileImage: {
     display: "block",
@@ -44,8 +43,8 @@ const useStyles = (theme) => ({
     margin: "10px",
   },
   serviceList: {
-    width: 800,
-    height: 500,
+    minWidth: 800,
+    // height: 500,
     // marginLeft: 700,
     marginBottom: 50,
     border: "2px solid #195C60",
@@ -55,14 +54,15 @@ const useStyles = (theme) => ({
     height: 150,
     // width: 400,
     // height: 300,
-    marginRight: 30,
-    marginBottom: 30,
+    margin: 30,
+    // marginRight: 30,
+    // marginBottom: 30,
     border: "2px solid #195C60",
     alignItems: "left",
   },
   petTitle: {
-    textAlign: "center",
-    // marginBottom: 500
+    marginTop: 20,
+    marginBottom: 10
   },
   petList: {
     width: 400,
@@ -87,6 +87,17 @@ const useStyles = (theme) => ({
   },
   alignServices: {
     alignItems: "left",
+  },
+  img: {
+    marginTop: 25,
+    borderRadius: "50%",
+  },
+  searchBtn: {
+    margin: "auto",
+    marginBottom: 50,
+  },
+  reqContainers: {
+    margin: "auto",
   },
 });
 
@@ -138,7 +149,7 @@ class ClientDashboard extends Component {
             <span key={client.user_id}>
               <Grid item xs={12} className={classes.profileCenter}>
                 <div>
-                  <Typography variant="h6">
+                  <Typography variant="h4">
                     <b>{client.client_name}</b>
                   </Typography>
                   {client.profile_img === "3e541de1f0419c15034e45c05eb3becd" ? (
@@ -148,7 +159,6 @@ class ClientDashboard extends Component {
                         src="images/blank-profile-picture.png"
                         alt="profile"
                         height="200"
-                        width="200"
                       />
                     </>
                   ) : (
@@ -163,14 +173,14 @@ class ClientDashboard extends Component {
                 </div>
               </Grid>
               <Grid container>
-                <Grid item xs={3}>
+                <Grid item className={classes.searchBtn}>
                   <div>
                     <img
                       className={classes.profileImage}
                       src="/images/service-provider.png"
                       alt="serviceProviderIcon"
-                      height="100"
-                      width="100"
+                      height="200"
+                      width="200"
                     />
                   </div>
                   <Button
@@ -183,7 +193,7 @@ class ClientDashboard extends Component {
                   </Button>
                 </Grid>
                 {clientRequest && clientRequest.length > 0 && (
-                  <Grid item xs={6}>
+                  <Grid item className={classes.reqContainers}>
                     <Card className={classes.serviceList}>
                       <CardContent>
                         <Typography variant="h6">
@@ -223,10 +233,10 @@ class ClientDashboard extends Component {
                                                         /> */}
                                     <CardContent className="align-center">
                                       <Typography variant="body1">
-                                        VET:{request.vet_name}
+                                        VET: {request.vet_name}
                                       </Typography>
                                       <Typography variant="body1">
-                                        PET:{request.pet_name}
+                                        PET: {request.pet_name}
                                       </Typography>
                                       <Typography variant="body1">
                                         {moment(request.start_date_time).format(
@@ -259,7 +269,7 @@ class ClientDashboard extends Component {
               </Grid>
               <Grid container>
                 {clientRequest && clientRequest.length > 0 && (
-                  <Grid item xs={6}>
+                  <Grid item className={classes.reqContainers}>
                     <Card className={classes.serviceList}>
                       <CardContent>
                         <Typography variant="h6">
@@ -298,10 +308,10 @@ class ClientDashboard extends Component {
                                                         /> */}
                                 <CardContent className="align-center">
                                   <Typography variant="body1">
-                                    VET NAME:{request.vet_name}
+                                    VET: {request.vet_name}
                                   </Typography>
                                   <Typography variant="body1">
-                                    PET NAME:{request.pet_name}
+                                    PET: {request.pet_name}
                                   </Typography>
                                   <Typography variant="body1">
                                     {moment(request.start_date_time).format(
@@ -332,7 +342,7 @@ class ClientDashboard extends Component {
               </Grid>
               <Grid container>
                 {clientRequest && clientRequest.length > 0 && (
-                  <Grid item xs={6}>
+                  <Grid item className={classes.reqContainers}>
                     <Card className={classes.serviceList}>
                       <CardContent>
                         <Typography variant="h6">
@@ -371,10 +381,10 @@ class ClientDashboard extends Component {
                                                         /> */}
                                 <CardContent className="align-center">
                                   <Typography variant="body1">
-                                    VET NAME:{request.vet_name}
+                                    VET: {request.vet_name}
                                   </Typography>
                                   <Typography variant="body1">
-                                    PET NAME:{request.pet_name}
+                                    PET: {request.pet_name}
                                   </Typography>
                                   <Typography variant="body1">
                                     {moment(request.start_date_time).format(
@@ -414,7 +424,7 @@ class ClientDashboard extends Component {
             petInfo.map((pet) => (
               <Grid item xs={6} key={pet.id}>
                 <Card className={classes.petCard}>
-                  <Typography variant="h6">{pet.pet_name}</Typography>
+                  <Typography variant="h6" className={classes.petTitle}>{pet.pet_name}</Typography>
                   <CardMedia
                     component="img"
                     className={classes.media}

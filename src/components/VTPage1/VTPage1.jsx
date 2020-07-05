@@ -153,7 +153,7 @@ class VTPage1 extends Component {
 
     this.reader.onloadend = () => {
       this.setState({
-        text:{
+        text: {
           ...this.state,
         },
         profile_img: this.reader.result,
@@ -192,6 +192,7 @@ class VTPage1 extends Component {
             fullWidth
             color="secondary"
             variant="outlined"
+            size="small"
             value={this.state.vet_name}
             onChange={this.handleInputChange("vet_name")}
           />
@@ -203,6 +204,7 @@ class VTPage1 extends Component {
             fullWidth
             color="secondary"
             variant="outlined"
+            size="small"
             value={this.state.home_address_house}
             onChange={this.handleInputChange("home_address_house")}
           />
@@ -214,6 +216,7 @@ class VTPage1 extends Component {
             fullWidth
             color="secondary"
             variant="outlined"
+            size="small"
             value={this.state.apt_suite}
             onChange={this.handleInputChange("apt_suite")}
           />
@@ -225,6 +228,7 @@ class VTPage1 extends Component {
             variant="outlined"
             value={this.state.city}
             color="secondary"
+            size="small"
             onChange={this.handleInputChange("city")}
             className={classes.city}
           />
@@ -234,6 +238,7 @@ class VTPage1 extends Component {
             variant="outlined"
             value={this.state.state}
             color="secondary"
+            size="small"
             onChange={this.handleInputChange("state")}
             className={classes.flex}
           />
@@ -242,6 +247,7 @@ class VTPage1 extends Component {
             label={"Zip_code"}
             variant="outlined"
             color="secondary"
+            size="small"
             value={this.state.zip_code}
             onChange={this.handleInputChange("zip_code")}
           />
@@ -260,13 +266,13 @@ class VTPage1 extends Component {
           >
             Select Photo to Upload
           </Button> */}
-          {/* //--------------------------------------------------------- */}
+          <img className={classes.img} src="images/camera.png" alt="camera-icon" width="100" height="100" />
+
           <DragDrop
             uppy={this.uppy}
           />
           <img className={classes.img} src={this.state.profile_img} alt="profilePictureUrl" width="50%" height="50%" />
 
-          {/* //--------------------------------------------------------- */}
 
         </div>
         <div>

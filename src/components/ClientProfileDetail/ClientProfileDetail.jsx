@@ -11,608 +11,594 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Paper from "@material-ui/core/Paper";
+import Box from "@material-ui/core/Paper";
+
 import { Typography, CardHeader } from "@material-ui/core";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 
-import { withRouter } from "react-router-dom";
-import "../ClientProfile/ClientProfile.css";
-import TextField from "@material-ui/core/TextField";
+import { withRouter } from 'react-router-dom';
+import '../ClientProfile/ClientProfile.css';
+import TextField from '@material-ui/core/TextField';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-import Uppy from "@uppy/core";
-import DragDrop from "@uppy/react/lib/DragDrop";
-import "@uppy/core/dist/style.css";
-import "@uppy/drag-drop/dist/style.css";
 
-const styles = (theme) => ({
-  root: {
-    marginLeft: 0,
-    marginRight: 0,
-    marginTop: "70px",
-    flexGrow: 1,
-  },
-  paddingTop: {
-    paddingTop: 50,
-  },
-  title: {
-    backgroundColor: "#faefec",
-    paddingTop: 85,
-    width: "100%",
-  },
-  name: {
-    paddingTop: 30,
-    textAlign: "center",
-  },
+import Uppy from '@uppy/core';
+import DragDrop from '@uppy/react/lib/DragDrop';
+// import ProgressBar from '@uppy/react/lib/ProgressBar'
 
-  items: {
-    padding: 15,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  itemImg: {
-    padding: 15,
-    textAlign: "center",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  img: {
-    borderRadius: "50%",
-    position: "absolute",
-    top: 170,
-    left: 100,
-  },
-  clientInfo: {
-    marginBottom: 0,
-    position: "absolute",
-    top: 160,
-    left: 330,
-  },
-  client_content: {
-    marginTop: 200,
-  },
-  editButton: {
-    display: "flex",
-    justifyContent: "right",
-    marginLeft: "85%",
-  },
-  textField: {
-    "& > *": {
-      margin: theme.spacing(1),
-      width: "25ch",
+import '@uppy/core/dist/style.css'
+import '@uppy/drag-drop/dist/style.css'
+import '@uppy/progress-bar/dist/style.css'
+
+import Swal from 'sweetalert2'
+
+
+const styles = theme => ({
+    root: {
+        marginLeft: 0,
+        marginRight: 0,
+        marginTop: '70px',
+        flexGrow: 1,
     },
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    margin: "auto",
-    width: "fit-content",
-  },
-  formControl: {
-    marginTop: theme.spacing(2),
-    minWidth: 120,
-  },
-  formControlLabel: {
-    marginTop: theme.spacing(1),
-  },
-  header: {
-    backgroundColor: fade("#195C60", 0.5),
-    paddingTop: 2.5,
-    paddingBottom: 2.5,
-  },
-  paperAbout: {
-    marginTop: 20,
-    borderRadius: "5px",
-    width: "75%",
-    border: "2px solid #195C60",
-  },
-  paperOther: {
-    marginTop: 20,
-    borderRadius: "5px",
-    width: "100%",
-    border: "2px solid #195C60",
-  },
-  contentInTable: {
-    paddingLeft: 10,
-    paddingTop: 10,
-    paddingBottom: 20,
-  },
+    paddingTop: {
+        paddingTop: 100,
+    },
+    title: {
+        backgroundColor: '#faefec',
+        paddingTop: 20,
+        paddingBottom: 50,
+        width: '100%',
+    },
+    name: {
+        paddingTop: 30,
+        textAlign: 'center',
+    },
+
+    items: {
+        padding: 15,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    itemImg: {
+        // padding: 15,
+        textAlign: 'center',
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    img: {
+        borderRadius: '50%',
+        position: 'absolute',
+        top: 200,
+        left: 150,
+    },
+    clientInfo: {
+        marginBottom: 0,
+        position: 'absolute',
+        top: 200,
+        left: 400,
+    },
+    client_content: {
+        marginTop: 200,
+
+    },
+    titleHeader: {
+        // display: 'flex',
+        justifyContent: "center",
+        textAlign: 'center',
+        top: 30,
+    },
+    editButton: {
+        display: 'flex',
+        justifyContent: "right",
+        marginLeft: '70%',
+        // top: 10,
+    },
+    contentInTable: {
+        padding: '0px 10px',
+    },
+    textField: {
+        '& > *': {
+            margin: theme.spacing(1),
+            width: '25ch',
+        },
+    },
+    form: {
+        display: 'flex',
+        flexDirection: 'column',
+        margin: 'auto',
+        width: 'fit-content',
+    },
+    formControl: {
+        marginTop: theme.spacing(2),
+        minWidth: 120,
+    },
+    formControlLabel: {
+        marginTop: theme.spacing(1),
+    },
+    header: {
+        backgroundColor: fade("#195C60", 0.5),
+        paddingTop: 2.5,
+        paddingBottom: 2.5,
+    },
+    paperAbout: {
+        marginTop: 20,
+        borderRadius: "5px",
+        width: "75%",
+        border: "2px solid #195C60",
+    },
+    paperOther: {
+        marginTop: 20,
+        borderRadius: "5px",
+        width: "100%",
+        border: "2px solid #195C60",
+        height: 200
+    },
+    contentInTable: {
+        paddingLeft: 10,
+        paddingTop: 10,
+        paddingBottom: 20,
+
+    },
+    editIcon: {
+        position: 'absolute',
+        top: 170,
+        left: 300,
+    },
+    progressLoad: {
+        position: 'absolute',
+        justifyContent: "center",
+        marginLeft: '50%',
+        background: 'rgba(0, 0, 0, 0.5)',
+    }
 });
 
+
+
 class ClientProfileDetail extends Component {
-  state = {
-    editable: false,
-    id: "",
-    client_name: "",
-    profile_img: "",
-    about_client: "",
-    about_equipment: "",
-    about_home: "",
-    city: "",
-    state: "",
-    file: null,
-    open: false,
-  };
-  componentWillReceiveProps = () => {
-    this.setState({
-      ...this.state,
-      open: this.props.open,
-    });
-  };
-
-  handleClickOpen = () => {
-    this.setState({
-      ...this.state,
-      open: true,
-    });
-  };
-
-  handleCancel = () => {
-    this.setState({
-      ...this.state,
-      open: false,
-    });
-  };
-
-  handleSubmitImg = () => {
-    this.props.dispatch({
-      type: "UPDATE_CLIENT_PROFILE_PICTURE",
-      payload: {
-        file: this.state.file,
-      },
-    });
-    this.setState({
-      ...this.state,
-      open: false,
-    });
-  };
-
-  //-----------------------------------
-
-  uppy = Uppy({
-    meta: { type: "profilePicture" },
-    restrictions: {
-      maxNumberOfFiles: 1,
-      maxFileSize: 5000000,
-      allowedFileTypes: ["image/*"],
-      // dimensions: { width: 1200, height: 800 },
-    },
-    autoProceed: true,
-  });
-  reader = new FileReader();
-
-  componentDidMount() {
-    const currentClient = this.props.clientInfo.find(
-      (client) => client.user_id === parseInt(this.props.match.params.id)
-    );
-    console.log("-------------->client profile", currentClient);
-    this.setState({
-      id: currentClient.user_id,
-      client_name: currentClient.client_name,
-      profile_img: currentClient.profile_img,
-      about_client: currentClient.about_client,
-      about_equipment: currentClient.about_equipment,
-      about_home: currentClient.about_home,
-      city: currentClient.city,
-      state: currentClient.state,
-    });
-    console.log("state:", this.state);
-
-    const currentId = this.props.match.params.id;
-    console.log("currentID", currentId);
-
-    this.props.dispatch({
-      type: "GET_PET_DATA",
-      payload: { id: currentId },
-    });
-    console.log("pet data:", this.props.petInfo);
-
-    this.uppy.on("upload", (file) => {
-      let fileKey = Object.keys(this.uppy.state.files)[0];
-      let fileFromUppy = this.uppy.state.files[fileKey].data;
-      this.setImage(fileFromUppy);
-    });
-
-    this.reader.onloadend = () => {
-      this.setState({
-        profile_img: this.reader.result,
-      });
-    };
-    console.log("data from client profile", this.state);
-  }
-
-  setImage = (file) => {
-    //reads the file into a local data url
-    this.reader.readAsDataURL(file);
-    this.setState({
-      ...this.state,
-      file: file,
-    });
-  };
-
-  //-----------------------------------
-
-  handleBackButton = () => {
-    console.log("clicked");
-    this.props.history.push("/clientdashboard");
-  };
-  handleEditClient = () => {
-    console.log("edit clicked!");
-    this.setState({
-      editable: true,
-    });
-  };
-  handleSaveClient = () => {
-    console.log("Save clicked!");
-    if (
-      this.state.client_name === "" ||
-      this.state.city === "" ||
-      this.state.state === "" ||
-      this.state.about_client === "" ||
-      this.state.about_home === "" ||
-      this.state.about_equipment === ""
-    ) {
-      alert("Please make sure that you filled all the information!");
-    } else {
-      //dispatch
-      this.props.dispatch({
-        type: "UPDATE_CLIENT_DATA",
-        payload: this.state,
-      });
-      this.setState({
-        editable: !this.state.editable,
-      });
+    state = {
+        editable: false,
+        id: '',
+        client_name: '',
+        profile_img: '',
+        about_client: '',
+        about_equipment: '',
+        about_home: '',
+        city: '',
+        state: '',
+        file: null,
+        open: false,
+        setLoading: false,
     }
-  };
-  handleInputChangeFor = (property) => (event) => {
-    console.log("input change", property, event.target.value);
-    this.setState({
-      [property]: event.target.value,
-    });
-  };
 
-  render() {
-    const { classes } = this.props;
-    return (
-      <div className={classes.root}>
-        <div className={classes.title}>
-          <div className={classes.userBasicInfo}>
-            <Grid container spacing={1}>
-              <Grid item xs={5} className={classes.items}>
-                {this.state.editable ? (
-                  <>
-                    <button onClick={this.handleClickOpen}>Edit</button>
-                    {this.props.client.profile_img ===
-                    "3e541de1f0419c15034e45c05eb3becd" ? (
-                      <img
-                        className={classes.img}
-                        src="images/blank-profile-picture.png"
-                        alt="blank-profile"
-                        height="200"
-                        width="200"
-                      />
-                    ) : (
-                      <img
-                        className={classes.img}
-                        src={this.props.client.media_url}
-                        alt={this.props.client.profile_img}
-                        height="200"
-                        width="200"
-                      />
-                    )}
 
-                    <Dialog
-                      open={this.state.open}
-                      onClose={this.handleClose}
-                      aria-labelledby="alert-dialog-title"
-                      aria-describedby="alert-dialog-description"
-                    >
-                      <DialogTitle id="alert-dialog-title">
-                        {"Edit Your Profile Picture"}
-                      </DialogTitle>
-                      <DialogContent>
-                        {/* <DialogContentText id="alert-dialog-description"> */}
 
-                        <DragDrop uppy={this.uppy} />
-                        <img
-                          src={this.state.profile_img}
-                          alt="profile_picture"
-                          height="100%"
-                          width="100%"
-                        />
+    componentWillReceiveProps = () => {
+        this.setState({
+            ...this.state,
+            open: this.props.open,
+        })
+    }
 
-                        {/* </DialogContentText> */}
-                      </DialogContent>
+    handleClickOpen = () => {
+        this.setState({
+            ...this.state,
+            open: true,
+            setLoading: false,
 
-                      <DialogActions>
-                        <Button onClick={this.handleCancel} color="primary">
-                          Cancel
-                        </Button>
-                        <Button
-                          onClick={this.handleSubmitImg}
-                          color="primary"
-                          autoFocus
-                        >
-                          Upload
-                        </Button>
-                      </DialogActions>
-                    </Dialog>
-                  </>
-                ) : (
-                  <>
-                    {this.props.client.profile_img ===
-                    "3e541de1f0419c15034e45c05eb3becd" ? (
-                      <img
-                        className={classes.img}
-                        src="images/blank-profile-picture.png"
-                        alt="profile"
-                        height="200"
-                        width="200"
-                      />
-                    ) : (
-                      <img
-                        className={classes.img}
-                        src={this.props.client.media_url}
-                        alt={this.props.client.profile_img}
-                        height="200"
-                        width="200"
-                      />
-                    )}
-                  </>
-                )}
-              </Grid>
+        })
+    }
 
-              <Grid item xs={3} className={classes.clientInfo}>
-                {this.state.editable ? (
-                  <>
-                    <p>
-                      <TextField
-                        id="filled-basic"
-                        label="Your name"
-                        color="secondary"
-                        variant="filled"
-                        value={this.state.client_name}
-                        height="10px"
-                        size="small"
-                        onChange={this.handleInputChangeFor("client_name")}
-                      />
-                    </p>
-                    <Grid container spacing={1}>
-                      <Grid item xs={6}>
-                        <TextField
-                          id="filled-basic"
-                          label="City"
-                          color="secondary"
-                          variant="filled"
-                          size="small"
-                          value={this.state.city}
-                          onChange={this.handleInputChangeFor("city")}
-                        />
-                      </Grid>
-                      <Grid item xs={6}>
-                        <TextField
-                          id="filled-basic"
-                          label="State"
-                          color="secondary"
-                          variant="filled"
-                          size="small"
-                          value={this.state.state}
-                          onChange={this.handleInputChangeFor("state")}
-                        />
-                      </Grid>
+    handleCancel = () => {
+        this.setState({
+            ...this.state,
+            open: false,
+        });
+    };
+
+    handleSubmitImg = () => {
+        this.props.dispatch({
+            type: 'UPDATE_CLIENT_PROFILE_PICTURE',
+            payload: {
+                file: this.state.file
+            }
+        })
+        // Swal.fire({
+        //     text: 'Update!',
+        //     width: 150,
+        //     padding: '1em',
+        //     background: '#fff url()',
+        //     showConfirmButton: false,
+        //     timer: 4000,
+        // })
+        this.setState({
+            setLoading: !this.state.setLoading
+        })
+
+    };
+
+    //-----------------------------------
+
+    uppy = Uppy({
+        meta: { type: 'profilePicture' },
+        restrictions: {
+            maxNumberOfFiles: 1,
+            maxFileSize: 5000000,
+            allowedFileTypes: ['image/*'],
+            // dimensions: { width: 1200, height: 800 },
+        },
+        autoProceed: true,
+    })
+
+
+    reader = new FileReader()
+
+
+
+    componentDidMount() {
+        const currentClient = this.props.clientInfo.find(client => client.user_id === parseInt(this.props.match.params.id))
+        console.log("-------------->client profile", currentClient);
+        this.setState({
+            id: currentClient.user_id,
+            client_name: currentClient.client_name,
+            profile_img: currentClient.profile_img,
+            about_client: currentClient.about_client,
+            about_equipment: currentClient.about_equipment,
+            about_home: currentClient.about_home,
+            city: currentClient.city,
+            state: currentClient.state,
+        })
+        console.log('state:', this.state)
+
+        const currentId = this.props.match.params.id;
+        console.log("currentID", currentId)
+
+        this.props.dispatch({
+            type: 'GET_PET_DATA',
+            payload: { id: currentId }
+        })
+        console.log('pet data:', this.props.petInfo)
+
+
+        this.uppy.on('upload', file => {
+            let fileKey = Object.keys(this.uppy.state.files)[0];
+            let fileFromUppy = this.uppy.state.files[fileKey].data;
+            this.setImage(fileFromUppy);
+
+        })
+
+        // this.uppy2.on(ProgressBar, {
+        //     target: '.UppyProgressBar',
+        //     hideAfterFinish: false
+        // })
+
+        this.reader.onloadend = () => {
+            this.setState({
+                profile_img: this.reader.result,
+            })
+        }
+        console.log('data from client profile', this.state)
+
+
+
+    }
+
+
+    setImage = file => {
+        //reads the file into a local data url
+        this.reader.readAsDataURL(file);
+        this.setState({
+            ...this.state,
+            file: file,
+        })
+    }
+
+    //-----------------------------------
+
+
+
+
+
+
+    handleBackButton = () => {
+        console.log('clicked');
+        this.props.history.push('/clientdashboard');
+    }
+    handleEditClient = () => {
+        console.log('edit clicked!');
+        this.setState({
+            editable: true,
+        });
+    }
+    handleSaveClient = () => {
+        console.log('Save clicked!')
+        if (this.state.client_name === '' || this.state.city === '' || this.state.state === '' || this.state.about_client === '' || this.state.about_home === '' || this.state.about_equipment === '') {
+            alert('Please make sure that you filled all the information!')
+        } else {
+            //dispatch
+            this.props.dispatch({
+                type: "UPDATE_CLIENT_DATA",
+                payload: this.state
+            });
+            this.setState({
+                editable: !this.state.editable,
+            });
+        }
+    }
+    handleInputChangeFor = (property) => (event) => {
+        console.log('input change', property, event.target.value)
+        this.setState({
+            [property]: event.target.value,
+        });
+    }
+
+
+
+
+
+
+
+    render() {
+
+
+        const { classes } = this.props;
+        return (
+            <div className={classes.root} >
+                {/* <h1>{JSON.stringify(this.props.clientInfo)}</h1> */}
+                <div className={classes.title}>
+                    <div className={classes.userBasicInfo}>
+                        <Grid container spacing={1}>
+                            <Grid item xs={5} className={classes.items}>
+
+                                {this.state.editable ?
+                                    <>
+                                        {this.props.client.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
+                                            <img className={classes.img} src="images/blank-profile-picture.png" alt="blank-profile" height="200" width="200" />
+                                            :
+                                            <img className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} height="200" width="200" />
+                                        }
+                                        <img src="images/edit.png" alt="edit_button" height="30" width="30" className={classes.editIcon} onClick={this.handleClickOpen} />
+                                    </>
+                                    :
+                                    <>
+                                        <Dialog
+                                            open={this.state.open}
+                                            onClose={this.handleClose}
+                                            aria-labelledby="alert-dialog-title"
+                                            aria-describedby="alert-dialog-description"
+                                        >
+                                            <DialogTitle id="alert-dialog-title">{"Edit Your Profile Picture"}</DialogTitle>
+                                            <DialogContent>
+                                                {/* <DialogContentText id="alert-dialog-description"> */}
+                                                <DragDrop uppy={this.uppy} />
+                                                {this.state.setLoading ?
+                                                    <>
+                                                        <CircularProgress className={classes.progressLoad} />
+                                                    </>
+                                                    :
+                                                    ''
+                                                }
+                                                <img src={this.state.profile_img} alt='profile_picture' height="100%" width="100%" />
+                                            </DialogContent>
+
+                                            <DialogActions>
+                                                <Button onClick={this.handleCancel} color="primary">
+                                                    Cancel
+                                                  </Button>
+                                                <Button onClick={this.handleSubmitImg} color="primary" autoFocus>
+                                                    Upload
+                                                </Button>
+                                            </DialogActions>
+                                        </Dialog>
+                                        {this.props.client.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
+                                            <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="200" width="200" />
+                                            :
+                                            <img className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} height="200" width="200" />
+                                        }
+                                    </>
+                                }
+                            </Grid>
+
+                            <Grid item xs={3} className={classes.clientInfo}>
+                                {this.state.editable ?
+                                    <>
+                                        <p><TextField id="filled-basic"
+                                            label="Your name"
+                                            color="secondary"
+                                            variant="filled"
+                                            value={this.state.client_name}
+                                            height="10px"
+                                            size="small"
+                                            onChange={this.handleInputChangeFor("client_name")} /></p>
+                                        <Grid container spacing={1}>
+                                            <Grid item xs={6} >
+                                                <TextField id="filled-basic" label="City" color="secondary" variant="filled" size="small"
+                                                    value={this.state.city} onChange={this.handleInputChangeFor("city")} />
+                                            </Grid>
+                                            <Grid item xs={6}>
+                                                <TextField id="filled-basic" label="State" color="secondary" variant="filled" size="small"
+                                                    value={this.state.state} onChange={this.handleInputChangeFor("state")} />
+                                            </Grid>
+                                        </Grid>
+
+
+                                    </>
+                                    :
+                                    <>
+                                        <h1>{this.state.client_name}</h1>
+                                        <p>{this.state.city}, {this.state.state}</p>
+                                        <Button variant="contained" color="primary" > <a href={`mailto:${this.props.user.user_email}`} target="_blank" className='link'> Contact {this.state.client_name}</a></Button>
+                                    </>
+                                }
+                            </Grid>
+                            {this.props.isClient && (
+                                <>
+                                    <Grid container >
+                                        <Grid item xs={10} className={classes.titleHeader} >
+                                            <p>This is how your profile appears to the public.</p>
+                                            <p >If you would like to edit any part of your profile click the edit button.</p>
+                                        </Grid>
+                                        <Grid item xs={3} className={classes.editButton}>
+
+                                            {this.state.editable ?
+                                                <>
+                                                    <Button variant="contained" color="secondary" onClick={this.handleSaveClient}>Save</Button>
+                                                </>
+                                                :
+                                                <>
+                                                    <Button variant="contained" color="secondary" onClick={this.handleEditClient}>Edit my profile</Button>
+                                                </>
+                                            }
+                                        </Grid>
+
+                                    </Grid>
+
+                                </>
+                            )}
+
+                        </Grid>
+                    </div>
+                </div>
+                {/* </Container> */}
+
+                <Container className={classes.client_content} maxWidth="md">
+                    <Grid container spacing={3} >
+                        <Grid item xs={9}>
+
+                            {this.state.editable ?
+                                <>
+                                    <TextField
+                                        id="outlined-multiline-static"
+                                        label="About you"
+                                        multiline
+                                        rows={4}
+                                        fullWidth
+                                        defaultValue={this.state.about_client}
+                                        variant="outlined"
+                                        onChange={this.handleInputChangeFor("about_client")}
+                                    />
+                                </>
+                                :
+                                <>
+                                    <Grid>
+                                        <Paper elevation={5} className={classes.paperAbout}>
+                                            <div>
+                                                <CardHeader
+                                                    title={`About ${this.state.client_name}`}
+                                                    className={classes.header}
+                                                />
+                                            </div>
+                                            <div >
+                                                <Typography variant="subtitle1" className={classes.contentInTable}>
+                                                    {this.state.about_client}
+                                                </Typography>
+                                            </div>
+                                        </Paper>
+                                    </Grid>
+                                </>
+                            }
+                        </Grid>
                     </Grid>
-                  </>
-                ) : (
-                  <>
-                    <h1>{this.state.client_name}</h1>
-                    <p>
-                      {this.state.city}, {this.state.state}
-                    </p>
-                    <Button variant="contained" color="primary">
-                      {" "}
-                      <a
-                        href={`mailto:${this.props.user.user_email}`}
-                        target="_blank"
-                        className="link"
-                      >
-                        {" "}
-                        Contact {this.state.client_name}
-                      </a>
-                    </Button>
-                  </>
-                )}
-              </Grid>
-              {this.props.isClient && (
-                <Grid item xs={3} className={classes.editButton}>
-                  {this.state.editable ? (
-                    <>
-                      <img
-                        src="images/checkmark.png"
-                        alt="save_button"
-                        height="50"
-                        width="50"
-                        onClick={this.handleSaveClient}
-                      />
-                      <p>Save</p>
-                    </>
-                  ) : (
-                    <>
-                      <img
-                        src="images/edit.png"
-                        alt="edit_button"
-                        height="50"
-                        width="50"
-                        onClick={this.handleEditClient}
-                      />
-                      <p>Edit profile</p>
-                    </>
-                  )}
-                  {/* <img src="images/edit.png" alt="edit_button" height="50" width="50" onClick={this.handleEditClient} /> */}
-                </Grid>
-              )}
-            </Grid>
-          </div>
-        </div>
-        {/* </Container> */}
 
-        <Container className={classes.client_content} maxWidth="lg">
-          <Grid container spacing={3}>
-            <Grid item xs={9}>
-              {this.state.editable ? (
-                <>
-                  <TextField
-                    id="outlined-multiline-static"
-                    label="About you"
-                    multiline
-                    rows={4}
-                    fullWidth
-                    defaultValue={this.state.about_client}
-                    variant="outlined"
-                    onChange={this.handleInputChangeFor("about_client")}
-                  />
-                </>
-              ) : (
-                <>
-                  <Grid>
-                    <Paper elevation={5} className={classes.paperAbout}>
-                      <div>
-                        <CardHeader
-                          title={`About ${this.state.client_name}`}
-                          className={classes.header}
-                        />
-                      </div>
-                      <div>
-                        <Typography
-                          variant="subtitle1"
-                          className={classes.contentInTable}
-                        >
-                          {this.state.about_client}
-                        </Typography>
-                      </div>
-                    </Paper>
-                  </Grid>
-                </>
-              )}
-            </Grid>
-          </Grid>
+                    <Grid item xs={12} className={classes.name}>
+                        <h2>{this.state.client_name}'s Pets</h2>
+                        {this.props.petInfo.map((pet) => {
+                            return (
+                                <div key={pet.id}>
+                                    <Pet
+                                        pet={pet}
+                                        editable={this.state.editable}
+                                    />
+                                </div>
+                            )
+                        })}
+                    </Grid>
+                    {/* <h1>{JSON.stringify(this.props.petInfo)}</h1> */}
+                    <Grid container spacing={3} className={classes.paddingTop}>
+                        <Grid item xs={6} className={classes.itemImg}>
+                            <img src="images/belt.png" alt="profile" height="80" width="130" />
+                        </Grid>
+                        <Grid item xs={6} className={classes.itemImg}>
+                            <img src="images/house-icon.png" alt="profile" height="80" width="90" />
+                        </Grid>
 
-          <Grid item xs={12} className={classes.name}>
-            <h2>{this.state.client_name}'s Pets</h2>
-          </Grid>
+                        <Grid item xs={6} className={classes.items}>
+                            
+                            {this.state.editable ?
+                                <>
+                                    <TextField
+                                        id="outlined-multiline-static"
+                                        label="Pet's equipment"
+                                        multiline
+                                        rows={4}
+                                        fullWidth
+                                        defaultValue={this.state.about_equipment}
+                                        variant="outlined"
+                                        onChange={this.handleInputChangeFor("about_equipment")}
+                                    />
+                                </>
+                                :
+                                <>
 
-          {this.props.petInfo.map((pet) => {
-            return (
-              <div key={pet.id}>
-                <Grid container spacing={3}>
-                  <Pet pet={pet} editable={this.state.editable} />
-                </Grid>
-              </div>
-            );
-          })}
-          <Grid container spacing={3} className={classes.paddingTop}>
-            <Grid item xs={6} className={classes.itemImg}>
-              <img
-                src="images/belt.png"
-                alt="profile"
-                height="80"
-                width="130"
-              />
-            </Grid>
-            <Grid item xs={6} className={classes.itemImg}>
-              <img
-                src="images/house-icon.png"
-                alt="profile"
-                height="80"
-                width="90"
-              />
-            </Grid>
+                                    <Grid className={classes.paperOther}>
+                                        <div>
+                                            <CardHeader
+                                                title={`${this.state.client_name}'s Pet Equipment`}
+                                                className={classes.header}
+                                            />
+                                        </div>
+                                        <div >
+                                            <Typography variant="subtitle1" className={classes.contentInTable}>
+                                                {this.state.about_equipment}
+                                            </Typography>
+                                        </div>
+                                    </Grid>
+                                </>
+                            }
 
-            <Grid item xs={6} className={classes.items}>
-              {this.state.editable ? (
-                <>
-                  <TextField
-                    id="outlined-multiline-static"
-                    label="Pet's equipment"
-                    multiline
-                    rows={4}
-                    fullWidth
-                    defaultValue={this.state.about_equipment}
-                    variant="outlined"
-                    onChange={this.handleInputChangeFor("about_equipment")}
-                  />
-                </>
-              ) : (
-                <>
-                  <Grid>
-                    <Paper elevation={5} className={classes.paperOther}>
-                      <div>
-                        <CardHeader
-                          title={`${this.state.client_name}'s Pet Equipment`}
-                          className={classes.header}
-                        />
-                      </div>
-                      <div>
-                        <Typography
-                          variant="subtitle1"
-                          className={classes.contentInTable}
-                        >
-                          {this.state.about_equipment}
-                        </Typography>
-                      </div>
-                    </Paper>
-                  </Grid>
-                </>
-              )}
-            </Grid>
-            <Grid item xs={6} className={classes.items}>
-              {this.state.editable ? (
-                <>
-                  <TextField
-                    id="outlined-multiline-static"
-                    label="About your home"
-                    multiline
-                    rows={4}
-                    fullWidth
-                    defaultValue={this.state.about_home}
-                    variant="outlined"
-                    onChange={this.handleInputChangeFor("about_home")}
-                  />
-                </>
-              ) : (
-                <>
-                  <Grid>
-                    <Paper elevation={5} className={classes.paperOther}>
-                      <div>
-                        <CardHeader
-                          title={`${this.state.client_name}'s Home Environment`}
-                          className={classes.header}
-                        />
-                      </div>
-                      <div>
-                        <Typography
-                          variant="subtitle1"
-                          className={classes.contentInTable}
-                        >
-                          {this.state.about_home}
-                        </Typography>
-                      </div>
-                    </Paper>
-                  </Grid>
-                </>
-              )}
-            </Grid>
-          </Grid>
-          <Grid item xs={12} className={classes.itemImg}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.handleBackButton}
-            >
-              Back to Dashboard
-            </Button>
-          </Grid>
-        </Container>
-      </div>
-    );
-  }
+                        </Grid>
+                        <Grid item xs={6}>
+                            {this.state.editable ?
+                                <>
+                                    <TextField
+                                        id="outlined-multiline-static"
+                                        label="About your home"
+                                        multiline
+                                        rows={4}
+                                        fullWidth
+                                        defaultValue={this.state.about_home}
+                                        variant="outlined"
+                                        onChange={this.handleInputChangeFor("about_home")}
+                                    />
+                                </>
+                                :
+                                <>
+
+                                    <Grid className={classes.paperOther}>
+                                        <div>
+                                            <CardHeader
+                                                title={`${this.state.client_name}'s Home Environment`}
+                                                className={classes.header}
+                                            />
+                                        </div>
+                                        <div >
+                                            <Typography variant="subtitle1" className={classes.contentInTable}>
+                                                {this.state.about_home}
+                                            </Typography>
+                                        </div>
+                                    </Grid>
+                                </>
+                            }
+                        </Grid>
+                    </Grid>
+                    <Grid item xs={12} className={classes.name}>
+                        <Button variant="contained" color="primary" onClick={this.handleBackButton}>Back to Dashboard</Button>
+                    </Grid>
+                </Container>
+
+            </div >
+        )
+    }
+
 }
 const mapStateToProps = (reduxState) => ({
   clientInfo: reduxState.clientInfo,

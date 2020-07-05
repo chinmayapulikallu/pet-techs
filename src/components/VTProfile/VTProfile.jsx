@@ -20,6 +20,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { withRouter } from "react-router-dom";
 import vtInfo from "../../redux/reducers/vetTechReducer";
@@ -86,7 +87,7 @@ const styles = (theme) => ({
   pic: {
     marginTop: 30,
   },
-  headngTitle: {
+  headingTitle: {
     textAlign: "center",
     fontWeight: "bold",
   },
@@ -124,6 +125,12 @@ const styles = (theme) => ({
   formControlLabel: {
     marginTop: theme.spacing(1),
   },
+  progressLoad: {
+    position: 'absolute',
+    justifyContent: "center",
+    marginLeft: '45%',
+    background: 'rgba(0, 0, 0, 0.5)',
+  }
 });
 
 class VTProfile extends Component {
@@ -131,13 +138,22 @@ class VTProfile extends Component {
     ...this.props.vetProfile,
     editable: false,
     open: false,
+    setLoading: false,
 
   };
 
+  componentWillReceiveProps = () => {
+    this.setState({
+      ...this.state,
+      open: this.props.open,
+    })
+  }
   handleClickOpen = () => {
     this.setState({
       ...this.state,
       open: true,
+      setLoading: false,
+
     })
   }
 
@@ -157,7 +173,8 @@ class VTProfile extends Component {
     })
     this.setState({
       ...this.state,
-      open: false,
+      setLoading: true,
+
     });
   };
 
@@ -265,7 +282,7 @@ class VTProfile extends Component {
     const { classes } = this.props;
     return (
       <div>
-        {JSON.stringify(this.props.vetProfile)}
+        {/* {JSON.stringify(this.props.vetProfile)} */}
         <div className={classes.mainHeader}>
           <Container maxWidth="md" className={classes.root}>
             <Grid container spacing={10} className={classes.editContainer}>
@@ -283,11 +300,11 @@ class VTProfile extends Component {
                   <Grid item xs={12} sm={3}>
                     <Button
                       variant="contained"
-                      color="primary"
+                      color="secondary"
                       className={classes.btn}
                       onClick={this.handleEdit}
                     >
-                      {this.state.editable ? "Save" : "Edit"}
+                      {this.state.editable ? "Save" : "Edit my profile"}
                     </Button>
                   </Grid>
                 </>
@@ -326,7 +343,7 @@ class VTProfile extends Component {
 
                 {this.state.editable ?
                   <>
-                    <button onClick={this.handleClickOpen}>Edit</button>
+                    <img src="images/edit.png" alt="edit_button" height="30" width="30" onClick={this.handleClickOpen} />
                     {this.state.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                       <>
                         <img className={classes.profilePic}
@@ -334,7 +351,7 @@ class VTProfile extends Component {
                       </>
                       :
                       <img className={classes.profilePic}
-                        src={this.state.media_url} alt={this.state.profile_img} height = '200' width = '200' />
+                        src={this.state.media_url} alt={this.state.profile_img} height='200' width='200' />
                     }
 
                     <Dialog
@@ -349,9 +366,14 @@ class VTProfile extends Component {
                         <DragDrop
                           uppy={this.uppy}
                         />
+                        {this.state.setLoading ?
+                          <>
+                            <CircularProgress className={classes.progressLoad} />
+                          </>
+                          :
+                          ''
+                        }
                         <img src={this.state.profile_img} alt='profile_picture' height="100%" width="100%" />
-
-
                       </DialogContent>
 
                       <DialogActions>
@@ -383,7 +405,7 @@ class VTProfile extends Component {
 
               <Paper variant="outlined" className={classes.paper}>
                 <header className={classes.header}>
-                  <Typography variant="h5" className={classes.headngTitle}>
+                  <Typography variant="h5" className={classes.headingTitle}>
                     Services Offered
                   </Typography>
                 </header>

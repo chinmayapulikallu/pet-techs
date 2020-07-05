@@ -192,28 +192,28 @@ class VTPage2 extends Component {
                 defaultChecked={false}
                 value={this.state.small_dog}
                 onChange={(event) => this.handleInputChange(event, "small_dog")}
-                label="Small"
+                label="Small (0-15 lbs)"
               />
               <FormControlLabel
                 control={<Checkbox name="mdCheck" />}
                 defaultChecked={false}
                 value={this.state.medium_dog}
                 onChange={(event) => this.handleInputChange(event, "medium_dog")}
-                label="Medium"
+                label="Medium (16-40 lbs)"
               />
               <FormControlLabel
                 control={<Checkbox name="lgCheck" />}
                 defaultChecked={false}
                 value={this.state.large_dog}
                 onChange={(event) => this.handleInputChange(event, "large_dog")}
-                label="Large"
+                label="Large (41-100 lbs)"
               />
               <FormControlLabel
                 control={<Checkbox name="gtCheck" />}
                 defaultChecked={false}
                 value={this.state.giant_dog}
                 onChange={(event) => this.handleInputChange(event, "giant_dog")}
-                label="Giant"
+                label="Giant (100 + lbs)"
               />
             </FormGroup>
             <Typography variant="subtitle1">

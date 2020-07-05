@@ -21,6 +21,7 @@ function* registerClient(action) {
             console.log('----------->formdata', action.payload.file.type);
             console.log('send this client data to server', action.payload);
 
+           
 
             // yield axios.post('/api/client', action.payload)
             let response = yield axios.post(`/api/client`, data, {

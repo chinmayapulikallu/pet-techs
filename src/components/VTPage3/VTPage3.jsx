@@ -96,9 +96,9 @@ class VTReg3 extends Component {
     return (
       <Container className={classes.root} maxWidth="sm">
         <div className={classes.title}>
-          <h3 className={classes.title}>
+          <h1 className={classes.title}>
             Tell us about your certifications and expertise:
-              </h3>
+              </h1>
           {/* <img
             className={classes.img}
             src="images/blank-profile-picture.png"
@@ -126,6 +126,7 @@ class VTReg3 extends Component {
               label="Year"
               variant="outlined"
               color="secondary"
+              size="small"
               InputProps={{
                 className: classes.year,
               }}
@@ -140,6 +141,7 @@ class VTReg3 extends Component {
           label="*Optional"
           variant="outlined"
           color="secondary"
+          size="small"
           InputProps={{
             className: classes.fullwidth,
           }}
@@ -153,6 +155,7 @@ class VTReg3 extends Component {
           label="*Optional"
           variant="outlined"
           color="secondary"
+          size="small"
           InputProps={{
             className: classes.fullwidth,
           }}

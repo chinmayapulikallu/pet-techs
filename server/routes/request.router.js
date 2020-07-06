@@ -192,7 +192,7 @@ router.post("/client", (req, res) => {
 router.get("/vt", (req, res) => {
   console.log("in vt :::: ", req.user.id)
   const sqlText = `select client_request.start_date_time, client_request.end_date_time, client_request.add_info,
-                   pet.pet_name, client_request.vet_id, pet_id, pet.id, client_request.id,
+                   pet.pet_name, client_request.vet_id, pet_id, input_info, pet.id, client_request.id,
                   client_request.request_status,client.client_name, client_request.service_select, 
                   pet.pet_type, "user".user_email from client_request, pet, client, "user" where
                   client_request.pet_id = pet.id and 

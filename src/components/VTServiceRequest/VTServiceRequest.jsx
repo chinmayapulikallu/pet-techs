@@ -156,12 +156,12 @@ class VTServiceRequest extends Component {
         </Grid>
         <div>
           <Typography variant="h6" className={classes.addInfo}>
-            Any addtional information for the vet tech?
+            Instructions for Vet Tech:
           </Typography>
           <div className={classes.req}>
             <Paper className={classes.dateOfReq}>
               <Typography variant="h6" className={classes.info}>
-                {this.props.request.add_info}
+                {this.props.request.input_info}
               </Typography>
             </Paper>
           </div>

@@ -79,7 +79,7 @@ class ClientRegPage2 extends Component {
             pet_bio: "CeCe is a sweet dog.",
             sex: "female",
             food_brand: "Purina",
-            feeding_per_day: 2,
+            feeding_per_day: "3",
             amount_per_meal: "1 cup",
             optional_food: "CeCe can have the occasional treat, but no chocolate. ",
             care_equipment: "I have a kennel for her, and she has a really nice leash.",

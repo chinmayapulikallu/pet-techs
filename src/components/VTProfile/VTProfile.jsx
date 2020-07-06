@@ -21,6 +21,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Avatar from '@material-ui/core/Avatar';
 
 import { withRouter } from "react-router-dom";
 import vtInfo from "../../redux/reducers/vetTechReducer";
@@ -75,6 +76,8 @@ const styles = (theme) => ({
     marginTop: -(PROFILE_IMG_HEIGHT / 3),
     height: PROFILE_IMG_HEIGHT,
     borderRadius: "50%",
+    width: theme.spacing(25),
+    height: theme.spacing(25),
 
     [theme.breakpoints.down("xs")]: {
       marginTop: 10,
@@ -129,7 +132,7 @@ const styles = (theme) => ({
     position: 'absolute',
     justifyContent: "center",
     marginLeft: '45%',
-    background: 'rgba(0, 0, 0, 0.5)',
+    // background: 'rgba(0, 0, 0, 0.5)',
   }
 });
 
@@ -139,7 +142,6 @@ class VTProfile extends Component {
     editable: false,
     open: false,
     setLoading: false,
-
   };
 
   componentWillReceiveProps = () => {
@@ -346,12 +348,11 @@ class VTProfile extends Component {
                     <img src="images/edit.png" alt="edit_button" height="30" width="30" onClick={this.handleClickOpen} />
                     {this.state.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                       <>
-                        <img className={classes.profilePic}
+                        <Avatar className={classes.profilePic}
                           src="images/blank-profile-picture.png" alt="profile" />
                       </>
                       :
-                      <img className={classes.profilePic}
-                        src={this.state.media_url} alt={this.state.profile_img} height='200' width='200' />
+                      <Avatar className={classes.profilePic} src={this.state.media_url} alt={this.state.profile_img}  />
                     }
 
                     <Dialog
@@ -390,12 +391,11 @@ class VTProfile extends Component {
                   <>
                     {this.state.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                       <>
-                        <img className={classes.profilePic}
-                          src="images/blank-profile-picture.png" alt="profile" height='200' width='200' />
+                        <Avatar className={classes.profilePic}
+                          src="images/blank-profile-picture.png" alt="profile" />
                       </>
                       :
-                      <img className={classes.profilePic}
-                        src={this.state.media_url} alt={this.state.profile_img} height='200' width='200' />
+                      <Avatar className={classes.profilePic} src={this.state.media_url} alt={this.state.profile_img} />
                     }
                   </>
                 }

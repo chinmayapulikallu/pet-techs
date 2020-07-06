@@ -16,6 +16,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = (theme) => ({
     root: {
@@ -32,14 +33,17 @@ const useStyles = (theme) => ({
         // width: 600,
         //    marginLeft: 300,
         textAlign: "center",
+        display: "block",
+        marginLeft: "auto",
+        marginRight: "auto",
     },
     profileImage: {
         display: "block",
         marginLeft: "auto",
         marginRight: "auto",
         borderRadius: '50%',
-        // width: 100,
-        // height: 100,
+        width: theme.spacing(15),
+        height: theme.spacing(15),
     },
     container: {
         marginTop: 50,
@@ -57,9 +61,7 @@ const useStyles = (theme) => ({
         width: "100%",
         backgroundColor: '#FFC2B4',
         boderRadius: '10px',
-
         backgroundColor: 'rgb(250, 250, 250)',
-
     },
     items: {
         border: "2px solid #195C60",
@@ -109,6 +111,12 @@ class CarePlanDetail extends Component {
     };
     componentDidMount() {
         console.log('----->state in care plan detail:', this.state)
+        const currentId = this.props.match.params.id;
+        console.log('-----> Current client', currentId)
+        this.props.dispatch({
+            type: 'GET_CLIENT_DATA',
+            payload: { id: currentId }
+        })
     }
     backToProfile = () => {
         this.props.history.goBack();
@@ -205,7 +213,7 @@ class CarePlanDetail extends Component {
         if (this.state.general) {
             contentBody = <>
                 <Typography>
-                    Pet Stats: I am a{" "}
+                    I am a{" "}
                     {this.state.isEditing ? (
                         <TextField
                             id="outlined-basic"
@@ -263,8 +271,8 @@ pounds and I am{" "}
 years old.{" "}
                 </Typography>
                 <Typography>
-                    General Info:
-                                {this.state.isEditing ? (
+                    Bio:{" "}
+                    {this.state.isEditing ? (
                         <TextField
                             id="outlined-basic"
                             variant="outlined"
@@ -282,7 +290,7 @@ years old.{" "}
         } else if (this.state.feeding) {
             contentBody =
                 <> <Typography>
-                    Pet Feeding Info: I like to eat{" "}
+                    I like to eat{" "}
                     {this.state.isEditing ? (
                         <TextField
                             id="outlined-basic"
@@ -330,48 +338,62 @@ meals per day, and my favorite food is{" "}
      </Typography>
                 </>
         } else if (this.state.medical) {
-            contentBody = <Typography>Medications: {this.state.medication_name}.</Typography>
+            contentBody = <Typography>{this.state.medication_name}</Typography>
 
         } else if (this.state.behavioral) {
             contentBody = <Typography>
-                Pet Behavior Info:{" "}
                 {this.state.isEditing ? (
                     <TextField
                         id="outlined-basic"
                         variant="outlined"
                         color="secondary"
                         label="General Pet Behavior"
-                        size="small"
+                        multiline
+                        rows={5}
+                        fullWidth
                         value={this.state.pet_behavior}
                         onChange={this.handleInputChange("pet_behavior")}
                     />
                 ) : (
                         this.state.pet_behavior
-                    )}.
+                    )}
             </Typography>
         } else if (this.state.equipment) {
             contentBody = <Typography>
-                Pet Equipment Info:{" "}
+
                 {this.state.isEditing ? (
                     <TextField
                         id="outlined-basic"
                         variant="outlined"
                         color="secondary"
                         label="Special Care Equipment"
-                        size="small"
+                        multiline
+                        rows={5}
+                        fullWidth
                         value={this.state.care_equipment}
                         onChange={this.handleInputChange("care_equipment")}
                     />
                 ) : (
                         this.state.care_equipment
-                    )}.
+                    )}
             </Typography>
         } else if (this.state.other) {
-
+            contentBody = <>
+                <Typography>Contact infomation:</Typography>
+                <Typography>- Name: {this.props.clientInfo.contact_name_1}</Typography>
+                <Typography>- Phone: {this.props.clientInfo.contact_phone_1}</Typography>
+                <Typography>- Email: {this.props.clientInfo.contact_email_1}</Typography>
+            </>
         }
 
         return (
             <Container maxWidth="md" >
+                <img
+                    className={classes.profileCenter}
+                    src='/images/careplan_icon.png'
+                    alt='care_plan_icon'
+                    height="auto" width="auto"
+                />
                 <Typography variant="h3" className={classes.profileCenter}>Care plan</Typography>
 
                 <TableContainer component={Paper} className={classes.paper}>
@@ -379,13 +401,13 @@ meals per day, and my favorite food is{" "}
                         <TableBody>
                             <TableRow>
                                 <TableCell variant='head'>
-                                    <img
+                                    <Avatar
                                         className={classes.profileImage}
                                         src={this.props.careplan.media_url}
-                                        alt={this.props.careplan.profile_img}
-                                        height="150" width="150"
+                                        alt={this.props.careplan.profile_img} 
                                     />
                                     <Typography variant="h3" className={classes.profileCenter}>{this.props.careplan.pet_name}</Typography>
+                                    
                                     <Grid container className={classes.itemCenter} >
                                         <ButtonGroup color="secondary" aria-label="outlined primary button group">
                                             <Button onClick={this.handleGeneralOpen}>General</Button>
@@ -404,27 +426,30 @@ meals per day, and my favorite food is{" "}
                                 </Grid>
                             </TableRow>
                             <TableRow variant='footer'>
-                                <Grid className={classes.itemCenter}>
-                                    {this.state.isEditing ?
-                                        <>
-                                            <Button
-                                                variant="contained"
-                                                onClick={this.handleEditButton}
-                                            >Cancel </Button>
+                                {!this.props.isVetTech && (
+                                    < Grid className={classes.itemCenter}>
+                                        {this.state.isEditing ?
+                                            <>
+                                                <Button
+                                                    variant="contained"
+                                                    onClick={this.handleEditButton}
+                                                >Cancel </Button>
+                                                <Button
+                                                    variant="contained"
+                                                    color="primary"
+                                                    onClick={this.handleEditToggle}
+                                                >Save </Button>
+                                            </>
+                                            :
+
                                             <Button
                                                 variant="contained"
                                                 color="primary"
-                                                onClick={this.handleEditToggle}
-                                            >Save </Button>
-                                        </>
-                                        :
-                                        <Button
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={this.handleEditButton}
-                                    >Edit </Button>
-                                    }
-                                </Grid>
+                                                onClick={this.handleEditButton}
+                                            >Edit </Button>
+                                        }
+                                    </Grid>
+                                )}
                             </TableRow>
                         </TableBody>
                     </Table>
@@ -437,13 +462,16 @@ meals per day, and my favorite food is{" "}
                         Back
                                 </Button>
                 </Grid>
-            </Container>
+            </Container >
         )
     }
-
-
 }
 
+const mapStateToProps = (state) => ({
+    isVetTech: state.user.user_type === 1,
+    clientInfo: state.clientInfo[0],
+});
+
 export default withStyles(useStyles)(
-    withRouter(connect()(CarePlanDetail))
+    withRouter(connect(mapStateToProps)(CarePlanDetail))
 );

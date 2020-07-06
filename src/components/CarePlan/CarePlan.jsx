@@ -78,6 +78,7 @@ class CarePlan extends Component {
                             <CarePlanDetail
                                 careplan={careplan}
                                 isEditing={this.state.isEditing}
+                                isVetTech={this.props.isVetTech}
                             />
                         </div>
                     )
@@ -87,8 +88,8 @@ class CarePlan extends Component {
     }
 }
 const mapStateToProps = (state) => ({
+    petCarePlan: state.petCarePlan,
 
-    petCarePlan: state.petCarePlan
 });
 export default withStyles(useStyles)(
     withRouter(connect(mapStateToProps)(CarePlan))

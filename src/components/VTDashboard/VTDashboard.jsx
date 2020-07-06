@@ -154,7 +154,7 @@ class VTDashboard extends Component {
                             size="small"
                             variant="contained"
                             // will need to add a value, (id) for event to capture.
-                            onClick={() => this.viewButton(petRequest.id)}
+                            onClick={() => this.viewButton(petRequest.pet_id)}
                           >
                             View
                          </Button>

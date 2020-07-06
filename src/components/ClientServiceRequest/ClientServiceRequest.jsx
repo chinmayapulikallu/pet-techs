@@ -96,11 +96,11 @@ class ClientServiceRequest extends Component {
         console.log("Clicked Send Request", this.props.user)
         Swal.fire({
             text: `Request sent to ${this.props.vetProfile.vet_name} via email!`,
-            width: 150,
+            width: 400,
             padding: '1em',
             background: '#fff url()',
             showConfirmButton: false,
-            timer: 4000,
+            timer: 5000,
         })
         this.props.dispatch({ type: 'SET_CLIENT_SERVICE_REQUEST', payload: this.state })
         this.props.history.push("/clientDashboard")

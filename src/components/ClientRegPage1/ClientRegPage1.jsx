@@ -151,6 +151,7 @@ class ClientRegPage1 extends Component {
       },
     });
     this.props.onNext();
+   
   };
   //-----------------------------------
 

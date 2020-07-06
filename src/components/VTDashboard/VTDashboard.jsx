@@ -12,14 +12,18 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableContainer from "@material-ui/core/TableContainer";
 import Typography from "@material-ui/core/Typography";
+import Avatar from '@material-ui/core/Avatar';
+
 const moment = require('moment');
 
 const styles = theme => ({
   img: {
     borderRadius: '50%',
     // position: 'absolute',
-    top: 170,
-    left: 100,
+    // top: 170,
+    // left: 100,
+    width: theme.spacing(25),
+    height: theme.spacing(25),
   },
 })
 
@@ -69,12 +73,10 @@ class VTDashboard extends Component {
               <Container>
                 {vt.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                   <>
-                    <img className={classes.img}
-                      src="images/blank-profile-picture.png" alt="profile" height='200' width='200'/>
+                    <Avatar className={classes.img} src="images/blank-profile-picture.png" alt="profile"/>
                   </>
                   :
-                  <img className={classes.img}
-                    src={vt.media_url} alt={vt.profile_img} height='200' width='200'/>
+                  <Avatar className={classes.img} src={vt.media_url} alt={vt.profile_img} />
                 }
                 {/* <img className={classes.img} src={vt.media_url} alt={vt.profile_img} height="150" width="150" /> */}
                 <Typography variant="h6">Pending Requests ({clientRequest.filter(cr => cr.request_status === 0).length})</Typography>

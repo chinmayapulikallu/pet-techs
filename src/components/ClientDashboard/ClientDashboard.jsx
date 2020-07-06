@@ -109,6 +109,7 @@ const useStyles = (theme) => ({
 class ClientDashboard extends Component {
   componentDidMount() {
     console.log("-----> client dashboard :: ", this.props);
+    window.scrollTo(0, 0)
     this.props.dispatch({
       type: "GET_CLIENT_DATA",
     });

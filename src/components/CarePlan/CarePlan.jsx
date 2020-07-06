@@ -89,7 +89,6 @@ class CarePlan extends Component {
 }
 const mapStateToProps = (state) => ({
     petCarePlan: state.petCarePlan,
-    isVetTech: state.user.user_type === 1,
 
 });
 export default withStyles(useStyles)(

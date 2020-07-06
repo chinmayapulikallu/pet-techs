@@ -15,7 +15,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Paper";
 import Avatar from '@material-ui/core/Avatar';
-import CardMedia from '@material-ui/core/CardMedia';
 
 
 import { Typography, CardHeader } from "@material-ui/core";
@@ -74,7 +73,7 @@ const styles = theme => ({
         borderRadius: '50%',
         position: 'absolute',
         top: 200,
-        left: 150,
+        left: '10%',
         width: theme.spacing(25),
         height: theme.spacing(25),
     },
@@ -82,7 +81,8 @@ const styles = theme => ({
         marginBottom: 0,
         position: 'absolute',
         top: 200,
-        left: 400,
+        right: '60%',
+        
     },
     client_content: {
         marginTop: 200,
@@ -352,14 +352,14 @@ class ClientProfileDetail extends Component {
             <div className={classes.root} >
                 {/* <h1>{JSON.stringify(this.props.clientInfo)}</h1> */}
                 <div className={classes.title}>
-                    <div className={classes.userBasicInfo}>
+                    <Container className={classes.userBasicInfo} maxWidth='md'>
                         <Grid container spacing={1}>
                             <Grid item xs={5} className={classes.items}>
 
                                 {this.state.editable ?
                                     <>
                                         {this.props.client.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
-                                            <Avatar className={classes.img} src="images/blank-profile-picture.png" alt="blank-profile"  />
+                                            <Avatar className={classes.img} src="images/blank-profile-picture.png" alt="blank-profile" />
                                             :
                                             <Avatar className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} />
                                         }
@@ -441,10 +441,13 @@ class ClientProfileDetail extends Component {
                             {this.props.isClient && (
                                 <>
                                     <Grid container >
-                                        <Grid item xs={10} className={classes.titleHeader} >
-                                            <p>This is how your profile appears to the public.</p>
-                                            <p >If you would like to edit any part of your profile click the edit button.</p>
-                                        </Grid>
+                                        {this.props.isClient && (
+                                            <Grid item xs={10} className={classes.titleHeader} >
+                                                <p>This is how your profile appears to the public.</p>
+                                                <p >If you would like to edit any part of your profile click the edit button.</p>
+                                            </Grid>
+                                        )}
+
                                         <Grid item xs={3} className={classes.editButton}>
 
                                             {this.state.editable ?
@@ -464,7 +467,7 @@ class ClientProfileDetail extends Component {
                             )}
 
                         </Grid>
-                    </div>
+                    </Container>
                 </div>
                 {/* </Container> */}
 
@@ -523,10 +526,10 @@ class ClientProfileDetail extends Component {
                     {/* <h1>{JSON.stringify(this.props.petInfo)}</h1> */}
                     <Grid container spacing={3} className={classes.paddingTop}>
                         <Grid item xs={6} className={classes.itemImg}>
-                            <img src="images/belt.png" alt="profile" height="80" width="130" />
+                            <img src="images/belt.png" alt="profile" height="auto" width="auto" />
                         </Grid>
                         <Grid item xs={6} className={classes.itemImg}>
-                            <img src="images/house-icon.png" alt="profile" height="80" width="90" />
+                            <img src="images/house-icon.png" alt="profile" height="auto" width="auto" />
                         </Grid>
 
                         <Grid item xs={6} className={classes.items}>

@@ -14,6 +14,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Paper";
+import Avatar from '@material-ui/core/Avatar';
+
 
 import { Typography, CardHeader } from "@material-ui/core";
 import { fade } from "@material-ui/core/styles/colorManipulator";
@@ -43,7 +45,7 @@ const styles = theme => ({
         flexGrow: 1,
     },
     paddingTop: {
-        paddingTop: 50,
+        paddingTop: 100,
     },
     title: {
         backgroundColor: '#faefec',
@@ -62,7 +64,7 @@ const styles = theme => ({
         alignItems: "center",
     },
     itemImg: {
-        padding: 15,
+        // padding: 15,
         textAlign: 'center',
         justifyContent: "center",
         alignItems: "center",
@@ -71,13 +73,16 @@ const styles = theme => ({
         borderRadius: '50%',
         position: 'absolute',
         top: 200,
-        left: 150,
+        left: '10%',
+        width: theme.spacing(25),
+        height: theme.spacing(25),
     },
     clientInfo: {
         marginBottom: 0,
         position: 'absolute',
         top: 200,
-        left: 400,
+        right: '60%',
+        
     },
     client_content: {
         marginTop: 200,
@@ -133,6 +138,7 @@ const styles = theme => ({
         borderRadius: "5px",
         width: "100%",
         border: "2px solid #195C60",
+        height: 200
     },
     contentInTable: {
         paddingLeft: 10,
@@ -148,8 +154,8 @@ const styles = theme => ({
     progressLoad: {
         position: 'absolute',
         justifyContent: "center",
-        marginLeft: '50%',
-        background: 'rgba(0, 0, 0, 0.5)',
+        marginLeft: '45%',
+        // background: 'rgba(0, 0, 0, 0.5)',
     }
 });
 
@@ -346,21 +352,19 @@ class ClientProfileDetail extends Component {
             <div className={classes.root} >
                 {/* <h1>{JSON.stringify(this.props.clientInfo)}</h1> */}
                 <div className={classes.title}>
-                    <div className={classes.userBasicInfo}>
+                    <Container className={classes.userBasicInfo} maxWidth='md'>
                         <Grid container spacing={1}>
                             <Grid item xs={5} className={classes.items}>
 
                                 {this.state.editable ?
                                     <>
                                         {this.props.client.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
-                                            <img className={classes.img} src="images/blank-profile-picture.png" alt="blank-profile" height="200" width="200" />
+                                            <Avatar className={classes.img} src="images/blank-profile-picture.png" alt="blank-profile" />
                                             :
-                                            <img className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} height="200" width="200" />
+                                            <Avatar className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} />
                                         }
                                         <img src="images/edit.png" alt="edit_button" height="30" width="30" className={classes.editIcon} onClick={this.handleClickOpen} />
-                                    </>
-                                    :
-                                    <>
+
                                         <Dialog
                                             open={this.state.open}
                                             onClose={this.handleClose}
@@ -390,10 +394,13 @@ class ClientProfileDetail extends Component {
                                                 </Button>
                                             </DialogActions>
                                         </Dialog>
+                                    </>
+                                    :
+                                    <>
                                         {this.props.client.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
-                                            <img className={classes.img} src="images/blank-profile-picture.png" alt="profile" height="200" width="200" />
+                                            <Avatar className={classes.img} src="images/blank-profile-picture.png" alt="profile" />
                                             :
-                                            <img className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} height="200" width="200" />
+                                            <Avatar className={classes.img} src={this.props.client.media_url} alt={this.props.client.profile_img} />
                                         }
                                     </>
                                 }
@@ -434,10 +441,13 @@ class ClientProfileDetail extends Component {
                             {this.props.isClient && (
                                 <>
                                     <Grid container >
-                                        <Grid item xs={10} className={classes.titleHeader} >
-                                            <p>This is how your profile appears to the public.</p>
-                                            <p >If you would like to edit any part of your profile click the edit button.</p>
-                                        </Grid>
+                                        {this.props.isClient && (
+                                            <Grid item xs={10} className={classes.titleHeader} >
+                                                <p>This is how your profile appears to the public.</p>
+                                                <p >If you would like to edit any part of your profile click the edit button.</p>
+                                            </Grid>
+                                        )}
+
                                         <Grid item xs={3} className={classes.editButton}>
 
                                             {this.state.editable ?
@@ -457,11 +467,11 @@ class ClientProfileDetail extends Component {
                             )}
 
                         </Grid>
-                    </div>
+                    </Container>
                 </div>
                 {/* </Container> */}
 
-                <Container className={classes.client_content} maxWidth="lg">
+                <Container className={classes.client_content} maxWidth="md">
                     <Grid container spacing={3} >
                         <Grid item xs={9}>
 
@@ -502,31 +512,28 @@ class ClientProfileDetail extends Component {
 
                     <Grid item xs={12} className={classes.name}>
                         <h2>{this.state.client_name}'s Pets</h2>
-                    </Grid>
-                    {/* <h1>{JSON.stringify(this.props.petInfo)}</h1> */}
-
-                    {this.props.petInfo.map((pet) => {
-                        return (
-                            <div key={pet.id}>
-                                <Grid container spacing={3}>
+                        {this.props.petInfo.map((pet) => {
+                            return (
+                                <div key={pet.id}>
                                     <Pet
                                         pet={pet}
                                         editable={this.state.editable}
                                     />
-                                </Grid>
-
-                            </div>
-                        )
-                    })}
+                                </div>
+                            )
+                        })}
+                    </Grid>
+                    {/* <h1>{JSON.stringify(this.props.petInfo)}</h1> */}
                     <Grid container spacing={3} className={classes.paddingTop}>
                         <Grid item xs={6} className={classes.itemImg}>
-                            <img src="images/belt.png" alt="profile" height="80" width="130" />
+                            <img src="images/belt.png" alt="profile" height="auto" width="auto" />
                         </Grid>
                         <Grid item xs={6} className={classes.itemImg}>
-                            <img src="images/house-icon.png" alt="profile" height="80" width="90" />
+                            <img src="images/house-icon.png" alt="profile" height="auto" width="auto" />
                         </Grid>
 
                         <Grid item xs={6} className={classes.items}>
+
                             {this.state.editable ?
                                 <>
                                     <TextField
@@ -543,27 +550,24 @@ class ClientProfileDetail extends Component {
                                 :
                                 <>
 
-                                    <Grid>
-                                        <Paper elevation={5} className={classes.paperOther}>
-                                            <div>
-                                                <CardHeader
-                                                    title={`${this.state.client_name}'s Pet Equipment`}
-                                                    className={classes.header}
-                                                />
-                                            </div>
-                                            <div >
-                                                <Typography variant="subtitle1" className={classes.contentInTable}>
-                                                    {this.state.about_equipment}
-                                                </Typography>
-                                            </div>
-                                        </Paper>
+                                    <Grid className={classes.paperOther}>
+                                        <div>
+                                            <CardHeader
+                                                title={`${this.state.client_name}'s Pet Equipment`}
+                                                className={classes.header}
+                                            />
+                                        </div>
+                                        <div >
+                                            <Typography variant="subtitle1" className={classes.contentInTable}>
+                                                {this.state.about_equipment}
+                                            </Typography>
+                                        </div>
                                     </Grid>
                                 </>
                             }
 
                         </Grid>
-                        <Grid item xs={6} className={classes.items}>
-
+                        <Grid item xs={6}>
                             {this.state.editable ?
                                 <>
                                     <TextField
@@ -580,26 +584,24 @@ class ClientProfileDetail extends Component {
                                 :
                                 <>
 
-                                    <Grid>
-                                        <Paper elevation={5} className={classes.paperOther}>
-                                            <div>
-                                                <CardHeader
-                                                    title={`${this.state.client_name}'s Home Environment`}
-                                                    className={classes.header}
-                                                />
-                                            </div>
-                                            <div >
-                                                <Typography variant="subtitle1" className={classes.contentInTable}>
-                                                    {this.state.about_home}
-                                                </Typography>
-                                            </div>
-                                        </Paper>
+                                    <Grid className={classes.paperOther}>
+                                        <div>
+                                            <CardHeader
+                                                title={`${this.state.client_name}'s Home Environment`}
+                                                className={classes.header}
+                                            />
+                                        </div>
+                                        <div >
+                                            <Typography variant="subtitle1" className={classes.contentInTable}>
+                                                {this.state.about_home}
+                                            </Typography>
+                                        </div>
                                     </Grid>
                                 </>
                             }
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} className={classes.itemImg}>
+                    <Grid item xs={12} className={classes.name}>
                         <Button variant="contained" color="primary" onClick={this.handleBackButton}>Back to Dashboard</Button>
                     </Grid>
                 </Container>

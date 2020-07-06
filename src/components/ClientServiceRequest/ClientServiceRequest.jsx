@@ -15,6 +15,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import Checkbox from "@material-ui/core/Checkbox"
+import Swal from 'sweetalert2'
 
 
 
@@ -93,15 +94,23 @@ class ClientServiceRequest extends Component {
 
     handleSendRequest = () => {
         console.log("Clicked Send Request", this.props.user)
+        Swal.fire({
+            text: `Request sent to ${this.props.vetProfile.vet_name} via email!`,
+            width: 400,
+            padding: '1em',
+            background: '#fff url()',
+            showConfirmButton: false,
+            timer: 5000,
+        })
         this.props.dispatch({ type: 'SET_CLIENT_SERVICE_REQUEST', payload: this.state })
         this.props.history.push("/clientDashboard")
     }
+
     // consoleLog = () => {
     //     console.log("Clicked Send Request", this.props.user)
     //     this.props.dispatch({type: 'SET_CLIENT_SERVICE_REQUEST', payload: this.state})
     //     // this.props.history.push("/clientDashboard")
     // }
-
 
     render() {
         const { classes } = this.props

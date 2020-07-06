@@ -207,14 +207,14 @@ class ClientProfileDetail extends Component {
                 file: this.state.file
             }
         })
-        // Swal.fire({
-        //     text: 'Update!',
-        //     width: 150,
-        //     padding: '1em',
-        //     background: '#fff url()',
-        //     showConfirmButton: false,
-        //     timer: 4000,
-        // })
+        Swal.fire({
+            text: 'Sent! Your ',
+            width: 150,
+            padding: '1em',
+            background: '#fff url()',
+            showConfirmButton: false,
+            timer: 4000,
+        })
         this.setState({
             setLoading: !this.state.setLoading
         })
@@ -384,10 +384,10 @@ class ClientProfileDetail extends Component {
                                             </DialogContent>
 
                                             <DialogActions>
-                                                <Button onClick={this.handleCancel} color="primary">
+                                                <Button onClick={this.handleCancel} color="secondary" variant="outlined" size= 'small'>
                                                     Cancel
                                                   </Button>
-                                                <Button onClick={this.handleSubmitImg} color="primary" autoFocus>
+                                                <Button onClick={this.handleSubmitImg} color="secondary" autoFocus variant="outlined" size= 'small'>
                                                     Upload
                                                 </Button>
                                             </DialogActions>

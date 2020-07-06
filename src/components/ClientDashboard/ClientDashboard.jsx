@@ -238,11 +238,11 @@ class ClientDashboard extends Component {
                                       <Typography variant="body1">
                                         VET: {request.vet_name}
                                       </Typography>
-                                      <Avatar
+                                      {/* <Avatar
                                         className={classes.img}
                                         src={request.media_url}
                                         alt={request.profile_img}
-                                      />
+                                      /> */}
                                       <Typography variant="body1">
                                         PET: {request.pet_name}
                                       </Typography>

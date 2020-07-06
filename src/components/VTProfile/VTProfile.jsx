@@ -379,12 +379,8 @@ class VTProfile extends Component {
                       </DialogContent>
 
                       <DialogActions>
-                        <Button onClick={this.handleCancel} color="primary">
-                          Cancel
-                                                  </Button>
-                        <Button onClick={this.handleSubmitImg} color="primary" autoFocus>
-                          Upload
-                                                </Button>
+                        <Button onClick={this.handleCancel} color="secondary" variant="outlined" size= 'small'>Cancel</Button>
+                        <Button onClick={this.handleSubmitImg} color="secondary" variant="outlined" size= 'small' autoFocus>Upload</Button>
                       </DialogActions>
                     </Dialog>
                   </>

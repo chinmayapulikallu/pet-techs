@@ -192,15 +192,15 @@ class Pet extends Component {
                                             {this.props.editable ?
                                                 <>
                                                     <>
+                                                        <img src="images/edit.png" alt="edit_button" height="30" width="30" className={classes.editButton} onClick={this.handleClickOpen} />
                                                         {this.props.pet.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                                                             <>
                                                                 <Avatar className={classes.img} src="images/paw-gress-icon.png" alt="profile" />
                                                             </>
                                                             :
 
-                                                            <Avatar className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img}  />
+                                                            <Avatar className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img} />
                                                         }
-                                                        <img src="images/edit.png" alt="edit_button" height="30" width="30" className={classes.editButton} onClick={this.handleClickOpen} />
                                                     </>
                                                     <>
                                                         <Dialog
@@ -225,10 +225,10 @@ class Pet extends Component {
                                                             </DialogContent>
 
                                                             <DialogActions>
-                                                                <Button onClick={this.handleCancel} color="primary">
+                                                                <Button onClick={this.handleCancel} color="secondary" variant="outlined" size='small'>
                                                                     Cancel
                                                   </Button>
-                                                                <Button onClick={this.handleSavePicture} color="primary" autoFocus>
+                                                                <Button onClick={this.handleSavePicture} color="secondary" variant="outlined" size='small'>
                                                                     Upload
                                                 </Button>
                                                             </DialogActions>
@@ -239,10 +239,10 @@ class Pet extends Component {
                                                 <>
                                                     {this.props.pet.profile_img === '3e541de1f0419c15034e45c05eb3becd' ?
                                                         <>
-                                                            <Avatar className={classes.img} src="images/paw-gress-icon.png" alt="profile"  />
+                                                            <Avatar className={classes.img} src="images/paw-gress-icon.png" alt="profile" />
                                                         </>
                                                         :
-                                                        <Avatar className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img}  />
+                                                        <Avatar className={classes.img} src={this.props.pet.media_url} alt={this.props.pet.profile_img} />
                                                     }
                                                 </>
                                             }

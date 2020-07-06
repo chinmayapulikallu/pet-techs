@@ -207,14 +207,14 @@ class ClientProfileDetail extends Component {
                 file: this.state.file
             }
         })
-        // Swal.fire({
-        //     text: 'Update!',
-        //     width: 150,
-        //     padding: '1em',
-        //     background: '#fff url()',
-        //     showConfirmButton: false,
-        //     timer: 4000,
-        // })
+        Swal.fire({
+            text: 'Sent! Your ',
+            width: 150,
+            padding: '1em',
+            background: '#fff url()',
+            showConfirmButton: false,
+            timer: 4000,
+        })
         this.setState({
             setLoading: !this.state.setLoading
         })

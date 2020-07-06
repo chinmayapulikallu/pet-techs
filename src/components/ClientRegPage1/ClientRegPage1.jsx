@@ -210,7 +210,7 @@ class ClientRegPage1 extends Component {
           <TextField
             // error= { this.state.client_name === ''}
             // helperText = 'This field is required'
-            label={"Name"}
+            // label={"Name"}
             fullWidth
             color="secondary"
             variant="outlined"
@@ -220,7 +220,7 @@ class ClientRegPage1 extends Component {
         </div>
         <div className={classes.inputs}>
           <TextField
-            label={"Home Address"}
+            // label={"Home Address"}
             fullWidth
             color="secondary"
             variant="outlined"
@@ -230,7 +230,7 @@ class ClientRegPage1 extends Component {
         </div>
         <div className={classes.inputs}>
           <TextField
-            label={"Apartment or Suite #"}
+            // label={"Apartment or Suite #"}
             fullWidth
             color="secondary"
             variant="outlined"
@@ -240,7 +240,7 @@ class ClientRegPage1 extends Component {
         </div>
         <div className={classes.inputs}>
           <TextField
-            label={"City"}
+            // label={"City"}
             variant="outlined"
             value={this.state.city}
             color="secondary"
@@ -248,7 +248,7 @@ class ClientRegPage1 extends Component {
             className={classes.city}
           />
           <TextField
-            label={"State"}
+            // label={"State"}
             variant="outlined"
             value={this.state.state}
             color="secondary"
@@ -256,7 +256,7 @@ class ClientRegPage1 extends Component {
             className={classes.flex}
           />
           <TextField
-            label={"Zipcode"}
+            // label={"Zipcode"}
             variant="outlined"
             color="secondary"
             value={this.state.zip_code}
@@ -351,7 +351,7 @@ class ClientRegPage1 extends Component {
         <div className={classes.inputs}>
           <TextField
             fullWidth
-            label={"Emergency Contact Name"}
+            // label={"Emergency Contact Name"}
             color="secondary"
             variant="outlined"
             value={this.state.contact_name_1}
@@ -360,7 +360,7 @@ class ClientRegPage1 extends Component {
         </div>
         <div className={classes.inputs}>
           <TextField
-            label={"Emergency Contact Phone"}
+            // label={"Emergency Contact Phone"}
             variant="outlined"
             value={this.state.contact_phone_1}
             color="secondary"
@@ -368,7 +368,7 @@ class ClientRegPage1 extends Component {
             className={classes.em_phone}
           />
           <TextField
-            label={"Emergency Contact Email"}
+            // label={"Emergency Contact Email"}
             variant="outlined"
             color="secondary"
             value={this.state.contact_email_1}
@@ -388,7 +388,7 @@ class ClientRegPage1 extends Component {
         </Typography>
         <div className={classes.inputs}>
           <TextField
-            label={"Vet Clinic Name"}
+            // label={"Vet Clinic Name"}
             variant="outlined"
             value={this.state.vet_clinic}
             color="secondary"
@@ -398,7 +398,7 @@ class ClientRegPage1 extends Component {
         </div>
         <div className={classes.inputs}>
           <TextField
-            label={"Vet Clinic Phone"}
+            // label={"Vet Clinic Phone"}
             variant="outlined"
             value={this.state.clinic_phone}
             color="secondary"
@@ -406,7 +406,7 @@ class ClientRegPage1 extends Component {
             className={classes.em_phone}
           />
           <TextField
-            label={"Vet Clinic Address (street & city)"}
+            // label={"Vet Clinic Address (street & city)"}
             variant="outlined"
             color="secondary"
             value={this.state.clinic_address}

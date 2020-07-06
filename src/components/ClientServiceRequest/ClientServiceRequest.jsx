@@ -87,7 +87,7 @@ class ClientServiceRequest extends Component {
     };
 
     handleCancel = () => {
-        this.props.history.push("/vt-profile")
+        this.props.history.goBack();
     }
 
     handleSendRequest = () => {

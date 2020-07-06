@@ -384,10 +384,10 @@ class ClientProfileDetail extends Component {
                                             </DialogContent>
 
                                             <DialogActions>
-                                                <Button onClick={this.handleCancel} color="primary">
+                                                <Button onClick={this.handleCancel} color="secondary" variant="outlined" size= 'small'>
                                                     Cancel
                                                   </Button>
-                                                <Button onClick={this.handleSubmitImg} color="primary" autoFocus>
+                                                <Button onClick={this.handleSubmitImg} color="secondary" autoFocus variant="outlined" size= 'small'>
                                                     Upload
                                                 </Button>
                                             </DialogActions>

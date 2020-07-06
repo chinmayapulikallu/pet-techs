@@ -419,10 +419,10 @@ meals per day, and my favorite food is{" "}
                                         </>
                                         :
                                         <Button
-                                            variant="contained"
-                                            color="primary"
-                                            onClick={this.handleEditButton}
-                                        >Edit </Button>
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={this.handleEditButton}
+                                    >Edit </Button>
                                     }
                                 </Grid>
                             </TableRow>

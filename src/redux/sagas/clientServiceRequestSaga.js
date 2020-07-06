@@ -20,14 +20,13 @@ function* acceptDeclineServiceRequest(action) {
 
 //post service request Information
 function* setClientServiceRequest(action) {
-  console.log('client service request saga:::::', action.payload)
+  console.log('client service request saga********', action.payload)
   try {
     yield axios.post('/api/request/client', action.payload);
     } catch (error) {
         console.log('Error with posting service request client:', error);
     }
 }
-
 
 //get client service request
 function *getClientServiceRequest() {
@@ -63,6 +62,5 @@ function* getVTServiceRequest() {
     console.log("Error with get client info:", error);
   }
 }
-
 
 export default clientServiceRequestSaga;

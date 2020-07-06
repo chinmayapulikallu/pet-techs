@@ -2,6 +2,9 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const sgMail = require("@sendgrid/mail");
+const dotenv = require('dotenv')
+dotenv.config();
+
 // const { getMaxListeners } = require('../modules/pool');
 const {
   rejectUnauthenticated,
@@ -75,7 +78,7 @@ router.post('/client', (req, res) => {
   if (req.user.id && req.user.user_email && hasEnvVariables) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
-      to: "mikecossalter@yahoo.com",
+      to: req.user.user_email,
       from: process.env.SENDGRID_FROM_EMAIL,
       subject: "New service Request!",
       text: " Test to send email",

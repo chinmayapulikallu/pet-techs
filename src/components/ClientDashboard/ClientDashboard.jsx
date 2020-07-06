@@ -44,6 +44,11 @@ const useStyles = (theme) => ({
   },
   buttonMargin: {
     margin: "10px",
+    // backgroundColor: "#FFC2B4"
+  },
+  buttonMargin2: {
+    margin: "10px",
+    backgroundColor: "#FFC2B4"
   },
   serviceList: {
     minWidth: 800,
@@ -109,6 +114,7 @@ const useStyles = (theme) => ({
 class ClientDashboard extends Component {
   componentDidMount() {
     console.log("-----> client dashboard :: ", this.props);
+    window.scrollTo(0, 0)
     this.props.dispatch({
       type: "GET_CLIENT_DATA",
     });
@@ -275,7 +281,7 @@ class ClientDashboard extends Component {
                   </Grid>
                 )}
               </Grid>
-              <Grid container>
+             
                 {clientRequest && clientRequest.length > 0 && (
                   <Grid item className={classes.reqContainers}>
                     <Card className={classes.serviceList}>
@@ -289,9 +295,10 @@ class ClientDashboard extends Component {
                           }
                           )
                         </Typography>
-
+                        <Grid container direction="row">
                         {clientRequest.map((request) => (
                           <div key={request.id}>
+                               <Grid item xs={12} sm={2}>
                             {request.request_status === 1 && (
                               <Card
                                 variant="outlined"
@@ -341,14 +348,16 @@ class ClientDashboard extends Component {
                                 <CardActions></CardActions>
                               </Card>
                             )}
+                                </Grid>
                           </div>
                         ))}
+                        </Grid>
                       </CardContent>
                     </Card>
                   </Grid>
                 )}
-              </Grid>
-              <Grid container>
+             
+              
                 {clientRequest && clientRequest.length > 0 && (
                   <Grid item className={classes.reqContainers}>
                     <Card className={classes.serviceList}>
@@ -362,9 +371,10 @@ class ClientDashboard extends Component {
                           }
                           )
                         </Typography>
-
+                          <Grid container direction="row">
                         {clientRequest.map((request) => (
                           <div key={request.id}>
+                          <Grid item xs={12} sm={2}>   
                             {request.request_status === 2 && (
                               <Card
                                 variant="outlined"
@@ -414,13 +424,15 @@ class ClientDashboard extends Component {
                                 <CardActions></CardActions>
                               </Card>
                             )}
+                            </Grid> 
                           </div>
                         ))}
+                        </Grid> 
                       </CardContent>
                     </Card>
                   </Grid>
                 )}
-              </Grid>
+             
             </span>
           ))}
         <div className={classes.petTitle}>
@@ -440,12 +452,12 @@ class ClientDashboard extends Component {
                   />
                   <CardContent>
                     <Button
-                      color="primary"
+                      
                       variant="contained"
-                      className={classes.buttonMargin}
+                      className={classes.buttonMargin2}
                       onClick={() => this.carePlan(pet.id)}
                     >
-                      carePlan
+                      Care Plan
                     </Button>
                   </CardContent>
                 </Card>

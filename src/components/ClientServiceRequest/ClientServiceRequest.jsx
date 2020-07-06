@@ -57,6 +57,7 @@ class ClientServiceRequest extends Component {
 
     componentDidMount() {
         console.log("clientservicerequest mount :: ", this.state)
+        window.scrollTo(0, 0)
     }
 
     handleDateChange = (event, property) => {

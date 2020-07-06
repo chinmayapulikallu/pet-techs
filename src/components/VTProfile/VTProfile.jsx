@@ -253,6 +253,7 @@ class VTProfile extends Component {
   componentDidMount() {
     // this.props.dispatch({ type: "GET_VT_DATA" });
     console.log(`HERE!!!!!`, this.props.vtInfo);
+    window.scrollTo(0, 0)
 
     this.uppy.on('upload', file => {
       let fileKey = Object.keys(this.uppy.state.files)[0];

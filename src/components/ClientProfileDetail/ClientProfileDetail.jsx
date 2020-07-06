@@ -73,7 +73,7 @@ const styles = theme => ({
         borderRadius: '50%',
         position: 'absolute',
         top: 200,
-        left: '10%',
+        left: 150,
         width: theme.spacing(25),
         height: theme.spacing(25),
     },
@@ -81,7 +81,7 @@ const styles = theme => ({
         marginBottom: 0,
         position: 'absolute',
         top: 200,
-        right: '60%',
+        left: 400,
         
     },
     client_content: {

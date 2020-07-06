@@ -13,6 +13,7 @@ import Paper from "@material-ui/core/Paper";
 import TableContainer from "@material-ui/core/TableContainer";
 import Typography from "@material-ui/core/Typography";
 import Avatar from '@material-ui/core/Avatar';
+import InfoPage from "../InfoPage/InfoPage";
 
 const moment = require('moment');
 
@@ -25,6 +26,10 @@ const styles = theme => ({
     width: theme.spacing(25),
     height: theme.spacing(25),
   },
+  button: {
+    // color: '#195C60',
+    backgroundColor: "#FFC2B4"
+  }
 })
 
 class VTDashboard extends Component {
@@ -106,6 +111,7 @@ class VTDashboard extends Component {
                          <TableCell>{request.service_select}</TableCell>
                         <TableCell>
                           <Button
+                          className={classes.button}
                             size="small"
                             variant="contained"
                             // will need to add a value, (id) for event to capture.
@@ -153,6 +159,7 @@ class VTDashboard extends Component {
                           <Button
                             size="small"
                             variant="contained"
+                            className={classes.button}
                             // will need to add a value, (id) for event to capture.
                             onClick={() => this.viewButton(petRequest.pet_id)}
                           >

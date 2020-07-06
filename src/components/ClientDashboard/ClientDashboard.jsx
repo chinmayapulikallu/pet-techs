@@ -44,6 +44,11 @@ const useStyles = (theme) => ({
   },
   buttonMargin: {
     margin: "10px",
+    // backgroundColor: "#FFC2B4"
+  },
+  buttonMargin2: {
+    margin: "10px",
+    backgroundColor: "#FFC2B4"
   },
   serviceList: {
     minWidth: 800,
@@ -109,6 +114,7 @@ const useStyles = (theme) => ({
 class ClientDashboard extends Component {
   componentDidMount() {
     console.log("-----> client dashboard :: ", this.props);
+    window.scrollTo(0, 0)
     this.props.dispatch({
       type: "GET_CLIENT_DATA",
     });
@@ -446,9 +452,9 @@ class ClientDashboard extends Component {
                   />
                   <CardContent>
                     <Button
-                      color="primary"
+                      
                       variant="contained"
-                      className={classes.buttonMargin}
+                      className={classes.buttonMargin2}
                       onClick={() => this.carePlan(pet.id)}
                     >
                       Care Plan

@@ -276,7 +276,7 @@ class ClientDashboard extends Component {
                   </Grid>
                 )}
               </Grid>
-              <Grid container>
+             
                 {clientRequest && clientRequest.length > 0 && (
                   <Grid item className={classes.reqContainers}>
                     <Card className={classes.serviceList}>
@@ -290,9 +290,10 @@ class ClientDashboard extends Component {
                           }
                           )
                         </Typography>
-
+                        <Grid container direction="row">
                         {clientRequest.map((request) => (
                           <div key={request.id}>
+                               <Grid item xs={12} sm={2}>
                             {request.request_status === 1 && (
                               <Card
                                 variant="outlined"
@@ -342,14 +343,16 @@ class ClientDashboard extends Component {
                                 <CardActions></CardActions>
                               </Card>
                             )}
+                                </Grid>
                           </div>
                         ))}
+                        </Grid>
                       </CardContent>
                     </Card>
                   </Grid>
                 )}
-              </Grid>
-              <Grid container>
+             
+              
                 {clientRequest && clientRequest.length > 0 && (
                   <Grid item className={classes.reqContainers}>
                     <Card className={classes.serviceList}>
@@ -363,9 +366,10 @@ class ClientDashboard extends Component {
                           }
                           )
                         </Typography>
-
+                          <Grid container direction="row">
                         {clientRequest.map((request) => (
                           <div key={request.id}>
+                          <Grid item xs={12} sm={2}>   
                             {request.request_status === 2 && (
                               <Card
                                 variant="outlined"
@@ -415,13 +419,15 @@ class ClientDashboard extends Component {
                                 <CardActions></CardActions>
                               </Card>
                             )}
+                            </Grid> 
                           </div>
                         ))}
+                        </Grid> 
                       </CardContent>
                     </Card>
                   </Grid>
                 )}
-              </Grid>
+             
             </span>
           ))}
         <div className={classes.petTitle}>
@@ -446,7 +452,7 @@ class ClientDashboard extends Component {
                       className={classes.buttonMargin}
                       onClick={() => this.carePlan(pet.id)}
                     >
-                      carePlan
+                      Care Plan
                     </Button>
                   </CardContent>
                 </Card>

@@ -134,6 +134,7 @@ class VTDashboard extends Component {
                         <TableCell>Species Name</TableCell>
                         <TableCell>Client Name</TableCell>
                         <TableCell>Client Email</TableCell>
+                        <TableCell>Client Phone</TableCell>
                         <TableCell>Service Type</TableCell>
                         <TableCell>Action</TableCell>
                       </TableRow>
@@ -148,6 +149,7 @@ class VTDashboard extends Component {
                         <TableCell>{petRequest.pet_type}</TableCell>
                         <TableCell>{petRequest.client_name}</TableCell>
                         <TableCell>{petRequest.user_email}</TableCell>
+                        <TableCell>{petRequest.phone_number}</TableCell>
                         <TableCell>{petRequest.service_select}</TableCell>
                         <TableCell>
                           <Button

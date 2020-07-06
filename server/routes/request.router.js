@@ -116,6 +116,7 @@ router.post("/client", (req, res) => {
 
   const petIds = req.body.pet_id;
   const vet_id = req.body.vet_id;
+  const client_id = req.body.client_id;
   const start_date_time = req.body.start_date_time;
   const end_date_time = req.body.end_date_time;
   const add_info = req.body.add_info;
@@ -125,13 +126,14 @@ router.post("/client", (req, res) => {
   // log.info("post client_request :: ", pet_id)
   // const request_status = req.body.request_status;
   const queryText =
-    `INSERT INTO "client_request" ( pet_id, vet_id, start_date_time, end_date_time, add_info, input_info, service_select) 
-      VALUES ($1, $2, $3, $4, $5, $6, $7)`;
+    `INSERT INTO "client_request" ( pet_id, vet_id, client_id, start_date_time, end_date_time, add_info, input_info, service_select) 
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`;
   petIds.map(async petId => {
     await pool
       .query(queryText, [
         petId,
         vet_id,
+        client_id,
         start_date_time,
         end_date_time,
         add_info,
@@ -194,7 +196,7 @@ router.get("/vt", (req, res) => {
   const sqlText = `select client_request.start_date_time, client_request.end_date_time, client_request.add_info,
                    pet.pet_name, client_request.vet_id, pet_id, pet.id, client_request.id,
                   client_request.request_status,client.client_name, client_request.service_select, 
-                  pet.pet_type, "user".user_email from client_request, pet, client, "user" where
+                  pet.pet_type, "user".user_email,"user".phone_number from client_request, pet, client, "user" where
                   client_request.pet_id = pet.id and 
                   pet.user_id = client.user_id and 
                   client.user_id = "user".id and

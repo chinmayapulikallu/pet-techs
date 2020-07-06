@@ -432,7 +432,7 @@ class ClientProfileDetail extends Component {
                                     <>
                                         <h1>{this.state.client_name}</h1>
                                         <p>{this.state.city}, {this.state.state}</p>
-                                        <Button variant="contained" color="primary" > <a href={`mailto:${this.props.user.user_email}`} target="_blank" className='link'> Contact {this.state.client_name}</a></Button>
+                                        {/* <Button variant="contained" color="primary" > <a href={`mailto:${this.props.user.user_email}`} target="_blank" className='link'> Contact {this.state.client_name}</a></Button> */}
                                     </>
                                 }
                             </Grid>

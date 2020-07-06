@@ -202,7 +202,6 @@ class VTReg3 extends Component {
             </p>
         <Grid container spacing={12}>
           <FormControl component="fieldset">
-            {/* <p>Do you know animal CPR/First Aid?</p> */}
             <Grid item xs={12}>
               <FormControlLabel
                 control={

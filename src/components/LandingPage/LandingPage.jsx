@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -8,7 +6,9 @@ import Typeography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
 import CardMedia from "@material-ui/core/CardMedia";
+import { callbackPromise } from "nodemailer/lib/shared";
 
 const styles = (theme) => ({
   landingPg: {
@@ -39,11 +39,11 @@ const styles = (theme) => ({
     width: "100%",
     height: "auto",
   },
-  test: {
-    position: "absolute",
-    top: "2000px",
-    left: "70px",
-  },
+  // test: {
+  //   position: "absolute",
+  //   top: "2000px",
+  //   left: "70px",
+  // },
   description: {
     textAlign: "center",
     fontFamily: "Quicksand",
@@ -70,22 +70,27 @@ const styles = (theme) => ({
     fontFamily: "Quicksand",
     margin: "25px",
     textAlign: "center",
+    display: "flex",
     justifyContent: "center",
     marginBottom: 100,
   },
   catText: {
-    fontFamily: "Quicksand",
-    margin: "25px",
+    marginLeft: "auto",
+    marginRight: "auto",
     textAlign: "center",
     justifyContent: "center",
-    marginBottom: 50,
-    backgroundColor: "transparent",
-    fontSize: 100,
+    padding: 10,
+  },
+  catSubText: {
+    textAlign: "center",
+    justifyContent: "center",
+    padding: 15,
   },
   catPaw: {
-    position: "absolute",
-    top: "35%",
-    left: "65%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    display: "flex",
+    justifyContent: "center",
     borderRadius: 40,
   },
   image: {
@@ -126,10 +131,11 @@ const styles = (theme) => ({
     paddingBottom: 20,
   },
   btn: {
-    height: 50,
-    width: 200,
+    // height: 50,
+    // width: 200,
     borderRadius: 12,
     display: "flex",
+    justifyContent: "center",
     flexDirection: "row",
     marginLeft: "auto",
     marginRight: "auto",
@@ -143,10 +149,22 @@ const styles = (theme) => ({
   },
   cardService: {
     // height: 400,
-    minHeight: 450,
+    minHeight: 475,
+    maxWidth: 300,
   },
-  fixResize: {
-    width: "100%",
+  // fixResize: {
+  //   width: "100%",
+  // },
+  backCat: {
+    background:
+      'url("../images/homeCat.png") no-repeat center center',
+    backgroundSize: "cover",
+
+  },
+  catTextCon: {
+    marginLeft: 100,
+    marginTop: "5%",
+    backgroundColor: "transparent",
   },
 });
 
@@ -171,7 +189,7 @@ class LandingPage extends Component {
     return (
       <div className={classes.root}>
         <Grid container spacing={3}>
-          <img className={classes.landingPg} src="../images/homeDog.png" />
+          <img className={classes.landingPg} src="../images/homeDog.png" alt="dog"/>
           <Typography variant="h3" className={classes.dogText}>
             Welcome to Pet Techs!
           </Typography>
@@ -214,7 +232,7 @@ class LandingPage extends Component {
             className={classes.cards}
             spacing={2}
           >
-            <Grid item xs={2}>
+            <Grid item xs={12} sm={12} md={2}>
               <Card className={classes.cardService}>
                 <CardContent>
                   <div>
@@ -237,7 +255,7 @@ class LandingPage extends Component {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={12} sm={12} md={2}>
               <Card className={classes.cardService}>
                 <CardContent>
                   <div>
@@ -260,7 +278,7 @@ class LandingPage extends Component {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={12} sm={12} md={2}>
               <Card className={classes.cardService}>
                 <CardContent>
                   <div>
@@ -282,7 +300,7 @@ class LandingPage extends Component {
                 </CardContent>
               </Card>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={12} sm={12} md={2}>
               <Card className={classes.cardService}>
                 <CardContent>
                   <div>
@@ -307,27 +325,26 @@ class LandingPage extends Component {
             </Grid>
           </Grid>
         </div>
-        <Grid container className={classes.fixResize}>
-          <img className={classes.catImage} src="../images/homeCat.png" />
-          <div className={classes.test}>
-            <Grid item xs={7}>
-              <Card raised={false} className={classes.catText}>
-                <Typography variant="h4">
+        <Paper className={classes.backCat} elevation={0}>
+          <Grid container spacing={10}>
+            <Grid item xs={12} sm={7}>
+              <Paper className={classes.catTextCon}>
+                <Typography variant="h4" className={classes.catText}>
                   "I really appreciate the Pet Techs service providers! They've
-                  got my back when i need help with my pets, always going above
+                  got my back when I need help with my pets, always going above
                   and beyond with their care!"
                 </Typography>
-                <Typography variant="h5">
+                <Typography variant="h5" className={classes.catSubText}>
                   - James, Eden Prairie Minnesota
                 </Typography>
-              </Card>
+              </Paper>
             </Grid>
-            <Grid item>
-              <img src="../images/catPaw.png" className={classes.catPaw} />
+            <Grid item xs={12} sm={4}>
+              <img src="../images/catPaw.png" alt="cat high five" className={classes.catPaw} />
             </Grid>
-          </div>
-        </Grid>
-        <Grid>
+          </Grid>
+        </Paper>
+        <Grid className={classes.servProv}>
           <div>
             <img
               className={classes.servProv}

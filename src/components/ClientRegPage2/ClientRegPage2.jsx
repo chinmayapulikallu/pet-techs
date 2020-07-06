@@ -101,6 +101,7 @@ class ClientRegPage2 extends Component {
 
   componentDidMount() {
     console.log("componentDidMount :: ", this.state);
+      window.scrollTo(0, 0)
   }
 
   handlePictureChangeFor = (event) => {

@@ -451,7 +451,7 @@ class ClientDashboard extends Component {
                       className={classes.buttonMargin}
                       onClick={() => this.carePlan(pet.id)}
                     >
-                      carePlan
+                      Care Plan
                     </Button>
                   </CardContent>
                 </Card>

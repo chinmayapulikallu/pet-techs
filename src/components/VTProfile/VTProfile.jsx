@@ -253,6 +253,7 @@ class VTProfile extends Component {
   componentDidMount() {
     // this.props.dispatch({ type: "GET_VT_DATA" });
     console.log(`HERE!!!!!`, this.props.vtInfo);
+    window.scrollTo(0, 0)
 
     this.uppy.on('upload', file => {
       let fileKey = Object.keys(this.uppy.state.files)[0];
@@ -378,12 +379,8 @@ class VTProfile extends Component {
                       </DialogContent>
 
                       <DialogActions>
-                        <Button onClick={this.handleCancel} color="primary">
-                          Cancel
-                                                  </Button>
-                        <Button onClick={this.handleSubmitImg} color="primary" autoFocus>
-                          Upload
-                                                </Button>
+                        <Button onClick={this.handleCancel} color="secondary" variant="outlined" size= 'small'>Cancel</Button>
+                        <Button onClick={this.handleSubmitImg} color="secondary" variant="outlined" size= 'small' autoFocus>Upload</Button>
                       </DialogActions>
                     </Dialog>
                   </>

@@ -42,6 +42,10 @@ class VTReviewPage extends Component {
   //   ...this.props.vtInfo,
   // }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   handleEditVTPage1Button = () => {
     console.log('edit clicked!')
     this.props.onEditInfo();

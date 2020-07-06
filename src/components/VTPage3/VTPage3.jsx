@@ -61,6 +61,7 @@ class VTReg3 extends Component {
 
   componentDidMount() {
     console.log(this.state.oralMedication)
+    window.scrollTo(0, 0);
   }
 
   handleToggleChangeFor = property => (event) => {

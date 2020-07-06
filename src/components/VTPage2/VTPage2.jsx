@@ -43,6 +43,10 @@ class VTPage2 extends Component {
   };
 
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+  
   //THIS WILL HANDLE ALL THE INPUTS FROM THE VET TECH PREFERENCES
   handleChange = (event, property) => {
     console.log(event.target.value, property);

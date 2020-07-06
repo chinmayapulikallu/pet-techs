@@ -30,6 +30,7 @@ class ClientReviewPage extends Component {
 
     componentDidMount() {
         console.log('componentDidMount :: ', this.state, this.props)
+        window.scrollTo(0,0)
     }
 
     //complete registration

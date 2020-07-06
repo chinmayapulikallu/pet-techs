@@ -1,17 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Pet from '../Pet/Pet';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import Pet from "../Pet/Pet";
 
-
-import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
+import { withStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Paper";
 import Avatar from '@material-ui/core/Avatar';
@@ -73,7 +71,7 @@ const styles = theme => ({
         borderRadius: '50%',
         position: 'absolute',
         top: 200,
-        left: '10%',
+        left: 150,
         width: theme.spacing(25),
         height: theme.spacing(25),
     },
@@ -81,7 +79,7 @@ const styles = theme => ({
         marginBottom: 0,
         position: 'absolute',
         top: 200,
-        right: '60%',
+        left: 400,
         
     },
     client_content: {
@@ -612,11 +610,14 @@ class ClientProfileDetail extends Component {
 
 }
 const mapStateToProps = (reduxState) => ({
-    clientInfo: reduxState.clientInfo,
-    petInfo: reduxState.petInfo,
-    user: reduxState.user,
-    isClient: reduxState.user.user_type === 0,
-})
+  clientInfo: reduxState.clientInfo,
+  petInfo: reduxState.petInfo,
+  user: reduxState.user,
+  isClient: reduxState.user.user_type === 0,
+});
 
-
-export default withRouter(connect(mapStateToProps)(withStyles(styles, { withTheme: true })(ClientProfileDetail)));
+export default withRouter(
+  connect(mapStateToProps)(
+    withStyles(styles, { withTheme: true })(ClientProfileDetail)
+  )
+);

@@ -63,7 +63,7 @@ class ClientReviewPage extends Component {
 
     render() {
         console.log("review props", this.props)
-        const { classes, user, clientInfo, petInfo } = this.props;
+        const { classes, clientInfo, petInfo } = this.props;
 
         return (
             <Container className={classes.root} maxWidth="md">

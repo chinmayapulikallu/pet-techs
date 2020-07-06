@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -191,7 +189,7 @@ class LandingPage extends Component {
     return (
       <div className={classes.root}>
         <Grid container spacing={3}>
-          <img className={classes.landingPg} src="../images/homeDog.png" />
+          <img className={classes.landingPg} src="../images/homeDog.png" alt="dog"/>
           <Typography variant="h3" className={classes.dogText}>
             Welcome to Pet Techs!
           </Typography>
@@ -342,7 +340,7 @@ class LandingPage extends Component {
               </Paper>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <img src="../images/catPaw.png" className={classes.catPaw} />
+              <img src="../images/catPaw.png" alt="cat high five" className={classes.catPaw} />
             </Grid>
           </Grid>
         </Paper>

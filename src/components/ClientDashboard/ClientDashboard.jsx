@@ -44,6 +44,11 @@ const useStyles = (theme) => ({
   },
   buttonMargin: {
     margin: "10px",
+    // backgroundColor: "#FFC2B4"
+  },
+  buttonMargin2: {
+    margin: "10px",
+    backgroundColor: "#FFC2B4"
   },
   serviceList: {
     minWidth: 800,
@@ -440,9 +445,9 @@ class ClientDashboard extends Component {
                   />
                   <CardContent>
                     <Button
-                      color="primary"
+                      
                       variant="contained"
-                      className={classes.buttonMargin}
+                      className={classes.buttonMargin2}
                       onClick={() => this.carePlan(pet.id)}
                     >
                       carePlan

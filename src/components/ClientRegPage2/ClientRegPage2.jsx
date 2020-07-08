@@ -11,13 +11,11 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-// import FormLabel from '@material-ui/core/FormLabel';
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import DatePicker from "react-datepicker";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-
 import "@uppy/core/dist/style.css";
 import "@uppy/drag-drop/dist/style.css";
 
@@ -26,12 +24,8 @@ const useStyles = (theme) => ({
     marginTop: 50,
     marginBottom: 40,
     textAlign: "center",
-    // flexGrow: 1,
-    // marginLeft: theme.spacing(40),
-    // marginRight: theme.spacing(20),
   },
   formControl: {
-    // margin: theme.spacing(1),
     minWidth: 120,
     margin: "10px",
   },
@@ -63,50 +57,11 @@ class ClientRegPage2 extends Component {
     ...this.props,
   };
 
-  //autofill form
-  autoFillForm = () => {
-    this.setState({
-      petInfo: {
-        pets: [
-          {
-            id: 1,
-            pet_type: "dog",
-            other_pet: "",
-            pet_name: "CeCe",
-            weight: "75",
-            age: "12",
-            breed: "German Shepard",
-            pet_bio: "CeCe is a sweet dog.",
-            sex: "female",
-            food_brand: "Purina",
-            feeding_per_day: "3",
-            amount_per_meal: "2 cups",
-            optional_food: "CeCe can have the occasional treat, but no chocolate. ",
-            care_equipment: "I have a kennel for her, and she has a really nice leash.",
-            pet_behavior: "She like to lounge around and sometimes get scared of storms.",
-            medications: [
-              {
-                id: 1,
-                pet_id: "11",
-                medication_name: "Anti-Anxiety Medication",
-                dosage: "as needed",
-                dosage_time: new Date(),
-              },
-            ],
-          },
-        ],
-      },
-    });
-  };
-
   componentDidMount() {
-    console.log("componentDidMount :: ", this.state);
-      window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
 
   handlePictureChangeFor = (event) => {
-    console.log("changing", event.target.files[0]);
-
     this.setState({
       ...this.state,
       file: event.target.files[0],
@@ -125,7 +80,6 @@ class ClientRegPage2 extends Component {
   //add AnotherPet
   addPets = () => {
     let petsId = Math.max(...this.state.petInfo.pets.map((pet) => pet.id)) + 1;
-    console.log("Pet List ::", this.state, petsId);
     this.setState({
       ...this.state,
       petInfo: {
@@ -166,7 +120,6 @@ class ClientRegPage2 extends Component {
   //add Medication
   addMedication = (petId) => {
     const currentPet = this.state.petInfo.pets.find((pet) => pet.id === petId);
-    console.log("medications ::", this.state, petId, currentPet);
     let nextMedicationId =
       Math.max(...currentPet.medications.map((m) => m.id)) + 1;
     currentPet.medications.push({
@@ -195,9 +148,7 @@ class ClientRegPage2 extends Component {
   };
 
   handleChange = (petId, property) => (event) => {
-    console.log(petId, property, event.target, this.state.petInfo);
     const currentPet = this.state.petInfo.pets.find((pet) => pet.id === petId);
-
     if (event.target.value === "true" || event.target.value === "false") {
       currentPet[property] = event.target.value === "true";
     } else {
@@ -229,7 +180,6 @@ class ClientRegPage2 extends Component {
   };
 
   handleMedicationChange = (petId, medicationId, property) => (event) => {
-    console.log(petId, property, event.target, this.state.petInfo);
     const currentPet = this.state.petInfo.pets.find((pet) => pet.id === petId);
     const currentMedication = currentPet.medications.find(
       (med) => med.id === medicationId
@@ -257,7 +207,6 @@ class ClientRegPage2 extends Component {
 
   //date input for medication
   handleDateChange = (petId, medicationId, property) => (date) => {
-    console.log("handleDateChange", date, this.state.petInfo.pets[0]);
     const currentPet = this.state.petInfo.pets.find((pet) => pet.id === petId);
     const currentMedication = currentPet.medications.find(
       (med) => med.id === medicationId
@@ -284,16 +233,10 @@ class ClientRegPage2 extends Component {
     this.props.dispatch({
       type: "SET_PET",
       payload: {
-        //...this.state
         ...this.state.petInfo,
       },
     });
     this.props.onNext();
-  };
-
-  //upload Photo
-  uploadPhoto = () => {
-    alert("upload photo");
   };
 
   render() {
@@ -304,9 +247,7 @@ class ClientRegPage2 extends Component {
         <Typography variant="h4" className={classes.title}>
           Pet Information
           <Button onClick={this.autoFillForm}></Button>
-          {/* <Button onClick={this.autoFillForm}></Button> */}
         </Typography>
-
         {this.state.petInfo.pets &&
           this.state.petInfo.pets.map((pet) => (
             <Card key={pet.id} className={classes.petContainer}>
@@ -421,10 +362,7 @@ class ClientRegPage2 extends Component {
                       onChange={this.handleChange(pet.id, "pet_bio")}
                     />
                   </Grid>
-                  <Grid item xs={12} className={classes.itemCenter}>
-                    {/* <Button color="primary" variant="contained"
-                                        onClick={this.uploadPhoto}>Upload Photo</Button> */}
-                  </Grid>
+                  <Grid item xs={12} className={classes.itemCenter}></Grid>
                   <Grid item xs={12}>
                     <TextField
                       label="Pet Food Brand"

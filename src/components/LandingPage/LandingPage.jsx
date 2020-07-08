@@ -2,13 +2,10 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import Typeography from "@material-ui/core/Typography";
+import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import CardMedia from "@material-ui/core/CardMedia";
-import { callbackPromise } from "nodemailer/lib/shared";
 
 const styles = (theme) => ({
   landingPg: {
@@ -39,11 +36,6 @@ const styles = (theme) => ({
     width: "100%",
     height: "auto",
   },
-  // test: {
-  //   position: "absolute",
-  //   top: "2000px",
-  //   left: "70px",
-  // },
   description: {
     textAlign: "center",
     fontFamily: "Quicksand",
@@ -131,8 +123,6 @@ const styles = (theme) => ({
     paddingBottom: 20,
   },
   btn: {
-    // height: 50,
-    // width: 200,
     borderRadius: 12,
     display: "flex",
     justifyContent: "center",
@@ -142,24 +132,17 @@ const styles = (theme) => ({
     alignItems: "center",
     marginTop: 25,
   },
-
   media: {
     height: 0,
-    paddingTop: "56.25%", // 16:9
+    paddingTop: "56.25%",
   },
   cardService: {
-    // height: 400,
     minHeight: 475,
     maxWidth: 300,
   },
-  // fixResize: {
-  //   width: "100%",
-  // },
   backCat: {
-    background:
-      'url("../images/homeCat.png") no-repeat center center',
+    background: 'url("../images/homeCat.png") no-repeat center center',
     backgroundSize: "cover",
-
   },
   catTextCon: {
     marginLeft: 100,
@@ -170,17 +153,14 @@ const styles = (theme) => ({
 
 class LandingPage extends Component {
   handleJoinClick = () => {
-    console.log("ClickedJoin");
     this.props.history.push("/register");
   };
 
   handSignInClick = () => {
-    console.log("ClickedSignIn");
     this.props.history.push("/login");
   };
 
   serviceProviderClick = () => {
-    console.log("clickedSignIn");
     this.props.history.push("/register");
   };
 
@@ -189,7 +169,11 @@ class LandingPage extends Component {
     return (
       <div className={classes.root}>
         <Grid container spacing={3}>
-          <img className={classes.landingPg} src="../images/homeDog.png" alt="dog"/>
+          <img
+            className={classes.landingPg}
+            src="../images/homeDog.png"
+            alt="dog"
+          />
           <Typography variant="h3" className={classes.dogText}>
             Welcome to Pet Techs!
           </Typography>
@@ -215,7 +199,7 @@ class LandingPage extends Component {
             <Grid container spacing={3}>
               <Typography className={classes.description} variant="h5">
                 You love your pets. We love that you love your pets. Pet Techs
-                is here to make sure you have qualified indviduals to help you
+                is here to make sure you have qualified individuals to help you
                 take care of them.
               </Typography>
             </Grid>
@@ -243,14 +227,14 @@ class LandingPage extends Component {
                       height="75"
                       width="75"
                     />
-                    <Typeography variant="h6">
+                    <Typography variant="h6">
                       <b>Pet Sleepovers</b>
-                    </Typeography>
-                    <Typeography variant="subtitle1">
+                    </Typography>
+                    <Typography variant="subtitle1">
                       We love slumber parties! Providers watch your pet in the
                       comfort of your own home. Jo need for you to pack up and
                       transport!
-                    </Typeography>
+                    </Typography>
                   </div>
                 </CardContent>
               </Card>
@@ -292,10 +276,10 @@ class LandingPage extends Component {
                     <Typography variant="h6">
                       <b>Drop in Care</b>
                     </Typography>
-                    <Typeography variant="subtitle1">
+                    <Typography variant="subtitle1">
                       Service providers drop by your home to help provide
                       insulin injections, basic medical needs, or routing care.
-                    </Typeography>
+                    </Typography>
                   </div>
                 </CardContent>
               </Card>
@@ -311,9 +295,9 @@ class LandingPage extends Component {
                       height="75"
                       width="75"
                     />
-                    <Typeography variant="h6">
+                    <Typography variant="h6">
                       <b>Hospice Care</b>
-                    </Typeography>
+                    </Typography>
                     <Typography variant="subtitle1">
                       Hospice service centers around providers coming to your
                       home, helping with general hospice comfort, maintenance
@@ -340,7 +324,11 @@ class LandingPage extends Component {
               </Paper>
             </Grid>
             <Grid item xs={12} sm={4}>
-              <img src="../images/catPaw.png" alt="cat high five" className={classes.catPaw} />
+              <img
+                src="../images/catPaw.png"
+                alt="cat high five"
+                className={classes.catPaw}
+              />
             </Grid>
           </Grid>
         </Paper>
@@ -386,10 +374,10 @@ class LandingPage extends Component {
           </div>
           <div>
             <Typography className={classes.description} variant="h5">
-              We're here to connect vetinary technicians with pet owners who
+              We're here to connect veterinary technicians with pet owners who
               want to hire qualified individuals to help give different kinds of
               out-of-clinic care. Either in your home or theirs, you want to
-              know your precious animals are in great hands. We are commited to
+              know your precious animals are in great hands. We are committed to
               giving quality and professional care and to give you ease of mind.{" "}
             </Typography>
           </div>
@@ -418,6 +406,5 @@ class LandingPage extends Component {
     );
   }
 }
-// export default LandingPage
 
 export default withStyles(styles)(LandingPage);

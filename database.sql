@@ -1,13 +1,5 @@
+--Database name pet_techs
 
--- USER is a reserved keyword with Postgres
--- You must use double quotes in every query that user is in:
--- ex. SELECT * FROM "user";
--- Otherwise you will have errors!
--- CREATE TABLE "user" (
---     "id" SERIAL PRIMARY KEY,
---     "username" VARCHAR (80) UNIQUE NOT NULL,
---     "password" VARCHAR (1000) NOT NULL
--- );
 
 CREATE TABLE "user" (
   id SERIAL PRIMARY KEY,
@@ -19,9 +11,7 @@ CREATE TABLE "user" (
   user_type int NOT NULL
 );
 
-
 CREATE TABLE client (
-  
   user_id INT NOT NULL
         REFERENCES "user" (id)
         ON DELETE CASCADE ,
@@ -64,7 +54,6 @@ CREATE TABLE vet_tech (
   dogs boolean DEFAULT FALSE,
   cats boolean DEFAULT FALSE,
   other boolean DEFAULT FALSE,
---  type_pet_provide varchar (50) NOT NULL,
   vet_available boolean DEFAULT FALSE,
   zero_two boolean DEFAULT FALSE,
   two_four boolean DEFAULT FALSE,
@@ -77,7 +66,6 @@ CREATE TABLE vet_tech (
   pet_younger_than_one boolean ,
   pet_more_than_one_family boolean,
   equipment_list text ,
-  
   experience int NOT NULL ,
   certifications text, 
   current_job_title text,
@@ -113,7 +101,6 @@ CREATE TABLE pet (
   other_food varchar (500),
   pet_behavior text NOT NULL,
   care_equipment text
---  other text
 );
 
 CREATE TABLE medication (
@@ -124,15 +111,6 @@ CREATE TABLE medication (
   medication_name varchar (500) DEFAULT NULL,
   dosage varchar (500)  DEFAULT NULL,
   dosage_time timestamp with time zone  DEFAULT NULL
-);
-
-CREATE TABLE pet_picture (
-  id SERIAL PRIMARY KEY,
-  pet_id INT NOT NULL
-         REFERENCES pet (id)
-         ON DELETE CASCADE ,
-  pet_profile_img varchar (1000),
-  pet_img varchar (1000)
 );
 
 CREATE TABLE client_request (
@@ -150,10 +128,6 @@ CREATE TABLE client_request (
   service_select text,
   input_info text
 );
-
-ALTER TABLE client_request
-  ALTER COLUMN "request_status" SET DEFAULT '0',
-  ALTER COLUMN "request_status" SET NOT NULL;
 
 
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router";
 import { Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
@@ -12,22 +12,21 @@ import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 import RadioGroup from "@material-ui/core/RadioGroup";
 
-
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     marginLeft: theme.spacing(20),
     marginRight: theme.spacing(20),
-    marginTop: '100px',
+    marginTop: "100px",
   },
   title: {
-    textAlign: 'center',
+    textAlign: "center",
   },
   helperText: {
-    textAlign: 'center',
+    textAlign: "center",
   },
   boxes: {
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
   },
   button: {
     margin: "20px 30px 20px 30px",
@@ -36,12 +35,10 @@ const styles = theme => ({
     borderRadius: 12,
   },
   radioAlignment: {
-        display: "block",
-        margin: "10px"
+    display: "block",
+    margin: "10px",
   },
-})
-
-
+});
 
 class RegisterPage extends Component {
   state = {
@@ -56,12 +53,14 @@ class RegisterPage extends Component {
   registerUser = (event) => {
     event.preventDefault();
 
-    if (this.state.user_email
-          && this.state.username 
-          && this.state.phone_number 
-          && this.state.password 
-          && this.state.hear_about 
-          && this.state.user_type) {
+    if (
+      this.state.user_email &&
+      this.state.username &&
+      this.state.phone_number &&
+      this.state.password &&
+      this.state.hear_about &&
+      this.state.user_type
+    ) {
       this.props.dispatch({
         type: "REGISTER",
         payload: {
@@ -73,15 +72,17 @@ class RegisterPage extends Component {
           user_type: this.state.user_type,
         },
       });
-      const redirectPage = this.state.user_type === '0' ? '/client-registration' : '/vet-tech-registration'
-      this.props.history.push(redirectPage)
+      const redirectPage =
+        this.state.user_type === "0"
+          ? "/client-registration"
+          : "/vet-tech-registration";
+      this.props.history.push(redirectPage);
     } else {
       this.props.dispatch({ type: "REGISTRATION_INPUT_ERROR" });
     }
-  }; // end registerUser
+  };
 
   handleInputChangeFor = (property) => (event) => {
-    console.log("in handleChange", event.target.value, property);
     if (event.target.value === "true" || event.target.value === "false") {
       this.setState({
         [property]: event.target.value === "true",
@@ -93,13 +94,11 @@ class RegisterPage extends Component {
     }
   };
   handSignInClick = () => {
-    console.log("ClickedSignIn");
     this.props.history.push("/login");
   };
 
-
   render() {
-    const { classes } = this.props
+    const { classes } = this.props;
     return (
       <div className={classes.root}>
         {this.props.errors.registrationMessage && (
@@ -110,10 +109,15 @@ class RegisterPage extends Component {
         <div>
           <Grid className={classes.title}>
             <FormControl onSubmit={this.registerUser}>
-              <Typography className={classes.title} variant="h3">Sign up with email!</Typography>
-              <Typography className={classes.title} variant="h6">*All fields required</Typography>
+              <Typography className={classes.title} variant="h3">
+                Sign up with email!
+              </Typography>
+              <Typography className={classes.title} variant="h6">
+                *All fields required
+              </Typography>
               <div className={classes.boxes}>
-                <TextField id="outlined-basic"
+                <TextField
+                  id="outlined-basic"
                   label="Email"
                   variant="outlined"
                   name="user_email"
@@ -123,7 +127,8 @@ class RegisterPage extends Component {
                 />
               </div>
               <div className={classes.boxes}>
-                <TextField id="outlined-basic"
+                <TextField
+                  id="outlined-basic"
                   label="Username"
                   variant="outlined"
                   name="username"
@@ -133,7 +138,8 @@ class RegisterPage extends Component {
                 />
               </div>
               <div className={classes.boxes}>
-                <TextField id="outlined-basic"
+                <TextField
+                  id="outlined-basic"
                   label="Phone"
                   variant="outlined"
                   name="phone"
@@ -143,14 +149,16 @@ class RegisterPage extends Component {
                 />
               </div>
               <div className={classes.boxes}>
-                <TextField id="outlined-basic"
+                <TextField
+                  id="outlined-basic"
                   type="password"
                   label="Password"
                   variant="outlined"
                   name="password"
                   color="secondary"
                   value={this.state.password}
-                  onChange={this.handleInputChangeFor("password")} />
+                  onChange={this.handleInputChangeFor("password")}
+                />
               </div>
               <h3>How did you hear about Pet Techs?</h3>
               <div>
@@ -168,92 +176,62 @@ class RegisterPage extends Component {
               </div>
 
               <FormControl component="fieldset">
-                  <RadioGroup defaultValue="male" aria-label="gender" className={classes.radioAlignment}
-                            name="customized-radios" onChange={this.handleInputChangeFor("user_type")}>
-                                <FormControlLabel value="0" control={<Radio />} label="I want to sign up as a pet owner" />
-                                <FormControlLabel value="1" control={<Radio />} label="I want to sign up as a Vet Tech" />
-                  </RadioGroup>
+                <RadioGroup
+                  defaultValue="male"
+                  aria-label="gender"
+                  className={classes.radioAlignment}
+                  name="customized-radios"
+                  onChange={this.handleInputChangeFor("user_type")}
+                >
+                  <FormControlLabel
+                    value="0"
+                    control={<Radio />}
+                    label="I want to sign up as a pet owner"
+                  />
+                  <FormControlLabel
+                    value="1"
+                    control={<Radio />}
+                    label="I want to sign up as a Vet Tech"
+                  />
+                </RadioGroup>
               </FormControl>
 
-             
               <div>
-                <Button className={classes.button} type="submit" name="submit" value="Register" onClick={this.registerUser} variant="contained" color="primary" >Register</Button>
+                <Button
+                  className={classes.button}
+                  type="submit"
+                  name="submit"
+                  value="Register"
+                  onClick={this.registerUser}
+                  variant="contained"
+                  color="primary"
+                >
+                  Register
+                </Button>
               </div>
               <div>
-                <Link className={classes.button} onClick={this.handSignInClick} variant="contained" color='secondary' >Already have an account?</Link>
+                <Link
+                  className={classes.button}
+                  onClick={this.handSignInClick}
+                  variant="contained"
+                  color="secondary"
+                >
+                  Already have an account?
+                </Link>
               </div>
-
             </FormControl>
           </Grid>
         </div>
-       
       </div>
     );
   }
 }
 
-// Instead of taking everything from state, we just want the error messages.
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({errors}) => ({ errors });
 const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-// export default connect(mapStateToProps)(RegisterPage);
-export default withRouter(connect(mapStateToProps)(withStyles(styles)(RegisterPage)));
+export default withRouter(
+  connect(mapStateToProps)(withStyles(styles)(RegisterPage))
+);
 
-{/* <FormGroup row={true}>
-                <FormControlLabel
-                  control={<Radio name="owner" />}
-                  value="0"
-                  id="client"
-                  onChange={this.handleInputChangeFor("user_type")}
-                  name="ownerRadio"
-                  label="I want to sign up as a pet owner"
-                />
-                <FormControlLabel
-                  control={<Radio name="vetTech" />}
-                  value="1"
-                  id="vet_tech"
-                  onChange={this.handleInputChangeFor("user_type")}
-                  name="noAgeRadio"
-                  label="I want to sign up as a Vet Tech"
-                />
-              </FormGroup> */}
-{/* <div>
-                <input
-                  type="radio"
-                  id="client"
-                  name="user_type"
-                  value="0"
-                  onChange={this.handleInputChangeFor("user_type")}
-                />
-                <label>I want to sign up as a pet owner.</label>
-                <br />
-                <input
-                  type="radio"
-                  id="vet_tech"
-                  name="user_type"
-                  value="1"
-                  onChange={this.handleInputChangeFor("user_type")}
-                />
-                <label>I want to sign up at a Vet Tech.</label>
-              </div> */}
-
-{/* <input
-                  className="register"
-                  type="submit"
-                  name="submit"
-                  value="Register"
-                /> */}
-
-{/* <br />
-        <button
-          type="button"
-          className="link-button"
-          onClick={() => {
-            this.props.dispatch({ type: "SET_TO_LOGIN_MODE" });
-          }}
-        >
-          Login
-          </button> */}

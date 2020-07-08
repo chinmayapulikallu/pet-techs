@@ -1,20 +1,16 @@
-import { combineReducers } from 'redux';
-import errors from './errorsReducer';
-import loginMode from './loginModeReducer';
-import user from './userReducer';
-import vtInfo from './vetTechReducer';
-import clientInfo from './clientInfoReducer';
-import petInfo from './petInfoReducer';
-import petCarePlan from './petCarePlanReducer';
-import vtInfoPage1 from './vetTechReducerPage1';
-import vtInfoPage2 from './vetTechReducerPage2';
-import vtInfoPage3 from './vetTechReducerPage3';
-import dogVetReducer from './getDogVetReducer';
-import clientRequestReducer from './clientRequestReducer';
-
-
-
-
+import { combineReducers } from "redux";
+import errors from "./errorsReducer";
+import loginMode from "./loginModeReducer";
+import user from "./userReducer";
+import vtInfo from "./vetTechReducer";
+import clientInfo from "./clientInfoReducer";
+import petInfo from "./petInfoReducer";
+import petCarePlan from "./petCarePlanReducer";
+import vtInfoPage1 from "./vetTechReducerPage1";
+import vtInfoPage2 from "./vetTechReducerPage2";
+import vtInfoPage3 from "./vetTechReducerPage3";
+import dogVetReducer from "./getDogVetReducer";
+import clientRequestReducer from "./clientRequestReducer";
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -33,7 +29,7 @@ const rootReducer = combineReducers({
   vtInfoPage2,
   vtInfoPage3,
   dogVetReducer,
-  clientRequestReducer
+  clientRequestReducer,
 });
 
 export default rootReducer;

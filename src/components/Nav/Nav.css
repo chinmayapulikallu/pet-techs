@@ -1,14 +1,9 @@
 .nav-title {
-    font-size: 24px;
-    font-weight: 700;
-    display: inline-block;
-    /* color: #f2f2f2; */
-    padding-left: 10px;
+  font-size: 24px;
+  font-weight: 700;
+  display: inline-block;
+  padding-left: 10px;
 }
-
-
-
-
 .nav-link {
   float: left;
   color: #000000;
@@ -17,58 +12,42 @@
   text-decoration: none;
   font-size: 15px;
   background-color: none;
-  /* margin-left: 10px; */
-
-  /* these last two make the logout button in
-  the nav bar look like another link */
-  border:none;
+  border: none;
   cursor: pointer;
-  outline:0;
+  outline: 0;
 }
-
 .nav-right {
   float: right;
 }
-
-
-.profile{
-  border-left: 2px solid #195C60;
+.profile {
+  border-left: 2px solid #195c60;
   padding-left: 24px;
   text-decoration: none;
   color: black;
-  padding-left:20px;
+  padding-left: 20px;
 }
-.profile_text{
+.profile_text {
   margin-bottom: 10px;
 }
-
-.profile_icon{
+.profile_icon {
   padding-top: -24px;
   float: left;
   padding: 15px 10px;
   text-decoration: none;
   font-size: 15px;
   background-color: none;
-
-  /* these last two make the logout button in
-  the nav bar look like another link */
-  border:none;
   cursor: pointer;
 }
-
 .social-nav__icon {
-  fill: #195C60;
-  transition: .25s ease;
+  fill: #195c60;
+  transition: 0.25s ease;
 }
-
 .social-nav__icon:hover {
-  fill: #FFC2B4;
+  fill: #ffc2b4;
 }
-
 .social-nav__link + .social-nav__link {
   margin-left: 10px;
 }
-
-.footer_links{
+.footer_links {
   margin-left: 20px;
 }

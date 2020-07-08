@@ -1,9 +1,8 @@
 const userReducer = (state = {}, action) => {
-  console.log('user Reducer----->', action.payload);
   switch (action.type) {
-    case 'SET_USER':
+    case "SET_USER":
       return action.payload;
-    case 'UNSET_USER':
+    case "UNSET_USER":
       return {};
     default:
       return state;

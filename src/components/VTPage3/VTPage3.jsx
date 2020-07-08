@@ -1,44 +1,38 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
-import { withStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Button from '@material-ui/core/Button';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withStyles } from "@material-ui/core/styles";
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import Button from "@material-ui/core/Button";
+import { withRouter } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 
-
-
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
-    // flexGrow: 1,
-    // marginLeft: theme.spacing(45),
-    // marginRight: theme.spacing(45),
-    marginTop: '100px',
+    marginTop: "100px",
   },
 
   title: {
-    textAlign: 'center',
+    textAlign: "center",
   },
   year: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: '15ch',
+    width: "15ch",
   },
   fullwidth: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
   },
   helperText: {
-    textAlign: 'right',
+    textAlign: "right",
   },
   itemCenter: {
-    textAlign: 'center',
+    textAlign: "center",
     justifyContent: "center",
     marginTop: "20px",
   },
@@ -47,79 +41,61 @@ const styles = theme => ({
     marginRight: theme.spacing(2),
   },
   img: {
-    borderRadius: '50%',
+    borderRadius: "50%",
   },
-
 });
-
-
 
 class VTReg3 extends Component {
   state = {
     ...this.props.vtInfoPage3,
-  }
+  };
 
   componentDidMount() {
-    console.log(this.state.oralMedication)
     window.scrollTo(0, 0);
   }
 
-  handleToggleChangeFor = property => (event) => {
-    console.log('switch', property, event.target.checked)
+  handleToggleChangeFor = (property) => (event) => {
     this.setState({
       [property]: event.target.checked === true,
     });
-  }
-  handleInputChangeFor = property => (event) => {
-    console.log('input change', property, event.target.value)
+  };
+  handleInputChangeFor = (property) => (event) => {
     this.setState({
       [property]: event.target.value,
     });
-  }
+  };
   handleBackButton = () => {
-    console.log('back clicked!')
     this.props.onBack();
-  }
+  };
   handleReviewButton = () => {
-    console.log('clicked!')
     this.props.onNext();
     this.props.dispatch({
-      type: 'SET_VT_DATA_PAGE_3',
+      type: "SET_VT_DATA_PAGE_3",
       payload: { ...this.state },
-    })
-    console.log('send this VT reg page 3 data to saga:', this.state)
-
-  }
+    });
+  };
 
   render() {
     const { classes } = this.props;
-    console.log('------------>', this.props.vtInfoPage3)
     return (
       <Container className={classes.root} maxWidth="sm">
         <div className={classes.title}>
           <h1 className={classes.title}>
             Tell us about your certifications and expertise:
-              </h1>
-          {/* <img
-            className={classes.img}
-            src="images/blank-profile-picture.png"
-            alt="profile"
-            height="150"
-            width="150"
-          /> */}
+          </h1>
           <h5>
             Your expertise as a veterinary professional what makes you stand
             apart and what helps pet owners get to know you.
-              </h5>
+          </h5>
           <h5>
-            Please keep emojis and personal identifiers (last name or
-            workplace) out of your profile.
-              </h5>
+            Please keep emojis and personal identifiers (last name or workplace)
+            out of your profile.
+          </h5>
         </div>
         <Grid container spacing={12}>
           <Grid item xs={5}>
             Year of professional experience caring for pets:
-              </Grid>
+          </Grid>
           <Grid item xs={4}>
             <TextField
               type="text"
@@ -166,7 +142,7 @@ class VTReg3 extends Component {
         <p>
           Areas of professional expertise (examples: lab procedures, animal
           medicine, hospice care, etc.)
-            </p>
+        </p>
         <TextField
           type="text"
           id="outlined-full-width"
@@ -180,7 +156,7 @@ class VTReg3 extends Component {
         />
         <FormHelperText className={classes.helperText}>
           500 characters maximum
-            </FormHelperText>
+        </FormHelperText>
         <p>Brief bio about yourself:</p>
         <TextField
           type="text"
@@ -192,7 +168,7 @@ class VTReg3 extends Component {
         />
         <FormHelperText className={classes.helperText}>
           600 characters maximum
-            </FormHelperText>
+        </FormHelperText>
         <br />
         <br />
         <h4>Additional Details:</h4>
@@ -200,7 +176,7 @@ class VTReg3 extends Component {
           While these details are optional, providing more information about
           skills and expertise will help pet owners feel more comfortable
           contacting you.
-            </p>
+        </p>
         <Grid container spacing={12}>
           <FormControl component="fieldset">
             <Grid item xs={12}>
@@ -308,7 +284,7 @@ class VTReg3 extends Component {
             onClick={this.handleBackButton}
           >
             Back
-              </Button>
+          </Button>
           <Button
             className={classes.buttons}
             variant="contained"
@@ -316,7 +292,7 @@ class VTReg3 extends Component {
             onClick={this.handleReviewButton}
           >
             Save and Continue
-              </Button>
+          </Button>
         </Grid>
       </Container>
     );
@@ -324,11 +300,11 @@ class VTReg3 extends Component {
 }
 const mapStateToProps = (state) => ({
   vtInfoPage3: {
-    experience: '',
-    certifications: '',
-    current_job_title: '',
-    expertise: '',
-    bioYourself: '',
+    experience: "",
+    certifications: "",
+    current_job_title: "",
+    expertise: "",
+    bioYourself: "",
     cpr_first_aid: false,
     oral_medication: false,
     injectable_medication: false,
@@ -340,6 +316,8 @@ const mapStateToProps = (state) => ({
     ...state.vtInfoPage3,
   },
   error: state.errors,
-})
+});
 
-export default withRouter(connect(mapStateToProps)(withStyles(styles, { withTheme: true })(VTReg3)));
+export default withRouter(
+  connect(mapStateToProps)(withStyles(styles, { withTheme: true })(VTReg3))
+);

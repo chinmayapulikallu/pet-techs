@@ -79,18 +79,19 @@ class VTServiceRequest extends Component {
       payload: { id: this.props.request.id, request_status: 1 },
     });
     this.props.history.goBack();
-    console.log('request id:', this.props.request.id)
   };
 
   handleDecline = () => {
     this.props.dispatch({
       type: "ACCEPT/DECLINE_REQ",
-      payload: {id: this.props.request.id, request_status: 2},
+      payload: { id: this.props.request.id, request_status: 2 },
     });
     this.props.history.goBack();
   };
 
-  handleBack = () => {this.props.history.goBack();};
+  handleBack = () => {
+    this.props.history.goBack();
+  };
 
   render() {
     const { classes } = this.props;

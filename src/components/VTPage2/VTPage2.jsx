@@ -14,7 +14,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import RadioGroup from "@material-ui/core/RadioGroup";
 
-
 const styles = (theme) => ({
   root: {
     marginLeft: theme.spacing(20),
@@ -36,26 +35,21 @@ const styles = (theme) => ({
 });
 
 class VTPage2 extends Component {
-    
   state = {
     ...this.props.vtInfoPage2,
-
   };
-
 
   componentDidMount() {
     window.scrollTo(0, 0);
   }
-  
+
   //THIS WILL HANDLE ALL THE INPUTS FROM THE VET TECH PREFERENCES
   handleChange = (event, property) => {
-    console.log(event.target.value, property);
     if (event.target.value === "true" || event.target.value === "false") {
       this.setState({
         [property]: event.target.value === "true",
       });
     } else {
-        console.log(event.target.value)
       this.setState({
         [property]: event.target.checked === true,
       });
@@ -63,40 +57,33 @@ class VTPage2 extends Component {
   };
 
   handleBackClick = () => {
-    console.log("CLICKED BACK");
     this.props.onBack();
   };
 
   //THIS WILL TAKE THE VET TECH TO THE 3RD VET TECH REGISTRATION PAGE
   //AND DISPATCH THE STATE
   handleContClick = () => {
-    console.log("CLICKED CONTINUE", this.state);
     this.props.dispatch({
-      type: 'SET_VT_DATA_PAGE_2',
+      type: "SET_VT_DATA_PAGE_2",
       payload: { ...this.state },
-    })
+    });
     this.props.onNext();
-    console.log('Vet reg data page 2:', this.state)
-
   };
 
-  handleInputChange = (event, property)=>{
-      console.log("Here is state!", this.state)
-      if (event.target.value === "true" || event.target.value === "false") {
-        this.setState({
-          [property]: event.target.checked === true,
-        });
-      } else {
-          console.log(event.target.value)
-        this.setState({
-          [property]: event.target.value,
-        });
-      }
-  }
+  handleInputChange = (event, property) => {
+    if (event.target.value === "true" || event.target.value === "false") {
+      this.setState({
+        [property]: event.target.checked === true,
+      });
+    } else {
+      this.setState({
+        [property]: event.target.value,
+      });
+    }
+  };
 
   render() {
     const { classes } = this.props;
-    console.log('----page 2-------->', this.props.vtInfoPage2)
 
     return (
       <div className={classes.root}>
@@ -120,7 +107,6 @@ class VTPage2 extends Component {
                 control={<Checkbox name="cats" />}
                 value={this.state.cats}
                 onChange={(event) => this.handleInputChange(event, "cats")}
-                // Checked={"true"}
                 label="Cats"
               />
               <FormControlLabel
@@ -182,7 +168,9 @@ class VTPage2 extends Component {
                 control={<Checkbox name="not_available" />}
                 defaultChecked={false}
                 value={this.state.not_available}
-                onChange={(event) => this.handleInputChange(event, "not_available")}
+                onChange={(event) =>
+                  this.handleInputChange(event, "not_available")
+                }
                 label="N/A"
               />
             </FormGroup>
@@ -202,7 +190,9 @@ class VTPage2 extends Component {
                 control={<Checkbox name="mdCheck" />}
                 defaultChecked={false}
                 value={this.state.medium_dog}
-                onChange={(event) => this.handleInputChange(event, "medium_dog")}
+                onChange={(event) =>
+                  this.handleInputChange(event, "medium_dog")
+                }
                 label="Medium (16-40 lbs)"
               />
               <FormControlLabel
@@ -224,7 +214,9 @@ class VTPage2 extends Component {
               Will you host animals younger than 1 years old?
             </Typography>
             <RadioGroup
-              onChange={(event) => this.handleChange(event, "pet_younger_than_one")}
+              onChange={(event) =>
+                this.handleChange(event, "pet_younger_than_one")
+              }
               row={true}
               value={String(this.state.pet_younger_than_one)}
             >
@@ -245,7 +237,9 @@ class VTPage2 extends Component {
               Will you host animals from multiple families at once?
             </Typography>
             <RadioGroup
-              onChange={(event) => this.handleChange(event, "pet_more_than_one_family")}
+              onChange={(event) =>
+                this.handleChange(event, "pet_more_than_one_family")
+              }
               row={true}
               value={String(this.state.pet_more_than_one_family)}
             >
@@ -325,7 +319,7 @@ const mapStateToProps = (state) => ({
     pet_younger_than_one: false,
     pet_more_than_one_family: false,
     equipment_list: "",
-    
+
     ...state.vtInfoPage2,
   },
   errors: state.errors,

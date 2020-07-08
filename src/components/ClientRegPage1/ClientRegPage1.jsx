@@ -9,7 +9,6 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
-// import { withRouter } from 'react-router-dom';
 import Uppy from "@uppy/core";
 import DragDrop from "@uppy/react/lib/DragDrop";
 import "@uppy/core/dist/style.css";
@@ -81,32 +80,7 @@ class ClientRegPage1 extends Component {
     ...this.props.clientInfo.text,
   };
 
-  //autofill form
-  autoFillForm = () => {
-    this.setState({
-      // text: {
-      client_name: "Andrew",
-      home_address_house: "2459 Portland Ave",
-      apt_suite: "",
-      city: "Minneapolis",
-      state: "MN",
-      zip_code: "55420",
-      about_client: "I have a 12 year old German Shepherd named CeCe! We are best friends and do everything together. CeCe has been with me since she was a puppy. Some of our favorite activities include going on walks, hanging out at the dog park and doing tricks for treats! ",
-      about_home: "We live in an apartment in Minneapolis. It is just us two, so we don't need a ton of space. CeCe is getting older now, so she doesn't need as much room to run around, we get plenty of exercise going on our daily walks.",
-      about_equipment: "CeCe has a favorite stuffed toy that she likes to carry around. It is very well loved. She also enjoys squeak toys and rawhide chew toys. ",
-      contact_name_1: "Katie",
-      contact_phone_1: "555-983-3827",
-      contact_email_1: "Katie@Katie.com",
-      vet_clinic: "St. Paul Pet Hospital",
-      clinic_address: "54 12th St, St. Paul, MN 55104",
-      clinic_phone: "555-343-8934",
-      transport: true,
-      // }
-    });
-  };
-
   handleChange = (event, property) => {
-    console.log("in handleChange", event.target.value, property);
     if (event.target.value === "true" || event.target.value === "false") {
       this.setState({
         [property]: event.target.value === "true",
@@ -116,10 +90,6 @@ class ClientRegPage1 extends Component {
         [property]: event.target.value,
       });
     }
-  };
-
-  handleUploadPhoto = () => {
-    alert("Photo set up needs to be set up");
   };
 
   handleNext = () => {
@@ -149,9 +119,7 @@ class ClientRegPage1 extends Component {
       },
     });
     this.props.onNext();
-   
   };
-  //-----------------------------------
 
   uppy = Uppy({
     meta: { type: "profilePicture" },
@@ -159,7 +127,6 @@ class ClientRegPage1 extends Component {
       maxNumberOfFiles: 1,
       maxFileSize: 5000000,
       allowedFileTypes: ["image/*"],
-      // dimensions: { width: 1200, height: 800 },
     },
     autoProceed: true,
   });
@@ -181,7 +148,6 @@ class ClientRegPage1 extends Component {
         profile_img: this.reader.result,
       });
     };
-    console.log("data from client reg page 1", this.state);
   };
 
   setImage = (file) => {
@@ -192,8 +158,6 @@ class ClientRegPage1 extends Component {
       file: file,
     });
   };
-
-  //-----------------------------------
 
   render() {
     const { classes, user } = this.props;
@@ -209,9 +173,7 @@ class ClientRegPage1 extends Component {
         <img src="/images/house-icon.png" alt="House" height="70" />
         <div className={classes.inputs}>
           <TextField
-            // error= { this.state.client_name === ''}
-            // helperText = 'This field is required'
-            // label={"Name"}
+            label={"Name"}
             fullWidth
             color="secondary"
             variant="outlined"
@@ -221,7 +183,7 @@ class ClientRegPage1 extends Component {
         </div>
         <div className={classes.inputs}>
           <TextField
-            // label={"Home Address"}
+            label={"Home Address"}
             fullWidth
             color="secondary"
             variant="outlined"
@@ -231,7 +193,7 @@ class ClientRegPage1 extends Component {
         </div>
         <div className={classes.inputs}>
           <TextField
-            // label={"Apartment or Suite #"}
+            label={"Apartment or Suite #"}
             fullWidth
             color="secondary"
             variant="outlined"
@@ -241,7 +203,7 @@ class ClientRegPage1 extends Component {
         </div>
         <div className={classes.inputs}>
           <TextField
-            // label={"City"}
+            label={"City"}
             variant="outlined"
             value={this.state.city}
             color="secondary"
@@ -249,7 +211,7 @@ class ClientRegPage1 extends Component {
             className={classes.city}
           />
           <TextField
-            // label={"State"}
+            label={"State"}
             variant="outlined"
             value={this.state.state}
             color="secondary"
@@ -257,7 +219,7 @@ class ClientRegPage1 extends Component {
             className={classes.flex}
           />
           <TextField
-            // label={"Zipcode"}
+            label={"Zipcode"}
             variant="outlined"
             color="secondary"
             value={this.state.zip_code}
@@ -268,15 +230,10 @@ class ClientRegPage1 extends Component {
           <Typography variant="h6" className={classes.section}>
             You look purr-fect! Let's add a photo for your profile!
           </Typography>
-
-          {/* //--------------------------------------------------------- */}
           <DragDrop
             uppy={this.uppy}
             class="uppy-DragDrop--isDragDropSupported"
           />
-
-          {/* //--------------------------------------------------------- */}
-
           <img
             className={classes.img}
             src={this.state.profile_img}
@@ -340,7 +297,6 @@ class ClientRegPage1 extends Component {
           height="70"
           className={classes.section}
         />
-
         <Typography variant="h6">
           Please enter emergency contact information
         </Typography>
@@ -352,7 +308,7 @@ class ClientRegPage1 extends Component {
         <div className={classes.inputs}>
           <TextField
             fullWidth
-            // label={"Emergency Contact Name"}
+            label={"Emergency Contact Name"}
             color="secondary"
             variant="outlined"
             value={this.state.contact_name_1}
@@ -361,7 +317,7 @@ class ClientRegPage1 extends Component {
         </div>
         <div className={classes.inputs}>
           <TextField
-            // label={"Emergency Contact Phone"}
+            label={"Emergency Contact Phone"}
             variant="outlined"
             value={this.state.contact_phone_1}
             color="secondary"
@@ -369,7 +325,7 @@ class ClientRegPage1 extends Component {
             className={classes.em_phone}
           />
           <TextField
-            // label={"Emergency Contact Email"}
+            label={"Emergency Contact Email"}
             variant="outlined"
             color="secondary"
             value={this.state.contact_email_1}
@@ -383,13 +339,12 @@ class ClientRegPage1 extends Component {
           height="70"
           className={classes.section}
         />
-
         <Typography variant="h6">
           Please enter your preferred vet clinic information
         </Typography>
         <div className={classes.inputs}>
           <TextField
-            // label={"Vet Clinic Name"}
+            label={"Vet Clinic Name"}
             variant="outlined"
             value={this.state.vet_clinic}
             color="secondary"
@@ -399,7 +354,7 @@ class ClientRegPage1 extends Component {
         </div>
         <div className={classes.inputs}>
           <TextField
-            // label={"Vet Clinic Phone"}
+            label={"Vet Clinic Phone"}
             variant="outlined"
             value={this.state.clinic_phone}
             color="secondary"
@@ -407,7 +362,7 @@ class ClientRegPage1 extends Component {
             className={classes.em_phone}
           />
           <TextField
-            // label={"Vet Clinic Address (street & city)"}
+            label={"Vet Clinic Address (street & city)"}
             variant="outlined"
             color="secondary"
             value={this.state.clinic_address}
@@ -433,14 +388,6 @@ class ClientRegPage1 extends Component {
             </RadioGroup>
           </FormControl>
         </div>
-        {/* <Button
-          color="primary"
-          variant="contained"
-          className={classes.botBtn}
-          onClick={this.handleBack}
-        >
-          Back
-        </Button> */}
         <Button
           color="primary"
           variant="contained"
@@ -454,26 +401,6 @@ class ClientRegPage1 extends Component {
   }
 }
 const mapStateToProps = (state) => ({
-  // clientInfo: {
-  //   // client_name: "",
-  //   // // home_address_house: "",
-  //   // // apt_suite: "",
-  //   // // city: "",
-  //   // // state: "",
-  //   // // zip_code: "",
-  //   // // profile_img: "",
-  //   // // about_client: "",
-  //   // // about_home: "",
-  //   // // about_equipment: "",
-  //   // // contact_name_1: "",
-  //   // // contact_phone_1: "",
-  //   // // contact_email_1: "",
-  //   // // vet_clinic: "",
-  //   // // clinic_address: "",
-  //   // // clinic_phone: "",
-  //   // // transport: false,
-  //   // ...state.clientInfo,
-  // },
   clientInfo: state.clientInfo,
 
   user: state.user,

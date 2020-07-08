@@ -3,7 +3,6 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import { withStyles } from "@material-ui/core/styles";
-
 import ClientRegPage1 from "../ClientRegPage1/ClientRegPage1";
 import ClientRegPage2 from "../ClientRegPage2/ClientRegPage2";
 import ClientReviewPage from "../ClientReviewPage/ClientReviewPage";
@@ -51,7 +50,11 @@ class ClientStepper extends Component {
     return (
       <>
         <div>
-          <Stepper activeStep={activeStep} alternativeLabel className={classes.root}>
+          <Stepper
+            activeStep={activeStep}
+            alternativeLabel
+            className={classes.root}
+          >
             {steps.map((label) => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>

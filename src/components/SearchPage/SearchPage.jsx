@@ -11,8 +11,6 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Paper from "@material-ui/core/Paper";
 import { fade } from "@material-ui/core/styles/colorManipulator";
-import Avatar from '@material-ui/core/Avatar';
-
 
 const styles = (theme) => ({
   root: {
@@ -95,7 +93,6 @@ class SearchPage extends Component {
   };
 
   componentDidMount = () => {
-    console.log("MOUNTED)");
     this.getAllVtInfo();
   };
 
@@ -104,20 +101,17 @@ class SearchPage extends Component {
   };
 
   handleChange = (event, property) => {
-    console.log(event.target.value, "#####");
     this.setState({
       [property]: event.target.value,
     });
   };
 
   viewProfileClick = (vet_id) => {
-    console.log("CLICKED VIEW PROFILE", vet_id);
     this.props.history.push(`/vt-profile/${vet_id}`);
   };
 
   //HANDLE SERVICE CHANGES
   handleServiceChange = (event, property) => {
-    console.log("CLICKED SERVICE TYPE", event.target.checked, property);
     this.setState({
       [property]: event.target.checked === true,
     });
@@ -148,7 +142,6 @@ class SearchPage extends Component {
   };
 
   hospiceCheck = (event) => {
-    console.log("HOSPICE CHECK -------------->");
     if (event.target.checked === true) {
       this.props.dispatch({ type: "GET_HOSPICE_VETS" });
     } else if (event.target.checked !== "true") {
@@ -158,7 +151,6 @@ class SearchPage extends Component {
 
   //HANDLE CHANGES FOR PET TYPE FILTER
   handleCheckChange = (event, property) => {
-    console.log(event.target.checked, property);
     this.setState({
       [property]: event.target.checked === true,
     });
@@ -166,8 +158,6 @@ class SearchPage extends Component {
 
   //FILTER CHECK MARKS
   dogCheck = (event) => {
-    console.log(event.target.checked);
-
     if (event.target.checked === true) {
       this.props.dispatch({ type: "GET_DOG_VETS" });
     } else if (event.target.checked !== "true") {
@@ -289,11 +279,16 @@ class SearchPage extends Component {
                         title={vet.vet_name}
                         className={classes.header}
                       />
-
                       {vet.profile_img ===
                       "3e541de1f0419c15034e45c05eb3becd" ? (
                         <>
-                          <img className={classes.profPic} src="images/blank-profile-picture.png" alt="profile" height="150" width="150" />
+                          <img
+                            className={classes.profPic}
+                            src="images/blank-profile-picture.png"
+                            alt="profile"
+                            height="150"
+                            width="150"
+                          />
                         </>
                       ) : (
                         <img
@@ -302,7 +297,6 @@ class SearchPage extends Component {
                           alt="profilePic"
                         />
                       )}
-
                       <Typography
                         className={classes.certifications}
                         variant="h6"

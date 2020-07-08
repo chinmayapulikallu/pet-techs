@@ -3,10 +3,9 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import { withStyles } from "@material-ui/core/styles";
-
-import VTPage1 from '../VTPage1/VTPage1';
-import VTPage2 from '../VTPage2/VTPage2';
-import VTPage3 from '../VTPage3/VTPage3';
+import VTPage1 from "../VTPage1/VTPage1";
+import VTPage2 from "../VTPage2/VTPage2";
+import VTPage3 from "../VTPage3/VTPage3";
 import VTReviewPage from "../VTReviewPage/VTReviewPage";
 
 const styles = {

@@ -9,12 +9,10 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Switch from "@material-ui/core/Switch";
-
-
-import Uppy from '@uppy/core';
-import DragDrop from '@uppy/react/lib/DragDrop';
-import '@uppy/core/dist/style.css'
-import '@uppy/drag-drop/dist/style.css'
+import Uppy from "@uppy/core";
+import DragDrop from "@uppy/react/lib/DragDrop";
+import "@uppy/core/dist/style.css";
+import "@uppy/drag-drop/dist/style.css";
 
 const styles = {
   root: {
@@ -35,13 +33,6 @@ const styles = {
   city: {
     width: "50%",
     marginRight: 10,
-  },
-  btn: {
-    marginTop: 20,
-    marginBottom: 20,
-    height: 45,
-    widith: 180,
-    borderRadius: 12,
   },
   botBtn: {
     margin: "60px 30px 20px 30px",
@@ -71,11 +62,11 @@ const styles = {
     marginLeft: 60,
   },
   switch: {
-    marginTop: -10
+    marginTop: -10,
   },
   title: {
-    marginTop: 100
-  }
+    marginTop: 100,
+  },
 };
 
 class VTPage1 extends Component {
@@ -85,7 +76,6 @@ class VTPage1 extends Component {
   };
 
   handleInputChange = (property) => (event) => {
-    console.log('changing', property, event.target.value)
     this.setState({
       [property]: event.target.value,
     });
@@ -104,7 +94,7 @@ class VTPage1 extends Component {
   handleNext = () => {
     this.props.onNext();
     this.props.dispatch({
-      type: 'SET_VT_DATA_PAGE_1',
+      type: "SET_VT_DATA_PAGE_1",
       payload: {
         file: this.state.file,
         text: {
@@ -120,36 +110,29 @@ class VTPage1 extends Component {
           dropin_care: this.state.dropin_care,
           hospice: this.state.hospice,
           about_vet: this.state.about_vet,
-        }
+        },
       },
-    })
-    console.log('Vet reg data page 1:', this.state)
+    });
   };
 
-  //-----------------------------------
-
-
   uppy = Uppy({
-    meta: { type: 'profilePicture' },
+    meta: { type: "profilePicture" },
     restrictions: {
       maxNumberOfFiles: 1,
       maxFileSize: 5000000,
-      allowedFileTypes: ['image/*'],
-      // dimensions: { width: 1200, height: 800 },
+      allowedFileTypes: ["image/*"],
     },
-    autoProceed: true
-  })
+    autoProceed: true,
+  });
 
-  reader = new FileReader()
+  reader = new FileReader();
 
   componentDidMount = () => {
-    console.log('data in vt state 1:', this.state)
-
-    this.uppy.on('upload', file => {
+    this.uppy.on("upload", (file) => {
       let fileKey = Object.keys(this.uppy.state.files)[0];
       let fileFromUppy = this.uppy.state.files[fileKey].data;
       this.setImage(fileFromUppy);
-    })
+    });
 
     this.reader.onloadend = () => {
       this.setState({
@@ -157,28 +140,21 @@ class VTPage1 extends Component {
           ...this.state,
         },
         profile_img: this.reader.result,
-      })
-    }
-    console.log('data from client reg page 1', this.state)
+      });
+    };
+  };
 
-  }
-
-  setImage = file => {
+  setImage = (file) => {
     //reads the file into a local data url
     this.reader.readAsDataURL(file);
     this.setState({
       ...this.state,
       file: file,
-    })
-  }
-  //-----------------------------------
-
-
-
+    });
+  };
 
   render() {
     const { classes } = this.props;
-    console.log('----page1-------->', this.props.vtInfoPage1)
 
     return (
       <Container className={classes.root} maxWidth="sm">
@@ -256,24 +232,22 @@ class VTPage1 extends Component {
           <Typography variant="h5">
             You look purr-fect! Let's add a photo for your profile!
           </Typography>
-
-
-          {/* <Button
-            className={classes.btn}
-            onClick={this.handleUploadPhoto}
-            variant="contained"
-            color="primary"
-          >
-            Select Photo to Upload
-          </Button> */}
-          <img className={classes.img} src="images/camera.png" alt="camera-icon" width="100" height="100" />
-
-          <DragDrop
-            uppy={this.uppy}
+          <img
+            className={classes.img}
+            src="images/camera.png"
+            alt="camera-icon"
+            width="100"
+            height="100"
           />
-          <img className={classes.img} src={this.state.profile_img} alt="profilePictureUrl" width="50%" height="50%" />
 
-
+          <DragDrop uppy={this.uppy} />
+          <img
+            className={classes.img}
+            src={this.state.profile_img}
+            alt="profilePictureUrl"
+            width="50%"
+            height="50%"
+          />
         </div>
         <div>
           <Typography variant="h5">
@@ -424,14 +398,6 @@ class VTPage1 extends Component {
             />
           </div>
           <div>
-            {/* <Button
-              className={classes.botBtn}
-              onClick={this.handleBack}
-              variant="contained"
-              color="primary"
-            >
-              Back
-            </Button> */}
             <Button
               className={classes.botBtn}
               onClick={this.handleNext}
@@ -463,11 +429,10 @@ const mapStateToProps = (state) => ({
       dropin_care: false,
       hospice: false,
       about_vet: "",
-      ...state.vtInfoPage1.text, // overrides default text with any existing vt values
+      ...state.vtInfoPage1.text,
     },
   },
   errors: state.errors,
-  // vtInfoPage1: state.vtInfoPage1,
   user: state.user,
 });
 

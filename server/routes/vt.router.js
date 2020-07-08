@@ -1,125 +1,103 @@
 const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
-const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const {
+  rejectUnauthenticated,
+} = require("../modules/authentication-middleware");
 const multer = require("multer");
 const multerDest = process.env.multer_dest || "../uploads";
 const upload = multer({ dest: multerDest });
-const { uploadVTPost, uploadVTProfile,generateSignedUrls } = require("../modules/imageHandler");
+const {
+  uploadVTPost,
+  uploadVTProfile,
+  generateSignedUrls,
+} = require("../modules/imageHandler");
 
-/**
- * GET route template
- */
+// get route for the VT
 router.get("/", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * from vet_tech where user_id = $1; `;
   pool
     .query(sqlText, [req.user.id])
-    .then(response => {
+    .then((response) => {
       generateSignedUrls(res, response.rows);
-     })
-   
+    })
     .catch((error) => {
-      console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
     });
 });
 
-// GET SINGLE VT PROFILE FOR VIEWING 
+// GET SINGLE VT PROFILE FOR VIEWING
 router.get("/profile/:id", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * from vet_tech where user_id = $1; `;
   pool
     .query(sqlText, [req.params.id])
-    // .then((response) => {
-    //   res.send(response.rows[0]);
-    // })
-    .then(response => {
+    .then((response) => {
       generateSignedUrls(res, response.rows);
-     })
+    })
     .catch((error) => {
-      console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
     });
 });
-
+// get route for all VT for search feature
 router.get("/all", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    // .then((response) => {
-    //   res.send(response.rows);
-    // })
-    .then(response => {
+    .then((response) => {
       generateSignedUrls(res, response.rows);
-     })
+    })
     .catch((error) => {
-      console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
     });
 });
 
-//FILTER DOG TEST
+//Filter Dog Search
 router.get("/dog", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" WHERE dogs=true ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    // .then((response) => {
-    //   res.send(response.rows);
-    // })
-    .then(response => {
+    .then((response) => {
       generateSignedUrls(res, response.rows);
-     })
+    })
     .catch((error) => {
-      console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
     });
 });
-//FILTER CAT TEST
+//Filter Cat Search
 router.get("/cat", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" WHERE cats=true ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    // .then((response) => {
-    //   res.send(response.rows);
-    // })
-    .then(response => {
+    .then((response) => {
       generateSignedUrls(res, response.rows);
-     })
+    })
     .catch((error) => {
-      console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
     });
 });
 
-//FILTER OTHER TEST
+//Filter Other Search
 router.get("/other", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" WHERE other=true ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    // .then((response) => {
-    //   res.send(response.rows);
-    // })
-    .then(response => {
+    .then((response) => {
       generateSignedUrls(res, response.rows);
-     })
+    })
     .catch((error) => {
-      console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
     });
 });
 
-//FILTER PET SLEEPOVER 
+//FILTER PET SLEEPOVER
 router.get("/sleepover", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" WHERE sleep_over=true ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    // .then((response) => {
-    //   res.send(response.rows);
-    // })
-    .then(response => {
+    .then((response) => {
       generateSignedUrls(res, response.rows);
-     })
+    })
     .catch((error) => {
-      console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
     });
 });
@@ -129,14 +107,10 @@ router.get("/boarding", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" WHERE boarding=true ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    // .then((response) => {
-    //   res.send(response.rows);
-    // })
-    .then(response => {
+    .then((response) => {
       generateSignedUrls(res, response.rows);
-     })
+    })
     .catch((error) => {
-      console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
     });
 });
@@ -146,14 +120,10 @@ router.get("/dropin", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" WHERE dropin_care=true ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    // .then((response) => {
-    //   res.send(response.rows);
-    // })
-    .then(response => {
+    .then((response) => {
       generateSignedUrls(res, response.rows);
-     })
+    })
     .catch((error) => {
-      console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
     });
 });
@@ -163,31 +133,20 @@ router.get("/hospice", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * FROM "vet_tech" WHERE hospice=true ORDER BY vet_name ASC; `;
   pool
     .query(sqlText)
-    // .then((response) => {
-    //   res.send(response.rows);
-    // })
-    .then(response => {
+    .then((response) => {
       generateSignedUrls(res, response.rows);
-     })
+    })
     .catch((error) => {
-      console.log(`Error getting Pet Tech info ${sqlText}`, error);
       res.sendStatus(500);
     });
 });
 
-
-
-
-/**
- * POST route template
- */
+// Post route for VT with Image
 router.post("/", upload.single("file"), (req, res) => {
   uploadVTPost(req, res);
-  console.log("---->VT id from post route", req.body);
 });
-
+// Post route for VT without image
 router.post("/withoutImg", (req, res) => {
-  console.log('req.body', req.body)
   const user_id = req.user.id;
   const vet_name = req.body.vet_name;
   const home_address_house = req.body.home_address_house;
@@ -228,7 +187,22 @@ router.post("/withoutImg", (req, res) => {
   const daily_exercise = req.body.daily_exercise;
   const pet_longer_than_a_week = req.body.pet_longer_than_a_week;
   const diabetic_insulin_care = req.body.diabetic_insulin_care;
-  console.log('--->VT id from imageHandler', user_id,
+  const queryText = `INSERT INTO "vet_tech" ( user_id, vet_name, home_address_house, 
+          apt_suite, city, state, zip_code, sleep_over, boarding, 
+          dropin_care, hospice, about_vet, dogs, cats, other, vet_available, 
+          zero_two, two_four, four_eight, not_available, small_dog, medium_dog, 
+          large_dog, giant_dog, pet_younger_than_one, pet_more_than_one_family, 
+          equipment_list, experience, certifications, current_job_title, expertise,bioYourself, 
+          cpr_first_aid, oral_medication, injectable_medication, exp_older_pet, 
+          exp_special_pet, daily_exercise, pet_longer_than_a_week, 
+          diabetic_insulin_care)
+          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, 
+              $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, 
+              $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, 
+              $38, $39, $40)`;
+  pool
+    .query(queryText, [
+      user_id,
       vet_name,
       home_address_house,
       apt_suite,
@@ -267,78 +241,15 @@ router.post("/withoutImg", (req, res) => {
       exp_special_pet,
       daily_exercise,
       pet_longer_than_a_week,
-      diabetic_insulin_care)
-
-      const queryText =
-          `INSERT INTO "vet_tech" ( user_id, vet_name, home_address_house, 
-          apt_suite, city, state, zip_code, sleep_over, boarding, 
-          dropin_care, hospice, about_vet, dogs, cats, other, vet_available, 
-          zero_two, two_four, four_eight, not_available, small_dog, medium_dog, 
-          large_dog, giant_dog, pet_younger_than_one, pet_more_than_one_family, 
-          equipment_list, experience, certifications, current_job_title, expertise,bioYourself, 
-          cpr_first_aid, oral_medication, injectable_medication, exp_older_pet, 
-          exp_special_pet, daily_exercise, pet_longer_than_a_week, 
-          diabetic_insulin_care)
-          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, 
-              $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, 
-              $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, 
-              $38, $39, $40)`;
-
-      pool.query(queryText, [
-          user_id,
-          vet_name,
-          home_address_house,
-          apt_suite,
-          city,
-          state,
-          zip_code,
-          sleep_over,
-          boarding,
-          dropin_care,
-          hospice,
-          about_vet,
-          dogs,
-          cats,
-          other,
-          vet_available,
-          zero_two,
-          two_four,
-          four_eight,
-          not_available,
-          small_dog,
-          medium_dog,
-          large_dog,
-          giant_dog,
-          pet_younger_than_one,
-          pet_more_than_one_family,
-          equipment_list,
-          experience,
-          certifications,
-          current_job_title,
-          expertise,
-          bioYourself,
-          cpr_first_aid,
-          oral_medication,
-          injectable_medication,
-          exp_older_pet,
-          exp_special_pet,
-          daily_exercise,
-          pet_longer_than_a_week,
-          diabetic_insulin_care
-      ])
-          .then((result) => {
-              console.log('back from db with:', result);
-              res.sendStatus(201);
-          })
-          .catch((error) => {
-              verbose && console.log('error in POST', error);
-              res.sendStatus(500);
-          })
-  })
-
-
-
-
+      diabetic_insulin_care,
+    ])
+    .then((result) => {
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      res.sendStatus(500);
+    });
+});
 
 //UPDATE VT INFO
 router.put("/", rejectUnauthenticated, (req, res) => {
@@ -406,20 +317,18 @@ router.put("/", rejectUnauthenticated, (req, res) => {
       certifications,
       current_job_title,
       expertise,
-      bioyourself
+      bioyourself,
     ])
     .then((response) => {
       res.sendStatus(200);
     })
     .catch((error) => {
-      console.log(`Error updating vt by id request.`, error);
       res.sendStatus(500);
     });
 });
-
+// Update VT Profile picture
 router.put("/updateProfilePicture", upload.single("file"), (req, res) => {
   uploadVTProfile(req, res);
-  console.log("-----> VT data from put route",req.user.id);
 });
 
 module.exports = router;

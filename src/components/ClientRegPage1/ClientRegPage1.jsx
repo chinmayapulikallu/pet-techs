@@ -91,7 +91,7 @@ class ClientRegPage1 extends Component {
       city: "Minneapolis",
       state: "MN",
       zip_code: "55420",
-      about_client: "I have a 10 year old German Shepherd named CeCe! We are best friends and do everything together. CeCe has been with me since she was a puppy. Some of our favorite activities include going on walks, hanging out at the dog park and doing tricks for treats! ",
+      about_client: "I have a 12 year old German Shepherd named CeCe! We are best friends and do everything together. CeCe has been with me since she was a puppy. Some of our favorite activities include going on walks, hanging out at the dog park and doing tricks for treats! ",
       about_home: "We live in an apartment in Minneapolis. It is just us two, so we don't need a ton of space. CeCe is getting older now, so she doesn't need as much room to run around, we get plenty of exercise going on our daily walks.",
       about_equipment: "CeCe has a favorite stuffed toy that she likes to carry around. It is very well loved. She also enjoys squeak toys and rawhide chew toys. ",
       contact_name_1: "Katie",

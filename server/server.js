@@ -14,8 +14,8 @@ const clientRouter = require('./routes/client.router');
 const petRouter = require('./routes/pet.router');
 const vtRouter = require('./routes/vt.router');
 const requestRouter = require('./routes/request.router');
-const petPictureRouter = require('./routes/petPicture.router');
-const clientDashboardRouter = require('./routes/clientDashboard.router');
+
+
 
 // Body parser middleware
 app.use(bodyParser.json({limit: "50mb"}));
@@ -34,8 +34,8 @@ app.use('/api/client', clientRouter);
 app.use('/api/pet', petRouter);
 app.use('/api/vt', vtRouter);
 app.use('/api/request', requestRouter);
-app.use('/api/pet/picture', petPictureRouter);
-app.use('/api/client/clientDashboard', clientDashboardRouter);
+
+
 
 
 

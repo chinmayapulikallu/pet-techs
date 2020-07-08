@@ -8,7 +8,11 @@ const {
 const multer = require("multer");
 const multerDest = process.env.multer_dest || "../uploads";
 const upload = multer({ dest: multerDest });
-const { uploadPost, uploadClientProfile, generateSignedUrls } = require("../modules/imageHandler");
+const {
+  uploadPost,
+  uploadClientProfile,
+  generateSignedUrls,
+} = require("../modules/imageHandler");
 
 /**
  * GET route template
@@ -17,19 +21,14 @@ router.get("/", rejectUnauthenticated, (req, res) => {
   const sqlText = `SELECT * from client where user_id = $1;`;
   pool
     .query(sqlText, [req.user.id])
-    .then(response => {
+    .then((response) => {
       generateSignedUrls(res, response.rows);
     })
-    // .then((response) => {
-    //   console.log('---->client data:', response.rows)
-    //   res.send(response.rows);
-
-    // })
     .catch((error) => {
       res.sendStatus(500);
     });
 });
-
+// Update for client info
 router.put("/", rejectUnauthenticated, (req, res) => {
   const {
     client_name,
@@ -56,18 +55,15 @@ router.put("/", rejectUnauthenticated, (req, res) => {
       res.sendStatus(200);
     })
     .catch((error) => {
-      console.log(`Error updating client by id request. ${sqlText}`, error);
       res.sendStatus(500);
     });
 });
-
-router.post("/", upload.single("file"), (req, res) => {
+// post route for client
+router.post("/", rejectUnauthenticated, upload.single("file"), (req, res) => {
   uploadPost(req, res);
-  console.log("client id from post route", req.body);
 });
-
+// post route for client if not including a profile picture
 router.post("/withoutImg", (req, res) => {
-  console.log('post request without img', req.body)
   const user_id = req.user.id;
   const client_name = req.body.client_name;
   const home_address_house = req.body.home_address_house;
@@ -85,45 +81,41 @@ router.post("/withoutImg", (req, res) => {
   const clinic_address = req.body.clinic_address;
   const clinic_phone = req.body.clinic_phone;
   const transport = req.body.transport;
-  console.log('client id from post route', user_id, client_name, home_address_house, apt_suite, city, state, zip_code, about_client, about_home, about_equipment, contact_name_1, contact_phone_1, contact_email_1, vet_clinic, clinic_address, clinic_phone, transport)
 
-  const queryText =
-    `INSERT INTO "client" ( user_id, client_name, home_address_house, apt_suite, city, state, zip_code, about_client, about_home, about_equipment, contact_name_1, contact_phone_1, contact_email_1, vet_clinic, clinic_address, clinic_phone, transport)
+  const queryText = `INSERT INTO "client" ( user_id, client_name, home_address_house, apt_suite, city, state, zip_code, about_client, about_home, about_equipment, contact_name_1, contact_phone_1, contact_email_1, vet_clinic, clinic_address, clinic_phone, transport)
            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17);`;
 
-  pool.query(queryText, [
-    user_id,
-    client_name,
-    home_address_house,
-    apt_suite,
-    city,
-    state,
-    zip_code,
-    about_client,
-    about_home,
-    about_equipment,
-    contact_name_1,
-    contact_phone_1,
-    contact_email_1,
-    vet_clinic,
-    clinic_address,
-    clinic_phone,
-    transport
-  ])
+  pool
+    .query(queryText, [
+      user_id,
+      client_name,
+      home_address_house,
+      apt_suite,
+      city,
+      state,
+      zip_code,
+      about_client,
+      about_home,
+      about_equipment,
+      contact_name_1,
+      contact_phone_1,
+      contact_email_1,
+      vet_clinic,
+      clinic_address,
+      clinic_phone,
+      transport,
+    ])
     .then((result) => {
-      console.log('back from db with:', result);
       res.sendStatus(201);
     })
     .catch((error) => {
-      console.log('error in POST', error);
       res.sendStatus(500);
-    })
-})
+    });
+});
 
-
-router.put("/updateProfilePicture", upload.single("file"), (req, res) => {
+// update for client profile picture
+router.put("/updateProfilePicture", rejectUnauthenticated, upload.single("file"), (req, res) => {
   uploadClientProfile(req, res);
-  console.log("client data from put route", req.user.id);
 });
 
 module.exports = router;

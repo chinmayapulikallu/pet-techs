@@ -4,18 +4,17 @@ Duration: 2 Week Sprint
 
 ## Problem and Solution
 
-Pet Techs was created to help bridge the gap between certified Vet Tech's and pet owners to help provide different out-of-clinic care for their animals. With how important Vet TEchs are in our pets world, it is important that we are able to provide them with professional veterinary technician care outside of routine clinic care.
+Pet Techs was created to help bridge the gap between certified Vet Tech's and pet owners to help provide different out-of-clinic care for their animals. With how important Vet Techs are in our pets world, it is important that we are able to provide them with professional veterinary technician care outside of routine clinic care.
 
 Our client has been a Vet Tech for almost 10 years and would receive calls daily asking if they provided pet sitting services and other types of services. This is where Pet Techs comes in to bridge that gap. This allows Pet Techs to continue doing something they are passionate about, gain more experience under their belts, as well as offer peace of mind to the pet owner.
 
-Pet Techs is here to provide more experienced care then just a local neighborhood girl. Pet Techs can provide individuals who have experience with senior, special needs, diabetic, animal first aid and CPR and other knowledge and expertise to ensure your pet is getting the best care possible when going on that business trip.
+Pet Techs is here to provide more experienced care then just a local neighbor. Pet Techs can provide individuals who have experience with senior, special needs, diabetic, animal first aid and CPR and other knowledge and expertise to ensure your pet is getting the best care possible when going on that business trip.
 
-## 
+## Screenshots
 
 ![](public/images/Landing-Page-1.png)
 ![](public/images/VT-Dashboard.png)
 ![](public/images/VT-Service-Request.png)
-
 
 ## Application walk through
 
@@ -59,12 +58,6 @@ This wraps up Pet Techs walk through. We hope this can give you a better underst
 
 Thanks for checking out Pet Techs Web Application!
 
-## Download (Don't Clone) This Repository
-
-- Don't Fork or Clone. Instead, click the `Clone or Download` button and select `Download Zip`.
-- Unzip the project and start with the code in that folder.
-- Create a new GitHub project and push this code to the new repository.
-
 ## Prerequisites
 
 Before you get started, make sure you have the following software installed on your computer:
@@ -72,8 +65,6 @@ Before you get started, make sure you have the following software installed on y
 - [Node.js](https://nodejs.org/en/)
 - [PostrgeSQL](https://www.postgresql.org/)
 - [Nodemon](https://nodemon.io/)
-
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
 
 ## Create database and table
 
@@ -85,6 +76,7 @@ If you would like to name your database something else, you will need to change 
 
 - Run `npm install`
 - Create a `.env` file at the root of the project and paste this line into the file:
+
   ```
   SERVER_SESSION_SECRET=superDuperSecret
   IAM_USER_KEY=yourkeyhere
@@ -93,53 +85,46 @@ If you would like to name your database something else, you will need to change 
   SENDGRID_API_KEY=yourkeyhere
   SENDGRID_FROM_EMAIL=youremailhere
   ```
+
   While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm run server`
-- Run `npm run client`
-- Navigate to `localhost:3000`
 
-## Production Build
+  You will need to sign up for SendGrid and obtain a unique API Key. To do so, please go to https://sendgrid.com/. Scroll down and click on "SendGrid API" and follow the instructions. Add your API key in your .env file.
 
-Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
+* Start postgres if not running already by using `brew services start postgresql`
+* Run `npm run server`
+* Run `npm run client`
+* Navigate to `localhost:3000`
 
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm start`
-- Navigate to `localhost:5000`
+## Built With
 
-## Lay of the Land
+- React
+- Redux
+- Redux Saga
+- Express
+- Node.js
+- Passport
+- PostgreSQL
+- Uppy
+- Sweet Alert
+- SendGrid
+- Material UI
+- Heroku
 
-- `src/` contains the React application
-- `public/` contains static assets for the client-side
-- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-- `server/` contains the Express App
-- `routes/` contains all the routes you will need on the back end to sync with your database.
 
-## Deployment
-
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
+(a full list of dependencies can be found in `package.json`).
 
 ## Authors
 
-- Thy Christiansen
-- Mike Cossalter
-- Natalie Hummel
-- Chinmaya Pulikallu
-- Heather Stoffels
+- Thy Christiansen - thyvu0411@gmail.com
+- Mike Cossalter - mikecossalter@yahoo.com
+- Natalie Hummel - natoms225@gmail.com
+- Chinmaya Pulikallu - chinmayapulikallu@gmail.com
+- Heather Stoffels - me@heatherstoffels.com
 
 ## Thank you
 
 - Vicky Moffat - Founder of Pet Techs
 - Dane Smith - instructor at Prime Digital Academy
 - Dev Jana - instructor at Prime Digital Academy
+- Pet Techs UX Design Team from Emerson Cohort - June 2020
 - Lamport Cohort - July 2020
-
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2

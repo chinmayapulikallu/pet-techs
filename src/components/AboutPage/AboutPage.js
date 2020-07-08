@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button"
+import Button from "@material-ui/core/Button";
 
 const styles = (theme) => ({
   landingPg: {
@@ -58,35 +58,33 @@ const styles = (theme) => ({
 
 class About extends Component {
   handleJoinClick = () => {
-    console.log("ClickedJoin");
     this.props.history.push("/register");
   };
 
-  
   render() {
     const { classes } = this.props;
     return (
-        <Grid>
-          <div>
-            <Typography className={classes.missionHeader} variant="h3">
-              Our Mission
-            </Typography>
-            <img
-              className={classes.image}
-              src="/images/mission-logo.png"
-              alt="missionLogoIcon"
-              height="300"
-              width="300"
-            />
-          </div>
-          <div>
-            <Typography className={classes.description} variant="h5">
-              We're here to connect vetinary technicians with pet owners who
-              want to hire qualified individuals to help give different kinds of
-              out-of-clinic care. Either in your home or theirs, you want to
-              know your precious animals are in great hands. We are commited to
-              giving quality and professional care and to give you ease of mind.{" "}
-            </Typography>
+      <Grid>
+        <div>
+          <Typography className={classes.missionHeader} variant="h3">
+            Our Mission
+          </Typography>
+          <img
+            className={classes.image}
+            src="/images/mission-logo.png"
+            alt="missionLogoIcon"
+            height="300"
+            width="300"
+          />
+        </div>
+        <div>
+          <Typography className={classes.description} variant="h5">
+            We're here to connect vetinary technicians with pet owners who want
+            to hire qualified individuals to help give different kinds of
+            out-of-clinic care. Either in your home or theirs, you want to know
+            your precious animals are in great hands. We are commited to giving
+            quality and professional care and to give you ease of mind.{" "}
+          </Typography>
           <Button
             className={classes.btn}
             onClick={this.handleJoinClick}
@@ -94,11 +92,10 @@ class About extends Component {
             color="primary"
           >
             Join
-              </Button>
-          </div>
-          <Grid>
-          </Grid>
-        </Grid>
+          </Button>
+        </div>
+        <Grid></Grid>
+      </Grid>
     );
   }
 }

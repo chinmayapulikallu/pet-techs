@@ -7,13 +7,9 @@ import {
 } from "react-router-dom";
 
 import { connect } from "react-redux";
-
 import Nav from "../Nav/Nav";
 import Footer from "../Footer/Footer";
-
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import { UserType } from "../../constants";
-
 import AboutPage from "../AboutPage/AboutPage";
 import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
@@ -22,16 +18,13 @@ import VTDashboard from "../VTDashboard/VTDashboard";
 import VTProfile from "../VTProfile/VTProfile";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import LoginPage from "../LoginPage/LoginPage";
-
 import ClientStepper from "../ClientStepper/ClientStepper";
 import ClientProfile from "../ClientProfile/ClientProfile";
 import ClientServiceRequest from "../ClientServiceRequest/ClientServiceRequest";
 import VTStepper from "../VTStepper/VTStepper";
 import SearchPage from "../SearchPage/SearchPage";
-
 import ClientDashBoard from "../ClientDashboard/ClientDashboard";
 import CarePlan from "../CarePlan/CarePlan";
-
 import "./App.css";
 import VTServiceRequest from "../VTServiceRequest/VTServiceRequest";
 
@@ -46,7 +39,7 @@ class App extends Component {
         <div>
           <Nav />
           <Switch>
-            {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
+            {/* Visiting localhost:3000 will redirect to localhost:3000/landingpg */}
             <Redirect exact from="/" to="/landingpg" />
             {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
@@ -66,36 +59,39 @@ class App extends Component {
             />
             <Route exact path="/vet-tech-registration" component={VTStepper} />
             <Route exact path="/landingPg" component={LandingPage} />
-            <Route exact path="/vtdashboard" component={VTDashboard} />
+            <ProtectedRoute exact path="/vtdashboard" component={VTDashboard} />
             <Route exact path="/register" component={RegisterPage} />
             <Route exact path="/login" component={LoginPage} />
-
             <ProtectedRoute
               exact
               path="/client-profile/:id"
               component={ClientProfile}
             />
-            <Route exact path="/vt-profile/:id" component={VTProfile} />
-            <Route exact path="/vt-service/:id" component={VTServiceRequest} />
-            <Route
+            <ProtectedRoute
+              exact
+              path="/vt-profile/:id"
+              component={VTProfile}
+            />
+            <ProtectedRoute
+              exact
+              path="/vt-service/:id"
+              component={VTServiceRequest}
+            />
+            <ProtectedRoute
               exact
               path="/client_service/:id"
               component={ClientServiceRequest}
             />
-            <Route exact path="/search" component={SearchPage} />
-            <Route
+            <ProtectedRoute exact path="/search" component={SearchPage} />
+            <ProtectedRoute
               exact
               path="/clientdashboard"
               component={ClientDashBoard}
-              allowedRole={UserType.CLIENT}
             />
-            <Route exact path="/careplan/:id" component={CarePlan} />
-
+            <ProtectedRoute exact path="/careplan/:id" component={CarePlan} />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
-
-          {/* <ProtectedRoute component={Footer} /> */}
           <Footer />
         </div>
       </Router>

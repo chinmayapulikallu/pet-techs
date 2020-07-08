@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
 import { withStyles } from "@material-ui/core/styles";
-
 import { withRouter } from "react-router-dom";
 import "./ClientProfile.css";
 import ClientProfileDetail from "../ClientProfileDetail/ClientProfileDetail";
@@ -58,7 +56,6 @@ const styles = (theme) => ({
 class ClientProfile extends Component {
   componentDidMount() {
     const currentId = this.props.match.params.id;
-    console.log("-----> Current client", currentId);
     this.props.dispatch({
       type: "GET_CLIENT_DATA",
       payload: { id: currentId },
@@ -66,8 +63,6 @@ class ClientProfile extends Component {
   }
 
   render() {
-    // console.log('->client profile', this.setClientData())
-
     const { classes } = this.props;
     return (
       <div className={classes.root}>

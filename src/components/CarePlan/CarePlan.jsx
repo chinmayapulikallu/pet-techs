@@ -19,8 +19,6 @@ const useStyles = (theme) => ({
   },
   profileCenter: {
     height: 200,
-    // width: 600,
-    //    marginLeft: 300,
     textAlign: "center",
   },
   profileImage: {
@@ -29,8 +27,6 @@ const useStyles = (theme) => ({
     marginRight: "auto",
     borderRadius: 0,
     paddingTop: 25,
-    // width: 100,
-    // height: 100,
   },
   container: {
     marginTop: 50,
@@ -48,42 +44,35 @@ class CarePlan extends Component {
     ...this.props.petCarePlan,
   };
   componentDidMount() {
-    // const currentPet = this.props.careplan.find(client => client.user_id === parseInt(this.props.match.params.id))
     this.props.dispatch({
       type: "GET_PET_CARE_PLAN",
       payload: { id: this.props.match.params.id },
     });
-
-        console.log("------------>reducer:", this.props.match.params.id);
-    }
-    render() {
-        const { classes } = this.props;
-        console.log('-------: ', this.state)
-        return (
-            <Container className={classes.container}>
-                <br />
-                <br />
-                <br />
-
-                {/* {JSON.stringify(this.props.petCarePlan)} */}
-                {this.props.petCarePlan.map((careplan) => {
-                    return (
-                        <div key={careplan.id}>
-                            <CarePlanDetail
-                                careplan={careplan}
-                                isEditing={this.state.isEditing}
-                                isVetTech={this.props.isVetTech}
-                            />
-                        </div>
-                    )
-                })}
-            </Container>
-        );
-    }
+  }
+  render() {
+    const { classes } = this.props;
+    return (
+      <Container className={classes.container}>
+        <br />
+        <br />
+        <br />
+        {this.props.petCarePlan.map((careplan) => {
+          return (
+            <div key={careplan.id}>
+              <CarePlanDetail
+                careplan={careplan}
+                isEditing={this.state.isEditing}
+                isVetTech={this.props.isVetTech}
+              />
+            </div>
+          );
+        })}
+      </Container>
+    );
+  }
 }
 const mapStateToProps = (state) => ({
-    petCarePlan: state.petCarePlan,
-
+  petCarePlan: state.petCarePlan,
 });
 export default withStyles(useStyles)(
   withRouter(connect(mapStateToProps)(CarePlan))

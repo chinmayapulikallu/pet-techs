@@ -5,8 +5,9 @@ const {
   rejectUnauthenticated,
 } = require("../modules/authentication-middleware");
 
+const path = require("path")
 const multer = require("multer");
-const multerDest = process.env.multer_dest || "../uploads";
+const multerDest = path.join(__dirname, '../uploads');
 const upload = multer({ dest: multerDest });
 const {
   uploadPetProfile,

@@ -1,12 +1,13 @@
 const express = require("express");
+
 const pool = require("../modules/pool");
 const router = express.Router();
 const {
   rejectUnauthenticated,
 } = require("../modules/authentication-middleware");
-
+const path = require("path")
 const multer = require("multer");
-const multerDest = process.env.multer_dest || "../uploads";
+const multerDest = path.join(__dirname, '../uploads');
 const upload = multer({ dest: multerDest });
 const {
   uploadPost,

@@ -6,7 +6,7 @@ const {
 } = require("../modules/authentication-middleware");
 
 const multer = require("multer");
-const multerDest = process.env.multer_dest || "../../../uploads";
+const multerDest = process.env.multer_dest || "../uploads";
 const upload = multer({ dest: multerDest });
 const {
   uploadPetProfile,
